@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 6.2: La Base de Datos de Superhéroes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: heroEntry 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.5);
+            letter-spacing: 2px;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        @keyframes heroEntry {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: slideIn 0.8s ease-out;
+            border: 3px solid #e0e0e0;
+        }
+        
+        .slide h2 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2a5298;
+        }
+        
+        .slide h3 {
+            color: #2a5298;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffd93d 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+            box-shadow: 0 5px 15px rgba(255,107,107,0.3);
+        }
+        
+        .teoria {
+            background: #f0f4f8;
+            border-left: 5px solid #2a5298;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+        
+        .diccionario-visual {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .diccionario-estructura {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 1.3em;
+            margin: 20px 0;
+        }
+        
+        .clave {
+            background: #ff6b6b;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .valor {
+            background: #4ecdc4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        
+        .flecha {
+            font-size: 1.5em;
+            color: #666;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff6b6b;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .number {
+            color: #B5CEA8;
+        }
+        
+        .dict-key {
+            color: #FFD700;
+        }
+        
+        .superhero-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transform: perspective(1000px) rotateY(0deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .superhero-card:hover {
+            transform: perspective(1000px) rotateY(5deg);
+        }
+        
+        .superhero-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hero-icon {
+            font-size: 2em;
+        }
+        
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .stat {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .paso {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #4caf50;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4caf50;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .comparacion-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparacion-tabla th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .comparacion-tabla td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparacion-tabla tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        .metodos-dict {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .metodo-card {
+            background: #fff3e0;
+            border: 2px solid #ff9800;
+            border-radius: 10px;
+            padding: 15px;
+            transition: transform 0.2s ease;
+        }
+        
+        .metodo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255,152,0,0.3);
+        }
+        
+        .metodo-card h5 {
+            color: #e65100;
+            margin-bottom: 10px;
+        }
+        
+        .metodo-card code {
+            background: #fff;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .tip {
+            background: #fff9c4;
+            border: 2px solid #fbc02d;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .warning {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 25px rgba(240,147,251,0.3);
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🦸‍♂️ La Base de Datos de Superhéroes</h1>
+            <p>Módulo 6: Diccionarios Anidados y Complejos - Ejercicio 6.2</p>
+        </div>
+
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Dominar el uso de diccionarios anidados y estructuras de datos complejas en Python. Los estudiantes aprenderán a crear, manipular y consultar una base de datos de superhéroes usando diccionarios con múltiples niveles de anidamiento, entendiendo cómo organizar información compleja de manera eficiente.
+            </div>
+
+            <h3>🧠 ¿Qué son los Diccionarios?</h3>
+            
+            <div class="teoria">
+                <h4>Concepto de Diccionario</h4>
+                <p>Un diccionario es una estructura de datos que almacena pares de <strong>clave-valor</strong>. Es como un diccionario real donde:</p>
+                <ul>
+                    <li>📖 La <strong>clave</strong> es la palabra que buscas</li>
+                    <li>📝 El <strong>valor</strong> es la definición de esa palabra</li>
+                    <li>🔍 Puedes buscar rápidamente cualquier valor usando su clave</li>
+                    <li>🎯 Cada clave es única (no puede repetirse)</li>
+                </ul>
+            </div>
+
+            <div class="diccionario-visual">
+                <h4>Estructura de un Diccionario</h4>
+                <div class="diccionario-estructura">
+                    <span>{</span>
+                    <span class="clave">"clave"</span>
+                    <span>:</span>
+                    <span class="valor">"valor"</span>
+                    <span>}</span>
+                </div>
+                <p>Las claves son únicas • Los valores pueden ser cualquier tipo de dato</p>
+            </div>
+
+            <table class="comparacion-tabla">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Lista</th>
+                        <th>Diccionario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Acceso a elementos</td>
+                        <td>Por índice numérico (0, 1, 2...)</td>
+                        <td>Por clave (nombre descriptivo)</td>
+                    </tr>
+                    <tr>
+                        <td>Orden</td>
+                        <td>Mantiene el orden de inserción</td>
+                        <td>Python 3.7+ mantiene orden</td>
+                    </tr>
+                    <tr>
+                        <td>Elementos duplicados</td>
+                        <td>Permitidos</td>
+                        <td>Claves únicas (valores pueden repetirse)</td>
+                    </tr>
+                    <tr>
+                        <td>Uso ideal</td>
+                        <td>Colecciones ordenadas</td>
+                        <td>Datos con relaciones clave-valor</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>🔧 Diccionarios Anidados</h2>
+            
+            <div class="teoria">
+                <h4>¿Qué es un Diccionario Anidado?</h4>
+                <p>Es un diccionario que contiene otros diccionarios como valores. Permite crear estructuras de datos complejas y jerárquicas, perfectas para representar objetos del mundo real con múltiples atributos.</p>
+                
+                <div class="codigo-ejemplo">
+<span class="comment"># Diccionario simple</span>
+<span class="variable">heroe_simple</span> = {
+    <span class="dict-key">"nombre"</span>: <span class="string">"Spider-Man"</span>,
+    <span class="dict-key">"poder"</span>: <span class="string">"Trepar paredes"</span>
+}
+
+<span class="comment"># Diccionario anidado</span>
+<span class="variable">heroe_complejo</span> = {
+    <span class="dict-key">"nombre"</span>: <span class="string">"Spider-Man"</span>,
+    <span class="dict-key">"identidad"</span>: {
+        <span class="dict-key">"nombre_real"</span>: <span class="string">"Peter Parker"</span>,
+        <span class="dict-key">"ocupacion"</span>: <span class="string">"Fotógrafo"</span>
+    },
+    <span class="dict-key">"poderes"</span>: [<span class="string">"Trepar paredes"</span>, <span class="string">"Sentido arácnido"</span>, <span class="string">"Super fuerza"</span>],
+    <span class="dict-key">"stats"</span>: {
+        <span class="dict-key">"fuerza"</span>: <span class="number">85</span>,
+        <span class="dict-key">"velocidad"</span>: <span class="number">90</span>,
+        <span class="dict-key">"inteligencia"</span>: <span class="number">95</span>
+    }
+}
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>Acceder a Datos en Diccionarios Anidados</h4>
+                <div class="codigo-ejemplo">
+<span class="comment"># Acceso simple</span>
+<span class="variable">nombre</span> = <span class="variable">heroe_complejo</span>[<span class="string">"nombre"</span>]  <span class="comment"># "Spider-Man"</span>
+
+<span class="comment"># Acceso anidado</span>
+<span class="variable">nombre_real</span> = <span class="variable">heroe_complejo</span>[<span class="string">"identidad"</span>][<span class="string">"nombre_real"</span>]  <span class="comment"># "Peter Parker"</span>
+
+<span class="comment"># Acceso a lista dentro del diccionario</span>
+<span class="variable">primer_poder</span> = <span class="variable">heroe_complejo</span>[<span class="string">"poderes"</span>][<span class="number">0</span>]  <span class="comment"># "Trepar paredes"</span>
+
+<span class="comment"># Acceso seguro con get()</span>
+<span class="variable">debilidad</span> = <span class="variable">heroe_complejo</span>.<span class="function">get</span>(<span class="string">"debilidad"</span>, <span class="string">"No especificada"</span>)
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Crear la estructura básica de la base de datos</h4>
+                <p>Comenzamos definiendo nuestra base de datos de superhéroes:</p>
+                <div class="codigo-ejemplo">
+<span class="comment"># Base de datos de superhéroes</span>
+<span class="variable">superheroes</span> = {
+    <span class="dict-key">"superman"</span>: {
+        <span class="dict-key">"nombre_completo"</span>: <span class="string">"Superman"</span>,
+        <span class="dict-key">"nombre_real"</span>: <span class="string">"Clark Kent"</span>,
+        <span class="dict-key">"planeta_origen"</span>: <span class="string">"Krypton"</span>,
+        <span class="dict-key">"poderes"</span>: [<span class="string">"volar"</span>, <span class="string">"super fuerza"</span>, <span class="string">"visión láser"</span>, <span class="string">"invulnerabilidad"</span>],
+        <span class="dict-key">"debilidad"</span>: <span class="string">"kriptonita"</span>,
+        <span class="dict-key">"ciudad"</span>: <span class="string">"Metrópolis"</span>,
+        <span class="dict-key">"aliados"</span>: [<span class="string">"Batman"</span>, <span class="string">"Wonder Woman"</span>, <span class="string">"Flash"</span>],
+        <span class="dict-key">"stats"</span>: {
+            <span class="dict-key">"fuerza"</span>: <span class="number">100</span>,
+            <span class="dict-key">"velocidad"</span>: <span class="number">100</span>,
+            <span class="dict-key">"inteligencia"</span>: <span class="number">85</span>,
+            <span class="dict-key">"resistencia"</span>: <span class="number">100</span>
+        }
+    }
+}
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Agregar más superhéroes a la base de datos</h4>
+                <div class="codigo-ejemplo">
+<span class="comment"># Agregar Batman</span>
+<span class="variable">superheroes</span>[<span class="dict-key">"batman"</span>] = {
+    <span class="dict-key">"nombre_completo"</span>: <span class="string">"Batman"</span>,
+    <span class="dict-key">"nombre_real"</span>: <span class="string">"Bruce Wayne"</span>,
+    <span class="dict-key">"planeta_origen"</span>: <span class="string">"Tierra"</span>,
+    <span class="dict-key">"poderes"</span>: [<span class="string">"inteligencia superior"</span>, <span class="string">"artes marciales"</span>, <span class="string">"tecnología avanzada"</span>],
+    <span class="dict-key">"debilidad"</span>: <span class="string">"es mortal"</span>,
+    <span class="dict-key">"ciudad"</span>: <span class="string">"Gotham"</span>,
+    <span class="dict-key">"aliados"</span>: [<span class="string">"Robin"</span>, <span class="string">"Alfred"</span>, <span class="string">"Gordon"</span>],
+    <span class="dict-key">"stats"</span>: {
+        <span class="dict-key">"fuerza"</span>: <span class="number">40</span>,
+        <span class="dict-key">"velocidad"</span>: <span class="number">30</span>,
+        <span class="dict-key">"inteligencia"</span>: <span class="number">100</span>,
+        <span class="dict-key">"resistencia"</span>: <span class="number">50</span>
+    },
+    <span class="dict-key">"gadgets"</span>: {
+        <span class="dict-key">"vehiculos"</span>: [<span class="string">"Batimóvil"</span>, <span class="string">"Batwing"</span>, <span class="string">"Baticiclo"</span>],
+        <span class="dict-key">"armas"</span>: [<span class="string">"Batarangs"</span>, <span class="string">"Gancho"</span>, <span class="string">"Bombas de humo"</span>]
+    }
+}
+
+<span class="comment"># Agregar Wonder Woman</span>
+<span class="variable">superheroes</span>[<span class="dict-key">"wonder_woman"</span>] = {
+    <span class="dict-key">"nombre_completo"</span>: <span class="string">"Wonder Woman"</span>,
+    <span class="dict-key">"nombre_real"</span>: <span class="string">"Diana Prince"</span>,
+    <span class="dict-key">"planeta_origen"</span>: <span class="string">"Themyscira"</span>,
+    <span class="dict-key">"poderes"</span>: [<span class="string">"super fuerza"</span>, <span class="string">"volar"</span>, <span class="string">"combate"</span>, <span class="string">"inmortalidad"</span>],
+    <span class="dict-key">"debilidad"</span>: <span class="string">"pierde poderes sin brazaletes"</span>,
+    <span class="dict-key">"ciudad"</span>: <span class="string">"Washington D.C."</span>,
+    <span class="dict-key">"aliados"</span>: [<span class="string">"Superman"</span>, <span class="string">"Batman"</span>, <span class="string">"Aquaman"</span>],
+    <span class="dict-key">"stats"</span>: {
+        <span class="dict-key">"fuerza"</span>: <span class="number">95</span>,
+        <span class="dict-key">"velocidad"</span>: <span class="number">80</span>,
+        <span class="dict-key">"inteligencia"</span>: <span class="number">90</span>,
+        <span class="dict-key">"resistencia"</span>: <span class="number">95</span>
+    },
+    <span class="dict-key">"armas"</span>: [<span class="string">"Lazo de la verdad"</span>, <span class="string">"Brazaletes"</span>, <span class="string">"Espada"</span>, <span class="string">"Escudo"</span>]
+}
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Crear funciones para consultar la base de datos</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">mostrar_info_heroe</span>(<span class="variable">nombre_heroe</span>):
+    <span class="string">"""Muestra información completa de un superhéroe"""</span>
+    <span class="keyword">if</span> <span class="variable">nombre_heroe</span> <span class="keyword">in</span> <span class="variable">superheroes</span>:
+        <span class="variable">heroe</span> = <span class="variable">superheroes</span>[<span class="variable">nombre_heroe</span>]
+        <span class="function">print</span>(<span class="string">f"\n🦸 {heroe['nombre_completo']} 🦸"</span>)
+        <span class="function">print</span>(<span class="string">"="</span> * <span class="number">40</span>)
+        <span class="function">print</span>(<span class="string">f"Nombre real: {heroe['nombre_real']}"</span>)
+        <span class="function">print</span>(<span class="string">f"Origen: {heroe['planeta_origen']}"</span>)
+        <span class="function">print</span>(<span class="string">f"Ciudad: {heroe['ciudad']}"</span>)
+        <span class="function">print</span>(<span class="string">f"Debilidad: {heroe['debilidad']}"</span>)
+        <span class="function">print</span>(<span class="string">f"\nPoderes: {', '.join(heroe['poderes'])}"</span>)
+        <span class="function">print</span>(<span class="string">f"Aliados: {', '.join(heroe['aliados'])}"</span>)
+        
+        <span class="comment"># Mostrar estadísticas</span>
+        <span class="function">print</span>(<span class="string">"\n📊 Estadísticas:"</span>)
+        <span class="keyword">for</span> <span class="variable">stat</span>, <span class="variable">valor</span> <span class="keyword">in</span> <span class="variable">heroe</span>[<span class="string">'stats'</span>].<span class="function">items</span>():
+            <span class="variable">barra</span> = <span class="string">"█"</span> * (<span class="variable">valor</span> // <span class="number">10</span>)
+            <span class="function">print</span>(<span class="string">f"  {stat.capitalize()}: {barra} {valor}/100"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"❌ No se encontró al superhéroe: {nombre_heroe}"</span>)
+
+<span class="keyword">def</span> <span class="function">buscar_por_poder</span>(<span class="variable">poder</span>):
+    <span class="string">"""Busca superhéroes que tengan un poder específico"""</span>
+    <span class="function">print</span>(<span class="string">f"\n🔍 Superhéroes con el poder '{poder}':"</span>)
+    <span class="variable">encontrados</span> = []
+    
+    <span class="keyword">for</span> <span class="variable">nombre</span>, <span class="variable">heroe</span> <span class="keyword">in</span> <span class="variable">superheroes</span>.<span class="function">items</span>():
+        <span class="keyword">if</span> <span class="variable">poder</span>.<span class="function">lower</span>() <span class="keyword">in</span> [<span class="variable">p</span>.<span class="function">lower</span>() <span class="keyword">for</span> <span class="variable">p</span> <span class="keyword">in</span> <span class="variable">heroe</span>[<span class="string">'poderes'</span>]]:
+            <span class="variable">encontrados</span>.<span class="function">append</span>(<span class="variable">heroe</span>[<span class="string">'nombre_completo'</span>])
+    
+    <span class="keyword">if</span> <span class="variable">encontrados</span>:
+        <span class="keyword">for</span> <span class="variable">heroe</span> <span class="keyword">in</span> <span class="variable">encontrados</span>:
+            <span class="function">print</span>(<span class="string">f"  • {heroe}"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">"  No se encontraron superhéroes con<span class="function">print</span>(<span class="string">"  No se encontraron superhéroes con ese poder."</span>)
+
+<span class="keyword">def</span> <span class="function">comparar_heroes</span>(<span class="variable">heroe1</span>, <span class="variable">heroe2</span>):
+    <span class="string">"""Compara las estadísticas de dos superhéroes"""</span>
+    <span class="keyword">if</span> <span class="variable">heroe1</span> <span class="keyword">in</span> <span class="variable">superheroes</span> <span class="keyword">and</span> <span class="variable">heroe2</span> <span class="keyword">in</span> <span class="variable">superheroes</span>:
+        <span class="variable">h1</span> = <span class="variable">superheroes</span>[<span class="variable">heroe1</span>]
+        <span class="variable">h2</span> = <span class="variable">superheroes</span>[<span class="variable">heroe2</span>]
+        
+        <span class="function">print</span>(<span class="string">f"\n⚔️ COMPARACIÓN: {h1['nombre_completo']} VS {h2['nombre_completo']} ⚔️"</span>)
+        <span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+        
+        <span class="keyword">for</span> <span class="variable">stat</span> <span class="keyword">in</span> <span class="variable">h1</span>[<span class="string">'stats'</span>]:
+            <span class="variable">val1</span> = <span class="variable">h1</span>[<span class="string">'stats'</span>][<span class="variable">stat</span>]
+            <span class="variable">val2</span> = <span class="variable">h2</span>[<span class="string">'stats'</span>][<span class="variable">stat</span>]
+            <span class="variable">ganador</span> = <span class="string">"⭐"</span> <span class="keyword">if</span> <span class="variable">val1</span> > <span class="variable">val2</span> <span class="keyword">else</span> (<span class="string">"⭐"</span> <span class="keyword">if</span> <span class="variable">val2</span> > <span class="variable">val1</span> <span class="keyword">else</span> <span class="string">"🤝"</span>)
+            <span class="variable">lado</span> = <span class="string">"izq"</span> <span class="keyword">if</span> <span class="variable">val1</span> > <span class="variable">val2</span> <span class="keyword">else</span> (<span class="string">"der"</span> <span class="keyword">if</span> <span class="variable">val2</span> > <span class="variable">val1</span> <span class="keyword">else</span> <span class="string">"emp"</span>)
+            
+            <span class="keyword">if</span> <span class="variable">lado</span> == <span class="string">"izq"</span>:
+                <span class="function">print</span>(<span class="string">f"{stat.capitalize():12} {ganador} {val1:3} | {val2:3}   "</span>)
+            <span class="keyword">elif</span> <span class="variable">lado</span> == <span class="string">"der"</span>:
+                <span class="function">print</span>(<span class="string">f"{stat.capitalize():12}   {val1:3} | {val2:3} {ganador}"</span>)
+            <span class="keyword">else</span>:
+                <span class="function">print</span>(<span class="string">f"{stat.capitalize():12}   {val1:3} | {val2:3} {ganador}"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Crear funciones de modificación y análisis</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">agregar_poder</span>(<span class="variable">nombre_heroe</span>, <span class="variable">nuevo_poder</span>):
+    <span class="string">"""Agrega un nuevo poder a un superhéroe"""</span>
+    <span class="keyword">if</span> <span class="variable">nombre_heroe</span> <span class="keyword">in</span> <span class="variable">superheroes</span>:
+        <span class="keyword">if</span> <span class="variable">nuevo_poder</span> <span class="keyword">not in</span> <span class="variable">superheroes</span>[<span class="variable">nombre_heroe</span>][<span class="string">'poderes'</span>]:
+            <span class="variable">superheroes</span>[<span class="variable">nombre_heroe</span>][<span class="string">'poderes'</span>].<span class="function">append</span>(<span class="variable">nuevo_poder</span>)
+            <span class="function">print</span>(<span class="string">f"✅ Poder '{nuevo_poder}' agregado a {superheroes[nombre_heroe]['nombre_completo']}"</span>)
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">f"⚠️ {superheroes[nombre_heroe]['nombre_completo']} ya tiene ese poder"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"❌ Superhéroe no encontrado"</span>)
+
+<span class="keyword">def</span> <span class="function">ranking_por_stat</span>(<span class="variable">stat_nombre</span>):
+    <span class="string">"""Crea un ranking de superhéroes basado en una estadística"""</span>
+    <span class="function">print</span>(<span class="string">f"\n🏆 RANKING por {stat_nombre.upper()} 🏆"</span>)
+    <span class="function">print</span>(<span class="string">"="</span> * <span class="number">35</span>)
+    
+    <span class="comment"># Crear lista de tuplas (nombre, valor)</span>
+    <span class="variable">ranking</span> = []
+    <span class="keyword">for</span> <span class="variable">nombre</span>, <span class="variable">heroe</span> <span class="keyword">in</span> <span class="variable">superheroes</span>.<span class="function">items</span>():
+        <span class="keyword">if</span> <span class="variable">stat_nombre</span> <span class="keyword">in</span> <span class="variable">heroe</span>[<span class="string">'stats'</span>]:
+            <span class="variable">ranking</span>.<span class="function">append</span>((<span class="variable">heroe</span>[<span class="string">'nombre_completo'</span>], <span class="variable">heroe</span>[<span class="string">'stats'</span>][<span class="variable">stat_nombre</span>]))
+    
+    <span class="comment"># Ordenar por valor (descendente)</span>
+    <span class="variable">ranking</span>.<span class="function">sort</span>(<span class="variable">key</span>=<span class="keyword">lambda</span> <span class="variable">x</span>: <span class="variable">x</span>[<span class="number">1</span>], <span class="variable">reverse</span>=<span class="keyword">True</span>)
+    
+    <span class="comment"># Mostrar ranking</span>
+    <span class="keyword">for</span> <span class="variable">i</span>, (<span class="variable">nombre</span>, <span class="variable">valor</span>) <span class="keyword">in</span> <span class="function">enumerate</span>(<span class="variable">ranking</span>, <span class="number">1</span>):
+        <span class="variable">medalla</span> = <span class="string">"🥇"</span> <span class="keyword">if</span> <span class="variable">i</span> == <span class="number">1</span> <span class="keyword">else</span> (<span class="string">"🥈"</span> <span class="keyword">if</span> <span class="variable">i</span> == <span class="number">2</span> <span class="keyword">else</span> (<span class="string">"🥉"</span> <span class="keyword">if</span> <span class="variable">i</span> == <span class="number">3</span> <span class="keyword">else</span> <span class="string">"  "</span>))
+        <span class="function">print</span>(<span class="string">f"{medalla} {i}. {nombre:20} - {valor}/100"</span>)
+
+<span class="keyword">def</span> <span class="function">equipo_balanceado</span>():
+    <span class="string">"""Sugiere un equipo balanceado de 3 superhéroes"""</span>
+    <span class="function">print</span>(<span class="string">"\n🤝 EQUIPO BALANCEADO SUGERIDO 🤝"</span>)
+    <span class="function">print</span>(<span class="string">"="</span> * <span class="number">35</span>)
+    
+    <span class="comment"># Buscar el más fuerte, más inteligente y más rápido</span>
+    <span class="variable">mas_fuerte</span> = <span class="function">max</span>(<span class="variable">superheroes</span>.<span class="function">items</span>(), 
+                      <span class="variable">key</span>=<span class="keyword">lambda</span> <span class="variable">x</span>: <span class="variable">x</span>[<span class="number">1</span>][<span class="string">'stats'</span>][<span class="string">'fuerza'</span>])
+    <span class="variable">mas_inteligente</span> = <span class="function">max</span>(<span class="variable">superheroes</span>.<span class="function">items</span>(), 
+                           <span class="variable">key</span>=<span class="keyword">lambda</span> <span class="variable">x</span>: <span class="variable">x</span>[<span class="number">1</span>][<span class="string">'stats'</span>][<span class="string">'inteligencia'</span>])
+    <span class="variable">mas_rapido</span> = <span class="function">max</span>(<span class="variable">superheroes</span>.<span class="function">items</span>(), 
+                      <span class="variable">key</span>=<span class="keyword">lambda</span> <span class="variable">x</span>: <span class="variable">x</span>[<span class="number">1</span>][<span class="string">'stats'</span>][<span class="string">'velocidad'</span>])
+    
+    <span class="variable">equipo</span> = {<span class="variable">mas_fuerte</span>[<span class="number">0</span>], <span class="variable">mas_inteligente</span>[<span class="number">0</span>], <span class="variable">mas_rapido</span>[<span class="number">0</span>]}
+    
+    <span class="function">print</span>(<span class="string">"Equipo sugerido para máxima efectividad:"</span>)
+    <span class="keyword">for</span> <span class="variable">heroe_key</span> <span class="keyword">in</span> <span class="variable">equipo</span>:
+        <span class="variable">heroe</span> = <span class="variable">superheroes</span>[<span class="variable">heroe_key</span>]
+        <span class="function">print</span>(<span class="string">f"\n• {heroe['nombre_completo']}"</span>)
+        <span class="variable">especialidad</span> = []
+        <span class="keyword">if</span> <span class="variable">heroe_key</span> == <span class="variable">mas_fuerte</span>[<span class="number">0</span>]:
+            <span class="variable">especialidad</span>.<span class="function">append</span>(<span class="string">"Músculo del equipo 💪"</span>)
+        <span class="keyword">if</span> <span class="variable">heroe_key</span> == <span class="variable">mas_inteligente</span>[<span class="number">0</span>]:
+            <span class="variable">especialidad</span>.<span class="function">append</span>(<span class="string">"Estratega 🧠"</span>)
+        <span class="keyword">if</span> <span class="variable">heroe_key</span> == <span class="variable">mas_rapido</span>[<span class="number">0</span>]:
+            <span class="variable">especialidad</span>.<span class="function">append</span>(<span class="string">"Velocista ⚡"</span>)
+        <span class="function">print</span>(<span class="string">f"  Rol: {', '.join(especialidad)}"</span>)
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📝 Programa Completo: Sistema de Gestión de Superhéroes</h2>
+            
+            <div class="codigo-ejemplo">
+<span class="function">print</span>(<span class="string">"🦸‍♂️ SISTEMA DE GESTIÓN DE SUPERHÉROES 🦸‍♀️"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">45</span>)
+
+<span class="comment"># [Incluir toda la base de datos de superhéroes aquí]</span>
+
+<span class="keyword">def</span> <span class="function">menu_principal</span>():
+    <span class="string">"""Muestra el menú principal del sistema"""</span>
+    <span class="keyword">while</span> <span class="keyword">True</span>:
+        <span class="function">print</span>(<span class="string">"\n📋 MENÚ PRINCIPAL"</span>)
+        <span class="function">print</span>(<span class="string">"1. Ver información de un superhéroe"</span>)
+        <span class="function">print</span>(<span class="string">"2. Buscar por poder"</span>)
+        <span class="function">print</span>(<span class="string">"3. Comparar dos superhéroes"</span>)
+        <span class="function">print</span>(<span class="string">"4. Ver ranking por estadística"</span>)
+        <span class="function">print</span>(<span class="string">"5. Agregar poder a un superhéroe"</span>)
+        <span class="function">print</span>(<span class="string">"6. Sugerir equipo balanceado"</span>)
+        <span class="function">print</span>(<span class="string">"7. Ver todos los superhéroes"</span>)
+        <span class="function">print</span>(<span class="string">"8. Salir"</span>)
+        
+        <span class="variable">opcion</span> = <span class="function">input</span>(<span class="string">"\nElige una opción (1-8): "</span>)
+        
+        <span class="keyword">if</span> <span class="variable">opcion</span> == <span class="string">"1"</span>:
+            <span class="variable">nombre</span> = <span class="function">input</span>(<span class="string">"Nombre del superhéroe (ej: superman): "</span>).<span class="function">lower</span>()
+            <span class="function">mostrar_info_heroe</span>(<span class="variable">nombre</span>)
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"2"</span>:
+            <span class="variable">poder</span> = <span class="function">input</span>(<span class="string">"¿Qué poder buscas?: "</span>)
+            <span class="function">buscar_por_poder</span>(<span class="variable">poder</span>)
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"3"</span>:
+            <span class="variable">h1</span> = <span class="function">input</span>(<span class="string">"Primer superhéroe: "</span>).<span class="function">lower</span>()
+            <span class="variable">h2</span> = <span class="function">input</span>(<span class="string">"Segundo superhéroe: "</span>).<span class="function">lower</span>()
+            <span class="function">comparar_heroes</span>(<span class="variable">h1</span>, <span class="variable">h2</span>)
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"4"</span>:
+            <span class="function">print</span>(<span class="string">"\nEstadísticas disponibles:"</span>)
+            <span class="function">print</span>(<span class="string">"- fuerza\n- velocidad\n- inteligencia\n- resistencia"</span>)
+            <span class="variable">stat</span> = <span class="function">input</span>(<span class="string">"¿Qué estadística?: "</span>).<span class="function">lower</span>()
+            <span class="function">ranking_por_stat</span>(<span class="variable">stat</span>)
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"5"</span>:
+            <span class="variable">nombre</span> = <span class="function">input</span>(<span class="string">"Nombre del superhéroe: "</span>).<span class="function">lower</span>()
+            <span class="variable">poder</span> = <span class="function">input</span>(<span class="string">"Nuevo poder: "</span>)
+            <span class="function">agregar_poder</span>(<span class="variable">nombre</span>, <span class="variable">poder</span>)
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"6"</span>:
+            <span class="function">equipo_balanceado</span>()
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"7"</span>:
+            <span class="function">print</span>(<span class="string">"\n🦸 TODOS LOS SUPERHÉROES:"</span>)
+            <span class="keyword">for</span> <span class="variable">key</span>, <span class="variable">heroe</span> <span class="keyword">in</span> <span class="variable">superheroes</span>.<span class="function">items</span>():
+                <span class="function">print</span>(<span class="string">f"  • {heroe['nombre_completo']} ({key})"</span>)
+                
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"8"</span>:
+            <span class="function">print</span>(<span class="string">"\n¡Hasta la próxima, héroe! 🦸‍♂️"</span>)
+            <span class="keyword">break</span>
+            
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">"❌ Opción no válida"</span>)
+        
+        <span class="function">input</span>(<span class="string">"\n[Presiona Enter para continuar...]"</span>)
+
+<span class="comment"># Ejecutar el programa</span>
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    <span class="function">menu_principal</span>()
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎨 Visualización de Datos</h2>
+            
+            <div class="superhero-card">
+                <h4><span class="hero-icon">🦸</span> Superman</h4>
+                <p><strong>Identidad:</strong> Clark Kent • <strong>Origen:</strong> Krypton</p>
+                <p><strong>Ciudad:</strong> Metrópolis • <strong>Debilidad:</strong> Kriptonita</p>
+                <div class="hero-stats">
+                    <div class="stat">💪 Fuerza<br>100/100</div>
+                    <div class="stat">⚡ Velocidad<br>100/100</div>
+                    <div class="stat">🧠 Inteligencia<br>85/100</div>
+                    <div class="stat">🛡️ Resistencia<br>100/100</div>
+                </div>
+            </div>
+
+            <div class="superhero-card" style="background: linear-gradient(135deg, #1a1a1a 0%, #434343 100%);">
+                <h4><span class="hero-icon">🦇</span> Batman</h4>
+                <p><strong>Identidad:</strong> Bruce Wayne • <strong>Origen:</strong> Tierra</p>
+                <p><strong>Ciudad:</strong> Gotham • <strong>Debilidad:</strong> Es mortal</p>
+                <div class="hero-stats">
+                    <div class="stat">💪 Fuerza<br>40/100</div>
+                    <div class="stat">⚡ Velocidad<br>30/100</div>
+                    <div class="stat">🧠 Inteligencia<br>100/100</div>
+                    <div class="stat">🛡️ Resistencia<br>50/100</div>
+                </div>
+            </div>
+
+            <div class="superhero-card" style="background: linear-gradient(135deg, #d4af37 0%, #aa6c39 100%);">
+                <h4><span class="hero-icon">⭐</span> Wonder Woman</h4>
+                <p><strong>Identidad:</strong> Diana Prince • <strong>Origen:</strong> Themyscira</p>
+                <p><strong>Ciudad:</strong> Washington D.C. • <strong>Debilidad:</strong> Pierde poderes sin brazaletes</p>
+                <div class="hero-stats">
+                    <div class="stat">💪 Fuerza<br>95/100</div>
+                    <div class="stat">⚡ Velocidad<br>80/100</div>
+                    <div class="stat">🧠 Inteligencia<br>90/100</div>
+                    <div class="stat">🛡️ Resistencia<br>95/100</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔍 Métodos Importantes de Diccionarios</h2>
+            
+            <div class="metodos-dict">
+                <div class="metodo-card">
+                    <h5>.keys()</h5>
+                    <p>Obtiene todas las claves</p>
+                    <code>dict.keys()</code>
+                </div>
+                
+                <div class="metodo-card">
+                    <h5>.values()</h5>
+                    <p>Obtiene todos los valores</p>
+                    <code>dict.values()</code>
+                </div>
+                
+                <div class="metodo-card">
+                    <h5>.items()</h5>
+                    <p>Obtiene pares clave-valor</p>
+                    <code>dict.items()</code>
+                </div>
+                
+                <div class="metodo-card">
+                    <h5>.get()</h5>
+                    <p>Obtiene valor con default</p>
+                    <code>dict.get(key, default)</code>
+                </div>
+                
+                <div class="metodo-card">
+                    <h5>.update()</h5>
+                    <p>Actualiza el diccionario</p>
+                    <code>dict.update(otro_dict)</code>
+                </div>
+                
+                <div class="metodo-card">
+                    <h5>.pop()</h5>
+                    <p>Elimina y retorna valor</p>
+                    <code>dict.pop(key)</code>
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>Ejemplo de uso de métodos</h4>
+                <div class="codigo-ejemplo">
+<span class="comment"># Iterar sobre claves</span>
+<span class="keyword">for</span> <span class="variable">nombre</span> <span class="keyword">in</span> <span class="variable">superheroes</span>.<span class="function">keys</span>():
+    <span class="function">print</span>(<span class="variable">nombre</span>)
+
+<span class="comment"># Iterar sobre valores</span>
+<span class="keyword">for</span> <span class="variable">heroe</span> <span class="keyword">in</span> <span class="variable">superheroes</span>.<span class="function">values</span>():
+    <span class="function">print</span>(<span class="variable">heroe</span>[<span class="string">'nombre_completo'</span>])
+
+<span class="comment"># Iterar sobre pares clave-valor</span>
+<span class="keyword">for</span> <span class="variable">nombre</span>, <span class="variable">heroe</span> <span class="keyword">in</span> <span class="variable">superheroes</span>.<span class="function">items</span>():
+    <span class="function">print</span>(<span class="string">f"{nombre}: {heroe['nombre_real']}"</span>)
+
+<span class="comment"># Acceso seguro con get()</span>
+<span class="variable">villano</span> = <span class="variable">superheroes</span>.<span class="function">get</span>(<span class="string">'joker'</span>, {<span class="string">'nombre_completo'</span>: <span class="string">'No encontrado'</span>})
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios de Práctica</h2>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 1: Sistema de Villanos</h4>
+                <p>Crea un diccionario similar para villanos con estas características:</p>
+                <ul>
+                    <li>Información básica (nombre, alias, origen)</li>
+                    <li>Nemesis (qué superhéroe es su enemigo)</li>
+                    <li>Plan malvado actual</li>
+                    <li>Nivel de amenaza (1-10)</li>
+                    <li>Historial de crímenes (lista)</li>
+                </ul>
+                <p>Crea funciones para relacionar villanos con héroes.</p>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 2: Batallas Épicas</h4>
+                <p>Crea un sistema de batallas que:</p>
+                <ul>
+                    <li>Compare estadísticas de dos personajes</li>
+                    <li>Considere debilidades y fortalezas</li>
+                    <li>Calcule probabilidades de victoria</li>
+                    <li>Guarde historial de batallas</li>
+                    <li>Genere un reporte de batalla detallado</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 3: Gestión de Equipos</h4>
+                <p>Expande el sistema para manejar equipos completos:</p>
+                <ul>
+                    <li>Crear equipos (Avengers, Justice League, etc.)</li>
+                    <li>Calcular estadísticas promedio del equipo</li>
+                    <li>Detectar sinergias entre miembros</li>
+                    <li>Sugerir formaciones óptimas para diferentes misiones</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Desafío Extra: API de Superhéroes</h4>
+                <p>Crea una "API" simulada con funciones avanzadas:</p>
+                <ul>
+                    <li>Búsqueda con filtros múltiples</li>
+                    <li>Exportar/importar datos en formato JSON</li>
+                    <li>Sistema de actualizaciones con versionado</li>
+                    <li>Generador de reportes en texto formateado</li>
+                    <li>Sistema de recomendaciones basado en preferencias</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Consejo de Diseño:</strong> Cuando trabajes con diccionarios complejos, dibuja primero la estructura en papel. Esto te ayudará a visualizar las relaciones entre los datos y planificar mejor tu código.
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Resumen y Conceptos Clave</h2>
+            
+            <div class="teoria">
+                <h4>Lo que aprendiste en este ejercicio:</h4>
+                <ul>
+                    <li>✅ Crear y manipular diccionarios complejos</li>
+                    <li>✅ Trabajar con diccionarios anidados</li>
+                    <li>✅ Combinar diccionarios con otras estructuras (listas)</li>
+                    <li>✅ Usar métodos de diccionarios (.keys(), .values(), .items())</li>
+                    <li>✅ Crear funciones para consultar y modificar datos</li>
+                    <li>✅ Implementar búsquedas y filtros</li>
+                    <li>✅ Organizar datos complejos de forma eficiente</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>Aplicaciones en el Mundo Real</h4>
+                <p>Los diccionarios son fundamentales en:</p>
+                <ul>
+                    <li>🗄️ <strong>Bases de datos NoSQL</strong><!DOCTYPE html>
+                    </li>
+                    <li>🌐 <strong>APIs y servicios web</strong></li>
+                    <li>📊 <strong>Análisis de datos</strong></li>
+                    <li>🛠️ <strong>Configuraciones de aplicaciones</strong></li>
+                    <li>🎮 <strong>Desarrollo de videojuegos</strong></li>
+                    <li>🤖 <strong>Inteligencia artificial y machine learning</strong></l
+                            i> 
+                    <li>📚 <strong>Procesamiento de lenguaje natural</strong></li>
+                </ul>
+            </div>
+        </div>
+            <div class="slide">
+                <h2>🔗 Recursos Adicionales</h2>
+                
+                <ul>
+                    <li><a href="https://docs.python.org/3/tutorial/datastructures.html#dictionaries">Documentación oficial de Python sobre diccionarios</a></li>
+                    <li><a href="https://realpython.com/python-dicts/">Tutorial de Real Python sobre diccionarios</a></li>
+                    <li><a href="https://www.w3schools.com/python/python_dictionaries.asp">W3Schools - Diccionarios en Python</a></li>
+                    <li><a href="https://www.geeksforgeeks.org/python-dictionary/">GeeksforGeeks - Diccionarios en Python</a></li>
+                    <li><a href="https://www.programiz.com/python-programming/dictionary">Programiz - Diccionarios en Python</a></li>
+                </ul>
+            </div>
+            <div class="slide">
+                <h2>👋 ¡Gracias por Participar!</h2>
+                
+                <p>Esperamos que hayas disfrutado este ejercicio y aprendido mucho sobre el uso de diccionarios en Python.</p>
+                <p>¡Sigue practicando y creando proyectos increíbles!</p>
+                
+                <p><strong>¡Hasta la próxima! 🦸‍♂️</strong></p>
+            </div>
+        </div>
+        </body>
+</html>
+
+    
