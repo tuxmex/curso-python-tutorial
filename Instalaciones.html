@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial de Instalación - Python, VS Code y Thonny</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100vh;
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 40px 60px;
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.95) 0%, rgba(42, 82, 152, 0.95) 100%);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .slide-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .slide-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #4fc3f7;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .slide-subtitle {
+            font-size: 1.3em;
+            color: #b3d9ff;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .step-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #4fc3f7;
+            color: #1e3c72;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        .step-title {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            color: #81d4fa;
+        }
+
+        .step-content {
+            line-height: 1.8;
+            color: #e1f5fe;
+        }
+
+        .code-block {
+            background: #0d1929;
+            border: 1px solid #1976d2;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Consolas', 'Monaco', monospace;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: #4fc3f7;
+            font-size: 0.95em;
+        }
+
+        .warning-box {
+            background: rgba(255, 152, 0, 0.2);
+            border-left: 4px solid #ff9800;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .warning-box strong {
+            color: #ffb74d;
+        }
+
+        .success-box {
+            background: rgba(76, 175, 80, 0.2);
+            border-left: 4px solid #4caf50;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: #4fc3f7;
+            border: none;
+            color: #1e3c72;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
+            background: #29b6f6;
+        }
+
+        .slide-indicator {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 18px;
+            color: #b3d9ff;
+        }
+
+        .icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .python-icon { color: #ffd43b; }
+        .vscode-icon { color: #007acc; }
+        .thonny-icon { color: #ff6b6b; }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4fc3f7;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .img-placeholder {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            color: #b3d9ff;
+        }
+
+        .download-link {
+            display: inline-block;
+            background: #4fc3f7;
+            color: #1e3c72;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .download-link:hover {
+            background: #29b6f6;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 20px;
+            }
+            
+            .slide-title {
+                font-size: 2em;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <div class="slide-indicator" id="slideIndicator">1 / 15</div>
+
+        <!-- Slide 1: Portada -->
+        <div class="slide active">
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center;">
+                <h1 style="font-size: 3.5em; margin-bottom: 20px; color: #4fc3f7;">Tutorial de Instalación</h1>
+                <h2 style="font-size: 2em; margin-bottom: 40px; color: #81d4fa;">Python 3.13 • VS Code • Thonny</h2>
+                <p style="font-size: 1.5em; color: #b3d9ff; margin-bottom: 60px;">Curso de Python para la Industria</p>
+                <div style="display: flex; gap: 40px; font-size: 4em;">
+                    <span class="python-icon">🐍</span>
+                    <span class="vscode-icon">📝</span>
+                    <span class="thonny-icon">🎯</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Agenda -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">📋 Agenda de Instalación</h2>
+                <p class="slide-subtitle">Lo que instalaremos hoy</p>
+            </div>
+            
+            <div class="content-grid">
+                <div class="step-card">
+                    <div class="icon python-icon">🐍</div>
+                    <h3 class="step-title">Python 3.13</h3>
+                    <ul class="feature-list">
+                        <li>Lenguaje de programación</li>
+                        <li>Intérprete principal</li>
+                        <li>Gestor de paquetes (pip)</li>
+                        <li>Configuración del PATH</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #4fc3f7;">⏱️ 10 minutos</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="icon vscode-icon">📝</div>
+                    <h3 class="step-title">Visual Studio Code</h3>
+                    <ul class="feature-list">
+                        <li>Editor profesional</li>
+                        <li>Extensión de Python</li>
+                        <li>Terminal integrada</li>
+                        <li>Depurador avanzado</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #4fc3f7;">⏱️ 10 minutos</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="icon thonny-icon">🎯</div>
+                    <h3 class="step-title">Thonny</h3>
+                    <ul class="feature-list">
+                        <li>IDE para principiantes</li>
+                        <li>Depurador visual</li>
+                        <li>Interfaz simple</li>
+                        <li>Ideal para aprender</li>
+                    </ul>
+                    <p style="margin-top: 15px; color: #4fc3f7;">⏱️ 5 minutos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Python - Descarga -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🐍 Python 3.13 - Paso 1: Descarga</h2>
+                <p class="slide-subtitle">Obteniendo el instalador oficial</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Ir al sitio oficial</h3>
+                <a href="https://www.python.org" class="download-link" target="_blank">www.python.org</a>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Hacer clic en Downloads</h3>
+                <div class="img-placeholder">
+                    <p>📸 Captura: Botón amarillo "Downloads" en la página principal</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Windows será detectado automáticamente</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Descargar Python 3.13.x</h3>
+                <p class="step-content">El archivo será: <code>python-3.13.x-amd64.exe</code></p>
+                <div class="warning-box">
+                    <strong>⚠️ Importante:</strong> Asegúrate de descargar la versión de 64 bits para Windows
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Python - Instalación -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🐍 Python 3.13 - Paso 2: Instalación</h2>
+                <p class="slide-subtitle">El paso más crítico de todos</p>
+            </div>
+
+            <div class="step-card" style="background: rgba(255, 152, 0, 0.1); border: 2px solid #ff9800;">
+                <div class="step-number" style="background: #ff9800;">!</div>
+                <h3 class="step-title" style="color: #ffb74d;">⚠️ PASO CRÍTICO</h3>
+                <div class="step-content">
+                    <p style="font-size: 1.2em; margin-bottom: 15px;"><strong>ANTES de instalar:</strong></p>
+                    <div style="background: #0d1929; padding: 20px; border-radius: 8px; border: 2px solid #ff9800;">
+                        <p style="font-size: 1.3em; text-align: center;">
+                            ✅ <strong>MARCA LA CASILLA:</strong><br>
+                            <span style="color: #ffb74d; font-size: 1.1em;">☑ Add Python 3.13 to PATH</span>
+                        </p>
+                    </div>
+                    <p style="margin-top: 15px; color: #ffb74d;">
+                        Si no marcas esta casilla, Python no funcionará desde la terminal
+                    </p>
+                </div>
+            </div>
+
+            <div class="content-grid" style="grid-template-columns: 1fr 1fr;">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Ejecutar el instalador</h3>
+                    <p class="step-content">Doble clic en el archivo descargado</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Marcar Add to PATH</h3>
+                    <p class="step-content">¡No olvides la casilla!</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Install Now</h3>
+                    <p class="step-content">Clic en "Install Now" (recomendado)</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3 class="step-title">Esperar</h3>
+                    <p class="step-content">La instalación toma 2-5 minutos</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Python - Verificación -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🐍 Python 3.13 - Paso 3: Verificación</h2>
+                <p class="slide-subtitle">Confirmando que todo funciona</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Abrir Command Prompt (CMD)</h3>
+                <div class="code-block">
+                    <code>Windows + R → cmd → Enter</code>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Verificar Python</h3>
+                <div class="code-block">
+                    <code>python --version</code>
+                </div>
+                <div class="success-box">
+                    <strong>✓ Resultado esperado:</strong> Python 3.13.x
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Verificar pip</h3>
+                <div class="code-block">
+                    <code>pip --version</code>
+                </div>
+                <div class="success-box">
+                    <strong>✓ Resultado esperado:</strong> pip 24.x.x from C:\...\Python313\...
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>🔧 Si no funciona:</strong> Reinicia tu computadora y vuelve a intentar. Si persiste el problema, reinstala Python asegurándote de marcar "Add to PATH".
+            </div>
+        </div>
+
+        <!-- Slide 6: VS Code - Descarga -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">📝 VS Code - Paso 1: Descarga</h2>
+                <p class="slide-subtitle">El editor profesional más popular</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Sitio oficial de VS Code</h3>
+                <a href="https://code.visualstudio.com" class="download-link" target="_blank">code.visualstudio.com</a>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Download for Windows</h3>
+                <div class="img-placeholder">
+                    <p>📸 Captura: Botón azul "Download for Windows"</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">Stable Build recomendado</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Archivo descargado</h3>
+                <p class="step-content">Se descargará: <code>VSCodeUserSetup-x64-1.xx.x.exe</code></p>
+                <p style="margin-top: 10px; color: #81d4fa;">Tamaño aproximado: 90 MB</p>
+            </div>
+        </div>
+
+        <!-- Slide 7: VS Code - Instalación -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">📝 VS Code - Paso 2: Instalación</h2>
+                <p class="slide-subtitle">Configuración recomendada</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Ejecutar instalador</h3>
+                    <p class="step-content">Doble clic y aceptar licencia</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Opciones importantes</h3>
+                    <ul class="feature-list">
+                        <li>Add "Open with Code" to context menu</li>
+                        <li>Register Code as editor</li>
+                        <li>Add to PATH</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Finalizar</h3>
+                    <p class="step-content">Launch Visual Studio Code ✓</p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <strong>💡 Tip:</strong> Marca TODAS las casillas en "Select Additional Tasks" para mejor integración con Windows
+            </div>
+        </div>
+
+        <!-- Slide 8: VS Code - Extensión Python -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">📝 VS Code - Paso 3: Extensión Python</h2>
+                <p class="slide-subtitle">Habilitando el soporte para Python</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Abrir Extensions</h3>
+                <div class="img-placeholder">
+                    <p>📸 Clic en el icono de cuadrados en la barra lateral</p>
+                    <p style="font-size: 0.9em; margin-top: 10px;">O presiona Ctrl+Shift+X</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Buscar "Python"</h3>
+                <p class="step-content">En la barra de búsqueda escribe: <strong>Python</strong></p>
+                <div class="success-box">
+                    <strong>✓ Buscar:</strong> Python by Microsoft (millones de descargas)
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Instalar extensión</h3>
+                <p class="step-content">Clic en el botón <strong>Install</strong></p>
+                <p style="margin-top: 10px;">La extensión incluye:</p>
+                <ul class="feature-list">
+                    <li>IntelliSense (autocompletado)</li>
+                    <li>Linting (detección de errores)</li>
+                    <li>Depuración</li>
+                    <li>Jupyter Notebooks</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Slide 9: VS Code - Primer programa -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">📝 VS Code - Paso 4: Primer Programa</h2>
+                <p class="slide-subtitle">Probando que todo funciona</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Crear carpeta del curso</h3>
+                <p class="step-content">En el escritorio, crear carpeta: <strong>CursoPython</strong></p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Abrir carpeta en VS Code</h3>
+                <p class="step-content">File → Open Folder → Seleccionar <strong>CursoPython</strong></p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Crear archivo Python</h3>
+                <p class="step-content">File → New File → Guardar como: <strong>hola.py</strong></p>
+                <div class="code-block">
+                    <code>print("¡Hola desde VS Code!")<br>
+print("Python Industrial en acción 🏭")</code>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3 class="step-title">Ejecutar</h3>
+                <p class="step-content">Presionar <strong>F5</strong> o clic derecho → <strong>Run Python File</strong></p>
+                <div class="success-box">
+                    <strong>✓ Verás el resultado en la Terminal integrada</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Thonny - Descarga -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🎯 Thonny - Paso 1: Descarga</h2>
+                <p class="slide-subtitle">IDE perfecto para principiantes</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Sitio oficial</h3>
+                <a href="https://thonny.org" class="download-link" target="_blank">thonny.org</a>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Download para Windows</h3>
+                <div class="img-placeholder">
+                    <p>📸 Clic en el enlace de Windows (esquina superior derecha)</p>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Archivo</h3>
+                <p class="step-content">Se descargará: <code>thonny-x.x.x.exe</code></p>
+                <p style="margin-top: 10px; color: #81d4fa;">Tamaño: ~20 MB (muy ligero)</p>
+            </div>
+        </div>
+
+        <!-- Slide 11: Thonny - Instalación -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🎯 Thonny - Paso 2: Instalación</h2>
+                <p class="slide-subtitle">Proceso simple y rápido</p>
+            </div>
+
+            <div class="content-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3 class="step-title">Ejecutar instalador</h3>
+                    <p class="step-content">Si Windows muestra advertencia: "More info" → "Run anyway"</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3 class="step-title">Install for me only</h3>
+                    <p class="step-content">Opción recomendada para uso personal</p>
+                </div>
+
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3 class="step-title">Next → Install</h3>
+                    <p class="step-content">Aceptar ubicación predeterminada</p>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <strong>✓ Ventaja:</strong> Thonny detecta automáticamente Python 3.13 instalado
+            </div>
+        </div>
+
+        <!-- Slide 12: Thonny - Configuración -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🎯 Thonny - Paso 3: Primera Ejecución</h2>
+                <p class="slide-subtitle">Configuración inicial</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3 class="step-title">Idioma</h3>
+                <p class="step-content">Puedes elegir <strong>Español</strong> si lo prefieres</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3 class="step-title">Modo de uso</h3>
+                <p class="step-content">Selecciona <strong>Standard</strong> (recomendado)</p>
+            </div>
+
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3 class="step-title">Probar Thonny</h3>
+                <div class="code-block">
+                    <code># Escribe en la ventana principal:<br>
+print("¡Hola desde Thonny!")<br>
+temperatura = 25.5<br>
+print(f"Temperatura del sensor: {temperatura}°C")</code>
+                </div>
+                <p style="margin-top: 10px;">Presiona el botón verde <strong>Run</strong> (▶) o F5</p>
+            </div>
+
+            <div class="success-box">
+                <strong>✓ Característica única:</strong> Thonny muestra paso a paso cómo Python ejecuta tu código
+            </div>
+        </div>
+
+        <!-- Slide 13: Verificación final -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">✅ Verificación Final</h2>
+                <p class="slide-subtitle">Confirmando todas las instalaciones</p>
+            </div>
+
+            <div class="step-card">
+                <h3 class="step-title">Comandos de verificación en CMD</h3>
+                <div class="code-block">
+                    <code># Verificar Python<br>
+python --version<br><br>
+# Verificar pip<br>
+pip --version<br><br>
+# Verificar VS Code<br>
+code --version<br><br>
+# Instalar librerías del curso<br>
+pip install numpy pandas matplotlib</code>
+                </div>
+            </div>
+
+            <div class="content-grid">
+                <div class="step-card">
+                    <h3 class="step-title">✓ Python 3.13</h3>
+                    <ul class="feature-list">
+                        <li>Intérprete funcionando</li>
+                        <li>pip instalado</li>
+                        <li>PATH configurado</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h3 class="step-title">✓ VS Code</h3>
+                    <ul class="feature-list">
+                        <li>Editor instalado</li>
+                        <li>Extensión Python activa</li>
+                        <li>Terminal integrada</li>
+                    </ul>
+                </div>
+
+                <div class="step-card">
+                    <h3 class="step-title">✓ Thonny</h3>
+                    <ul class="feature-list">
+                        <li>IDE funcionando</li>
+                        <li>Python detectado</li>
+                        <li>Listo para aprender</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 14: Solución de problemas -->
+        <div class="slide">
+            <div class="slide-header">
+                <h2 class="slide-title">🔧 Solución de Problemas Comunes</h2>
+                <p class="slide-subtitle">Las 3 situaciones más frecuentes</p>
+            </div>
+
+            <div class="step-card">
+                <h3 class="step-title">❌ "python no se reconoce como comando..."</h3>
+                <div class="warning-box">
+                    <strong>Causa:</strong> No se marcó "Add Python to PATH" durante la instalación
+                </div>
+                <div class="success-box">
+                    <strong>Solución:</strong>
+                    <ol style="margin-left: 20px;">
+                        <li>Desinstalar Python desde Panel de Control</li>
+                        <li>Reinstalar marcando ✓ "Add Python to PATH"</li>
+                        <li>Reiniciar la computadora</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <h3 class="step-title">❌ VS Code no reconoce Python</h3>
+                <div class="warning-box">
+                    <strong>Causa:</strong> VS Code no encuentra el intérprete
+                </div>
+                <div class="success-box">
+                    <strong>Solución:</strong>
+                    <ol style="margin-left: 20px;">
+                        <li>En VS Code: Ctrl + Shift + P</li>
+                        <li>Escribir: "Python: Select Interpreter"</li>
+                        <li>Seleccionar Python 3.13.x</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="step-card">
+                <h3 class="step-title">❌ Error al instalar librerías con pip</h3>
+                <div class="warning-box">
+                    <strong>Causa:</strong> pip desactualizado o permisos
+                </div>
+                <div class="success-box">
+                    <strong>Solución:</strong>
+                    <ol style="margin-left: 20px;">
+                        <li>Abrir CMD como Administrador</li>
+                        <li>Ejecutar: <code>python -m pip install --upgrade pip</code></li>
+                        <li>Reintentar la instalación</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 15: Conclusión -->
+        <div class="slide">
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; text-align: center;">
+                <h2 style="font-size: 3em; color: #4fc3f7; margin-bottom: 30px;">🎉 ¡Instalación Completa!</h2>
+                
+                <div style="background: rgba(76, 195, 247, 0.1); padding: 30px; border-radius: 12px; margin-bottom: 40px;">
+                    <h3 style="font-size: 1.8em; color: #81d4fa; margin-bottom: 20px;">Ya tienes todo listo:</h3>
+                    <div style="display: flex; gap: 40px; justify-content: center; font-size: 1.3em;">
+                        <div>✅ Python 3.13</div>
+                        <div>✅ VS Code</div>
+                        <div>✅ Thonny</div>
+                    </div>
+                </div>
+
+                <div class="step-card" style="max-width: 600px;">
+                    <h3 class="step-title">📚 Recursos adicionales</h3>
+                    <ul class="feature-list" style="text-align: left;">
+                        <li><strong>Documentación Python:</strong> docs.python.org/es/3.13/</li>
+                        <li><strong>Tutorial VS Code:</strong> code.visualstudio.com/docs/python</li>
+                        <li><strong>Guía Thonny:</strong> realpython.com/python-thonny/</li>
+                    </ul>
+                </div>
+
+                <p style="font-size: 1.5em; color: #4fc3f7; margin-top: 40px;">
+                    <strong>¡Listos para programar! 🚀</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Anterior</button>
+        <button class="nav-btn" onclick="nextSlide()">Siguiente →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.display = 'none';
+            });
+            
+            slides[index].classList.add('active');
+            slides[index].style.display = 'block';
+            
+            document.getElementById('slideIndicator').textContent = `${index + 1} / ${totalSlides}`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        function previousSlide() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+            if (e.key === 'Home') { currentSlide = 0; showSlide(0); }
+            if (e.key === 'End') { currentSlide = totalSlides - 1; showSlide(totalSlides - 1); }
+        });
+
+        // Inicializar
+        showSlide(0);
+    </script>
+</body>
+</html>

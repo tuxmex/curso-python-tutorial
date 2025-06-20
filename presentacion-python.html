@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python para la Industria - Presentación de Inicio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        .presentation-container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            width: 90%;
+            max-width: 1200px;
+            height: 90vh;
+            display: none;
+            animation: slideIn 0.8s ease-out;
+            padding: 60px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(20,20,20,0.95) 0%, rgba(30,30,30,0.95) 100%);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            border: none;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+
+        .slide-indicator {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 18px;
+            color: #94a3b8;
+        }
+
+        /* Slide 1 - Título */
+        .title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+        }
+
+        .python-logo {
+            width: 150px;
+            height: 150px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .main-title {
+            font-size: 4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6 0%, #60a5fa 50%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5)); }
+            to { filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.8)); }
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+
+        .date-location {
+            font-size: 1.2em;
+            color: #64748b;
+        }
+
+        /* Slide 2 - Instructor */
+        .instructor-slide {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .profile-section {
+            text-align: center;
+        }
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            margin: 0 auto 30px;
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+        }
+
+        .instructor-name {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .instructor-title {
+            font-size: 1.3em;
+            color: #3b82f6;
+            margin-bottom: 20px;
+        }
+
+        .achievements {
+            text-align: left;
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #60a5fa;
+        }
+
+        .achievement-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateX(10px);
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .achievement-title {
+            font-size: 1.3em;
+            margin-bottom: 8px;
+            color: #93c5fd;
+        }
+
+        .achievement-desc {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Slide 3 - ¿Qué es Python? */
+        .python-intro {
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .stat-card {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: 800;
+            color: #3b82f6;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            color: #94a3b8;
+        }
+
+        /* Slide 4 - Por qué Python */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.05);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #60a5fa;
+        }
+
+        .feature-desc {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* Slide 5 - Python en la Industria */
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .industry-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .industry-card:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .industry-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .industry-name {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #93c5fd;
+        }
+
+        .industry-example {
+            font-size: 0.9em;
+            color: #94a3b8;
+        }
+
+        /* Slide 6 - Casos de Éxito */
+        .success-stories {
+            margin-top: 40px;
+        }
+
+        .story-card {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, rgba(30, 30, 30, 0.5) 100%);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 16px;
+            border-left: 5px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateX(10px);
+        }
+
+        .company-name {
+            font-size: 1.8em;
+            color: #60a5fa;
+            margin-bottom: 15px;
+        }
+
+        .story-content {
+            color: #cbd5e1;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .impact {
+            font-size: 1.1em;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        /* Slide 7 - Qué aprenderás */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .module-card {
+            background: rgba(59, 130, 246, 0.05);
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+        }
+
+        .module-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #3b82f6;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .module-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #93c5fd;
+        }
+
+        .topic-list {
+            list-style: none;
+        }
+
+        .topic-list li {
+            padding: 8px 0;
+            padding-left: 20px;
+            position: relative;
+            color: #cbd5e1;
+        }
+
+        .topic-list li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+        }
+
+        /* Slide 8 - Inicio */
+        .start-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .cta-title {
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .cta-subtitle {
+            font-size: 1.5em;
+            color: #94a3b8;
+            margin-bottom: 50px;
+        }
+
+        .contact-info {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 30px 50px;
+            border-radius: 16px;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .contact-item {
+            font-size: 1.2em;
+            margin: 15px 0;
+            color: #cbd5e1;
+        }
+
+        .contact-item strong {
+            color: #60a5fa;
+        }
+
+        /* Animación de partículas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(59, 130, 246, 0.5);
+            border-radius: 50%;
+            animation: drift 20s infinite;
+        }
+
+        @keyframes drift {
+            from {
+                transform: translate(0, 100vh) scale(0);
+            }
+            to {
+                transform: translate(100vw, -100vh) scale(1);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide {
+                padding: 30px;
+            }
+            
+            .main-title {
+                font-size: 2.5em;
+            }
+            
+            .instructor-slide {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid,
+            .industry-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-grid,
+            .curriculum-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <div class="presentation-container">
+        <div class="slide-indicator" id="slideIndicator">1 / 8</div>
+
+        <!-- Slide 1: Portada -->
+        <div class="slide active title-slide">
+            <svg class="python-logo" viewBox="0 0 128 128">
+                <linearGradient id="python-gradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#2563eb;stop-opacity:1" />
+                </linearGradient>
+                <linearGradient id="python-gradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" style="stop-color:#60a5fa;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                </linearGradient>
+                <path fill="url(#python-gradient1)" d="M63.391 1.988c-4.222.02-8.252.379-11.8 1.007-10.45 1.846-12.346 5.71-12.346 12.837v9.411h24.693v3.137h-33.961c-7.176 0-13.46 4.313-15.426 12.521-2.268 9.405-2.368 15.275 0 25.096 1.755 7.311 5.947 12.519 13.124 12.519h8.491v-11.282c0-8.151 7.051-15.34 15.426-15.34h24.665c6.866 0 12.346-5.654 12.346-12.548v-23.513c0-6.693-5.646-11.72-12.346-12.837-4.244-.706-8.645-1.027-12.866-1.008zm-13.354 7.569c2.55 0 4.634 2.117 4.634 4.721 0 2.593-2.083 4.69-4.634 4.69-2.56 0-4.633-2.097-4.633-4.69-.001-2.604 2.073-4.721 4.633-4.721z"/>
+                <path fill="url(#python-gradient2)" d="M91.682 28.38v10.966c0 8.5-7.208 15.655-15.426 15.655h-24.665c-6.756 0-12.346 5.783-12.346 12.549v23.515c0 6.691 5.818 10.628 12.346 12.547 7.816 2.297 15.312 2.713 24.665 0 6.216-1.801 12.346-5.423 12.346-12.547v-9.412h-24.664v-3.138h37.012c7.176 0 9.852-5.005 12.348-12.519 2.578-7.735 2.467-15.174 0-25.096-1.774-7.145-5.161-12.521-12.348-12.521h-9.268zm-13.873 59.547c2.561 0 4.634 2.097 4.634 4.692 0 2.602-2.074 4.719-4.634 4.719-2.55 0-4.633-2.117-4.633-4.719 0-2.595 2.083-4.692 4.633-4.692z"/>
+            </svg>
+            <h1 class="main-title">Python para la Industria</h1>
+            <p class="subtitle">Transformando el Sector Industrial con Programación Inteligente</p>
+            <p class="date-location">Celaya, Guanajuato • 2025</p>
+        </div>
+
+        <!-- Slide 2: Instructor -->
+        <div class="slide instructor-slide">
+            <div class="profile-section">
+                <div class="profile-image">👨‍💻</div>
+                <h2 class="instructor-name">Anastacio Rodríguez García</h2>
+                <p class="instructor-title">Especialista en Programación & TI</p>
+            </div>
+            <div class="achievements">
+                <h2 class="section-title">Experiencia y Logros</h2>
+                <div class="achievement-item">
+                    <h3 class="achievement-title">🏭 Automatización Industrial</h3>
+                    <p class="achievement-desc">Implementación de soluciones Python para optimización de procesos industriales, reduciendo tiempos de producción en un 40%</p>
+                </div>
+                <div class="achievement-item">
+                    <h3 class="achievement-title">📊 Análisis de Datos</h3>
+                    <p class="achievement-desc">Desarrollo de sistemas de análisis predictivo para mantenimiento industrial, ahorrando costos significativos en paradas no programadas</p>
+                </div>
+                <div class="achievement-item">
+                    <h3 class="achievement-title">🤖 IoT & Sensores</h3>
+                    <p class="achievement-desc">Integración de dispositivos IoT con Python para monitoreo en tiempo real de líneas de producción</p>
+                </div>
+                <div class="achievement-item">
+                    <h3 class="achievement-title">🎓 Formación Continua</h3>
+                    <p class="achievement-desc">+500 profesionales capacitados en programación Python aplicada a la industria</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: ¿Qué es Python? -->
+        <div class="slide python-intro">
+            <h2 class="section-title">¿Qué es Python?</h2>
+            <p style="font-size: 1.3em; color: #cbd5e1; margin-bottom: 30px; line-height: 1.8;">
+                Python es el lenguaje de programación más versátil y poderoso del mundo, 
+                diseñado para ser simple, legible y extremadamente efectivo.
+            </p>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">#1</div>
+                    <div class="stat-label">Lenguaje más popular en 2025</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">48%</div>
+                    <div class="stat-label">De desarrolladores lo usan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8M+</div>
+                    <div class="stat-label">Proyectos en GitHub</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; padding: 30px; background: rgba(59, 130, 246, 0.1); border-radius: 16px;">
+                <p style="font-size: 1.2em; font-style: italic; color: #93c5fd;">
+                    "Python ha revolucionado la forma en que las industrias abordan la automatización, 
+                    el análisis de datos y la inteligencia artificial"
+                </p>
+                <p style="margin-top: 15px; color: #64748b;">- IEEE Computer Society</p>
+            </div>
+        </div>
+
+        <!-- Slide 4: Por qué Python -->
+        <div class="slide">
+            <h2 class="section-title" style="text-align: center; margin-bottom: 50px;">¿Por qué Python domina la industria?</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3 class="feature-title">Simplicidad Poderosa</h3>
+                    <p class="feature-desc">Sintaxis clara que reduce el tiempo de desarrollo en un 50% comparado con otros lenguajes</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3 class="feature-title">Ecosistema Gigante</h3>
+                    <p class="feature-desc">+400,000 librerías especializadas para cualquier necesidad industrial</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3 class="feature-title">Integración Total</h3>
+                    <p class="feature-desc">Compatible con PLCs, SCADA, bases de datos industriales y sistemas legacy</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3 class="feature-title">IA & Machine Learning</h3>
+                    <p class="feature-desc">Líder absoluto en inteligencia artificial aplicada a la industria</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Python en la Industria -->
+        <div class="slide">
+            <h2 class="section-title" style="text-align: center;">Python en Acción: Transformando Industrias</h2>
+            
+            <div class="industry-grid">
+                <div class="industry-card">
+                    <div class="industry-icon">🏭</div>
+                    <div class="industry-name">Manufactura</div>
+                    <div class="industry-example">Control de calidad con visión artificial</div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🚗</div>
+                    <div class="industry-name">Automotriz</div>
+                    <div class="industry-example">Optimización de líneas de ensamblaje</div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">⚡</div>
+                    <div class="industry-name">Energía</div>
+                    <div class="industry-example">Predicción de demanda eléctrica</div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🏥</div>
+                    <div class="industry-name">Farmacéutica</div>
+                    <div class="industry-example">Análisis de datos de producción</div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">📦</div>
+                    <div class="industry-name">Logística</div>
+                    <div class="industry-example">Optimización de rutas y almacenes</div>
+                </div>
+                <div class="industry-card">
+                    <div class="industry-icon">🔬</div>
+                    <div class="industry-name">Química</div>
+                    <div class="industry-example">Simulación de procesos químicos</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Casos de Éxito -->
+        <div class="slide">
+            <h2 class="section-title">Casos de Éxito Globales</h2>
+            
+            <div class="success-stories">
+                <div class="story-card">
+                    <h3 class="company-name">🚀 Tesla</h3>
+                    <p class="story-content">
+                        Utiliza Python para el piloto automático, análisis de telemetría y optimización de la producción en sus Gigafactories.
+                    </p>
+                    <p class="impact">→ 35% de mejora en eficiencia de producción</p>
+                </div>
+                
+                <div class="story-card">
+                    <h3 class="company-name">🏭 General Electric</h3>
+                    <p class="story-content">
+                        Implementó Python en su plataforma Predix para mantenimiento predictivo en turbinas industriales.
+                    </p>
+                    <p class="impact">→ $1.5B ahorrados en mantenimiento no planificado</p>
+                </div>
+                
+                <div class="story-card">
+                    <h3 class="company-name">📊 Netflix</h3>
+                    <p class="story-content">
+                        Procesa 450 billones de eventos diarios con Python para optimizar su infraestructura y experiencia de usuario.
+                    </p>
+                    <p class="impact">→ 90% de reducción en tiempo de procesamiento</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Qué aprenderás -->
+        <div class="slide">
+            <h2 class="section-title" style="text-align: center;">Lo que dominarás en este curso</h2>
+            
+            <div class="curriculum-grid">
+                <div class="module-card">
+                    <div class="module-number">1</div>
+                    <h3 class="module-title">Fundamentos Industriales</h3>
+                    <ul class="topic-list">
+                        <li>Python desde cero con enfoque industrial</li>
+                        <li>Manejo de datos de sensores y PLCs</li>
+                        <li>Automatización de tareas repetitivas</li>
+                        <li>Integración con sistemas SCADA</li>
+                    </ul>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">2</div>
+                    <h3 class="module-title">Análisis de Datos</h3>
+                    <ul class="topic-list">
+                        <li>Pandas para datos de producción</li>
+                        <li>Visualización con Matplotlib/Plotly</li>
+                        <li>KPIs y métricas industriales</li>
+                        <li>Reportes automatizados</li>
+                    </ul>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">3</div>
+                    <h3 class="module-title">IoT & Tiempo Real</h3>
+                    <ul class="topic-list">
+                        <li>Conexión con dispositivos IoT</li>
+                        <li>Protocolos MQTT y OPC UA</li>
+                        <li>Dashboards en tiempo real</li>
+                        <li>Alertas y notificaciones</li>
+                    </ul>
+                </div>
+                
+                <div class="module-card">
+                    <div class="module-number">4</div>
+                    <h3 class="module-title">IA para la Industria</h3>
+                    <ul class="topic-list">
+                        <li>Machine Learning predictivo</li>
+                        <li>Visión artificial para QA</li>
+                        <li>Optimización de procesos</li>
+                        <li>Mantenimiento predictivo</li>
+                    </ul>
+                </div>
