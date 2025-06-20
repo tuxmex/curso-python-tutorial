@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 5.1: La Fábrica de Cumplidos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .slide h2 {
+            color: #fa709a;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #fee140;
+        }
+        
+        .slide h3 {
+            color: #e85d75;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #fff5f5;
+            border-left: 5px solid #fa709a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #e85d75;
+            margin-bottom: 10px;
+        }
+        
+        .funcion-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .funcion-diagrama {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .funcion-parte {
+            background: white;
+            border: 2px solid #e85d75;
+            border-radius: 10px;
+            padding: 15px 25px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .flecha {
+            font-size: 2em;
+            color: #fa709a;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #fa709a;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .number {
+            color: #B5CEA8;
+        }
+        
+        .def-keyword {
+            color: #569CD6;
+            font-weight: bold;
+        }
+        
+        .return-keyword {
+            color: #C586C0;
+            font-weight: bold;
+        }
+        
+        .paso {
+            background: #fff0f6;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #ec4899;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ec4899;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .anatomia-funcion {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .anatomia-funcion h4 {
+            color: #0369a1;
+            margin-bottom: 15px;
+        }
+        
+        .parte-funcion {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .parte-funcion .etiqueta {
+            background: #0ea5e9;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-right: 15px;
+            font-weight: bold;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .comparacion-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparacion-tabla th {
+            background: #fa709a;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparacion-tabla td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparacion-tabla tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .tip {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejemplo-cumplido {
+            background: #fce7f3;
+            border: 2px solid #ec4899;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-style: italic;
+            color: #831843;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .beneficios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .beneficio-card {
+            background: #f3f4f6;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .beneficio-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .beneficio-card .icono {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💝 La Fábrica de Cumplidos</h1>
+            <p>Módulo 5: Funciones - Ejercicio 5.1</p>
+        </div>
+
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Aprender a crear y usar funciones básicas con parámetros en Python. Los estudiantes desarrollarán funciones que generen cumplidos personalizados, entendiendo cómo las funciones nos permiten reutilizar código y hacerlo más organizado. Este ejercicio introduce el concepto de funciones de forma divertida y memorable.
+            </div>
+
+            <h3>🧠 ¿Qué son las Funciones?</h3>
+            
+            <div class="teoria">
+                <h4>Concepto de Función</h4>
+                <p>Una función es como una <strong>máquina especializada</strong> que:</p>
+                <ul>
+                    <li>🔵 Recibe ingredientes (parámetros)</li>
+                    <li>🔧 Procesa esos ingredientes (código)</li>
+                    <li>📦 Devuelve un producto terminado (resultado)</li>
+                </ul>
+            </div>
+
+            <div class="funcion-box">
+                <h4>La Máquina de Funciones</h4>
+                <div class="funcion-diagrama">
+                    <div class="funcion-parte">Entrada<br>(Parámetros)</div>
+                    <div class="flecha">→</div>
+                    <div class="funcion-parte" style="background: #fee140;">FUNCIÓN<br>(Proceso)</div>
+                    <div class="flecha">→</div>
+                    <div class="funcion-parte">Salida<br>(Resultado)</div>
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>¿Por qué usar funciones?</h4>
+                <div class="beneficios-grid">
+                    <div class="beneficio-card">
+                        <div class="icono">♻️</div>
+                        <h5>Reutilización</h5>
+                        <p>Escribe una vez, usa muchas veces</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="icono">📦</div>
+                        <h5>Organización</h5>
+                        <p>Código más limpio y ordenado</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="icono">🐛</div>
+                        <h5>Menos Errores</h5>
+                        <p>Corrige en un lugar, funciona en todos</p>
+                    </div>
+                    <div class="beneficio-card">
+                        <div class="icono">🧪</div>
+                        <h5>Fácil de Probar</h5>
+                        <p>Prueba cada función por separado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔧 Anatomía de una Función</h2>
+            
+            <div class="anatomia-funcion">
+                <h4>Estructura Básica de una Función</h4>
+                
+                <div class="codigo-ejemplo">
+<span class="def-keyword">def</span> <span class="function">nombre_funcion</span>(<span class="variable">parametro1</span>, <span class="variable">parametro2</span>):
+    <span class="string">"""Documentación de la función"""</span>
+    <span class="comment"># Código de la función</span>
+    <span class="variable">resultado</span> = <span class="variable">parametro1</span> + <span class="variable">parametro2</span>
+    <span class="return-keyword">return</span> <span class="variable">resultado</span>
+                </div>
+                
+                <div class="parte-funcion">
+                    <span class="etiqueta">def</span>
+                    <span>Palabra clave que indica que vamos a definir una función</span>
+                </div>
+                
+                <div class="parte-funcion">
+                    <span class="etiqueta">nombre_funcion</span>
+                    <span>El nombre que le damos a nuestra función (debe ser descriptivo)</span>
+                </div>
+                
+                <div class="parte-funcion">
+                    <span class="etiqueta">parámetros</span>
+                    <span>Los datos que la función necesita para trabajar (van entre paréntesis)</span>
+                </div>
+                
+                <div class="parte-funcion">
+                    <span class="etiqueta">:</span>
+                    <span>Los dos puntos indican que empieza el cuerpo de la función</span>
+                </div>
+                
+                <div class="parte-funcion">
+                    <span class="etiqueta">return</span>
+                    <span>Devuelve el resultado de la función (opcional)</span>
+                </div>
+            </div>
+
+            <table class="comparacion-tabla">
+                <thead>
+                    <tr>
+                        <th>Sin Funciones 😢</th>
+                        <th>Con Funciones 😊</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Código repetido muchas veces</td>
+                        <td>Código escrito una sola vez</td>
+                    </tr>
+                    <tr>
+                        <td>Difícil de mantener</td>
+                        <td>Fácil de actualizar</td>
+                    </tr>
+                    <tr>
+                        <td>Archivos largos y confusos</td>
+                        <td>Código organizado y claro</td>
+                    </tr>
+                    <tr>
+                        <td>Errores en múltiples lugares</td>
+                        <td>Corriges una vez, funciona siempre</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Crear nuestra primera función simple</h4>
+                <p>Empezamos con una función básica que genera un saludo:</p>
+                <div class="codigo-ejemplo">
+<span class="def-keyword">def</span> <span class="function">saludar</span>(<span class="variable">nombre</span>):
+    <span class="string">"""Esta función saluda a una persona por su nombre"""</span>
+    <span class="return-keyword">return</span> <span class="string">f"¡Hola, </span>{<span class="variable">nombre</span>}<span class="string">! ¿Cómo estás?"</span>
+
+<span class="comment"># Usar la función</span>
+<span class="variable">mensaje</span> = <span class="function">saludar</span>(<span class="string">"Ana"</span>)
+<span class="function">print</span>(<span class="variable">mensaje</span>)  <span class="comment"># ¡Hola, Ana! ¿Cómo estás?</span>
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Crear la función generadora de cumplidos</h4>
+                <p>Ahora creamos nuestra fábrica de cumplidos con múltiples parámetros:</p>
+                <div class="codigo-ejemplo">
+<span class="def-keyword">def</span> <span class="function">generar_cumplido</span>(<span class="variable">nombre</span>, <span class="variable">cualidad</span>, <span class="variable">actividad</span>):
+    <span class="string">"""Genera un cumplido personalizado con formato aleatorio"""</span>
+    <span class="variable">nombre</span> = <span class="variable">nombre</span>.<span class="function">title</span>()  <span class="comment"># Capitalizar nombre</span>
+    <span class="variable">emoji</span> = <span class="function">obtener_emoji_cualidad</span>(<span class="variable">cualidad</span>)
+    <span class="variable">intensificador</span> = <span class="function">obtener_intensificador</span>()
+    
+    <span class="variable">plantillas</span> = [
+        <span class="string">f"</span>{<span class="variable">emoji</span>}<span class="string"> ¡</span>{<span class="variable">nombre</span>}<span class="string">, eres </span>{<span class="variable">intensificador</span>}<span class="string"> </span>{<span class="variable">cualidad</span>}<span class="string"> cuando haces </span>{<span class="variable">actividad</span>}<span class="string">!"</span>,
+        <span class="string">f"</span>{<span class="variable">nombre</span>}<span class="string">, tu habilidad para </span>{<span class="variable">actividad</span>}<span class="string"> es </span>{<span class="variable">intensificador</span>}<span class="string"> </span>{<span class="variable">cualidad</span>}<span class="string"> </span>{<span class="variable">emoji</span>}<span class="string">"</span>,
+        <span class="string">f"¡Qué </span>{<span class="variable">cualidad</span>}<span class="string"> eres, </span>{<span class="variable">nombre</span>}<span class="string">! </span>{<span class="variable">emoji</span>}<span class="string"> Especialmente cuando haces </span>{<span class="variable">actividad</span>}<span class="string">"</span>,
+        <span class="string">f"</span>{<span class="variable">emoji</span>}<span class="string"> </span>{<span class="variable">nombre</span>}<span class="string">, cuando haces </span>{<span class="variable">actividad</span>}<span class="string">, demuestras ser </span>{<span class="variable">intensificador</span>}<span class="string"> </span>{<span class="variable">cualidad</span>}<span class="string">"</span>
+    ]
+    
+    <span class="return-keyword">return</span> random.<span class="function">choice</span>(<span class="variable">plantillas</span>)
+
+<span class="def-keyword">def</span> <span class="function">menu_principal</span>():
+    <span class="string">"""Muestra el menú y gestiona la interacción"""</span>
+    <span class="keyword">while</span> <span class="keyword">True</span>:
+        <span class="function">print</span>(<span class="string">"\n¿Qué deseas hacer?"</span>)
+        <span class="function">print</span>(<span class="string">"1. Generar un cumplido personalizado"</span>)
+        <span class="function">print</span>(<span class="string">"2. Generar cumplidos aleatorios"</span>)
+        <span class="function">print</span>(<span class="string">"3. Ver ejemplos de cualidades"</span>)
+        <span class="function">print</span>(<span class="string">"4. Salir"</span>)
+        
+        <span class="variable">opcion</span> = <span class="function">input</span>(<span class="string">"\nElige una opción (1-4): "</span>)
+        
+        <span class="keyword">if</span> <span class="variable">opcion</span> == <span class="string">"1"</span>:
+            <span class="function">crear_cumplido_personalizado</span>()
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"2"</span>:
+            <span class="function">generar_cumplidos_aleatorios</span>()
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"3"</span>:
+            <span class="function">mostrar_ejemplos</span>()
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"4"</span>:
+            <span class="function">print</span>(<span class="string">"\n¡Gracias por usar la Fábrica de Cumplidos! 💝"</span>)
+            <span class="keyword">break</span>
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">"Opción no válida. Intenta de nuevo."</span>)
+
+<span class="def-keyword">def</span> <span class="function">crear_cumplido_personalizado</span>():
+    <span class="string">"""Solicita datos al usuario y genera un cumplido"""</span>
+    <span class="function">print</span>(<span class="string">"\n--- Cumplido Personalizado ---"</span>)
+    <span class="variable">nombre</span> = <span class="function">input</span>(<span class="string">"¿Cuál es el nombre? "</span>)
+    <span class="variable">cualidad</span> = <span class="function">input</span>(<span class="string">"¿Qué cualidad tiene? (ej: creativo, amable): "</span>)
+    <span class="variable">actividad</span> = <span class="function">input</span>(<span class="string">"¿Qué hace bien? (ej: programar, cocinar): "</span>)
+    
+    <span class="variable">cumplido</span> = <span class="function">generar_cumplido</span>(<span class="variable">nombre</span>, <span class="variable">cualidad</span>, <span class="variable">actividad</span>)
+    <span class="function">print</span>(<span class="string">f"\n✨ {<span class="variable">cumplido</span>} ✨"</span>)
+
+<span class="def-keyword">def</span> <span class="function">generar_cumplidos_aleatorios</span>():
+    <span class="string">"""Genera cumplidos con datos aleatorios"""</span>
+    <span class="variable">nombres</span> = [<span class="string">"Ana"</span>, <span class="string">"Carlos"</span>, <span class="string">"María"</span>, <span class="string">"Luis"</span>, <span class="string">"Sofia"</span>]
+    <span class="variable">cualidades</span> = [<span class="string">"creativo"</span>, <span class="string">"inteligente"</span>, <span class="string">"divertido"</span>, <span class="string">"amable"</span>, <span class="string">"talentoso"</span>]
+    <span class="variable">actividades</span> = [<span class="string">"programar"</span>, <span class="string">"enseñar"</span>, <span class="string">"diseñar"</span>, <span class="string">"ayudar"</span>, <span class="string">"innovar"</span>]
+    
+    <span class="function">print</span>(<span class="string">"\n--- Cumplidos Aleatorios ---"</span>)
+    <span class="keyword">for</span> <span class="variable">_</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):
+        <span class="variable">nombre</span> = random.<span class="function">choice</span>(<span class="variable">nombres</span>)
+        <span class="variable">cualidad</span> = random.<span class="function">choice</span>(<span class="variable">cualidades</span>)
+        <span class="variable">actividad</span> = random.<span class="function">choice</span>(<span class="variable">actividades</span>)
+        <span class="function">print</span>(<span class="string">f"✨ {<span class="function">generar_cumplido</span>(<span class="variable">nombre</span>, <span class="variable">cualidad</span>, <span class="variable">actividad</span>)}"</span>)
+
+<span class="def-keyword">def</span> <span class="function">mostrar_ejemplos</span>():
+    <span class="string">"""Muestra ejemplos de cualidades con emojis"""</span>
+    <span class="function">print</span>(<span class="string">"\n--- Ejemplos de Cualidades ---"</span>)
+    <span class="variable">cualidades</span> = [
+        <span class="string">"creativo"</span>, <span class="string">"inteligente"</span>, <span class="string">"divertido"</span>, <span class="string">"amable"</span>,
+        <span class="string">"valiente"</span>, <span class="string">"trabajador"</span>, <span class="string">"talentoso"</span>, <span class="string">"generoso"</span>
+    ]
+    
+    <span class="keyword">for</span> <span class="variable">cualidad</span> <span class="keyword">in</span> <span class="variable">cualidades</span>:
+        <span class="variable">emoji</span> = <span class="function">obtener_emoji_cualidad</span>(<span class="variable">cualidad</span>)
+        <span class="function">print</span>(<span class="string">f"{<span class="variable">emoji</span>} {<span class="variable">cualidad</span>}"</span>)
+
+<span class="comment"># Programa principal</span>
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    <span class="function">menu_principal</span>()
+            </div>
+
+            <div class="tip">
+                <strong>Nota:</strong> Este programa usa el patrón <code>if __name__ == "__main__"</code> que permite que el código se ejecute solo cuando el archivo se ejecuta directamente, no cuando se importa como módulo.
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔍 Conceptos Avanzados de Funciones</h2>
+            
+            <div class="teoria">
+                <h4>Parámetros vs Argumentos</h4>
+                <ul>
+                    <li><strong>Parámetros:</strong> Las variables en la definición de la función</li>
+                    <li><strong>Argumentos:</strong> Los valores reales que pasamos al llamar la función</li>
+                </ul>
+                
+                <div class="codigo-ejemplo">
+<span class="def-keyword">def</span> <span class="function">saludar</span>(<span class="variable">nombre</span>, <span class="variable">edad</span>):  <span class="comment"># nombre y edad son PARÁMETROS</span>
+    <span class="return-keyword">return</span> <span class="string">f"Hola {nombre}, tienes {edad} años"</span>
+
+<span class="function">saludar</span>(<span class="string">"Juan"</span>, <span class="number">25</span>)  <span class="comment"># "Juan" y 25 son ARGUMENTOS</span>
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>Retorno de Valores</h4>
+                <p>Las funciones pueden devolver diferentes tipos de datos:</p>
+                
+                <div class="codigo-ejemplo">
+<span class="comment"># Función que no retorna nada (None implícito)</span>
+<span class="def-keyword">def</span> <span class="function">imprimir_mensaje</span>(<span class="variable">msg</span>):
+    <span class="function">print</span>(<span class="variable">msg</span>)
+    <span class="comment"># No hay return, devuelve None</span>
+
+<span class="comment"># Función que retorna un valor</span>
+<span class="def-keyword">def</span> <span class="function">calcular_area</span>(<span class="variable">base</span>, <span class="variable">altura</span>):
+    <span class="return-keyword">return</span> <span class="variable">base</span> * <span class="variable">altura</span> / <span class="number">2</span>
+
+<span class="comment"># Función que retorna múltiples valores</span>
+<span class="def-keyword">def</span> <span class="function">obtener_estadisticas</span>(<span class="variable">numeros</span>):
+    <span class="return-keyword">return</span> <span class="function">min</span>(<span class="variable">numeros</span>), <span class="function">max</span>(<span class="variable">numeros</span>), <span class="function">sum</span>(<span class="variable">numeros</span>)
+
+<span class="variable">minimo</span>, <span class="variable">maximo</span>, <span class="variable">total</span> = <span class="function">obtener_estadisticas</span>([<span class="number">1</span>, <span class="number">5</span>, <span class="number">3</span>, <span class="number">9</span>, <span class="number">2</span>])
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>Alcance de Variables (Scope)</h4>
+                <p>Las variables dentro de una función son locales a esa función:</p>
+                
+                <div class="codigo-ejemplo">
+<span class="variable">mensaje_global</span> = <span class="string">"Soy global"</span>
+
+<span class="def-keyword">def</span> <span class="function">mi_funcion</span>():
+    <span class="variable">mensaje_local</span> = <span class="string">"Soy local"</span>
+    <span class="function">print</span>(<span class="variable">mensaje_local</span>)    <span class="comment"># ✓ Funciona</span>
+    <span class="function">print</span>(<span class="variable">mensaje_global</span>)  <span class="comment"># ✓ Funciona</span>
+
+<span class="function">mi_funcion</span>()
+<span class="function">print</span>(<span class="variable">mensaje_global</span>)  <span class="comment"># ✓ Funciona</span>
+<span class="comment"># print(mensaje_local)  # ❌ Error: no existe fuera de la función</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios de Práctica</h2>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 1: Generador de Historias</h4>
+                <p>Crea funciones que generen historias cortas personalizadas:</p>
+                <ul>
+                    <li>Una función para generar el inicio</li>
+                    <li>Una función para el desarrollo</li>
+                    <li>Una función para el final</li>
+                    <li>Una función principal que combine todo</li>
+                </ul>
+                <p>Ejemplo: generar_historia("María", "bosque", "dragón") → Una historia completa</p>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 2: Calculadora de Propinas</h4>
+                <p>Crea un conjunto de funciones para calcular propinas:</p>
+                <ul>
+                    <li><code>calcular_propina(total, porcentaje)</code></li>
+                    <li><code>dividir_cuenta(total, personas)</code></li>
+                    <li><code>formatear_dinero(cantidad)</code></li>
+                    <li><code>sugerir_propina(calidad_servicio)</code></li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 3: Validador de Contraseñas</h4>
+                <p>Desarrolla funciones para validar contraseñas seguras:</p>
+                <ul>
+                    <li><code>tiene_longitud_minima(password, min_length)</code></li>
+                    <li><code>tiene_mayusculas(password)</code></li>
+                    <li><code>tiene_numeros(password)</code></li>
+                    <li><code>tiene_caracteres_especiales(password)</code></li>
+                    <li><code>es_password_segura(password)</code> - que use todas las anteriores</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Desafío Extra: Sistema de Puntuación</h4>
+                <p>Crea un sistema completo de puntuación para un juego con funciones para:</p>
+                <ul>
+                    <li>Calcular puntos por acción</li>
+                    <li>Aplicar multiplicadores</li>
+                    <li>Guardar récords</li>
+                    <li>Mostrar tabla de posiciones</li>
+                    <li>Generar mensajes de felicitación según el puntaje</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎯 Mejores Prácticas para Funciones</h2>
+            
+            <div class="teoria">
+                <h4>Principios SOLID para Funciones</h4>
+                <table class="comparacion-tabla">
+                    <thead>
+                        <tr>
+                            <th>Principio</th>
+                            <th>Descripción</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Una sola responsabilidad</strong></td>
+                            <td>Cada función debe hacer una sola cosa</td>
+                            <td>❌ <code>calcular_y_mostrar_resultado()</code><br>
+                                ✅ <code>calcular_resultado()</code> + <code>mostrar_resultado()</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Nombres descriptivos</strong></td>
+                            <td>El nombre debe explicar qué hace</td>
+                            <td>❌ <code>proc_data()</code><br>
+                                ✅ <code>procesar_datos_usuario()</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Pocos parámetros</strong></td>
+                            <td>Idealmente 3 o menos parámetros</td>
+                            <td>❌ <code>crear(a, b, c, d, e, f)</code><br>
+                                ✅ <code>crear_usuario(datos_dict)</code></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sin efectos secundarios</strong></td>
+                            <td>No modificar variables globales inesperadamente</td>
+                            <td>La función solo debe hacer lo que su nombre indica</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="teoria">
+                <h4>Documentación de Funciones</h4>
+                <p>Siempre documenta tus funciones con docstrings:</p>
+                
+                <div class="codigo-ejemplo">
+<span class="def-keyword">def</span> <span class="function">calcular_promedio</span>(<span class="variable">numeros</span>):
+    <span class="string">"""
+    Calcula el promedio de una lista de números.
+    
+    Parámetros:
+        numeros (list): Lista de números a promediar
+        
+    Retorna:
+        float: El promedio de los números
+        
+    Ejemplo:
+        >>> calcular_promedio([1, 2, 3, 4, 5])
+        3.0
+    """</span>
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">numeros</span>:
+        <span class="return-keyword">return</span> <span class="number">0</span>
+    <span class="return-keyword">return</span> <span class="function">sum</span>(<span class="variable">numeros</span>) / <span class="function">len</span>(<span class="variable">numeros</span>)
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Resumen y Conceptos Clave</h2>
+            
+            <div class="teoria">
+                <h4>Lo que aprendiste en este ejercicio:</h4>
+                <ul>
+                    <li>✅ Crear funciones con <code>def</code></li>
+                    <li>✅ Usar parámetros para hacer funciones flexibles</li>
+                    <li>✅ Retornar valores con <code>return</code></li>
+                    <li>✅ Organizar código en funciones reutilizables</li>
+                    <li>✅ Llamar funciones desde otras funciones</li>
+                    <li>✅ Documentar funciones con docstrings</li>
+                    <li>✅ Entender el alcance de las variables</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>¿Por qué son importantes las funciones?</h4>
+                <p>Las funciones son fundamentales en programación porque:</p>
+                <ul>
+                    <li>🏗️ Permiten construir programas complejos de forma modular</li>
+                    <li>🔧 Facilitan el mantenimiento y depuración del código</li>
+                    <li>👥 Permiten que múltiples programadores trabajen en paralelo</li>
+                    <li>📚 Crean código que puede ser compartido y reutilizado</li>
+                    <li>🧪 Hacen el código más fácil de probar</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Próximo paso:</strong> En los siguientes ejercicios aprenderás sobre estructuras de datos más complejas (listas, diccionarios) y cómo las funciones pueden trabajar con ellas para crear programas aún más poderosos.
+            </div>
+        </div>
+    </div>
+</body>
+</html><span class="string">"""
+    Genera un cumplido personalizado
+    
+    Parámetros:
+    - nombre: El nombre de la persona
+    - cualidad: Una característica positiva
+    - actividad: Algo que la persona hace bien
+    """</span>
+    <span class="variable">cumplido</span> = <span class="string">f"¡</span>{<span class="variable">nombre</span>}<span class="string">, eres increíblemente </span>{<span class="variable">cualidad</span>}<span class="string"> cuando haces </span>{<span class="variable">actividad</span>}<span class="string">!"</span>
+    <span class="return-keyword">return</span> <span class="variable">cumplido</span>
+
+<span class="comment"># Probar la función</span>
+<span class="function">print</span>(<span class="function">generar_cumplido</span>(<span class="string">"Carlos"</span>, <span class="string">"creativo"</span>, <span class="string">"programar"</span>))
+                </div>
+                
+                <div class="ejemplo-cumplido">
+                    ¡Carlos, eres increíblemente creativo cuando haces programar!
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Añadir variedad con múltiples plantillas</h4>
+                <p>Hagamos la función más interesante con diferentes formatos:</p>
+                <div class="codigo-ejemplo">
+<span class="keyword">import</span> random
+
+<span class="def-keyword">def</span> <span class="function">generar_cumplido_variado</span>(<span class="variable">nombre</span>, <span class="variable">cualidad</span>, <span class="variable">actividad</span>):
+    <span class="string">"""Genera cumplidos con diferentes formatos"""</span>
+    
+    <span class="variable">plantillas</span> = [
+        <span class="string">f"¡</span>{<span class="variable">nombre</span>}<span class="string">, eres increíblemente </span>{<span class="variable">cualidad</span>}<span class="string"> cuando haces </span>{<span class="variable">actividad</span>}<span class="string">!"</span>,
+        <span class="string">f"</span>{<span class="variable">nombre</span>}<span class="string">, tu habilidad para </span>{<span class="variable">actividad</span>}<span class="string"> es realmente </span>{<span class="variable">cualidad</span>}<span class="string">."</span>,
+        <span class="string">f"¡Qué </span>{<span class="variable">cualidad</span>}<span class="string"> eres, </span>{<span class="variable">nombre</span>}<span class="string">! Especialmente cuando haces </span>{<span class="variable">actividad</span>}<span class="string">."</span>,
+        <span class="string">f"</span>{<span class="variable">nombre</span>}<span class="string">, cuando haces </span>{<span class="variable">actividad</span>}<span class="string">, demuestras ser muy </span>{<span class="variable">cualidad</span>}<span class="string">."</span>
+    ]
+    
+    <span class="return-keyword">return</span> random.<span class="function">choice</span>(<span class="variable">plantillas</span>)
+
+<span class="comment"># Generar varios cumplidos diferentes</span>
+<span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">3</span>):
+    <span class="function">print</span>(<span class="function">generar_cumplido_variado</span>(<span class="string">"María"</span>, <span class="string">"talentosa"</span>, <span class="string">"diseñar"</span>))
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Crear funciones auxiliares</h4>
+                <p>Dividimos la lógica en funciones más pequeñas y especializadas:</p>
+                <div class="codigo-ejemplo">
+<span class="def-keyword">def</span> <span class="function">obtener_emoji_cualidad</span>(<span class="variable">cualidad</span>):
+    <span class="string">"""Devuelve un emoji según la cualidad"""</span>
+    <span class="variable">emojis</span> = {
+        <span class="string">"creativo"</span>: <span class="string">"🎨"</span>,
+        <span class="string">"inteligente"</span>: <span class="string">"🧠"</span>,
+        <span class="string">"divertido"</span>: <span class="string">"😄"</span>,
+        <span class="string">"amable"</span>: <span class="string">"💖"</span>,
+        <span class="string">"valiente"</span>: <span class="string">"🦁"</span>,
+        <span class="string">"trabajador"</span>: <span class="string">"💪"</span>
+    }
+    <span class="return-keyword">return</span> <span class="variable">emojis</span>.<span class="function">get</span>(<span class="variable">cualidad</span>, <span class="string">"✨"</span>)  <span class="comment"># ✨ por defecto</span>
+
+<span class="def-keyword">def</span> <span class="function">capitalizar_nombre</span>(<span class="variable">nombre</span>):
+    <span class="string">"""Asegura que el nombre esté bien capitalizado"""</span>
+    <span class="return-keyword">return</span> <span class="variable">nombre</span>.<span class="function">title</span>()
+
+<span class="def-keyword">def</span> <span class="function">generar_cumplido_completo</span>(<span class="variable">nombre</span>, <span class="variable">cualidad</span>, <span class="variable">actividad</span>):
+    <span class="string">"""Genera un cumplido completo con emojis"""</span>
+    <span class="variable">nombre_formateado</span> = <span class="function">capitalizar_nombre</span>(<span class="variable">nombre</span>)
+    <span class="variable">emoji</span> = <span class="function">obtener_emoji_cualidad</span>(<span class="variable">cualidad</span>)
+    
+    <span class="variable">cumplido</span> = <span class="string">f"</span>{<span class="variable">emoji</span>}<span class="string"> ¡</span>{<span class="variable">nombre_formateado</span>}<span class="string">, eres increíblemente </span>{<span class="variable">cualidad</span>}<span class="string"> "</span>
+    <span class="variable">cumplido</span> += <span class="string">f"cuando haces </span>{<span class="variable">actividad</span>}<span class="string">! </span>{<span class="variable">emoji</span>}<span class="string">"</span>
+    
+    <span class="return-keyword">return</span> <span class="variable">cumplido</span>
+
+<span class="comment"># Usar las funciones juntas</span>
+<span class="function">print</span>(<span class="function">generar_cumplido_completo</span>(<span class="string">"juan"</span>, <span class="string">"creativo"</span>, <span class="string">"pintar"</span>))
+                </div>
+                
+                <div class="ejemplo-cumplido">
+                    🎨 ¡Juan, eres increíblemente creativo cuando haces pintar! 🎨
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📝 Programa Completo: Fábrica de Cumplidos</h2>
+            
+            <div class="codigo-ejemplo">
+<span class="keyword">import</span> random
+
+<span class="function">print</span>(<span class="string">"💝 BIENVENIDO A LA FÁBRICA DE CUMPLIDOS 💝"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">45</span>)
+
+<span class="def-keyword">def</span> <span class="function">obtener_emoji_cualidad</span>(<span class="variable">cualidad</span>):
+    <span class="string">"""Devuelve un emoji según la cualidad"""</span>
+    <span class="variable">emojis</span> = {
+        <span class="string">"creativo"</span>: <span class="string">"🎨"</span>, <span class="string">"inteligente"</span>: <span class="string">"🧠"</span>, <span class="string">"divertido"</span>: <span class="string">"😄"</span>,
+        <span class="string">"amable"</span>: <span class="string">"💖"</span>, <span class="string">"valiente"</span>: <span class="string">"🦁"</span>, <span class="string">"trabajador"</span>: <span class="string">"💪"</span>,
+        <span class="string">"talentoso"</span>: <span class="string">"⭐"</span>, <span class="string">"generoso"</span>: <span class="string">"🤝"</span>, <span class="string">"paciente"</span>: <span class="string">"🕰️"</span>
+    }
+    <span class="return-keyword">return</span> <span class="variable">emojis</span>.<span class="function">get</span>(<span class="variable">cualidad</span>.<span class="function">lower</span>(), <span class="string">"✨"</span>)
+
+<span class="def-keyword">def</span> <span class="function">obtener_intensificador</span>():
+    <span class="string">"""Devuelve una palabra para intensificar el cumplido"""</span>
+    <span class="variable">intensificadores</span> = [
+        <span class="string">"increíblemente"</span>, <span class="string">"sorprendentemente"</span>, <span class="string">"extraordinariamente"</span>,
+        <span class="string">"verdaderamente"</span>, <span class="string">"absolutamente"</span>, <span class="string">"maravillosamente"</span>
+    ]
+    <span class="return-keyword">return</span> random.<span class="function">choice</span>(<span class="variable">intensificadores</span>)
+
+<span class="def-keyword">def</span> <span class="function">generar_cumplido</span>(<span class="variable">nombre</span>, <span class="variable">cualidad</span>, <span class="variable">actividad</span>):

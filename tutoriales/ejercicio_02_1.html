@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2.1: La Tienda de Mascotas Virtuales</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: #2c5f2d;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            color: #4a7c59;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .slide h2 {
+            color: #2c5f2d;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #84fab0;
+        }
+        
+        .slide h3 {
+            color: #4a7c59;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #fccb90 0%, #d57eeb 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #f0f9ff;
+            border-left: 5px solid #8fd3f4;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+        
+        .tipo-dato {
+            display: inline-block;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin: 5px;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.1em;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #84fab0;
+            color: #2c5f2d;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .number {
+            color: #B5CEA8;
+        }
+        
+        .boolean {
+            color: #569CD6;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .paso {
+            background: #f0fdf4;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #22c55e;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #22c55e;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .tabla-tipos {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .tabla-tipos th {
+            background: #4a7c59;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .tabla-tipos td {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .tabla-tipos tr:nth-child(even) {
+            background: #f9fafb;
+        }
+        
+        .tabla-tipos code {
+            background: #e5e7eb;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+        }
+        
+        .tip {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .warning {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .mascota-visual {
+            background: #e0f2fe;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .mascota-emoji {
+            font-size: 4em;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐾 La Tienda de Mascotas Virtuales</h1>
+            <p>Módulo 2: Tipos de Datos y Variables - Ejercicio 2.1</p>
+        </div>
+
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Aprender a trabajar con diferentes tipos de datos en Python (strings, integers, floats, booleans y listas) creando variables para representar las características de una mascota virtual. Este ejercicio introduce el concepto fundamental de los tipos de datos de forma divertida y memorable.
+            </div>
+
+            <h3>🧠 Conceptos Teóricos: Tipos de Datos en Python</h3>
+            
+            <div class="teoria">
+                <h4>¿Qué son los Tipos de Datos?</h4>
+                <p>Los tipos de datos son las diferentes formas en que Python puede almacenar información. Es como tener diferentes tipos de cajas para guardar diferentes cosas:</p>
+                <ul>
+                    <li>📝 Una caja para textos (palabras, nombres)</li>
+                    <li>🔢 Una caja para números enteros (edad, cantidad)</li>
+                    <li>💰 Una caja para números decimales (peso, precio)</li>
+                    <li>✅ Una caja para verdadero/falso (sí/no)</li>
+                    <li>📦 Una caja que puede contener muchas cosas (listas)</li>
+                </ul>
+            </div>
+
+            <table class="tabla-tipos">
+                <thead>
+                    <tr>
+                        <th>Tipo de Dato</th>
+                        <th>Nombre en Python</th>
+                        <th>Ejemplos</th>
+                        <th>Uso en Mascotas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="tipo-dato">Texto</span></td>
+                        <td><code>str</code> (string)</td>
+                        <td><code>"Hola"</code>, <code>'Python'</code></td>
+                        <td>Nombre de la mascota</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tipo-dato">Entero</span></td>
+                        <td><code>int</code> (integer)</td>
+                        <td><code>5</code>, <code>100</code>, <code>-3</code></td>
+                        <td>Edad en meses</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tipo-dato">Decimal</span></td>
+                        <td><code>float</code></td>
+                        <td><code>3.14</code>, <code>2.5</code>, <code>0.99</code></td>
+                        <td>Peso en kg</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tipo-dato">Booleano</span></td>
+                        <td><code>bool</code></td>
+                        <td><code>True</code>, <code>False</code></td>
+                        <td>¿Está feliz?</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tipo-dato">Lista</span></td>
+                        <td><code>list</code></td>
+                        <td><code>[1, 2, 3]</code>, <code>["a", "b"]</code></td>
+                        <td>Colores de la mascota</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>🔧 Variables: Las Etiquetas de Python</h2>
+            
+            <div class="teoria">
+                <h4>¿Qué son las Variables?</h4>
+                <p>Las variables son como <strong>etiquetas</strong> que le ponemos a los datos para poder usarlos después. Imagina que tienes cajas con cosas y les pones etiquetas para saber qué hay dentro.</p>
+                
+                <div class="codigo-ejemplo">
+<span class="comment"># Esto es una variable llamada "edad" que guarda el número 5</span>
+<span class="variable">edad</span> = <span class="number">5</span>
+
+<span class="comment"># Esto es una variable llamada "nombre" que guarda el texto "Firulais"</span>
+<span class="variable">nombre</span> = <span class="string">"Firulais"</span>
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>Reglas para Nombrar Variables</h4>
+                <ul>
+                    <li>✅ Pueden contener letras, números y guiones bajos (_)</li>
+                    <li>✅ Deben empezar con letra o guion bajo</li>
+                    <li>❌ NO pueden empezar con números</li>
+                    <li>❌ NO pueden contener espacios (usa guion_bajo)</li>
+                    <li>❌ NO pueden ser palabras reservadas de Python</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Definir el nombre de la mascota (String)</h4>
+                <p>Empezamos creando una variable para el nombre. Usamos comillas para indicar que es texto.</p>
+                <div class="codigo-ejemplo">
+<span class="variable">nombre_mascota</span> = <span class="string">"Pyto"</span>  <span class="comment"># string (texto)</span>
+<span class="keyword">print</span>(<span class="string">"Nombre de la mascota:"</span>, <span class="variable">nombre_mascota</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Agregar la edad (Integer)</h4>
+                <p>La edad la guardamos como número entero, sin decimales ni comillas.</p>
+                <div class="codigo-ejemplo">
+<span class="variable">edad_meses</span> = <span class="number">6</span>  <span class="comment"># int (número entero)</span>
+<span class="keyword">print</span>(<span class="string">"Edad:"</span>, <span class="variable">edad_meses</span>, <span class="string">"meses"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Definir el peso (Float)</h4>
+                <p>El peso necesita decimales, así que usamos un float.</p>
+                <div class="codigo-ejemplo">
+<span class="variable">peso_kg</span> = <span class="number">2.5</span>  <span class="comment"># float (número decimal)</span>
+<span class="keyword">print</span>(<span class="string">"Peso:"</span>, <span class="variable">peso_kg</span>, <span class="string">"kilogramos"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Estado de ánimo (Boolean)</h4>
+                <p>Usamos True o False para indicar si la mascota está feliz.</p>
+                <div class="codigo-ejemplo">
+<span class="variable">esta_feliz</span> = <span class="boolean">True</span>  <span class="comment"># boolean (verdadero/falso)</span>
+<span class="keyword">print</span>(<span class="string">"¿Está feliz?"</span>, <span class="variable">esta_feliz</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="5">
+                <h4>Lista de colores (List)</h4>
+                <p>Creamos una lista para guardar múltiples colores de la mascota.</p>
+                <div class="codigo-ejemplo">
+<span class="variable">colores</span> = [<span class="string">"dorado"</span>, <span class="string">"blanco"</span>]  <span class="comment"># lista</span>
+<span class="keyword">print</span>(<span class="string">"Colores:"</span>, <span class="variable">colores</span>)
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📝 Código Completo del Ejercicio</h2>
+            
+            <div class="codigo-ejemplo">
+<span class="comment"># === LA TIENDA DE MASCOTAS VIRTUALES ===</span>
+<span class="comment"># Creando nuestra primera mascota virtual con diferentes tipos de datos</span>
+
+<span class="keyword">print</span>(<span class="string">"🐾 BIENVENIDO A LA TIENDA DE MASCOTAS VIRTUALES 🐾"</span>)
+<span class="keyword">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># Datos básicos de la mascota (diferentes tipos)</span>
+<span class="variable">nombre_mascota</span> = <span class="string">"Pyto"</span>              <span class="comment"># string</span>
+<span class="variable">tipo_mascota</span> = <span class="string">"Perro Python"</span>       <span class="comment"># string</span>
+<span class="variable">edad_meses</span> = <span class="number">6</span>                      <span class="comment"># int</span>
+<span class="variable">peso_kg</span> = <span class="number">2.5</span>                        <span class="comment"># float</span>
+<span class="variable">esta_feliz</span> = <span class="boolean">True</span>                    <span class="comment"># boolean</span>
+<span class="variable">esta_vacunado</span> = <span class="boolean">True</span>                 <span class="comment"># boolean</span>
+<span class="variable">colores</span> = [<span class="string">"dorado"</span>, <span class="string">"blanco"</span>]       <span class="comment"># lista</span>
+<span class="variable">juguetes_favoritos</span> = [<span class="string">"pelota"</span>, <span class="string">"hueso"</span>, <span class="string">"cuerda"</span>]  <span class="comment"># lista</span>
+
+<span class="comment"># Mostrar la información de la mascota</span>
+<span class="keyword">print</span>(<span class="string">"\n📋 FICHA DE LA MASCOTA:"</span>)
+<span class="keyword">print</span>(<span class="string">"-"</span> * <span class="number">30</span>)
+<span class="keyword">print</span>(<span class="string">"Nombre:"</span>, <span class="variable">nombre_mascota</span>)
+<span class="keyword">print</span>(<span class="string">"Tipo:"</span>, <span class="variable">tipo_mascota</span>)
+<span class="keyword">print</span>(<span class="string">"Edad:"</span>, <span class="variable">edad_meses</span>, <span class="string">"meses"</span>)
+<span class="keyword">print</span>(<span class="string">"Peso:"</span>, <span class="variable">peso_kg</span>, <span class="string">"kg"</span>)
+<span class="keyword">print</span>(<span class="string">"¿Está feliz?"</span>, <span class="variable">esta_feliz</span>)
+<span class="keyword">print</span>(<span class="string">"¿Está vacunado?"</span>, <span class="variable">esta_vacunado</span>)
+<span class="keyword">print</span>(<span class="string">"Colores:"</span>, <span class="variable">colores</span>)
+<span class="keyword">print</span>(<span class="string">"Juguetes favoritos:"</span>, <span class="variable">juguetes_favoritos</span>)
+
+<span class="comment"># Información adicional usando los datos</span>
+<span class="keyword">print</span>(<span class="string">"\n🎯 INFORMACIÓN ADICIONAL:"</span>)
+<span class="keyword">print</span>(<span class="string">"-"</span> * <span class="number">30</span>)
+
+<span class="comment"># Convertir edad a años (división)</span>
+<span class="variable">edad_anos</span> = <span class="variable">edad_meses</span> / <span class="number">12</span>
+<span class="keyword">print</span>(<span class="string">f"Edad en años: {<span class="variable">edad_anos</span>:.1f} años"</span>)
+
+<span class="comment"># Contar juguetes</span>
+<span class="variable">numero_juguetes</span> = <span class="keyword">len</span>(<span class="variable">juguetes_favoritos</span>)
+<span class="keyword">print</span>(<span class="string">f"Cantidad de juguetes: {<span class="variable">numero_juguetes</span>}"</span>)
+
+<span class="comment"># Estado de salud</span>
+<span class="keyword">if</span> <span class="variable">esta_vacunado</span> <span class="keyword">and</span> <span class="variable">esta_feliz</span>:
+    <span class="keyword">print</span>(<span class="string">"Estado: ¡Mascota saludable y feliz! ✨"</span>)
+<span class="keyword">else</span>:
+    <span class="keyword">print</span>(<span class="string">"Estado: Necesita atención"</span>)
+
+<span class="keyword">print</span>(<span class="string">"\n¡Gracias por visitar nuestra tienda! 🐾"</span>)
+            </div>
+
+            <div class="mascota-visual">
+                <div class="mascota-emoji">🐕</div>
+                <h4>Pyto - Perro Python</h4>
+                <p>6 meses • 2.5 kg • Feliz ✅</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔍 Explorando los Tipos de Datos</h2>
+
+            <div class="teoria">
+                <h4>Verificar el Tipo de una Variable</h4>
+                <p>Python nos permite verificar qué tipo de dato contiene una variable usando la función <code>type()</code>:</p>
+                
+                <div class="codigo-ejemplo">
+<span class="comment"># Verificar tipos de datos</span>
+<span class="keyword">print</span>(<span class="string">"Tipo de nombre_mascota:"</span>, <span class="keyword">type</span>(<span class="variable">nombre_mascota</span>))    <span class="comment"># <class 'str'></span>
+<span class="keyword">print</span>(<span class="string">"Tipo de edad_meses:"</span>, <span class="keyword">type</span>(<span class="variable">edad_meses</span>))          <span class="comment"># <class 'int'></span>
+<span class="keyword">print</span>(<span class="string">"Tipo de peso_kg:"</span>, <span class="keyword">type</span>(<span class="variable">peso_kg</span>))                <span class="comment"># <class 'float'></span>
+<span class="keyword">print</span>(<span class="string">"Tipo de esta_feliz:"</span>, <span class="keyword">type</span>(<span class="variable">esta_feliz</span>))          <span class="comment"># <class 'bool'></span>
+<span class="keyword">print</span>(<span class="string">"Tipo de colores:"</span>, <span class="keyword">type</span>(<span class="variable">colores</span>))                <span class="comment"># <class 'list'></span>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>Error Común:</strong> Mezclar tipos incompatibles puede causar errores. Por ejemplo:
+                <div class="codigo-ejemplo">
+<span class="comment"># ❌ Esto causará un error:</span>
+<span class="variable">edad</span> = <span class="string">"6"</span>        <span class="comment"># String, no número</span>
+<span class="variable">nueva_edad</span> = <span class="variable">edad</span> + <span class="number">1</span>  <span class="comment"># Error: no puedes sumar string + número</span>
+
+<span class="comment"># ✅ Correcto:</span>
+<span class="variable">edad</span> = <span class="number">6</span>          <span class="comment"># Número</span>
+<span class="variable">nueva_edad</span> = <span class="variable">edad</span> + <span class="number">1</span>  <span class="comment"># Funciona: 7</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios de Práctica</h2>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 1: Tu Mascota Personalizada</h4>
+                <p>Crea tu propia mascota virtual con al menos 8 características diferentes. Incluye:</p>
+                <ul>
+                    <li>• Al menos 2 strings (nombre, raza)</li>
+                    <li>• Al menos 2 números enteros (edad, nivel de energía)</li>
+                    <li>• Al menos 1 float (altura, temperatura)</li>
+                    <li>• Al menos 2 booleanos (tiene_collar, necesita_baño)</li>
+                    <li>• Al menos 1 lista (comidas_favoritas)</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 2: La Familia de Mascotas</h4>
+                <p>Crea variables para 3 mascotas diferentes de la misma familia. Luego crea una lista que contenga todos los nombres y otra con todas las edades.</p>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 3: Calculadora de Mascota</h4>
+                <p>Usando las variables de tu mascota, calcula:</p>
+                <ul>
+                    <li>• Cuántos días tiene de vida (edad_meses * 30)</li>
+                    <li>• Cuánta comida necesita al año (peso_kg * 365)</li>
+                    <li>• Costo mensual de mantenimiento</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Desafío Extra:</strong> Investiga qué es un diccionario en Python y trata de crear uno para tu mascota donde las claves sean las características (nombre, edad, etc.) y los valores sean los datos correspondientes.
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Resumen y Conceptos Clave</h2>
+            
+            <div class="teoria">
+                <h4>Lo que aprendiste hoy:</h4>
+                <ul>
+                    <li>✅ Los 5 tipos de datos básicos de Python</li>
+                    <li>✅ Cómo crear y nombrar variables correctamente</li>
+                    <li>✅ La importancia de usar el tipo de dato correcto</li>
+                    <li>✅ Cómo verificar el tipo de una variable con <code>type()</code></li>
+                    <li>✅ Operaciones básicas con diferentes tipos de datos</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>Próximos pasos:</h4>
+                <p>En el siguiente ejercicio aprenderemos a:</p>
+                <ul>
+                    <li>🔄 Convertir entre diferentes tipos de datos</li>
+                    <li>🧮 Realizar operaciones más complejas</li>
+                    <li>📊 Trabajar con estructuras de datos más avanzadas</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Recuerda:</strong> Los tipos de datos son fundamentales en programación. Elegir el tipo correcto hace que tu código sea más eficiente y evita errores. ¡Es como usar la herramienta correcta para cada trabajo!
+            </div>
+        </div>
+    </div>
+</body>
+</html>

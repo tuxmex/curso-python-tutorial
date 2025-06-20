@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4.1: El Asistente Personal de Decisiones</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .slide h2 {
+            color: #f5576c;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f093fb;
+        }
+        
+        .slide h3 {
+            color: #d63384;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #f8f9fa;
+            border-left: 5px solid #f5576c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #f5576c;
+            margin-bottom: 10px;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #f5576c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .number {
+            color: #B5CEA8;
+        }
+        
+        .operator {
+            color: #D4D4D4;
+        }
+        
+        .flowchart {
+            background: #e3f2fd;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .decision-box {
+            background: #fff;
+            border: 3px solid #2196f3;
+            border-radius: 10px;
+            padding: 15px 25px;
+            margin: 10px auto;
+            display: inline-block;
+            position: relative;
+        }
+        
+        .decision-diamond {
+            background: #fff;
+            border: 3px solid #f44336;
+            transform: rotate(45deg);
+            width: 120px;
+            height: 120px;
+            margin: 30px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .decision-diamond span {
+            transform: rotate(-45deg);
+            font-weight: bold;
+        }
+        
+        .arrow {
+            font-size: 2em;
+            color: #666;
+            margin: 10px 0;
+        }
+        
+        .paso {
+            background: #fce4ec;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #e91e63;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #e91e63;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .sintaxis-box {
+            background: #e8eaf6;
+            border: 2px solid #3f51b5;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .sintaxis-box h4 {
+            color: #3f51b5;
+            margin-bottom: 15px;
+        }
+        
+        .sintaxis-ejemplo {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin-top: 10px;
+        }
+        
+        .comparacion-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparacion-tabla th {
+            background: #f5576c;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparacion-tabla td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .comparacion-tabla tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+        
+        .comparacion-tabla code {
+            background: #e8eaf6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .warning {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .resultado-ejemplo {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 El Asistente Personal de Decisiones</h1>
+            <p>Módulo 4: Estructuras de Control - Ejercicio 4.1</p>
+        </div>
+
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Dominar las estructuras condicionales if/elif/else creando un programa que ayude a tomar decisiones basadas en múltiples factores. Los estudiantes aprenderán a evaluar condiciones complejas y crear flujos de decisión inteligentes, simulando un asistente personal que sugiere actividades según el contexto.
+            </div>
+
+            <h3>🧠 Conceptos Teóricos: Estructuras Condicionales</h3>
+            
+            <div class="teoria">
+                <h4>¿Qué son las Estructuras Condicionales?</h4>
+                <p>Las estructuras condicionales permiten que nuestro programa tome decisiones. Es como darle a la computadora la capacidad de pensar: "SI pasa esto, ENTONCES haz aquello, SI NO, haz otra cosa".</p>
+                
+                <div class="flowchart">
+                    <div class="decision-box">INICIO</div>
+                    <div class="arrow">↓</div>
+                    <div class="decision-diamond"><span>¿Condición?</span></div>
+                    <div style="display: flex; justify-content: space-around; margin-top: 20px;">
+                        <div>
+                            <div class="arrow">SÍ →</div>
+                            <div class="decision-box">Acción 1</div>
+                        </div>
+                        <div>
+                            <div class="arrow">NO →</div>
+                            <div class="decision-box">Acción 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sintaxis-box">
+                <h4>Sintaxis de if/elif/else en Python</h4>
+                <div class="sintaxis-ejemplo">
+if condición1:
+    # Código si condición1 es True
+elif condición2:
+    # Código si condición1 es False y condición2 es True
+elif condición3:
+    # Código si las anteriores son False y condición3 es True
+else:
+    # Código si todas las condiciones son False
+                </div>
+            </div>
+
+            <table class="comparacion-tabla">
+                <thead>
+                    <tr>
+                        <th>Estructura</th>
+                        <th>Cuándo usar</th>
+                        <th>Ejemplo de uso</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>if</code></td>
+                        <td>Una sola condición</td>
+                        <td>Si llueve, lleva paraguas</td>
+                    </tr>
+                    <tr>
+                        <td><code>if...else</code></td>
+                        <td>Dos opciones mutuamente excluyentes</td>
+                        <td>Si es mayor de edad, puede votar; si no, debe esperar</td>
+                    </tr>
+                    <tr>
+                        <td><code>if...elif...else</code></td>
+                        <td>Múltiples opciones</td>
+                        <td>Calificación: A, B, C, D o F según la nota</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>🔍 Operadores de Comparación y Lógicos</h2>
+            
+            <div class="teoria">
+                <h4>Operadores de Comparación</h4>
+                <table class="comparacion-tabla">
+                    <thead>
+                        <tr>
+                            <th>Operador</th>
+                            <th>Significado</th>
+                            <th>Ejemplo</th>
+                            <th>Resultado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>==</code></td>
+                            <td>Igual a</td>
+                            <td><code>5 == 5</code></td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>!=</code></td>
+                            <td>Diferente de</td>
+                            <td><code>5 != 3</code></td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;</code></td>
+                            <td>Mayor que</td>
+                            <td><code>5 &gt; 3</code></td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;</code></td>
+                            <td>Menor que</td>
+                            <td><code>5 &lt; 3</code></td>
+                            <td>False</td>
+                        </tr>
+                        <tr>
+                            <td><code>&gt;=</code></td>
+                            <td>Mayor o igual</td>
+                            <td><code>5 &gt;= 5</code></td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td><code>&lt;=</code></td>
+                            <td>Menor o igual</td>
+                            <td><code>5 &lt;= 6</code></td>
+                            <td>True</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="teoria">
+                <h4>Operadores Lógicos</h4>
+                <ul>
+                    <li><strong>and</strong>: Ambas condiciones deben ser True</li>
+                    <li><strong>or</strong>: Al menos una condición debe ser True</li>
+                    <li><strong>not</strong>: Invierte el valor (True → False, False → True)</li>
+                </ul>
+                
+                <div class="codigo-ejemplo">
+<span class="comment"># Ejemplos de operadores lógicos</span>
+<span class="variable">edad</span> <span class="operator">=</span> <span class="number">25</span>
+<span class="variable">tiene_licencia</span> <span class="operator">=</span> <span class="keyword">True</span>
+
+<span class="comment"># AND: ambas deben ser verdaderas</span>
+<span class="keyword">if</span> <span class="variable">edad</span> <span class="operator">>=</span> <span class="number">18</span> <span class="keyword">and</span> <span class="variable">tiene_licencia</span>:
+    <span class="function">print</span>(<span class="string">"Puedes conducir"</span>)
+
+<span class="comment"># OR: al menos una debe ser verdadera</span>
+<span class="keyword">if</span> <span class="variable">edad</span> <span class="operator">&lt;</span> <span class="number">18</span> <span class="keyword">or</span> <span class="keyword">not</span> <span class="variable">tiene_licencia</span>:
+    <span class="function">print</span>(<span class="string">"No puedes conducir"</span>)
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Configurar el programa y obtener datos del usuario</h4>
+                <div class="codigo-ejemplo">
+<span class="function">print</span>(<span class="string">"🤖 ASISTENTE PERSONAL DE DECISIONES 🤖"</span>)
+<span class="function">print</span>(<span class="string">"="</span> <span class="operator">*</span> <span class="number">40</span>)
+
+<span class="comment"># Recopilar información del usuario</span>
+<span class="variable">clima</span> <span class="operator">=</span> <span class="function">input</span>(<span class="string">"¿Cómo está el clima? (soleado/lluvioso/nublado): "</span>).<span class="function">lower</span>()
+<span class="variable">dinero</span> <span class="operator">=</span> <span class="function">float</span>(<span class="function">input</span>(<span class="string">"¿Cuánto dinero tienes disponible? $"</span>))
+<span class="variable">humor</span> <span class="operator">=</span> <span class="function">input</span>(<span class="string">"¿Cómo te sientes? (feliz/triste/normal): "</span>).<span class="function">lower</span>()
+<span class="variable">energia</span> <span class="operator">=</span> <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Del 1 al 10, ¿cuál es tu nivel de energía? "</span>))
+                </div>
+                <p>Usamos <code>.lower()</code> para convertir las respuestas a minúsculas y evitar problemas con mayúsculas.</p>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Crear la estructura principal de decisiones</h4>
+                <div class="codigo-ejemplo">
+<span class="function">print</span>(<span class="string">"\n🎯 ANALIZANDO TU SITUACIÓN..."</span>)
+<span class="function">print</span>(<span class="string">"-"</span> <span class="operator">*</span> <span class="number">30</span>)
+
+<span class="comment"># Decisiones basadas en múltiples factores</span>
+<span class="keyword">if</span> <span class="variable">clima</span> <span class="operator">==</span> <span class="string">"soleado"</span> <span class="keyword">and</span> <span class="variable">dinero</span> <span class="operator">>=</span> <span class="number">100</span> <span class="keyword">and</span> <span class="variable">energia</span> <span class="operator">>=</span> <span class="number">7</span>:
+    <span class="function">print</span>(<span class="string">"¡Perfecto para ir al parque de diversiones! 🎢"</span>)
+    <span class="function">print</span>(<span class="string">"El clima es ideal, tienes suficiente dinero y energía."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">clima</span> <span class="operator">==</span> <span class="string">"soleado"</span> <span class="keyword">and</span> <span class="variable">dinero</span> <span class="operator">&lt;</span> <span class="number">50</span>:
+    <span class="function">print</span>(<span class="string">"¡Día perfecto para un picnic en el parque! 🧺"</span>)
+    <span class="function">print</span>(<span class="string">"No necesitas mucho dinero para disfrutar del sol."</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Agregar más condiciones complejas</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">elif</span> <span class="variable">clima</span> <span class="operator">==</span> <span class="string">"lluvioso"</span> <span class="keyword">and</span> <span class="variable">humor</span> <span class="operator">==</span> <span class="string">"triste"</span>:
+    <span class="function">print</span>(<span class="string">"Día ideal para ver tu serie favorita con chocolate caliente ☕"</span>)
+    <span class="function">print</span>(<span class="string">"A veces está bien quedarse en casa y consentirse."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">clima</span> <span class="operator">==</span> <span class="string">"lluvioso"</span> <span class="keyword">and</span> <span class="variable">energia</span> <span class="operator">>=</span> <span class="number">8</span>:
+    <span class="function">print</span>(<span class="string">"¡Aprovecha para hacer ejercicio en casa! 💪"</span>)
+    <span class="function">print</span>(<span class="string">"Tu energía alta es perfecta para una rutina indoor."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">energia</span> <span class="operator">&lt;=</span> <span class="number">3</span>:
+    <span class="function">print</span>(<span class="string">"Necesitas descansar. Una siesta te vendría bien 😴"</span>)
+    <span class="function">print</span>(<span class="string">"Tu cuerpo te está pidiendo recuperar energías."</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Agregar condiciones anidadas y el else final</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">elif</span> <span class="variable">humor</span> <span class="operator">==</span> <span class="string">"feliz"</span>:
+    <span class="keyword">if</span> <span class="variable">dinero</span> <span class="operator">>=</span> <span class="number">50</span>:
+        <span class="function">print</span>(<span class="string">"¡Sal a celebrar con amigos! 🎉"</span>)
+        <span class="function">print</span>(<span class="string">"Tu buen humor merece compartirse."</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">"Llama a tus amigos para una reunión en casa 📱"</span>)
+        <span class="function">print</span>(<span class="string">"La felicidad se multiplica cuando se comparte."</span>)
+        
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Un buen libro o película siempre es buena opción 📚"</span>)
+    <span class="function">print</span>(<span class="string">"A veces los mejores planes son los más simples."</span>)
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📝 Código Completo del Asistente</h2>
+            
+            <div class="codigo-ejemplo">
+<span class="function">print</span>(<span class="string">"🤖 ASISTENTE PERSONAL DE DECISIONES 🤖"</span>)
+<span class="function">print</span>(<span class="string">"="</span> <span class="operator">*</span> <span class="number">40</span>)
+<span class="function">print</span>(<span class="string">"Responderé algunas preguntas para sugerirte la mejor actividad\n"</span>)
+
+<span class="comment"># Recopilar información del usuario</span>
+<span class="variable">clima</span> <span class="operator">=</span> <span class="function">input</span>(<span class="string">"¿Cómo está el clima? (soleado/lluvioso/nublado): "</span>).<span class="function">lower</span>()
+<span class="variable">dinero</span> <span class="operator">=</span> <span class="function">float</span>(<span class="function">input</span>(<span class="string">"¿Cuánto dinero tienes disponible? $"</span>))
+<span class="variable">humor</span> <span class="operator">=</span> <span class="function">input</span>(<span class="string">"¿Cómo te sientes? (feliz/triste/normal): "</span>).<span class="function">lower</span>()
+<span class="variable">energia</span> <span class="operator">=</span> <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Del 1 al 10, ¿cuál es tu nivel de energía? "</span>))
+<span class="variable">hora</span> <span class="operator">=</span> <span class="function">int</span>(<span class="function">input</span>(<span class="string">"¿Qué hora es? (formato 24h, solo la hora): "</span>))
+
+<span class="function">print</span>(<span class="string">"\n🎯 ANALIZANDO TU SITUACIÓN..."</span>)
+<span class="function">print</span>(<span class="string">"-"</span> <span class="operator">*</span> <span class="number">30</span>)
+
+<span class="comment"># Sistema de decisiones complejo</span>
+<span class="keyword">if</span> <span class="variable">hora</span> <span class="operator">>=</span> <span class="number">22</span> <span class="keyword">or</span> <span class="variable">hora</span> <span class="operator">&lt;</span> <span class="number">6</span>:
+    <span class="function">print</span>(<span class="string">"🌙 Es tarde, deberías considerar dormir."</span>)
+    <span class="function">print</span>(<span class="string">"El descanso es importante para tu salud."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">clima</span> <span class="operator">==</span> <span class="string">"soleado"</span> <span class="keyword">and</span> <span class="variable">dinero</span> <span class="operator">>=</span> <span class="number">100</span> <span class="keyword">and</span> <span class="variable">energia</span> <span class="operator">>=</span> <span class="number">7</span>:
+    <span class="function">print</span>(<span class="string">"🎢 ¡Perfecto para ir al parque de diversiones!"</span>)
+    <span class="function">print</span>(<span class="string">"Tienes todo a tu favor: clima, dinero y energía."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">clima</span> <span class="operator">==</span> <span class="string">"soleado"</span> <span class="keyword">and</span> <span class="variable">dinero</span> <span class="operator">&lt;</span> <span class="number">50</span> <span class="keyword">and</span> <span class="variable">energia</span> <span class="operator">>=</span> <span class="number">5</span>:
+    <span class="function">print</span>(<span class="string">"🏖️ ¡Día perfecto para la playa o un parque!"</span>)
+    <span class="function">print</span>(<span class="string">"La naturaleza es gratis y revitalizante."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">clima</span> <span class="operator">==</span> <span class="string">"lluvioso"</span>:
+    <span class="keyword">if</span> <span class="variable">humor</span> <span class="operator">==</span> <span class="string">"triste"</span>:
+        <span class="function">print</span>(<span class="string">"☕ Día ideal para Netflix y chocolate caliente."</span>)
+        <span class="function">print</span>(<span class="string">"Date permiso de descansar y consentirte."</span>)
+    <span class="keyword">elif</span> <span class="variable">energia</span> <span class="operator">>=</span> <span class="number">8</span>:
+        <span class="function">print</span>(<span class="string">"💪 ¡Aprovecha para hacer ejercicio en casa!"</span>)
+        <span class="function">print</span>(<span class="string">"YouTube tiene excelentes rutinas gratuitas."</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">"🎮 Buen momento para jugar videojuegos o leer."</span>)
+        
+<span class="keyword">elif</span> <span class="variable">energia</span> <span class="operator">&lt;=</span> <span class="number">3</span>:
+    <span class="function">print</span>(<span class="string">"😴 Tu cuerpo necesita descanso."</span>)
+    <span class="function">print</span>(<span class="string">"Una siesta de 20-30 minutos te recargará."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">humor</span> <span class="operator">==</span> <span class="string">"feliz"</span> <span class="keyword">and</span> <span class="variable">dinero</span> <span class="operator">>=</span> <span class="number">50</span>:
+    <span class="function">print</span>(<span class="string">"🎉 ¡Sal a celebrar! Invita a amigos a comer."</span>)
+    <span class="function">print</span>(<span class="string">"Compartir la alegría la multiplica."</span>)
+    
+<span class="keyword">elif</span> <span class="variable">humor</span> <span class="operator">==</span> <span class="string">"normal"</span> <span class="keyword">and</span> <span class="variable">energia</span> <span class="operator">>=</span> <span class="number">5</span>:
+    <span class="keyword">if</span> <span class="number">6</span> <span class="operator">&lt;=</span> <span class="variable">hora</span> <span class="operator">&lt;=</span> <span class="number">18</span>:
+        <span class="function">print</span>(<span class="string">"🚶 Una caminata te ayudará a despejar la mente."</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">"🍳 Cocina algo especial para ti."</span>)
+        
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"📚 Un buen libro o podcast siempre es buena opción."</span>)
+    <span class="function">print</span>(<span class="string">"A veces los mejores planes son los más simples."</span>)
+
+<span class="comment"># Mensaje adicional basado en el dinero</span>
+<span class="function">print</span>(<span class="string">"\n💡 CONSEJO FINANCIERO:"</span>)
+<span class="keyword">if</span> <span class="variable">dinero</span> <span class="operator">&lt;</span> <span class="number">20</span>:
+    <span class="function">print</span>(<span class="string">"Recuerda: las mejores cosas de la vida son gratis."</span>)
+<span class="keyword">elif</span> <span class="variable">dinero</span> <span class="operator">&lt;</span> <span class="number">100</span>:
+    <span class="function">print</span>(<span class="string">"Tienes un presupuesto moderado, gástalo sabiamente."</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"Tienes buen presupuesto, pero recuerda ahorrar también."</span>)
+
+<span class="function">print</span>(<span class="string">"\n¡Que tengas un excelente día! 🌟"</span>)
+            </div>
+
+            <div class="resultado-ejemplo">
+<strong>Ejemplo de ejecución:</strong>
+🤖 ASISTENTE PERSONAL DE DECISIONES 🤖
+========================================
+Responderé algunas preguntas para sugerirte la mejor actividad
+
+¿Cómo está el clima? (soleado/lluvioso/nublado): soleado
+¿Cuánto dinero tienes disponible? $25
+¿Cómo te sientes? (feliz/triste/normal): feliz
+Del 1 al 10, ¿cuál es tu nivel de energía? 8
+¿Qué hora es? (formato 24h, solo la hora): 14
+
+🎯 ANALIZANDO TU SITUACIÓN...
+------------------------------
+🏖️ ¡Día perfecto para la playa o un parque!
+La naturaleza es gratis y revitalizante.
+
+💡 CONSEJO FINANCIERO:
+Tienes un presupuesto moderado, gástalo sabiamente.
+
+¡Que tengas un excelente día! 🌟
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔬 Análisis del Flujo de Decisiones</h2>
+            
+            <div class="warning">
+                <strong>Orden de las Condiciones:</strong> El orden importa. Python evalúa las condiciones de arriba hacia abajo y ejecuta el primer bloque que sea True. Las condiciones más específicas deben ir primero.
+            </div>
+
+            <div class="teoria">
+                <h4>Buenas Prácticas en Estructuras Condicionales</h4>
+                <ul>
+                    <li>✅ <strong>Condiciones específicas primero:</strong> Las más restrictivas van antes que las generales</li>
+                    <li>✅ <strong>Evitar redundancia:</strong> No repetir condiciones ya evaluadas</li>
+                    <li>✅ <strong>Usar elif en lugar de múltiples if:</strong> Más eficiente y claro</li>
+                    <li>✅ <strong>Incluir un else final:</strong> Para manejar casos no previstos</li>
+                    <li>✅ <strong>Comentar la lógica compleja:</strong> Facilita el mantenimiento</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Técnica de Depuración:</strong> Agrega print() temporales dentro de cada bloque para ver qué camino está tomando tu código:
+                <div class="codigo-ejemplo">
+<span class="keyword">if</span> <span class="variable">condicion</span>:
+    <span class="function">print</span>(<span class="string">"DEBUG: Entró al primer if"</span>)
+    <span class="comment"># resto del código</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios de Práctica</h2>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 1: Sistema de Calificaciones</h4>
+                <p>Crea un programa que convierta una calificación numérica (0-100) en letra (A, B, C, D, F) con los siguientes criterios:</p>
+                <ul>
+                    <li>90-100: A (Excelente)</li>
+                    <li>80-89: B (Muy bien)</li>
+                    <li>70-79: C (Bien)</li>
+                    <li>60-69: D (Suficiente)</li>
+                    <li>0-59: F (Insuficiente)</li>
+                </ul>
+                <p>Agrega mensajes motivacionales diferentes para cada calificación.</p>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 2: Calculadora de Descuentos</h4>
+                <p>Crea un sistema que calcule descuentos basado en:</p>
+                <ul>
+                    <li>Monto de compra (descuentos por volumen)</li>
+                    <li>Día de la semana (ofertas especiales)</li>
+                    <li>Si es cliente frecuente (descuento adicional)</li>
+                    <li>Edad del cliente (descuentos para estudiantes/jubilados)</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 3: Recomendador de Películas</h4>
+                <p>Desarrolla un asistente que recomiende películas basándose en:</p>
+                <ul>
+                    <li>Género preferido</li>
+                    <li>Estado de ánimo</li>
+                    <li>Si está solo o acompañado</li>
+                    <li>Duración disponible</li>
+                    <li>Si ha visto las películas populares recientes</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Desafío Extra: Diagnóstico de PC</h4>
+                <p>Crea un programa que diagnostique problemas comunes de computadora haciendo preguntas como:</p>
+                <ul>
+                    <li>¿La computadora enciende?</li>
+                    <li>¿Aparece algo en la pantalla?</li>
+                    <li>¿Hace algún ruido extraño?</li>
+                    <li>¿Cuándo fue la última vez que funcionó bien?</li>
+                </ul>
+                <p>Usa estructuras anidadas para crear un árbol de decisión complejo.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Resumen y Conceptos Clave</h2>
+            
+            <div class="teoria">
+                <h4>Lo que aprendiste en este ejercicio:</h4>
+                <ul>
+                    <li>✅ Usar <code>if</code>, <code>elif</code> y <code>else</code> para crear flujos de decisión</li>
+                    <li>✅ Combinar múltiples condiciones con <code>and</code> y <code>or</code></li>
+                    <li>✅ Anidar condiciones para casos más específicos</li>
+                    <li>✅ La importancia del orden en las condiciones</li>
+                    <li>✅ Crear programas interactivos que respondan al contexto</li>
+                    <li>✅ Manejar diferentes tipos de entrada del usuario</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>Conexión con el mundo real:</h4>
+                <p>Las estructuras condicionales son la base de:</p>
+                <ul>
+                    <li>🎮 Sistemas de videojuegos (decisiones del jugador)</li>
+                    <li>🏥 Diagnósticos médicos

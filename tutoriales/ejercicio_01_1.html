@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1.1: Mi Primera Receta de Código</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .slide h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        
+        .slide h3 {
+            color: #764ba2;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #f8f9fa;
+            border-left: 5px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .teoria ul {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+        
+        .teoria li {
+            margin-bottom: 10px;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.1em;
+            line-height: 1.6;
+            position: relative;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .keyword {
+            color: #569CD6;
+        }
+        
+        .paso {
+            background: #e3f2fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #2196f3;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2196f3;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .tip {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .ejercicio-propuesto h4 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .resultado-esperado {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .resultado-esperado h4 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .highlight {
+            background: #ffeb3b;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .slide {
+                padding: 20px;
+            }
+            
+            .codigo-ejemplo {
+                font-size: 0.9em;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍳 Mi Primera Receta de Código</h1>
+            <p>Módulo 1: Introducción a Python - Ejercicio 1.1</p>
+        </div>
+
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Familiarizarse con la sintaxis básica de Python, aprender a usar comentarios y la función print() para mostrar información en pantalla. Este ejercicio usa una analogía divertida comparando la programación con cocinar.
+            </div>
+
+            <h3>🧠 Conceptos Teóricos Necesarios</h3>
+            
+            <div class="teoria">
+                <h4>1. ¿Qué es Python?</h4>
+                <ul>
+                    <li><strong>Python</strong> es un lenguaje de programación de alto nivel, fácil de aprender</li>
+                    <li>Es como un idioma que usamos para comunicarnos con la computadora</li>
+                    <li>La computadora lee nuestras instrucciones línea por línea, de arriba hacia abajo</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>2. Comentarios en Python</h4>
+                <ul>
+                    <li>Los <span class="highlight">comentarios</span> son notas que escribimos para nosotros o otros programadores</li>
+                    <li>La computadora los ignora completamente</li>
+                    <li>Se escriben usando el símbolo <code>#</code></li>
+                    <li>Son como las anotaciones al margen en un libro de recetas</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>3. La función print()</h4>
+                <ul>
+                    <li><code>print()</code> es una función que muestra información en la pantalla</li>
+                    <li>Todo lo que esté entre los paréntesis y comillas se mostrará</li>
+                    <li>Es nuestra forma de comunicarnos con el usuario</li>
+                    <li>Piensa en <code>print()</code> como un megáfono 📢</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Crear el título de nuestra receta</h4>
+                <p>Comenzamos mostrando el título de nuestra receta usando print()</p>
+                <div class="codigo-ejemplo">
+<span class="comment"># Mi primera receta: Tacos de programador</span>
+<span class="function">print</span>(<span class="string">"=== RECETA: TACOS DE PROGRAMADOR ==="</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Agregar los primeros pasos</h4>
+                <p>Cada línea de código es como un paso en nuestra receta</p>
+                <div class="codigo-ejemplo">
+<span class="function">print</span>(<span class="string">"Paso 1: Abrir el IDE (como abrir la despensa)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 2: Escribir código limpio (como lavar los ingredientes)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 3: Declarar variables (como preparar los utensilios)"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Completar la receta con más pasos</h4>
+                <p>Agregamos más instrucciones para hacer nuestra receta completa</p>
+                <div class="codigo-ejemplo">
+<span class="function">print</span>(<span class="string">"Paso 4: Usar funciones (como mezclar ingredientes)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 5: Probar el código (como probar el sazón)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 6: Depurar errores (como ajustar la sal)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 7: ¡Servir y disfrutar tu programa!"</span>)
+                </div>
+            </div>
+
+            <div class="tip">
+                <strong>Consejo Pro:</strong> Los comentarios son tus mejores amigos. Úsalos para explicar qué hace tu código, especialmente cuando regreses a él después de tiempo.
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📝 Código Completo</h2>
+            
+            <div class="codigo-ejemplo">
+<span class="comment"># Mi primera receta: Tacos de programador</span>
+<span class="comment"># Este programa muestra una receta divertida comparando cocinar con programar</span>
+
+<span class="function">print</span>(<span class="string">"=== RECETA: TACOS DE PROGRAMADOR ==="</span>)
+<span class="function">print</span>(<span class="string">""</span>)  <span class="comment"># Línea en blanco para separar</span>
+
+<span class="comment"># Ingredientes (conceptos de programación)</span>
+<span class="function">print</span>(<span class="string">"INGREDIENTES:"</span>)
+<span class="function">print</span>(<span class="string">"- 2 tazas de creatividad"</span>)
+<span class="function">print</span>(<span class="string">"- 1 kilo de paciencia"</span>)
+<span class="function">print</span>(<span class="string">"- 500g de lógica fresca"</span>)
+<span class="function">print</span>(<span class="string">"- Bugs al gusto (para darle sabor)"</span>)
+<span class="function">print</span>(<span class="string">""</span>)
+
+<span class="comment"># Instrucciones paso a paso</span>
+<span class="function">print</span>(<span class="string">"INSTRUCCIONES:"</span>)
+<span class="function">print</span>(<span class="string">"Paso 1: Abrir el IDE (como abrir la despensa)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 2: Escribir código limpio (como lavar los ingredientes)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 3: Declarar variables (como preparar los utensilios)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 4: Usar funciones (como mezclar ingredientes)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 5: Probar el código (como probar el sazón)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 6: Depurar errores (como ajustar la sal)"</span>)
+<span class="function">print</span>(<span class="string">"Paso 7: ¡Servir y disfrutar tu programa!"</span>)
+<span class="function">print</span>(<span class="string">""</span>)
+
+<span class="comment"># Mensaje final</span>
+<span class="function">print</span>(<span class="string">"¡Buen provecho! Digo... ¡Happy Coding! 🌮💻"</span>)
+            </div>
+
+            <div class="resultado-esperado">
+                <h4>🖥️ Resultado Esperado:</h4>
+                <pre style="background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace;">
+=== RECETA: TACOS DE PROGRAMADOR ===
+
+INGREDIENTES:
+- 2 tazas de creatividad
+- 1 kilo de paciencia
+- 500g de lógica fresca
+- Bugs al gusto (para darle sabor)
+
+INSTRUCCIONES:
+Paso 1: Abrir el IDE (como abrir la despensa)
+Paso 2: Escribir código limpio (como lavar los ingredientes)
+Paso 3: Declarar variables (como preparar los utensilios)
+Paso 4: Usar funciones (como mezclar ingredientes)
+Paso 5: Probar el código (como probar el sazón)
+Paso 6: Depurar errores (como ajustar la sal)
+Paso 7: ¡Servir y disfrutar tu programa!
+
+¡Buen provecho! Digo... ¡Happy Coding! 🌮💻
+                </pre>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios de Práctica</h2>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 1: Tu Receta Favorita</h4>
+                <p>Modifica el código para crear tu propia receta. Puede ser de tu comida favorita, pero relacionándola con programación. Por ejemplo: "Pizza de Python", "Hamburguesa de HTML", etc.</p>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 2: Agrega Más Detalles</h4>
+                <p>Incluye una sección de "TIEMPO DE PREPARACIÓN" y "DIFICULTAD" usando print() y comentarios explicativos.</p>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 3: Receta del Día</h4>
+                <p>Crea un programa que muestre diferentes recetas usando muchos print(). Incluye al menos 3 recetas diferentes con separadores visuales.</p>
+            </div>
+
+            <div class="tip">
+                <strong>Para pensar:</strong> ¿Por qué crees que comparamos la programación con cocinar? ¿Qué similitudes encuentras entre ambas actividades?
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Conceptos Clave Aprendidos</h2>
+            
+            <div class="teoria">
+                <h4>En este ejercicio aprendiste:</h4>
+                <ul>
+                    <li>✅ Cómo escribir tu primer programa en Python</li>
+                    <li>✅ Usar <code>print()</code> para mostrar información</li>
+                    <li>✅ Agregar comentarios con <code>#</code></li>
+                    <li>✅ Organizar tu código de forma legible</li>
+                    <li>✅ La importancia de la claridad en la programación</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>Errores Comunes a Evitar:</h4>
+                <ul>
+                    <li>❌ Olvidar las comillas en print(): <code>print(Hola)</code> ← Error</li>
+                    <li>❌ Olvidar los paréntesis: <code>print "Hola"</code> ← Error</li>
+                    <li>❌ Usar comillas incorrectas: mezclar ' y "</li>
+                    <li>❌ No cerrar paréntesis o comillas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
