@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicios Prácticos - Curso Python Industrial</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #4a6fdc;
+            --light: #f8faff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+        
+        .exercises-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .exercise-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .exercise-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            border-color: var(--accent);
+        }
+        
+        .exercise-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .exercise-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .exercise-card h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1.4em;
+        }
+        
+        .exercise-icon {
+            font-size: 1.8em;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(30, 60, 114, 0.3);
+        }
+        
+        .exercise-card p {
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.6;
+            min-height: 60px;
+        }
+        
+        .exercise-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            padding: 12px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(30, 60, 114, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .exercise-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(30, 60, 114, 0.4);
+        }
+        
+        .exercise-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .exercise-link:hover::before {
+            left: 100%;
+        }
+        
+        .exercise-link i {
+            transition: transform 0.3s ease;
+        }
+        
+        .exercise-link:hover i {
+            transform: rotate(360deg);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .exercises-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .exercise-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-laptop-code"></i> Ejercicios Prácticos</h1>
+            <p class="subtitle">Domina Python con estos desafíos interactivos</p>
+        </header>
+        
+        <div class="exercises-grid">
+            <!-- Ejercicio 1 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-utensils"></i></span> Mi Primera Receta de Código</h2>
+                <p>Crea tu primer programa en Python simulando un libro de recetas con funciones básicas.</p>
+                <a href="../tutoriales/ejercicio_01_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 2 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-paw"></i></span> La Tienda de Mascotas Virtuales</h2>
+                <p>Gestiona una tienda de mascotas con diccionarios y listas. Aprende estructuras de datos básicas.</p>
+                <a href="../tutoriales/ejercicio_02_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 3 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-magic"></i></span> El Detector de Números Mágicos</h2>
+                <p>Identifica números especiales usando condicionales y bucles. Perfecto para practicar lógica.</p>
+                <a href="../tutoriales/ejercicio_03_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 4 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-robot"></i></span> El Asistente Personal de Decisiones</h2>
+                <p>Desarrolla un sistema que tome decisiones basadas en múltiples condiciones y parámetros.</p>
+                <a href="../tutoriales/ejercicio_04_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 5 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-comment-dots"></i></span> La Fábrica de Cumplidos</h2>
+                <p>Genera cumplidos personalizados combinando strings y funciones. ¡Diversión con Python!</p>
+                <a href="../tutoriales/ejercicio_05_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 6 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-mask"></i></span> La Base de Datos de Superhéroes</h2>
+                <p>Administra información de superhéroes con estructuras de datos complejas y búsquedas.</p>
+                <a href="../tutoriales/ejercicio_06_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 7 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-rocket"></i></span> El Centro de Comando Espacial</h2>
+                <p>Simula una misión espacial con programación orientada a objetos. ¡Controla tu nave!</p>
+                <a href="../tutoriales/ejercicio_07_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 8 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-bug"></i></span> Manejo de Errores y Excepciones</h2>
+                <p>Aprende a manejar errores con try-except. Haz tus programas más robustos y profesionales.</p>
+                <a href="../tutoriales/ejercicio_08_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+            
+            <!-- Ejercicio 9 -->
+            <div class="exercise-card">
+                <h2><span class="exercise-icon"><i class="fas fa-book"></i></span> El Diario Digital Personal</h2>
+                <p>Crea un sistema de diario que guarde entradas en archivos. Aprende manejo de archivos.</p>
+                <a href="../tutoriales/ejercicio_09_1.html" class="exercise-link">
+                    <i class="fas fa-arrow-right"></i> Comenzar ejercicio
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Efecto de aparición escalonada para las tarjetas
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.exercise-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `fadeIn 0.5s ease-out ${index * 0.1}s forwards`;
+                card.style.opacity = 0;
+            });
+        });
+    </script>
+</body>
+</html>
