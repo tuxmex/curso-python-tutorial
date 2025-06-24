@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 9.1: El Diario Digital Personal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            font-family: 'Georgia', serif;
+            font-style: italic;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            color: #34495e;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: slideIn 0.8s ease-out;
+            border: 1px solid #e1e8ed;
+        }
+        
+        .slide h2 {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .slide h3 {
+            color: #34495e;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #ecf0f1;
+            border-left: 5px solid #3498db;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #2980b9;
+            margin-bottom: 10px;
+        }
+        
+        .archivo-visual {
+            background: #2c3e50;
+            color: #ecf0f1;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .archivo-visual::before {
+            content: "📄 mi_diario.txt";
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        
+        .entrada-diario {
+            background: #fff9e6;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 10px 0;
+            font-style: italic;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #3498db;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .with-keyword {
+            color: #C586C0;
+            font-weight: bold;
+        }
+        
+        .modo-archivo {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .modo-card {
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .modo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(52,152,219,0.3);
+        }
+        
+        .modo-card h5 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .modo-card code {
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        
+        .paso {
+            background: #e8f6f3;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #27ae60;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #27ae60;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .flujo-archivo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .flujo-paso {
+            background: #ecf0f1;
+            border: 2px solid #3498db;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .flujo-flecha {
+            font-size: 2em;
+            color: #3498db;
+        }
+        
+        .comparacion-tabla {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .comparacion-tabla th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .comparacion-tabla td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+        
+        .comparacion-tabla tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .tip {
+            background: #fff9c4;
+            border: 2px solid #f1c40f;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .warning {
+            background: #ffe5e5;
+            border: 2px solid #e74c3c;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .menu-ejemplo {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            margin: 15px 0;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📔 El Diario Digital Personal</h1>
+            <p>Módulo 9: Archivos y Entrada/Salida - Ejercicio 9.1</p>
+        </div> 
+        <div class="slide">
+            <h2>Objetivo del Ejercicio</h2>
+            <div class="objetivo">
+                Aprender a crear, leer y escribir en archivos de texto utilizando Python, gestionando un diario personal digital.
+            </div>
+            <h3>¿Qué Aprenderás?</h3>
+            <ul>
+                <li>Cómo crear un archivo de texto.</li>
+                <li>Cómo escribir entradas en el diario.</li>
+                <li>Cómo leer y mostrar las entradas del diario.</li>
+                <li>Cómo gestionar el formato de las entradas.</li>
+                <li>Cómo manejar excepciones al trabajar con archivos.</li>
+                <li>Cómo aplicar buenas prácticas en la gestión de archivos.</li>
+            </ul>
+            <h3>¿Por Qué es Importante?</h3>
+            <p>El manejo de archivos es una habilidad esencial en programación, permitiendo la persistencia de datos y la interacción con el sistema de archivos. Aprender a gestionar archivos te permitirá crear aplicaciones más complejas y útiles.</p>
+        </div>
+        <div class="slide">
+            <h2>Teoría Básica</h2>
+            <div class="teoria">
+                <h4>Conceptos Clave</h4>
+                <p>En Python, puedes trabajar con archivos utilizando las funciones integradas <code>open()</code>, <code>read()</code>, <code>write()</code>, y <code>close()</code>. Los archivos se pueden abrir en diferentes modos: lectura ('r'), escritura ('w'), y adición ('a').</p>
+                <p>Es importante cerrar los archivos después de usarlos para liberar recursos del sistema.</p>
+            </div>
+            <h3>Archivo de Ejemplo</h3>
+            <div class="archivo-visual">
+                <p >Archivo: <strong>mi_diario.txt</strong></p>
+                <p>Este archivo contendrá las entradas del diario personal.</p>
+                <div class="entrada-diario">
+                    <p>Fecha: 2023-10-01</p>
+                    <p>Hoy he aprendido a manejar archivos en Python. ¡Es fascinante!</p>
+                </div>
+                <div class="entrada-diario">
+                    <p>Fecha: 2023-10-02</p>
+                    <p>He escrito mi primera entrada en el diario digital. ¡Me encanta!</p>
+                </div>
+            </div>
+            <h3>Código de Ejemplo</h3>
+            <div class="codigo-ejemplo">
+                <pre>
+<span class="comment"># Abrir el archivo en modo escritura</span>
+<span class="variable">diario</span> = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'w'</span>)
+<span class="comment"># Escribir una entrada en el diario</span>
+diario.<span class="function">write</span>(<span class="string">'Fecha: 2023-10-01\\nHoy he aprendido a manejar archivos en Python. ¡Es fascinante!\\n'</span>)
+<span class="comment"># Cerrar el archivo</span>
+diario.<span class="function">close</span>()
+<span class="comment"># Abrir el archivo en modo lectura</span>
+diario = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'r'</span>)
+<span class="comment"># Leer el contenido del diario</span>
+contenido = diario.<span class="function">read</span>()
+<span class="comment"># Mostrar el contenido</span>
+<span class="function">print</span>(contenido)
+<span class="comment"># Cerrar el archivo</span>
+diario.<span class="function">close</span>()
+                </pre>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Modos de Archivo</h2>
+            <div class="modo-archivo">
+                <div class="modo-card">
+                    <h5>Modo Lectura (<code>r</code>)</h5>
+                    <p>Abre un archivo para leer. Si el archivo no existe, se genera un error.</p>
+                </div>
+                <div class="modo-card">
+                    <h5>Modo Escritura (<code>w</code>)</h5>
+                    <p>Crea un nuevo archivo o sobrescribe uno existente. El contenido previo se pierde.</p>
+                </div>
+                <div class="modo-card">
+                    <h5>Modo Adición (<code>a</code>)</h5>
+                    <p>Añade contenido al final del archivo sin borrar el contenido existente.</p>
+                </div>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Pasos para Crear y Leer el Diario</h2>
+            <div class="paso" data-paso="1">
+                Abrir el archivo en modo escritura para crear o sobrescribir.
+            </div>
+            <div class="paso" data-paso="2">
+                Escribir la entrada del diario con la fecha y el contenido.
+            </div>
+            <div class="paso" data-paso="3">
+                Cerrar el archivo para guardar los cambios.
+            </div>
+            <div class="paso" data-paso="4">
+                Abrir el archivo en modo lectura para leer las entradas.
+            </div>
+            <div class="paso" data-paso="5">
+                Leer el contenido del archivo y mostrarlo en la consola. 
+            </div>
+            <div class="paso" data-paso="6">
+                Cerrar el archivo después de leer para liberar recursos.
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Flujo de Trabajo del Archivo</h2>
+            <div class="flujo-archivo">
+                <div class="flujo-paso">Abrir Archivo</div>
+                <div class="flujo-flecha">➡️</div>
+                <div class="flujo-paso">Escribir Entrada</div>
+                <div class="flujo-flecha">➡️</div>
+                <div class="flujo-paso">Cerrar Archivo</div>
+                <div class="flujo-flecha">➡️</div>
+                <div class="flujo-paso">Abrir Archivo</div>
+                <div class="flujo-flecha">➡️</div>
+                <div class="flujo-paso">Leer Contenido</div>
+                <div class="flujo-flecha">➡️</div>
+                <div class="flujo-paso">Mostrar en Consola</div>
+                <div class="flujo-flecha">➡️</div>
+                <div class="flujo-paso">Cerrar Archivo</div>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Comparación de Modos de Archivo</h2>
+            <table class="comparacion-tabla">
+                <thead>
+                    <tr>
+                        <th>Modo</th>
+                        <th>Descripción</th>
+                        <th>Permisos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>r</code></td>
+                        <td>Lectura del archivo existente.</td>
+                        <td>Sólo lectura.</td>
+                    </tr>
+                    <tr>
+                        <td><code>w</code></td>
+                        <td>Escritura, crea o sobrescribe el archivo.</td>
+                        <td>Lectura y escritura.</td>
+                    </tr>
+                    <tr>
+                        <td><code>a</code></td>
+                        <td>Añade contenido al final del archivo.</td>
+                        <td>Lectura y escritura.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip">
+                <h4>Consejo</h4>
+                <p>Siempre verifica si el archivo existe antes de abrirlo en modo lectura para evitar errores.</p>
+            </div>  
+
+            <div class="warning">
+                <h4>Advertencia</h4>
+                <p>Usar el modo escritura ('w') sobrescribirá el contenido del archivo. Asegúrate de que es lo que deseas.</p>
+            </div>
+        </div>
+        <div class="slide">
+            <h2>Ejercicio Propuesto</h2>
+            <div class="ejercicio-propuesto">
+                <p>Escribe un programa que permita al usuario agregar entradas a su diario personal. El programa debe:</p>
+                <ul>
+                    <li>Pedir al usuario la fecha y el contenido de la entrada.</li>
+                    <li>Guardar la entrada en un archivo llamado <code>mi_diario.txt</code>.</li>
+                    <li>Permitir al usuario leer todas las entradas guardadas.</li>
+                </ul>
+                <p>Utiliza excepciones para manejar posibles errores al abrir o escribir en el archivo.</p>
+            </div>
+            <h3>Ejemplo de Código</h3>
+            <div class="menu-ejemplo">
+                <pre>
+<span class="keyword">try</span>:
+    diario = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'a'</span>)
+    fecha = <span class="function">input</span>(<span class="string">'Ingrese la fecha (YYYY-MM-DD): '</span>)
+    contenido = <span class="function">input</span>(<span class="string">'Ingrese el contenido de la entrada: '</span>)
+    diario.<span class="function">write</span>(<span class="string">'Fecha: '</span> + fecha + <span class="string'>', Contenido: '</span> + contenido + <span class="string'>\\n'</span>)
+    diario.<span class="function">close</span>()
+    diario = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'r'</span>)
+    print(<span class="string">'Contenido del diario:'</span>)
+    <span class="function">print</span>(diario.<span class="function">read</span>())
+    diario.<span class="function">close</span>()
+<span class="keyword">except</span> <span class="function">Exception</span> as e:
+    <span class="function">print</span>(<span class="string">'Error al manejar el archivo:'</span>, e)
+                </pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+        
+
+
+
+

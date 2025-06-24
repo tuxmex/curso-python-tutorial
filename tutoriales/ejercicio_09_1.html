@@ -363,194 +363,558 @@
     <div class="container">
         <div class="header">
             <h1>📔 El Diario Digital Personal</h1>
-            <p>Módulo 9: Archivos y Entrada/Salida - Ejercicio 9.1</p>
-        </div> 
+            <p>Módulo 9: Archivos y Entrada/Salida - Ejercicio 9.1
+</div>
+
         <div class="slide">
-            <h2>Objetivo del Ejercicio</h2>
+            <h2>📎 Información del Ejercicio</h2>
+            
             <div class="objetivo">
-                Aprender a crear, leer y escribir en archivos de texto utilizando Python, gestionando un diario personal digital.
+                <strong>🎯 Objetivo:</strong> Aprender a leer y escribir archivos de texto en Python creando un diario digital personal. Los estudiantes comprenderán cómo manejar archivos de forma segura, trabajar con fechas y horas, y crear aplicaciones que persistan datos más allá de la ejecución del programa.
             </div>
-            <h3>¿Qué Aprenderás?</h3>
-            <ul>
-                <li>Cómo crear un archivo de texto.</li>
-                <li>Cómo escribir entradas en el diario.</li>
-                <li>Cómo leer y mostrar las entradas del diario.</li>
-                <li>Cómo gestionar el formato de las entradas.</li>
-                <li>Cómo manejar excepciones al trabajar con archivos.</li>
-                <li>Cómo aplicar buenas prácticas en la gestión de archivos.</li>
-            </ul>
-            <h3>¿Por Qué es Importante?</h3>
-            <p>El manejo de archivos es una habilidad esencial en programación, permitiendo la persistencia de datos y la interacción con el sistema de archivos. Aprender a gestionar archivos te permitirá crear aplicaciones más complejas y útiles.</p>
-        </div>
-        <div class="slide">
-            <h2>Teoría Básica</h2>
+
+            <h3>🧠 ¿Por qué Manejar Archivos?</h3>
+            
             <div class="teoria">
-                <h4>Conceptos Clave</h4>
-                <p>En Python, puedes trabajar con archivos utilizando las funciones integradas <code>open()</code>, <code>read()</code>, <code>write()</code>, y <code>close()</code>. Los archivos se pueden abrir en diferentes modos: lectura ('r'), escritura ('w'), y adición ('a').</p>
-                <p>Es importante cerrar los archivos después de usarlos para liberar recursos del sistema.</p>
+                <h4>La Importancia de la Persistencia de Datos</h4>
+                <p>Hasta ahora, todos nuestros programas pierden los datos cuando terminan. Con archivos podemos:</p>
+                <ul>
+                    <li>💾 <strong>Guardar información permanentemente</strong></li>
+                    <li>📖 <strong>Leer datos de sesiones anteriores</strong></li>
+                    <li>📊 <strong>Compartir información entre programas</strong></li>
+                    <li>🔄 <strong>Crear backups y registros históricos</strong></li>
+                </ul>
             </div>
-            <h3>Archivo de Ejemplo</h3>
-            <div class="archivo-visual">
-                <p >Archivo: <strong>mi_diario.txt</strong></p>
-                <p>Este archivo contendrá las entradas del diario personal.</p>
-                <div class="entrada-diario">
-                    <p>Fecha: 2023-10-01</p>
-                    <p>Hoy he aprendido a manejar archivos en Python. ¡Es fascinante!</p>
-                </div>
-                <div class="entrada-diario">
-                    <p>Fecha: 2023-10-02</p>
-                    <p>He escrito mi primera entrada en el diario digital. ¡Me encanta!</p>
-                </div>
+
+            <div class="flujo-archivo">
+                <div class="flujo-paso">Programa</div>
+                <div class="flujo-flecha">→</div>
+                <div class="flujo-paso" style="background: #3498db; color: white;">Escribir</div>
+                <div class="flujo-flecha">→</div>
+                <div class="flujo-paso">Archivo.txt</div>
+                <div class="flujo-flecha">→</div>
+                <div class="flujo-paso" style="background: #27ae60; color: white;">Leer</div>
+                <div class="flujo-flecha">→</div>
+                <div class="flujo-paso">Programa</div>
             </div>
-            <h3>Código de Ejemplo</h3>
-            <div class="codigo-ejemplo">
-                <pre>
-<span class="comment"># Abrir el archivo en modo escritura</span>
-<span class="variable">diario</span> = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'w'</span>)
-<span class="comment"># Escribir una entrada en el diario</span>
-diario.<span class="function">write</span>(<span class="string">'Fecha: 2023-10-01\\nHoy he aprendido a manejar archivos en Python. ¡Es fascinante!\\n'</span>)
-<span class="comment"># Cerrar el archivo</span>
-diario.<span class="function">close</span>()
-<span class="comment"># Abrir el archivo en modo lectura</span>
-diario = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'r'</span>)
-<span class="comment"># Leer el contenido del diario</span>
-contenido = diario.<span class="function">read</span>()
-<span class="comment"># Mostrar el contenido</span>
-<span class="function">print</span>(contenido)
-<span class="comment"># Cerrar el archivo</span>
-diario.<span class="function">close</span>()
-                </pre>
-            </div>
-        </div>
-        <div class="slide">
-            <h2>Modos de Archivo</h2>
+
             <div class="modo-archivo">
                 <div class="modo-card">
-                    <h5>Modo Lectura (<code>r</code>)</h5>
-                    <p>Abre un archivo para leer. Si el archivo no existe, se genera un error.</p>
+                    <h5>📖 'r'</h5>
+                    <p><strong>Read (Leer)</strong></p>
+                    <p>Solo lectura</p>
+                    <p>Error si no existe</p>
                 </div>
-                <div class="modo-card">
-                    <h5>Modo Escritura (<code>w</code>)</h5>
-                    <p>Crea un nuevo archivo o sobrescribe uno existente. El contenido previo se pierde.</p>
+                <div class="modo-card" style="background: #27ae60;">
+                    <h5>✍️ 'w'</h5>
+                    <p><strong>Write (Escribir)</strong></p>
+                    <p>Crea o sobrescribe</p>
+                    <p>¡Borra contenido previo!</p>
                 </div>
-                <div class="modo-card">
-                    <h5>Modo Adición (<code>a</code>)</h5>
-                    <p>Añade contenido al final del archivo sin borrar el contenido existente.</p>
+                <div class="modo-card" style="background: #f39c12;">
+                    <h5>➕ 'a'</h5>
+                    <p><strong>Append (Añadir)</strong></p>
+                    <p>Agrega al final</p>
+                    <p>Preserva contenido</p>
+                </div>
+                <div class="modo-card" style="background: #9b59b6;">
+                    <h5>🔄 'r+'</h5>
+                    <p><strong>Read/Write</strong></p>
+                    <p>Lectura y escritura</p>
+                    <p>Debe existir</p>
                 </div>
             </div>
         </div>
+
         <div class="slide">
-            <h2>Pasos para Crear y Leer el Diario</h2>
-            <div class="paso" data-paso="1">
-                Abrir el archivo en modo escritura para crear o sobrescribir.
+            <h2>🔧 Manejo Seguro de Archivos</h2>
+            
+            <div class="teoria">
+                <h4>El Problema: Archivos Abiertos</h4>
+                <p>Cuando abrimos un archivo, Python reserva recursos del sistema. Si no lo cerramos correctamente:</p>
+                <ul>
+                    <li>❌ Pérdida de datos (no se guardan los cambios)</li>
+                    <li>❌ Archivos bloqueados para otros programas</li>
+                    <li>❌ Desperdicio de memoria</li>
+                    <li>❌ Posibles errores en el sistema</li>
+                </ul>
             </div>
-            <div class="paso" data-paso="2">
-                Escribir la entrada del diario con la fecha y el contenido.
+
+            <div class="teoria">
+                <h4>La Solución: Contexto 'with'</h4>
+                <p>Python proporciona una forma elegante y segura de manejar archivos:</p>
+                
+                <div class="codigo-ejemplo">
+<span class="comment"># ❌ Forma antigua (peligrosa)</span>
+<span class="variable">archivo</span> = <span class="function">open</span>(<span class="string">"datos.txt"</span>, <span class="string">"r"</span>)
+<span class="variable">contenido</span> = <span class="variable">archivo</span>.<span class="function">read</span>()
+<span class="variable">archivo</span>.<span class="function">close</span>()  <span class="comment"># Si hay error antes, nunca se cierra!</span>
+
+<span class="comment"># ✅ Forma moderna (segura)</span>
+<span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"datos.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> <span class="variable">archivo</span>:
+    <span class="variable">contenido</span> = <span class="variable">archivo</span>.<span class="function">read</span>()
+<span class="comment"># El archivo se cierra automáticamente, incluso si hay errores</span>
+                </div>
             </div>
-            <div class="paso" data-paso="3">
-                Cerrar el archivo para guardar los cambios.
-            </div>
-            <div class="paso" data-paso="4">
-                Abrir el archivo en modo lectura para leer las entradas.
-            </div>
-            <div class="paso" data-paso="5">
-                Leer el contenido del archivo y mostrarlo en la consola. 
-            </div>
-            <div class="paso" data-paso="6">
-                Cerrar el archivo después de leer para liberar recursos.
-            </div>
-        </div>
-        <div class="slide">
-            <h2>Flujo de Trabajo del Archivo</h2>
-            <div class="flujo-archivo">
-                <div class="flujo-paso">Abrir Archivo</div>
-                <div class="flujo-flecha">➡️</div>
-                <div class="flujo-paso">Escribir Entrada</div>
-                <div class="flujo-flecha">➡️</div>
-                <div class="flujo-paso">Cerrar Archivo</div>
-                <div class="flujo-flecha">➡️</div>
-                <div class="flujo-paso">Abrir Archivo</div>
-                <div class="flujo-flecha">➡️</div>
-                <div class="flujo-paso">Leer Contenido</div>
-                <div class="flujo-flecha">➡️</div>
-                <div class="flujo-paso">Mostrar en Consola</div>
-                <div class="flujo-flecha">➡️</div>
-                <div class="flujo-paso">Cerrar Archivo</div>
-            </div>
-        </div>
-        <div class="slide">
-            <h2>Comparación de Modos de Archivo</h2>
+
             <table class="comparacion-tabla">
                 <thead>
                     <tr>
-                        <th>Modo</th>
+                        <th>Método</th>
                         <th>Descripción</th>
-                        <th>Permisos</th>
+                        <th>Ejemplo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><code>r</code></td>
-                        <td>Lectura del archivo existente.</td>
-                        <td>Sólo lectura.</td>
+                        <td><code>read()</code></td>
+                        <td>Lee todo el archivo</td>
+                        <td><code>contenido = archivo.read()</code></td>
                     </tr>
                     <tr>
-                        <td><code>w</code></td>
-                        <td>Escritura, crea o sobrescribe el archivo.</td>
-                        <td>Lectura y escritura.</td>
+                        <td><code>readline()</code></td>
+                        <td>Lee una línea</td>
+                        <td><code>linea = archivo.readline()</code></td>
                     </tr>
                     <tr>
-                        <td><code>a</code></td>
-                        <td>Añade contenido al final del archivo.</td>
-                        <td>Lectura y escritura.</td>
+                        <td><code>readlines()</code></td>
+                        <td>Lee todas las líneas en lista</td>
+                        <td><code>lineas = archivo.readlines()</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>write()</code></td>
+                        <td>Escribe texto</td>
+                        <td><code>archivo.write("Hola")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>writelines()</code></td>
+                        <td>Escribe lista de líneas</td>
+                        <td><code>archivo.writelines(lista)</code></td>
                     </tr>
                 </tbody>
             </table>
+        </div>
 
-            <div class="tip">
-                <h4>Consejo</h4>
-                <p>Siempre verifica si el archivo existe antes de abrirlo en modo lectura para evitar errores.</p>
-            </div>  
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
 
-            <div class="warning">
-                <h4>Advertencia</h4>
-                <p>Usar el modo escritura ('w') sobrescribirá el contenido del archivo. Asegúrate de que es lo que deseas.</p>
+            <div class="paso" data-paso="1">
+                <h4>Importar módulos necesarios y crear función básica</h4>
+                <p>Comenzamos importando datetime para manejar fechas:</p>
+                <div class="codigo-ejemplo">
+<span class="keyword">import</span> datetime
+<span class="keyword">import</span> os
+
+<span class="keyword">def</span> <span class="function">escribir_entrada</span>():
+    <span class="string">"""Permite al usuario escribir una nueva entrada en el diario"""</span>
+    <span class="comment"># Obtener fecha y hora actual</span>
+    <span class="variable">ahora</span> = datetime.datetime.<span class="function">now</span>()
+    <span class="variable">fecha_hora</span> = <span class="variable">ahora</span>.<span class="function">strftime</span>(<span class="string">"%Y-%m-%d %H:%M"</span>)
+    
+    <span class="comment"># Solicitar entrada al usuario</span>
+    <span class="function">print</span>(<span class="string">"\n📝 NUEVA ENTRADA DE DIARIO"</span>)
+    <span class="function">print</span>(<span class="string">f"Fecha: {fecha_hora}"</span>)
+    <span class="function">print</span>(<span class="string">"-"</span> * <span class="number">40</span>)
+    
+    <span class="variable">entrada</span> = <span class="function">input</span>(<span class="string">"¿Qué pasó hoy? "</span>)
+    
+    <span class="comment"># Escribir en el archivo</span>
+    <span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"mi_diario.txt"</span>, <span class="string">"a"</span>, <span class="variable">encoding</span>=<span class="string">"utf-8"</span>) <span class="keyword">as</span> <span class="variable">archivo</span>:
+        <span class="variable">archivo</span>.<span class="function">write</span>(<span class="string">f"\n{'='*50}\n"</span>)
+        <span class="variable">archivo</span>.<span class="function">write</span>(<span class="string">f"📅 {fecha_hora}\n"</span>)
+        <span class="variable">archivo</span>.<span class="function">write</span>(<span class="string">f"{entrada}\n"</span>)
+    
+    <span class="function">print</span>(<span class="string">"✅ Entrada guardada exitosamente!"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Crear función para leer el diario</h4>
+                <p>Función que muestra todas las entradas anteriores:</p>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">leer_diario</span>():
+    <span class="string">"""Lee y muestra todas las entradas del diario"""</span>
+    <span class="keyword">try</span>:
+        <span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"mi_diario.txt"</span>, <span class="string">"r"</span>, <span class="variable">encoding</span>=<span class="string">"utf-8"</span>) <span class="keyword">as</span> <span class="variable">archivo</span>:
+            <span class="variable">contenido</span> = <span class="variable">archivo</span>.<span class="function">read</span>()
+            
+        <span class="keyword">if</span> <span class="variable">contenido</span>.<span class="function">strip</span>():
+            <span class="function">print</span>(<span class="string">"\n📖 TU DIARIO PERSONAL 📖"</span>)
+            <span class="function">print</span>(<span class="variable">contenido</span>)
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">"\n📭 Tu diario está vacío. ¡Escribe tu primera entrada!"</span>)
+            
+    <span class="keyword">except</span> <span class="function">FileNotFoundError</span>:
+        <span class="function">print</span>(<span class="string">"\n📭 No tienes un diario aún. ¡Crea tu primera entrada!"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Agregar función de búsqueda</h4>
+                <p>Permite buscar entradas por fecha o palabra clave:</p>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">buscar_en_diario</span>():
+    <span class="string">"""Busca entradas que contengan una palabra clave"""</span>
+    <span class="keyword">try</span>:
+        <span class="variable">palabra</span> = <span class="function">input</span>(<span class="string">"¿Qué palabra quieres buscar? "</span>).<span class="function">lower</span>()
+        
+        <span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"mi_diario.txt"</span>, <span class="string">"r"</span>, <span class="variable">encoding</span>=<span class="string">"utf-8"</span>) <span class="keyword">as</span> <span class="variable">archivo</span>:
+            <span class="variable">lineas</span> = <span class="variable">archivo</span>.<span class="function">readlines</span>()
+        
+        <span class="function">print</span>(<span class="string">f"\n🔍 Buscando '{palabra}'..."</span>)
+        <span class="variable">encontrado</span> = <span class="keyword">False</span>
+        <span class="variable">entrada_actual</span> = []
+        
+        <span class="keyword">for</span> <span class="variable">linea</span> <span class="keyword">in</span> <span class="variable">lineas</span>:
+            <span class="keyword">if</span> <span class="variable">linea</span>.<span class="function">startswith</span>(<span class="string">"="</span> * <span class="number">50</span>):
+                <span class="comment"># Nueva entrada encontrada</span>
+                <span class="keyword">if</span> <span class="variable">entrada_actual</span> <span class="keyword">and</span> <span class="keyword">any</span>(<span class="variable">palabra</span> <span class="keyword">in</span> <span class="variable">l</span>.<span class="function">lower</span>() <span class="keyword">for</span> <span class="variable">l</span> <span class="keyword">in</span> <span class="variable">entrada_actual</span>):
+                    <span class="variable">encontrado</span> = <span class="keyword">True</span>
+                    <span class="function">print</span>(<span class="string">"\n"</span> + <span class="string">"="</span> * <span class="number">50</span>)
+                    <span class="keyword">for</span> <span class="variable">l</span> <span class="keyword">in</span> <span class="variable">entrada_actual</span>:
+                        <span class="function">print</span>(<span class="variable">l</span>, <span class="variable">end</span>=<span class="string">""</span>)
+                <span class="variable">entrada_actual</span> = [<span class="variable">linea</span>]
+            <span class="keyword">else</span>:
+                <span class="variable">entrada_actual</span>.<span class="function">append</span>(<span class="variable">linea</span>)
+        
+        <span class="comment"># Verificar última entrada</span>
+        <span class="keyword">if</span> <span class="variable">entrada_actual</span> <span class="keyword">and</span> <span class="keyword">any</span>(<span class="variable">palabra</span> <span class="keyword">in</span> <span class="variable">l</span>.<span class="function">lower</span>() <span class="keyword">for</span> <span class="variable">l</span> <span class="keyword">in</span> <span class="variable">entrada_actual</span>):
+            <span class="variable">encontrado</span> = <span class="keyword">True</span>
+            <span class="function">print</span>(<span class="string">"\n"</span> + <span class="string">"="</span> * <span class="number">50</span>)
+            <span class="keyword">for</span> <span class="variable">l</span> <span class="keyword">in</span> <span class="variable">entrada_actual</span>:
+                <span class="function">print</span>(<span class="variable">l</span>, <span class="variable">end</span>=<span class="string">""</span>)
+        
+        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">encontrado</span>:
+            <span class="function">print</span>(<span class="string">f"No se encontraron entradas con '{palabra}'"</span>)
+            
+    <span class="keyword">except</span> <span class="function">FileNotFoundError</span>:
+        <span class="function">print</span>(<span class="string">"❌ No hay diario para buscar"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Crear funciones adicionales y menú principal</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">estadisticas_diario</span>():
+    <span class="string">"""Muestra estadísticas del diario"""</span>
+    <span class="keyword">try</span>:
+        <span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"mi_diario.txt"</span>, <span class="string">"r"</span>, <span class="variable">encoding</span>=<span class="string">"utf-8"</span>) <span class="keyword">as</span> <span class="variable">archivo</span>:
+            <span class="variable">contenido</span> = <span class="variable">archivo</span>.<span class="function">read</span>()
+            <span class="variable">lineas</span> = <span class="variable">contenido</span>.<span class="function">split</span>(<span class="string">'\n'</span>)
+        
+        <span class="comment"># Contar entradas</span>
+        <span class="variable">num_entradas</span> = <span class="variable">contenido</span>.<span class="function">count</span>(<span class="string">"="</span> * <span class="number">50</span>)
+        <span class="variable">num_palabras</span> = <span class="function">len</span>(<span class="variable">contenido</span>.<span class="function">split</span>())
+        
+        <span class="function">print</span>(<span class="string">"\n📊 ESTADÍSTICAS DE TU DIARIO"</span>)
+        <span class="function">print</span>(<span class="string">"="</span> * <span class="number">30</span>)
+        <span class="function">print</span>(<span class="string">f"📝 Total de entradas: {num_entradas}"</span>)
+        <span class="function">print</span>(<span class="string">f"📖 Total de palabras: {num_palabras}"</span>)
+        <span class="function">print</span>(<span class="string">f"📏 Promedio palabras/entrada: {num_palabras//num_entradas if num_entradas > 0 else 0}"</span>)
+        
+        <span class="comment"># Encontrar palabras más comunes</span>
+        <span class="variable">palabras</span> = <span class="variable">contenido</span>.<span class="function">lower</span>().<span class="function">split</span>()
+        <span class="variable">frecuencia</span> = {}
+        <span class="keyword">for</span> <span class="variable">palabra</span> <span class="keyword">in</span> <span class="variable">palabras</span>:
+            <span class="keyword">if</span> <span class="function">len</span>(<span class="variable">palabra</span>) > <span class="number">4</span>:  <span class="comment"># Solo palabras significativas</span>
+                <span class="variable">frecuencia</span>[<span class="variable">palabra</span>] = <span class="variable">frecuencia</span>.<span class="function">get</span>(<span class="variable">palabra</span>, <span class="number">0</span>) + <span class="number">1</span>
+        
+        <span class="variable">top_palabras</span> = <span class="function">sorted</span>(<span class="variable">frecuencia</span>.<span class="function">items</span>(), <span class="variable">key</span>=<span class="keyword">lambda</span> <span class="variable">x</span>: <span class="variable">x</span>[<span class="number">1</span>], <span class="variable">reverse</span>=<span class="keyword">True</span>)[:<span class="number">5</span>]
+        
+        <span class="function">print</span>(<span class="string">"\n🔝 Palabras más frecuentes:"</span>)
+        <span class="keyword">for</span> <span class="variable">palabra</span>, <span class="variable">freq</span> <span class="keyword">in</span> <span class="variable">top_palabras</span>:
+            <span class="function">print</span>(<span class="string">f"  • {palabra}: {freq} veces"</span>)
+            
+    <span class="keyword">except</span> <span class="function">FileNotFoundError</span>:
+        <span class="function">print</span>(<span class="string">"❌ No hay diario para analizar"</span>)
+
+<span class="keyword">def</span> <span class="function">exportar_diario</span>():
+    <span class="string">"""Exporta el diario con formato especial"""</span>
+    <span class="keyword">try</span>:
+        <span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"mi_diario.txt"</span>, <span class="string">"r"</span>, <span class="variable">encoding</span>=<span class="string">"utf-8"</span>) <span class="keyword">as</span> <span class="variable">archivo</span>:
+            <span class="variable">contenido</span> = <span class="variable">archivo</span>.<span class="function">read</span>()
+        
+        <span class="variable">fecha_export</span> = datetime.datetime.<span class="function">now</span>().<span class="function">strftime</span>(<span class="string">"%Y%m%d_%H%M%S"</span>)
+        <span class="variable">nombre_export</span> = <span class="string">f"diario_exportado_{fecha_export}.txt"</span>
+        
+        <span class="with-keyword">with</span> <span class="function">open</span>(<span class="variable">nombre_export</span>, <span class="string">"w"</span>, <span class="variable">encoding</span>=<span class="string">"utf-8"</span>) <span class="keyword">as</span> <span class="variable">archivo</span>:
+            <span class="variable">archivo</span>.<span class="function">write</span>(<span class="string">"📔 MI DIARIO PERSONAL - EXPORTACIÓN\n"</span>)
+            <span class="variable">archivo</span>.<span class="function">write</span>(<span class="string">f"Exportado el: {datetime.datetime.now().strftime('%d/%m/%Y %H:%M')}\n"</span>)
+            <span class="variable">archivo</span>.<span class="function">write</span>(<span class="string">"="</span> * <span class="number">60</span> + <span class="string">"\n"</span>)
+            <span class="variable">archivo</span>.<span class="function">write</span>(<span class="variable">contenido</span>)
+        
+        <span class="function">print</span>(<span class="string">f"✅ Diario exportado como: {nombre_export}"</span>)
+        
+    <span class="keyword">except</span> <span class="function">FileNotFoundError</span>:
+        <span class="function">print</span>(<span class="string">"❌ No hay diario para exportar"</span>)
+                </div>
             </div>
         </div>
+
         <div class="slide">
-            <h2>Ejercicio Propuesto</h2>
-            <div class="ejercicio-propuesto">
-                <p>Escribe un programa que permita al usuario agregar entradas a su diario personal. El programa debe:</p>
-                <ul>
-                    <li>Pedir al usuario la fecha y el contenido de la entrada.</li>
-                    <li>Guardar la entrada en un archivo llamado <code>mi_diario.txt</code>.</li>
-                    <li>Permitir al usuario leer todas las entradas guardadas.</li>
-                </ul>
-                <p>Utiliza excepciones para manejar posibles errores al abrir o escribir en el archivo.</p>
+            <h2>📝 Programa Completo del Diario Digital</h2>
+            
+            <div class="codigo-ejemplo">
+<span class="keyword">import</span> datetime
+<span class="keyword">import</span> os
+
+<span class="function">print</span>(<span class="string">"📔 DIARIO DIGITAL PERSONAL 📔"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">30</span>)
+
+<span class="comment"># [Incluir todas las funciones aquí]</span>
+
+<span class="keyword">def</span> <span class="function">menu_principal</span>():
+    <span class="string">"""Muestra el menú principal y gestiona las opciones"""</span>
+    <span class="keyword">while</span> <span class="keyword">True</span>:
+        <span class="function">print</span>(<span class="string">"\n📋 MENÚ PRINCIPAL"</span>)
+        <span class="function">print</span>(<span class="string">"1. ✍️  Escribir nueva entrada"</span>)
+        <span class="function">print</span>(<span class="string">"2. 📖 Leer diario completo"</span>)
+        <span class="function">print</span>(<span class="string">"3. 🔍 Buscar en el diario"</span>)
+        <span class="function">print</span>(<span class="string">"4. 📊 Ver estadísticas"</span>)
+        <span class="function">print</span>(<span class="string">"5. 💾 Exportar diario"</span>)
+        <span class="function">print</span>(<span class="string">"6. 🗑️  Borrar diario (¡cuidado!)"</span>)
+        <span class="function">print</span>(<span class="string">"7. 🚪 Salir"</span>)
+        
+        <span class="variable">opcion</span> = <span class="function">input</span>(<span class="string">"\nElige una opción (1-7): "</span>)
+        
+        <span class="keyword">if</span> <span class="variable">opcion</span> == <span class="string">"1"</span>:
+            <span class="function">escribir_entrada</span>()
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"2"</span>:
+            <span class="function">leer_diario</span>()
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"3"</span>:
+            <span class="function">buscar_en_diario</span>()
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"4"</span>:
+            <span class="function">estadisticas_diario</span>()
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"5"</span>:
+            <span class="function">exportar_diario</span>()
+            
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"6"</span>:
+            <span class="variable">confirmar</span> = <span class="function">input</span>(<span class="string">"⚠️  ¿Estás seguro? (s/n): "</span>)
+            <span class="keyword">if</span> <span class="variable">confirmar</span>.<span class="function">lower</span>() == <span class="string">'s'</span>:
+                <span class="keyword">try</span>:
+                    os.<span class="function">remove</span>(<span class="string">"mi_diario.txt"</span>)
+                    <span class="function">print</span>(<span class="string">"🗑️  Diario eliminado"</span>)
+                <span class="keyword">except</span> <span class="function">FileNotFoundError</span>:
+                    <span class="function">print</span>(<span class="string">"No hay diario para eliminar"</span>)
+                    
+        <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"7"</span>:
+            <span class="function">print</span>(<span class="string">"\n👋 ¡Hasta luego! No olvides escribir en tu diario."</span>)
+            <span class="keyword">break</span>
+            
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">"❌ Opción no válida"</span>)
+        
+        <span class="function">input</span>(<span class="string">"\n[Presiona Enter para continuar...]"</span>)
+
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    <span class="function">menu_principal</span>()
             </div>
-            <h3>Ejemplo de Código</h3>
-            <div class="menu-ejemplo">
-                <pre>
+
+            <div class="archivo-visual">
+                <p>2024-11-15 14:30: Hoy aprendí a manejar archivos en Python. ¡Es increíble poder guardar información permanentemente!</p>
+                <p>=================================================</p>
+                <p>📅 2024-11-16 09:15</p>
+                <p>Creé mi primer diario digital. Me siento como un verdadero programador.</p>
+                <p>=================================================</p>
+                <p>📅 2024-11-17 20:45</p>
+                <p>Agregué funciones de búsqueda y estadísticas. Python es más poderoso de lo que pensaba.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🔍 Características Avanzadas del Programa</h2>
+            
+            <div class="teoria">
+                <h4>Manejo de Errores</h4>
+                <p>El programa maneja graciosamente situaciones de error comunes:</p>
+                
+                <div class="codigo-ejemplo">
 <span class="keyword">try</span>:
-    diario = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'a'</span>)
-    fecha = <span class="function">input</span>(<span class="string">'Ingrese la fecha (YYYY-MM-DD): '</span>)
-    contenido = <span class="function">input</span>(<span class="string">'Ingrese el contenido de la entrada: '</span>)
-    diario.<span class="function">write</span>(<span class="string">'Fecha: '</span> + fecha + <span class="string'>', Contenido: '</span> + contenido + <span class="string'>\\n'</span>)
-    diario.<span class="function">close</span>()
-    diario = <span class="function">open</span>(<span class="string">'mi_diario.txt'</span>, <span class="string">'r'</span>)
-    print(<span class="string">'Contenido del diario:'</span>)
-    <span class="function">print</span>(diario.<span class="function">read</span>())
-    diario.<span class="function">close</span>()
-<span class="keyword">except</span> <span class="function">Exception</span> as e:
-    <span class="function">print</span>(<span class="string">'Error al manejar el archivo:'</span>, e)
-                </pre>
+    <span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"archivo.txt"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> <span class="variable">f</span>:
+        <span class="variable">contenido</span> = <span class="variable">f</span>.<span class="function">read</span>()
+<span class="keyword">except</span> <span class="function">FileNotFoundError</span>:
+    <span class="function">print</span>(<span class="string">"El archivo no existe"</span>)
+<span class="keyword">except</span> <span class="function">PermissionError</span>:
+    <span class="function">print</span>(<span class="string">"No tienes permisos para leer este archivo"</span>)
+<span class="keyword">except</span> <span class="function">UnicodeDecodeError</span>:
+    <span class="function">print</span>(<span class="string">"Error al decodificar el archivo"</span>)
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>Codificación UTF-8</h4>
+                <p>Importante para manejar caracteres especiales y emojis:</p>
+                
+                <div class="codigo-ejemplo">
+<span class="comment"># Sin encoding - puede fallar con acentos y emojis</span>
+<span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"archivo.txt"</span>, <span class="string">"w"</span>) <span class="keyword">as</span> <span class="variable">f</span>:
+    <span class="variable">f</span>.<span class="function">write</span>(<span class="string">"Año"</span>)  <span class="comment"># Puede causar error</span>
+
+<span class="comment"># Con encoding UTF-8 - funciona con todos los caracteres</span>
+<span class="with-keyword">with</span> <span class="function">open</span>(<span class="string">"archivo.txt"</span>, <span class="string">"w"</span>, <span class="variable">encoding</span>=<span class="string">"utf-8"</span>) <span class="keyword">as</span> <span class="variable">f</span>:
+    <span class="variable">f</span>.<span class="function">write</span>(<span class="string">"Año 📅 ñ á é í ó ú"</span>)  <span class="comment"># Funciona perfectamente</span>
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>Formateo de Fechas con strftime</h4>
+                <table class="comparacion-tabla">
+                    <thead>
+                        <tr>
+                            <th>Código</th>
+                            <th>Significado</th>
+                            <th>Ejemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>%Y</code></td>
+                            <td>Año completo</td>
+                            <td>2024</td>
+                        </tr>
+                        <tr>
+                            <td><code>%m</code></td>
+                            <td>Mes (01-12)</td>
+                            <td>11</td>
+                        </tr>
+                        <tr>
+                            <td><code>%d</code></td>
+                            <td>Día (01-31)</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td><code>%H</code></td>
+                            <td>Hora (00-23)</td>
+                            <td>14</td>
+                        </tr>
+                        <tr>
+                            <td><code>%M</code></td>
+                            <td>Minutos (00-59)</td>
+                            <td>30</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios de Práctica</h2>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 1: Diario con Categorías</h4>
+                <p>Mejora el diario agregando categorías a las entradas:</p>
+                <ul>
+                    <li>Personal, Trabajo, Ideas, Sueños, etc.</li>
+                    <li>Filtrar entradas por categoría</li>
+                    <li>Estadísticas por categoría</li>
+                    <li>Usar colores diferentes para cada categoría</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 2: Diario Multimedia</h4>
+                <p>Expande el diario para incluir más tipos de contenido:</p>
+                <ul>
+                    <li>Enlaces a fotos (guardar rutas)</li>
+                    <li>Estado de ánimo con emojis</li>
+                    <li>Clima del día</li>
+                    <li>Ubicación</li>
+                    <li>Etiquetas (tags) para organizar</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 3: Sistema de Backup</h4>
+                <p>Implementa seguridad para el diario:</p>
+                <ul>
+                    <li>Backup automático diario</li>
+                    <li>Encriptación básica con contraseña</li>
+                    <li>Recuperar entradas eliminadas</li>
+                    <li>Historial de cambios</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Desafío Extra: Blog Personal</h4>
+                <p>Convierte el diario en un generador de blog:</p>
+                <ul>
+                    <li>Exportar a HTML con formato bonito</li>
+                    <li>Generar índice de entradas</li>
+                    <li>Crear páginas mensuales</li>
+                    <li>Sistema de comentarios</li>
+                    <li>RSS feed generator</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>⚠️ Consideraciones de Seguridad</h2>
+            
+            <div class="warning">
+                <strong>Archivos y Seguridad:</strong>
+                <ul>
+                    <li>❌ Nunca guardes contraseñas en texto plano</li>
+                    <li>❌ Cuidado con rutas de archivos de usuarios</li>
+                    <li>❌ No ejecutes código desde archivos externos</li>
+                    <li>❌ Valida siempre los nombres de archivo</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>Buenas Prácticas con Archivos</h4>
+                <ul>
+                    <li>✅ Siempre usa <code>with</code> para abrir archivos</li>
+                    <li>✅ Especifica encoding explícitamente</li>
+                    <li>✅ Maneja excepciones apropiadamente</li>
+                    <li>✅ Valida datos antes de escribir</li>
+                    <li>✅ Crea backups de archivos importantes</li>
+                    <li>✅ Usa rutas relativas cuando sea posible</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Consejo Pro:</strong> Para aplicaciones más complejas, considera usar bases de datos (SQLite) en lugar de archivos de texto. Python incluye SQLite por defecto y es perfecto para aplicaciones personales.
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Resumen y Conceptos Clave</h2>
+            
+            <div class="teoria">
+                <h4>Lo que aprendiste en este ejercicio:</h4>
+                <ul>
+                    <li>✅ Abrir archivos con <code>open()</code></li>
+                    <li>✅ Usar <code>with</code> para manejo seguro de archivos</li>
+                    <li>✅ Diferentes modos de apertura (r, w, a)</li>
+                    <li>✅ Leer archivos completos y por líneas</li>
+                    <li>✅ Escribir y agregar contenido a archivos</li>
+                    <li>✅ Manejar excepciones de archivos</li>
+                    <li>✅ Trabajar con fechas usando datetime</li>
+                    <li>✅ Importancia del encoding UTF-8</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>Aplicaciones del Manejo de Archivos</h4>
+                <p>El manejo de archivos es fundamental para:</p>
+                <ul>
+                    <li>📊 <strong>Análisis de datos</strong> (CSV, logs)</li>
+                    <li>⚙️ <strong>Configuración de aplicaciones</strong></li>
+                    <li>📝 <strong>Generación de reportes</strong></li>
+                    <li>🎮 <strong>Guardar progreso en juegos</strong></li>
+                    <li>🌐 <strong>Procesamiento de páginas web</strong></li>
+                    <li>🤖 <strong>Machine Learning</strong> (datasets)</li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Próximo paso:</strong> Ahora que sabes manejar archivos de texto, el siguiente paso es aprender a trabajar con otros formatos como CSV, JSON y XML. También exploraremos cómo crear aplicaciones con interfaces gráficas que faciliten la interacción con archivos.
             </div>
         </div>
     </div>
 </body>
 </html>
-        
-
-
-
-

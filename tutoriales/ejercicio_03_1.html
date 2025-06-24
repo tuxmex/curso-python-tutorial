@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 3.2: El Detector de Números Mágicos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: magicGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes magicGlow {
+            from {
+                text-shadow: 0 0 10px rgba(255,255,255,0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,255,255,0.6);
+            }
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: slideIn 0.8s ease-out;
+        }
+        
+        .slide h2 {
+            color: #6a11cb;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2575fc;
+        }
+        
+        .slide h3 {
+            color: #2575fc;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #f0f4ff;
+            border-left: 5px solid #6a11cb;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #6a11cb;
+            margin-bottom: 10px;
+        }
+        
+        .numero-magico {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .operadores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .operador-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .operador-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #6a11cb;
+        }
+        
+        .operador-card .simbolo {
+            font-size: 2em;
+            color: #6a11cb;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .operador-card .nombre {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .operador-card .ejemplo {
+            color: #666;
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #6a11cb;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .number {
+            color: #B5CEA8;
+        }
+        
+        .operator {
+            color: #D4D4D4;
+            font-weight: bold;
+        }
+        
+        .boolean {
+            color: #569CD6;
+        }
+        
+        .paso {
+            background: #f0f8ff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #4169e1;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4169e1;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .tabla-operadores {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .tabla-operadores th {
+            background: #6a11cb;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+        }
+        
+        .tabla-operadores td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tabla-operadores tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .tabla-operadores code {
+            background: #e9ecef;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #e83e8c;
+        }
+        
+        .resultado-magico {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: #333;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(250,112,154,0.3);
+        }
+        
+        .tip {
+            background: #fffbf0;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .warning {
+            background: #fff5f5;
+            border: 2px solid #dc3545;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .tabla-verdad {
+            background: white;
+            border: 2px solid #6a11cb;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .tabla-verdad table {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .tabla-verdad th {
+            background: #6a11cb;
+            color: white;
+            padding: 10px;
+            border: 1px solid #6a11cb;
+        }
+        
+        .tabla-verdad td {
+            padding: 10px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .true {
+            background: #d4edda;
+            color: #155724;
+            font-weight: bold;
+        }
+        
+        .false {
+            background: #f8d7da;
+            color: #721c24;
+            font-weight: bold;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔮 El Detector de Números Mágicos</h1>
+            <p>Módulo 3: Operadores y Expresiones - Ejercicio 3.2</p>
+        </div>
+
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Dominar los operadores de comparación y lógicos en Python creando un programa que detecte si un número cumple con condiciones "mágicas". Los estudiantes aprenderán a combinar múltiples condiciones usando operadores booleanos y a crear expresiones lógicas complejas de manera divertida.
+            </div>
+
+            <h3>🧮 ¿Qué son los Operadores?</h3>
+            
+            <div class="teoria">
+                <h4>Los Operadores: Las Herramientas del Programador</h4>
+                <p>Los operadores son símbolos especiales que realizan operaciones con valores y variables. Son como las herramientas matemáticas y lógicas que usa Python:</p>
+                <ul>
+                    <li>🔢 <strong>Aritméticos:</strong> Para hacer cálculos matemáticos</li>
+                    <li>⚖️ <strong>Comparación:</strong> Para comparar valores</li>
+                    <li>🧩 <strong>Lógicos:</strong> Para combinar condiciones</li>
+                    <li>📦 <strong>Asignación:</strong> Para guardar valores</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <div class="numero-magico">42</div>
+                <div class="numero-magico" style="animation-delay: 0.5s;">7</div>
+                <div class="numero-magico" style="animation-delay: 1s;">13</div>
+                <div class="numero-magico" style="animation-delay: 1.5s;">99</div>
+            </div>
+
+            <div class="teoria">
+                <h4>¿Qué hace a un número "mágico"?</h4>
+                <p>En nuestro programa, un número será mágico si cumple ciertas condiciones especiales que definiremos usando operadores. ¡Es como crear hechizos matemáticos!</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>⚖️ Operadores de Comparación</h2>
+            
+            <div class="operadores-grid">
+                <div class="operador-card">
+                    <div class="simbolo">==</div>
+                    <div class="nombre">Igual a</div>
+                    <div class="ejemplo">5 == 5 → True</div>
+                </div>
+                
+                <div class="operador-card">
+                    <div class="simbolo">!=</div>
+                    <div class="nombre">Diferente de</div>
+                    <div class="ejemplo">5 != 3 → True</div>
+                </div>
+                
+                <div class="operador-card">
+                    <div class="simbolo">&gt;</div>
+                    <div class="nombre">Mayor que</div>
+                    <div class="ejemplo">5 &gt; 3 → True</div>
+                </div>
+                
+                <div class="operador-card">
+                    <div class="simbolo">&lt;</div>
+                    <div class="nombre">Menor que</div>
+                    <div class="ejemplo">5 &lt; 3 → False</div>
+                </div>
+                
+                <div class="operador-card">
+                    <div class="simbolo">&gt;=</div>
+                    <div class="nombre">Mayor o igual</div>
+                    <div class="ejemplo">5 &gt;= 5 → True</div>
+                </div>
+                
+                <div class="operador-card">
+                    <div class="simbolo">&lt;=</div>
+                    <div class="nombre">Menor o igual</div>
+                    <div class="ejemplo">5 &lt;= 6 → True</div>
+                </div>
+            </div>
+
+            <div class="codigo-ejemplo">
+<span class="comment"># Ejemplos de comparaciones</span>
+<span class="variable">edad</span> <span class="operator">=</span> <span class="number">18</span>
+<span class="variable">temperatura</span> <span class="operator">=</span> <span class="number">25.5</span>
+
+<span class="comment"># Comparaciones simples</span>
+<span class="function">print</span>(<span class="variable">edad</span> <span class="operator">==</span> <span class="number">18</span>)      <span class="comment"># True</span>
+<span class="function">print</span>(<span class="variable">edad</span> <span class="operator">!=</span> <span class="number">21</span>)      <span class="comment"># True</span>
+<span class="function">print</span>(<span class="variable">edad</span> <span class="operator">>=</span> <span class="number">18</span>)     <span class="comment"># True</span>
+<span class="function">print</span>(<span class="variable">temperatura</span> <span class="operator">></span> <span class="number">30</span>) <span class="comment"># False</span>
+
+<span class="comment"># Las comparaciones devuelven True o False</span>
+<span class="variable">es_mayor_edad</span> <span class="operator">=</span> <span class="variable">edad</span> <span class="operator">>=</span> <span class="number">18</span>
+<span class="function">print</span>(<span class="string">f"¿Es mayor de edad? {es_mayor_edad}"</span>)  <span class="comment"># True</span>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🧩 Operadores Lógicos</h2>
+            
+            <div class="teoria">
+                <h4>Los Conectores de Condiciones</h4>
+                <p>Los operadores lógicos nos permiten combinar múltiples condiciones:</p>
+            </div>
+
+            <table class="tabla-operadores">
+                <thead>
+                    <tr>
+                        <th>Operador</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                        <th>Resultado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>and</code></td>
+                        <td>Ambas condiciones deben ser True</td>
+                        <td><code>True and True</code></td>
+                        <td class="true">True</td>
+                    </tr>
+                    <tr>
+                        <td><code>and</code></td>
+                        <td>Si una es False, todo es False</td>
+                        <td><code>True and False</code></td>
+                        <td class="false">False</td>
+                    </tr>
+                    <tr>
+                        <td><code>or</code></td>
+                        <td>Al menos una debe ser True</td>
+                        <td><code>True or False</code></td>
+                        <td class="true">True</td>
+                    </tr>
+                    <tr>
+                        <td><code>or</code></td>
+                        <td>Solo False si ambas son False</td>
+                        <td><code>False or False</code></td>
+                        <td class="false">False</td>
+                    </tr>
+                    <tr>
+                        <td><code>not</code></td>
+                        <td>Invierte el valor</td>
+                        <td><code>not True</code></td>
+                        <td class="false">False</td>
+                    </tr>
+                    <tr>
+                        <td><code>not</code></td>
+                        <td>Invierte el valor</td>
+                        <td><code>not False</code></td>
+                        <td class="true">True</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tabla-verdad">
+                <h4>📊 Tablas de Verdad</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>A</th>
+                            <th>B</th>
+                            <th>A and B</th>
+                            <th>A or B</th>
+                            <th>not A</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="true">True</td>
+                            <td class="true">True</td>
+                            <td class="true">True</td>
+                            <td class="true">True</td>
+                            <td class="false">False</td>
+                        </tr>
+                        <tr>
+                            <td class="true">True</td>
+                            <td class="false">False</td>
+                            <td class="false">False</td>
+                            <td class="true">True</td>
+                            <td class="false">False</td>
+                        </tr>
+                        <tr>
+                            <td class="false">False</td>
+                            <td class="true">True</td>
+                            <td class="false">False</td>
+                            <td class="true">True</td>
+                            <td class="true">True</td>
+                        </tr>
+                        <tr>
+                            <td class="false">False</td>
+                            <td class="false">False</td>
+                            <td class="false">False</td>
+                            <td class="false">False</td>
+                            <td class="true">True</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🧮 Operadores Aritméticos y Módulo</h2>
+            
+            <div class="teoria">
+                <h4>El Operador Módulo (%)</h4>
+                <p>El operador módulo es especialmente útil para detectar propiedades de números:</p>
+            </div>
+
+            <div class="operadores-grid">
+                <div class="operador-card">
+                    <div class="simbolo">%</div>
+                    <div class="nombre">Módulo (resto)</div>
+                    <div class="ejemplo">10 % 3 → 1</div>
+                </div>
+                
+                <div class="operador-card">
+                    <div class="simbolo">//</div>
+                    <div class="nombre">División entera</div>
+                    <div class="ejemplo">10 // 3 → 3</div>
+                </div>
+                
+                <div class="operador-card">
+                    <div class="simbolo">**</div>
+                    <div class="nombre">Potencia</div>
+                    <div class="ejemplo">2 ** 3 → 8</div>
+                </div>
+            </div>
+
+            <div class="codigo-ejemplo">
+<span class="comment"># Usos comunes del operador módulo</span>
+<span class="variable">numero</span> <span class="operator">=</span> <span class="number">15</span>
+
+<span class="comment"># Verificar si es par o impar</span>
+<span class="variable">es_par</span> <span class="operator">=</span> <span class="variable">numero</span> <span class="operator">%</span> <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span>
+<span class="function">print</span>(<span class="string">f"{numero} es par: {es_par}"</span>)  <span class="comment"># False</span>
+
+<span class="comment"># Verificar si es divisible por 3</span>
+<span class="variable">divisible_3</span> <span class="operator">=</span> <span class="variable">numero</span> <span class="operator">%</span> <span class="number">3</span> <span class="operator">==</span> <span class="number">0</span>
+<span class="function">print</span>(<span class="string">f"{numero} es divisible por 3: {divisible_3}"</span>)  <span class="comment"># True</span>
+
+<span class="comment"># Verificar si es múltiplo de 5</span>
+<span class="variable">multiplo_5</span> <span class="operator">=</span> <span class="variable">numero</span> <span class="operator">%</span> <span class="number">5</span> <span class="operator">==</span> <span class="number">0</span>
+<span class="function">print</span>(<span class="string">f"{numero} es múltiplo de 5: {multiplo_5}"</span>)  <span class="comment"># True</span>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Definir las condiciones mágicas</h4>
+                <p>Empezamos creando funciones para verificar propiedades especiales:</p>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">es_numero_perfecto</span>(<span class="variable">n</span>):
+    <span class="string">"""Un número es perfecto si la suma de sus divisores propios es igual al número"""</span>
+    <span class="keyword">if</span> <span class="variable">n</span> <span class="operator">&lt;=</span> <span class="number">0</span>:
+        <span class="keyword">return</span> <span class="boolean">False</span>
+    
+    <span class="variable">suma_divisores</span> <span class="operator">=</span> <span class="number">0</span>
+    <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">1</span>, <span class="variable">n</span>):
+        <span class="keyword">if</span> <span class="variable">n</span> <span class="operator">%</span> <span class="variable">i</span> <span class="operator">==</span> <span class="number">0</span>:
+            <span class="variable">suma_divisores</span> <span class="operator">+=</span> <span class="variable">i</span>
+    
+    <span class="keyword">return</span> <span class="variable">suma_divisores</span> <span class="operator">==</span> <span class="variable">n</span>
+
+<span class="keyword">def</span> <span class="function">es_numero_primo</span>(<span class="variable">n</span>):
+    <span class="string">"""Verifica si un número es primo"""</span>
+    <span class="keyword">if</span> <span class="variable">n</span> <span class="operator">&lt;</span> <span class="number">2</span>:
+        <span class="keyword">return</span> <span class="boolean">False</span>
+    
+    <span class="keyword">for</span> <span class="variable">i</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="number">2</span>, <span class="function">int</span>(<span class="variable">n</span> <span class="operator">**</span> <span class="number">0.5</span>) <span class="operator">+</span> <span class="number">1</span>):
+        <span class="keyword">if</span> <span class="variable">n</span> <span class="operator">%</span> <span class="variable">i</span> <span class="operator">==</span> <span class="number">0</span>:
+            <span class="keyword">return</span> <span class="boolean">False</span>
+    
+    <span class="keyword">return</span> <span class="boolean">True</span>
+
+<span class="keyword">def</span> <span class="function">suma_digitos</span>(<span class="variable">n</span>):
+    <span class="string">"""Calcula la suma de los dígitos de un número"""</span>
+    <span class="keyword">return</span> <span class="function">sum</span>(<span class="function">int</span>(<span class="variable">digito</span>) <span class="keyword">for</span> <span class="variable">digito</span> <span class="keyword">in</span> <span class="function">str</span>(<span class="function">abs</span>(<span class="variable">n</span>)))
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Crear el detector principal</h4>
+                <p>Implementamos la lógica para detectar números mágicos:</p>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">detectar_numero_magico</span>(<span class="variable">numero</span>):
+    <span class="string">"""Detecta si un número es mágico según múltiples criterios"""</span>
+    <span class="function">print</span>(<span class="string">f"\n🔮 ANALIZANDO EL NÚMERO {numero}..."</span>)
+    <span class="function">print</span>(<span class="string">"="</span> <span class="operator">*</span> <span class="number">40</span>)
+    
+    <span class="comment"># Verificar propiedades básicas</span>
+    <span class="variable">es_par</span> <span class="operator">=</span> <span class="variable">numero</span> <span class="operator">%</span> <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span>
+    <span class="variable">es_multiplo_3</span> <span class="operator">=</span> <span class="variable">numero</span> <span class="operator">%</span> <span class="number">3</span> <span class="operator">==</span> <span class="number">0</span>
+    <span class="variable">es_multiplo_5</span> <span class="operator">=</span> <span class="variable">numero</span> <span class="operator">%</span> <span class="number">5</span> <span class="operator">==</span> <span class="number">0</span>
+    <span class="variable">es_multiplo_7</span> <span class="operator">=</span> <span class="variable">numero</span> <span class="operator">%</span> <span class="number">7</span> <span class="operator">==</span> <span class="number">0</span>
+    
+    <span class="comment"># Verificar propiedades especiales</span>
+    <span class="variable">es_primo</span> <span class="operator">=</span> <span class="function">es_numero_primo</span>(<span class="variable">numero</span>)
+    <span class="variable">es_perfecto</span> <span class="operator">=</span> <span class="function">es_numero_perfecto</span>(<span class="variable">numero</span>)
+    <span class="variable">suma_dig</span> <span class="operator">=</span> <span class="function">suma_digitos</span>(<span class="variable">numero</span>)
+    <span class="variable">suma_dig_es_par</span> <span class="operator">=</span> <span class="variable">suma_dig</span> <span class="operator">%</span> <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span>
+    
+    <span class="comment"># Mostrar análisis</span>
+    <span class="function">print</span>(<span class="string">f"✓ ¿Es par? {es_par}"</span>)
+    <span class="function">print</span>(<span class="string">f"✓ ¿Es múltiplo de 3? {es_multiplo_3}"</span>)
+    <span class="function">print</span>(<span class="string">f"✓ ¿Es múltiplo de 5? {es_multiplo_5}"</span>)
+    <span class="function">print</span>(<span class="string">f"✓ ¿Es múltiplo de 7? {es_multiplo_7}"</span>)
+    <span class="function">print</span>(<span class="string">f"✓ ¿Es primo? {es_primo}"</span>)
+    <span class="function">print</span>(<span class="string">f"✓ ¿Es perfecto? {es_perfecto}"</span>)
+    <span class="function">print</span>(<span class="string">f"✓ Suma de dígitos: {suma_dig} (par: {suma_dig_es_par})"</span>)
+    
+    <span class="comment"># Definir niveles de magia</span>
+    <span class="variable">nivel_magia</span> <span class="operator">=</span> <span class="number">0</span>
+    <span class="variable">razones</span> <span class="operator">=</span> []
+    
+    <span class="comment"># Número súper mágico (muy raro)</span>
+    <span class="keyword">if</span> <span class="variable">es_perfecto</span>:
+        <span class="variable">nivel_magia</span> <span class="operator">+=</span> <span class="number">100</span>
+        <span class="variable">razones</span>.<span class="function">append</span>(<span class="string">"¡Es un número PERFECTO! ✨"</span>)
+    
+    <span class="comment"># Número primo (especial)</span>
+    <span class="keyword">if</span> <span class="variable">es_primo</span>:
+        <span class="variable">nivel_magia</span> <span class="operator">+=</span> <span class="number">50</span>
+        <span class="variable">razones</span>.<span class="function">append</span>(<span class="string">"Es un número primo 🌟"</span>)
+    
+    <span class="comment"># Combinaciones mágicas</span>
+    <span class="keyword">if</span> <span class="variable">es_par</span> <span class="keyword">and</span> <span class="variable">es_multiplo_3</span> <span class="keyword">and</span> <span class="variable">numero</span> <span class="operator">></span> <span class="number">50</span>:
+        <span class="variable">nivel_magia</span> <span class="operator">+=</span> <span class="number">30</span>
+        <span class="variable">razones</span>.<span class="function">append</span>(<span class="string">"Es par Y múltiplo de 3 Y mayor que 50"</span>)
+    
+    <span class="keyword">if</span> <span class="variable">es_multiplo_5</span> <span class="keyword">and</span> <span class="variable">es_multiplo_7</span>:
+        <span class="variable">nivel_magia</span> <span class="operator">+=</span> <span class="number">25</span>
+        <span class="variable">razones</span>.<span class="function">append</span>(<span class="string">"Es múltiplo de 5 Y de 7"</span>)
+    
+    <span class="keyword">if</span> <span class="variable">suma_dig</span> <span class="operator">==</span> <span class="number">7</span> <span class="keyword">or</span> <span class="variable">suma_dig</span> <span class="operator">==</span> <span class="number">11</span> <span class="keyword">or</span> <span class="variable">suma_dig</span> <span class="operator">==</span> <span class="number">13</span>:
+        <span class="variable">nivel_magia</span> <span class="operator">+=</span> <span class="number">20</span>
+        <span class="variable">razones</span>.<span class="function">append</span>(<span class="string">f"La suma de sus dígitos ({suma_dig}) es mística"</span>)
+    
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">es_par</span> <span class="keyword">and</span> <span class="variable">es_multiplo_3</span> <span class="keyword">and</span> <span class="variable">suma_dig_es_par</span>:
+        <span class="variable">nivel_magia</span> <span class="operator">+=</span> <span class="number">15</span>
+        <span class="variable">razones</span>.<span class="function">append</span>(<span class="string">"Es impar PERO múltiplo de 3 Y suma de dígitos par"</span>)
+    
+    <span class="comment"># Números especiales</span>
+    <span class="keyword">if</span> <span class="variable">numero</span> <span class="keyword">in</span> [<span class="number">7</span>, <span class="number">13</span>, <span class="number">42</span>, <span class="number">69</span>, <span class="number">420</span>, <span class="number">666</span>, <span class="number">777</span>]:
+        <span class="variable">nivel_magia</span> <span class="operator">+=</span> <span class="number">40</span>
+        <span class="variable">razones</span>.<span class="function">append</span>(<span class="string">"Es un número culturalmente mágico"</span>)
+    
+    <span class="keyword">return</span> <span class="variable">nivel_magia</span>, <span class="variable">razones</span>
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Crear la interfaz de usuario</h4>
+                <p>Implementamos el programa principal con un menú interactivo:</p>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">mostrar_resultado_magico</span>(<span class="variable">numero</span>, <span class="variable">nivel_magia</span>, <span class="variable">razones</span>):
+    <span class="string">"""Muestra el resultado del análisis de forma visual"""</span>
+    <span class="function">print</span>(<span class="string">"\n" + "="</span> <span class="operator">*</span> <span class="number">50</span>)
+    
+    <span class="keyword">if</span> <span class="variable">nivel_magia</span> <span class="operator">>=</span> <span class="number">100</span>:
+        <span class="function">print</span>(<span class="string">"🌟✨🔮 ¡NÚMERO LEGENDARIAMENTE MÁGICO! 🔮✨🌟"</span>)
+        <span class="function">print</span>(<span class="string">f"Nivel de magia: {nivel_magia} puntos"</span>)
+    <span class="keyword">elif</span> <span class="variable">nivel_magia</span> <span class="operator">>=</span> <span class="number">50</span>:
+        <span class="function">print</span>(<span class="string">"✨ ¡NÚMERO MUY MÁGICO! ✨"</span>)
+        <span class="function">print</span>(<span class="string">f"Nivel de magia: {nivel_magia} puntos"</span>)
+    <span class="keyword">elif</span> <span class="variable">nivel_magia</span> <span class="operator">></span> <span class="number">0</span>:
+        <span class="function">print</span>(<span class="string">"🌙 Número con propiedades mágicas"</span>)
+        <span class="function">print</span>(<span class="string">f"Nivel de magia: {nivel_magia} puntos"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">"😔 Número ordinario (no mágico)"</span>)
+    
+    <span class="keyword">if</span> <span class="variable">razones</span>:
+        <span class="function">print</span>(<span class="string">"\n📜 Razones mágicas:"</span>)
+        <span class="keyword">for</span> <span class="variable">razon</span> <span class="keyword">in</span> <span class="variable">razones</span>:
+            <span class="function">print</span>(<span class="string">f"  • {razon}"</span>)
+    
+    <span class="function">print</span>(<span class="string">"="</span> <span class="operator">*</span> <span class="number">50</span>)
+
+<span class="keyword">def</span> <span class="function">juego_adivina_magico</span>():
+    <span class="string">"""Mini-juego: encuentra un número mágico"""</span>
+    <span class="keyword">import</span> random
+    
+    <span class="function">print</span>(<span class="string">"\n🎮 JUEGO: ¡ENCUENTRA EL NÚMERO MÁGICO!"</span>)
+    <span class="function">print</span>(<span class="string">"Tienes que encontrar un número con nivel de magia > 30"</span>)
+    
+    <span class="variable">intentos</span> <span class="operator">=</span> <span class="number">0</span>
+    <span class="variable">encontrado</span> <span class="operator">=</span> <span class="boolean">False</span>
+    
+    <span class="keyword">while</span> <span class="keyword">not</span> <span class="variable">encontrado</span> <span class="keyword">and</span> <span class="variable">intentos</span> <span class="operator">&lt;</span> <span class="number">10</span>:
+        <span class="variable">intento</span> <span class="operator">=</span> <span class="function">int</span>(<span class="function">input</span>(<span class="string">f"\nIntento {intentos + 1}/10: "</span>))
+        <span class="variable">nivel</span>, <span class="variable">_</span> <span class="operator">=</span> <span class="function">detectar_numero_magico</span>(<span class="variable">intento</span>)
+        
+        <span class="keyword">if</span> <span class="variable">nivel</span> <span class="operator">></span> <span class="number">30</span>:
+            <span class="function">print</span>(<span class="string">f"🎉 ¡FELICIDADES! Encontraste un número mágico con {nivel} puntos"</span>)
+            <span class="variable">encontrado</span> <span class="operator">=</span> <span class="boolean">True</span>
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">f"Sigue intentando... (nivel: {nivel})"</span>)
+        
+        <span class="variable">intentos</span> <span class="operator">+=</span> <span class="number">1</span>
+    
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">encontrado</span>:
+        <span class="function">print</span>(<span class="string">"\n😅 No encontraste un número suficientemente mágico"</span>)
+        <span class="function">print</span>(<span class="string">"Pista: prueba con múltiplos de 5 y 7, o números primos"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Programa principal completo</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">def</span> <span class="function">main</span>():
+    <span class="string">"""Programa principal del Detector de Números Mágicos"""</span>
+    <span class="function">print</span>(<span class="string">"🔮 DETECTOR DE NÚMEROS MÁGICOS 🔮"</span>)
+    <span class="function">print</span>(<span class="string">"="</span> <span class="operator">*</span> <span class="number">40</span>)
+    
+    <span class="keyword">while</span> <span class="boolean">True</span>:
+        <span class="function">print</span>(<span class="string">"\n📋 MENÚ PRINCIPAL"</span>)
+        <span class="function">print</span>(<span class="string">"1. Analizar un número"</span>)
+        <span class="function">print</span>(<span class="string">"2. Ver números mágicos famosos"</span>)
+        <span class="function">print</span>(<span class="string">"3. Jugar a encontrar números mágicos"</span>)
+        <span class="function">print</span>(<span class="string">"4. Analizar rango de números"</span>)
+        <span class="function">print</span>(<span class="string">"5. Salir"</span>)
+        
+        <span class="variable">opcion</span> <span class="operator">=</span> <span class="function">input</span>(<span class="string">"\nElige una opción: "</span>)
+        
+        <span class="keyword">if</span> <span class="variable">opcion</span> <span class="operator">==</span> <span class="string">"1"</span>:
+            <span class="keyword">try</span>:
+                <span class="variable">numero</span> <span class="operator">=</span> <span class="function">int</span>(<span class="function">input</span>(<span class="string">"\nIngresa un número: "</span>))
+                <span class="variable">nivel</span>, <span class="variable">razones</span> <span class="operator">=</span> <span class="function">detectar_numero_magico</span>(<span class="variable">numero</span>)
+                <span class="function">mostrar_resultado_magico</span>(<span class="variable">numero</span>, <span class="variable">nivel</span>, <span class="variable">razones</span>)
+            <span class="keyword">except</span> <span class="function">ValueError</span>:
+                <span class="function">print</span>(<span class="string">"❌ Por favor ingresa un número válido"</span>)
+        
+        <span class="keyword">elif</span> <span class="variable">opcion</span> <span class="operator">==</span> <span class="string">"2"</span>:
+            <span class="function">print</span>(<span class="string">"\n🌟 NÚMEROS MÁGICOS FAMOSOS:"</span>)
+            <span class="variable">numeros_famosos</span> <span class="operator">=</span> [<span class="number">6</span>, <span class="number">28</span>, <span class="number">496</span>]  <span class="comment"># Números perfectos</span>
+            <span class="keyword">for</span> <span class="variable">num</span> <span class="keyword">in</span> <span class="variable">numeros_famosos</span>:
+                <span class="variable">nivel</span>, <span class="variable">_</span> <span class="operator">=</span> <span class="function">detectar_numero_magico</span>(<span class="variable">num</span>)
+                <span class="function">print</span>(<span class="string">f"  • {num}: Nivel de magia = {nivel}"</span>)
+        
+        <span class="keyword">elif</span> <span class="variable">opcion</span> <span class="operator">==</span> <span class="string">"3"</span>:
+            <span class="function">juego_adivina_magico</span>()
+        
+        <span class="keyword">elif</span> <span class="variable">opcion</span> <span class="operator">==</span> <span class="string">"4"</span>:
+            <span class="variable">inicio</span> <span class="operator">=</span> <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Número inicial: "</span>))
+            <span class="variable">fin</span> <span class="operator">=</span> <span class="function">int</span>(<span class="function">input</span>(<span class="string">"Número final: "</span>))
+            <span class="function">print</span>(<span class="string">"\n🔍 Buscando números mágicos..."</span>)
+            
+            <span class="variable">magicos_encontrados</span> <span class="operator">=</span> []
+            <span class="keyword">for</span> <span class="variable">n</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="variable">inicio</span>, <span class="variable">fin</span> <span class="operator">+</span> <span class="number">1</span>):
+                <span class="variable">nivel</span>, <span class="variable">_</span> <span class="operator">=</span> <span class="function">detectar_numero_magico</span>(<span class="variable">n</span>)
+                <span class="keyword">if</span> <span class="variable">nivel</span> <span class="operator">></span> <span class="number">20</span>:
+                    <span class="variable">magicos_encontrados</span>.<span class="function">append</span>((<span class="variable">n</span>, <span class="variable">nivel</span>))
+            
+            <span class="keyword">if</span> <span class="variable">magicos_encontrados</span>:
+                <span class="function">print</span>(<span class="string">"\n✨ Números mágicos encontrados:"</span>)
+                <span class="keyword">for</span> <span class="variable">num</span>, <span class="variable">nivel</span> <span class="keyword">in</span> <span class="function">sorted</span>(<span class="variable">magicos_encontrados</span>, <span class="variable">key</span><span class="operator">=</span><span class="keyword">lambda</span> <span class="variable">x</span>: <span class="variable">x</span>[<span class="number">1</span>], <span class="variable">reverse</span><span class="operator">=</span><span class="boolean">True</span>):
+                    <span class="function">print</span>(<span class="string">f"  {num}: {nivel} puntos"</span>)
+            <span class="keyword">else</span>:
+                <span class="function">print</span>(<span class="string">"No se encontraron números mágicos en ese rango"</span>)
+        
+        <span class="keyword">elif</span> <span class="variable">opcion</span> <span class="operator">==</span> <span class="string">"5"</span>:
+            <span class="function">print</span>(<span class="string">"\n✨ ¡Que la magia de los números te acompañe! ✨"</span>)
+            <span class="keyword">break</span>
+        
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">"❌ Opción no válida"</span>)
+
+<span class="keyword">if</span> __name__ <span class="operator">==</span> <span class="string">"__main__"</span>:
+    <span class="function">main</span>()
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎯 Resultados y Ejemplos</h2>
+            
+            <div class="resultado-magico">
+                🔮 Número 28: ¡NÚMERO LEGENDARIAMENTE MÁGICO!<br>
+                Nivel de magia: 175 puntos<br>
+                ✨ Es un número PERFECTO<br>
+                ✨ Es par Y múltiplo de 7
+            </div>
+
+            <div class="resultado-magico" style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);">
+                🌟 Número 7: NÚMERO MUY MÁGICO<br>
+                Nivel de magia: 90 puntos<br>
+                ⭐ Es un número primo<br>
+                ⭐ Es culturalmente mágico
+            </div>
+
+            <div class="resultado-magico" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                🌙 Número 30: Número con propiedades mágicas<br>
+                Nivel de magia: 55 puntos<br>
+                • Es par Y múltiplo de 3 Y mayor que 50<br>
+                • Es múltiplo de 5
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios de Práctica</h2>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 1: Números Fibonacci Mágicos</h4>
+                <p>Modifica el programa para detectar si un número pertenece a la secuencia de Fibonacci:</p>
+                <ul>
+                    <li>Crear función <code>es_fibonacci(n)</code></li>
+                    <li>Agregar 50 puntos de magia si es Fibonacci</li>
+                    <li>Encontrar todos los números Fibonacci mágicos hasta 1000</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 2: Detector de Números Vampiro</h4>
+                <p>Un número vampiro es un número compuesto v = xy con un número par de dígitos n, que puede ser factorizado en dos números x e y con n/2 dígitos cada uno:</p>
+                <ul>
+                    <li>1260 = 21 × 60</li>
+                    <li>Implementar la detección</li>
+                    <li>Agregar 80 puntos de magia si es vampiro</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Ejercicio 3: Números Palíndromos Mágicos</h4>
+                <p>Detectar números que se leen igual de izquierda a derecha:</p>
+                <ul>
+                    <li>121, 1331, 12321</li>
+                    <li>Bonus: palíndromos en binario</li>
+                    <li>Crear escalas de magia según longitud</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h4>📌 Desafío Extra: Calculadora de Expresiones Mágicas</h4>
+                <p>Crea una calculadora que evalúe expresiones complejas con operadores lógicos:</p>
+                <ul>
+                    <li>Entrada: "42 > 40 and 42 % 2 == 0"</li>
+                    <li>Evaluar de forma segura con <code>ast.literal_eval</code></li>
+                    <li>Mostrar tabla de verdad paso a paso</li>
+                    <li>Explicar por qué el resultado es True o False</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Resumen y Conceptos Clave</h2>
+            
+            <div class="teoria">
+                <h4>Lo que aprendiste en este ejercicio:</h4>
+                <ul>
+                    <li>✅ Usar operadores de comparación (<, >, ==, !=, <=, >=)</li>
+                    <li>✅ Combinar condiciones con operadores lógicos (and, or, not)</li>
+                    <li>✅ Aplicar el operador módulo (%) para detectar propiedades</li>
+                    <li>✅ Crear expresiones booleanas complejas</li>
+                    <li>✅ Entender la precedencia de operadores</li>
+                    <li>✅ Usar operadores de asignación compuesta (+=, -=)</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>Precedencia de Operadores (de mayor a menor)</h4>
+                <ol>
+                    <li><code>**</code> (Potencia)</li>
+                    <li><code>*, /, //, %</code> (Multiplicación, división, módulo)</li>
+                    <li><code>+, -</code> (Suma, resta)</li>
+                    <li><code><, >, <=, >=, ==, !=</code> (Comparación)</li>
+                    <li><code>not</code> (NOT lógico)</li>
+                    <li><code>and</code> (AND lógico)</li>
+                    <li><code>or</code> (OR lógico)</li>
+                </ol>
+            </div>
+
+            <div class="warning">
+                <strong>Errores Comunes:</strong>
+                <ul>
+                    <li>❌ Usar <code>=</code> en lugar de <code>==</code> para comparar</li>
+                    <li>❌ Olvidar paréntesis en expresiones complejas</li>
+                    <li>❌ No entender que <code>and</code> requiere que AMBAS sean True</li>
+                    <li>❌ División por cero al usar módulo: <code>n % 0</code></li>
+                </ul>
+            </div>
+
+            <div class="tip">
+                <strong>Próximo paso:</strong> Con el dominio de operadores, el siguiente paso es aprender sobre estructuras de control (if/else, bucles) para crear programas con lógica más compleja y toma de decisiones avanzada.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
