@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Presentación - Ejercicio 8: Manejo de Errores en Python</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
+            color: #22223b;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #fff;
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .container:hover {
+            box-shadow: 0 12px 36px rgba(58, 90, 64, 0.15);
+            transform: translateY(-4px) scale(1.01);
+        }
+        .step ul, .theory ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .step ul li, .theory ul li {
+            position: relative;
+            padding-left: 36px;
+            margin-bottom: 14px;
+            font-size: 1.08em;
+            animation: fadeInUp 0.7s;
+        }
+        .step ul li::before {
+            content: "💡";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2em;
+            animation: bounceIn 0.7s;
+        }
+        .theory ul li::before {
+            content: "✨";
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2em;
+            animation: pulse 1.2s infinite alternate;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.5);}
+            60% { transform: scale(1.2);}
+            100% { transform: scale(1);}
+        }
+        @keyframes pulse {
+            from { color: #b5838d;}
+            to { color: #ffb4a2;}
+        }
+
+        .container {
+            border-radius: 16px;
+            box-shadow: 0 6px 24px rgba(34,34,59,0.08);
+            padding: 32px 40px;
+        }
+        
+        h1, h2 {
+            color: #3a5a40;
+        }
+        h1 {
+            margin-bottom: 0.5em;
+        }
+        .step {
+            background: #e9f5db;
+            border-left: 6px solid #3a5a40;
+            padding: 18px 24px;
+            margin: 24px 0;
+            border-radius: 8px;
+        }
+        code, pre {
+            background: #f0efeb;
+            color: #22223b;
+            border-radius: 6px;
+            padding: 2px 6px;
+            font-size: 1em;
+        }
+        pre {
+            padding: 16px;
+            overflow-x: auto;
+        }
+        ul {
+            margin-top: 0.5em;
+        }
+        .theory {
+            background: #f7cad0;
+            border-left: 6px solid #b5838d;
+            padding: 16px 24px;
+            border-radius: 8px;
+            margin: 24px 0;
+        }
+        .highlight {
+            color: #3a86ff;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ejercicio 8: Manejo de Errores y Excepciones en Python</h1>
+        <div class="theory">
+            <h2>¿Por qué es importante el manejo de errores?</h2>
+            <p>
+                Cuando escribimos programas, es común que ocurran errores inesperados, como ingresar un dato incorrecto o intentar dividir por cero.
+                <span class="highlight">Python</span> nos permite manejar estos errores de forma elegante usando <code>try</code>, <code>except</code>, <code>else</code> y <code>finally</code>.
+            </p>
+        </div>
+
+        <div class="step">
+            <h2>Paso 1: Estructura básica</h2>
+            <p>
+                La estructura para manejar errores es:
+            </p>
+            <pre><code>try:
+    # Código que puede causar un error
+except TipoDeError:
+    # Qué hacer si ocurre ese error
+else:
+    # (Opcional) Si no hubo error
+finally:
+    # (Opcional) Siempre se ejecuta
+</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Paso 2: Ejemplo práctico</h2>
+            <p>
+                Analicemos el siguiente código:
+            </p>
+            <pre><code>try:
+    numero = int(input("Introduce un número: "))
+    resultado = 10 / numero
+    print("El resultado es:", resultado)
+except ValueError:
+    print("Debes introducir un número entero.")
+except ZeroDivisionError:
+    print("No se puede dividir entre cero.")
+except Exception as e:
+    print("Ocurrió un error:", e)
+else:
+    print("La operación se realizó correctamente.")
+finally:
+    print("Fin del programa.")
+</code></pre>
+        </div>
+
+        <div class="step">
+            <h2>Paso 3: Explicación paso a paso</h2>
+            <ul>
+                <li><b>try:</b> Intenta convertir la entrada a entero y dividir 10 por ese número.</li>
+                <li><b>except ValueError:</b> Si el usuario no ingresa un número válido, muestra un mensaje de error.</li>
+                <li><b>except ZeroDivisionError:</b> Si el usuario ingresa 0, evita la división por cero.</li>
+                <li><b>except Exception as e:</b> Captura cualquier otro error inesperado.</li>
+                <li><b>else:</b> Si no hubo errores, informa que todo salió bien.</li>
+                <li><b>finally:</b> Siempre se ejecuta, mostrando el fin del programa.</li>
+            </ul>
+        </div>
+
+        <div class="theory">
+            <h2>¡Recuerda!</h2>
+            <ul>
+                <li>El manejo de errores hace tus programas más robustos y fáciles de usar.</li>
+                <li>Siempre que esperes un posible error, usa <code>try</code> y <code>except</code>.</li>
+                <li>¡Practica modificando el código y probando diferentes entradas!</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
