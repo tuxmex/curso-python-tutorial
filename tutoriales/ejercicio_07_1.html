@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 7.2: El Centro de Comando Espacial</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: spaceGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes spaceGlow {
+            from {
+                text-shadow: 0 0 20px rgba(100,200,255,0.5);
+            }
+            to {
+                text-shadow: 0 0 40px rgba(100,200,255,0.8), 0 0 60px rgba(100,200,255,0.5);
+            }
+        }
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3
+            );box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            animation: slideIn 0.8s ease-out;
+            border: 2px solid rgba(100,200,255,0.2);
+        }
+        
+        .slide h2 {
+            color: #302b63;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #4c9aff;
+        }
+        
+        .slide h3 {
+            color: #24243e;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #f0f4ff;
+            border-left: 5px solid #4c9aff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #302b63;
+            margin-bottom: 10px;
+        }
+        
+        .modulo-card {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        
+        .modulo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .modulo-card::before {
+            content: "🚀";
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .modulo-card h4 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        .modulo-card p {
+            margin-bottom: 15px;
+        }
+        
+        .modulo-card .funciones {
+            background: rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative;
+            border: 1px solid #4c9aff;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #4c9aff;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .number {
+            color: #B5CEA8;
+        }
+        
+        .module {
+            color: #4EC9B0;
+            font-weight: bold;
+        }
+        
+        .paso {
+            background: #e8f4fd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #2196f3;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #2196f3;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .espacio-visual {
+            background: #0a0a0a;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .planeta {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 10px;
+            position: relative;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .planeta.tierra {
+            background: linear-gradient(135deg, #2196f3 0%, #4caf50 50%, #2196f3 100%);
+            animation-delay: 0s;
+        }
+        
+        .planeta.marte {
+            background: linear-gradient(135deg, #ff5722 0%, #ff9800 100%);
+            animation-delay: 1s;
+        }
+        
+        .planeta.jupiter {
+            background: linear-gradient(135deg, #ffc107 0%, #ff9800 50%, #795548 100%);
+            width: 80px;
+            height: 80px;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        
+        .estrellas {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+        
+        .estrella {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .tabla-modulos {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .tabla-modulos th {
+            background: #302b63;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .tabla-modulos td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tabla-modulos tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .tabla-modulos code {
+            background: #e8f4fd;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #0066cc;
+        }
+        
+        .consola-output {
+            background: #000;
+            color: #0f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            border: 2px solid #0f0;
+            box-shadow: 0 0 20px rgba(0,255,0,0.3);
+        }
+        
+        .tip {
+            background: #fffbf0;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .warning {
+            background: #fff5f5;
+            border: 2px solid #dc3545;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .import-tipos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .import-card {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .import-card:hover {
+            transform: translateY(-5px);
+            border-color: #4c9aff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .import-card h5 {
+            color: #302b63;
+            margin-bottom: 10px;
+        }
+        
+        .import-card code {
+            display: block;
+            background: #e8f4fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 El Centro de Comando Espacial</h1>
+            <p>Módulo 7: Módulos y Paquetes - Ejercicio 7.2</p>
+        </div>
+
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Aprender a importar y usar módulos estándar de Python (datetime, random, math) para simular un centro de comando de misiones espaciales. Los estudiantes comprenderán cómo los módulos organizan funcionalidades relacionadas y cómo aprovechar la biblioteca estándar de Python para crear aplicaciones complejas.
+            </div>
+
+            <h3>📚 ¿Qué son los Módulos?</h3>
+            
+            <div class="teoria">
+                <h4>Módulos: Las Herramientas del Programador</h4>
+                <p>Los módulos son archivos de Python que contienen código reutilizable. Son como cajas de herramientas especializadas:</p>
+                <ul>
+                    <li>🔧 <strong>Organización:</strong> Agrupan funciones relacionadas</li>
+                    <li>♻️ <strong>Reutilización:</strong> Evitan escribir código repetido</li>
+                    <li>📦 <strong>Biblioteca estándar:</strong> Python incluye módulos para casi todo</li>
+                    <li>🚀 <strong>Eficiencia:</strong> Código probado y optimizado</li>
+                </ul>
+            </div>
+
+            <div class="espacio-visual">
+                <div class="estrellas">
+                    <div class="estrella" style="width: 2px; height: 2px; top: 10%; left: 20%;"></div>
+                    <div class="estrella" style="width: 3px; height: 3px; top: 30%; left: 60%; animation-delay: 0.5s;"></div>
+                    <div class="estrella" style="width: 2px; height: 2px; top: 50%; left: 80%; animation-delay: 1s;"></div>
+                    <div class="estrella" style="width: 4px; height: 4px; top: 70%; left: 30%; animation-delay: 1.5s;"></div>
+                    <div class="estrella" style="width: 2px; height: 2px; top: 20%; left: 90%; animation-delay: 2s;"></div>
+                </div>
+                <div class="planeta tierra"></div>
+                <div class="planeta marte"></div>
+                <div class="planeta jupiter"></div>
+            </div>
+
+            <div class="teoria">
+                <h4>La Biblioteca Estándar de Python</h4>
+                <p>Python viene con "baterías incluidas" - módulos para casi cualquier tarea:</p>
+                <ul>
+                    <li>📅 <code>datetime</code> - Manejo de fechas y tiempo</li>
+                    <li>🎲 <code>random</code> - Números aleatorios</li>
+                    <li>🧮 <code>math</code> - Funciones matemáticas avanzadas</li>
+                    <li>🗂️ <code>os</code> - Interacción con el sistema operativo</li>
+                    <li>📊 <code>statistics</code> - Cálculos estadísticos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📥 Formas de Importar Módulos</h2>
+            
+            <div class="import-tipos">
+                <div class="import-card">
+                    <h5>Import Completo</h5>
+                    <p>Importa todo el módulo</p>
+                    <code>import math<br>math.pi</code>
+                </div>
+                
+                <div class="import-card">
+                    <h5>Import con Alias</h5>
+                    <p>Da un nombre corto al módulo</p>
+                    <code>import datetime as dt<br>dt.datetime.now()</code>
+                </div>
+                
+                <div class="import-card">
+                    <h5>Import Específico</h5>
+                    <p>Importa funciones específicas</p>
+                    <code>from random import randint<br>randint(1, 10)</code>
+                </div>
+                
+                <div class="import-card">
+                    <h5>Import Todo (*)</h5>
+                    <p>Importa todo (no recomendado)</p>
+                    <code>from math import *<br>sin(pi/2)</code>
+                </div>
+            </div>
+
+            <div class="warning">
+                <strong>Mejores Prácticas:</strong>
+                <ul>
+                    <li>✅ Prefiere imports específicos: <code>from math import pi, sin</code></li>
+                    <li>✅ Usa alias para módulos con nombres largos</li>
+                    <li>❌ Evita <code>from module import *</code> (contamina el namespace)</li>
+                    <li>✅ Agrupa imports al inicio del archivo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🛸 Módulos para el Centro Espacial</h2>
+            
+            <div class="modulo-card">
+                <h4>📅 datetime - Control de Tiempo de Misión</h4>
+                <p>Gestiona fechas, horas y duraciones para las misiones espaciales.</p>
+                <div class="funciones">
+                    • datetime.now() - Tiempo actual<br>
+                    • timedelta() - Duraciones<br>
+                    • strftime() - Formateo de fechas<br>
+                    • timezone - Zonas horarias
+                </div>
+            </div>
+
+            <div class="modulo-card" style="background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);">
+                <h4>🎲 random - Simulación de Eventos</h4>
+                <p>Genera eventos aleatorios como meteoritos, fallos de sistema, descubrimientos.</p>
+                <div class="funciones">
+                    • random() - Número entre 0 y 1<br>
+                    • randint(a, b) - Entero aleatorio<br>
+                    • choice(lista) - Elemento aleatorio<br>
+                    • shuffle(lista) - Mezclar lista
+                </div>
+            </div>
+
+            <div class="modulo-card" style="background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);">
+                <h4>🧮 math - Cálculos de Trayectoria</h4>
+                <p>Funciones matemáticas para calcular órbitas, distancias y trayectorias.</p>
+                <div class="funciones">
+                    • sin(), cos() - Trigonometría<br>
+                    • sqrt() - Raíz cuadrada<br>
+                    • pi, e - Constantes<br>
+                    • degrees(), radians() - Conversión
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Importar módulos y configurar el centro de comando</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">import</span> <span class="module">datetime</span>
+<span class="keyword">import</span> <span class="module">random</span>
+<span class="keyword">import</span> <span class="module">math</span>
+<span class="keyword">import</span> <span class="module">time</span>
+
+<span class="comment"># Configuración del Centro de Comando Espacial</span>
+<span class="keyword">class</span> <span class="function">CentroComandoEspacial</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>):
+        <span class="variable">self</span>.nombre = <span class="string">"Centro Houston"</span>
+        <span class="variable">self</span>.tiempo_inicio = <span class="module">datetime</span>.<span class="module">datetime</span>.<span class="function">now</span>()
+        <span class="variable">self</span>.misiones_activas = []
+        <span class="variable">self</span>.astronautas = [<span class="string">"Neil A."</span>, <span class="string">"Buzz A."</span>, <span class="string">"Sally R."</span>, <span class="string">"Yuri G."</span>]
+        <span class="variable">self</span>.planetas = {
+            <span class="string">"Marte"</span>: {<span class="string">"distancia_km"</span>: <span class="number">225000000</span>, <span class="string">"gravedad"</span>: <span class="number">3.71</span>},
+            <span class="string">"Luna"</span>: {<span class="string">"distancia_km"</span>: <span class="number">384400</span>, <span class="string">"gravedad"</span>: <span class="number">1.62</span>},
+            <span class="string">"Venus"</span>: {<span class="string">"distancia_km"</span>: <span class="number">108000000</span>, <span class="string">"gravedad"</span>: <span class="number">8.87</span>}
+        }
+        
+        <span class="function">print</span>(<span class="string">f"🚀 {self.nombre} inicializado"</span>)
+        <span class="function">print</span>(<span class="string">f"Hora del sistema: {self.tiempo_inicio.strftime('%Y-%m-%d %H:%M:%S')}"</span>)
+    
+    <span class="keyword">def</span> <span class="function">tiempo_transcurrido</span>(<span class="variable">self</span>):
+        <span class="string">"""Calcula el tiempo transcurrido desde el inicio"""</span>
+        <span class="variable">ahora</span> = <span class="module">datetime</span>.<span class="module">datetime</span>.<span class="function">now</span>()
+        <span class="variable">transcurrido</span> = <span class="variable">ahora</span> - <span class="variable">self</span>.tiempo_inicio
+        <span class="keyword">return</span> <span class="variable">transcurrido</span>
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Crear sistema de misiones con random</h4>
+                <div class="codigo-ejemplo">
+    <span class="keyword">def</span> <span class="function">generar_mision</span>(<span class="variable">self</span>):
+        <span class="string">"""Genera una misión espacial aleatoria"""</span>
+        <span class="variable">tipos_mision</span> = [<span class="string">"Exploración"</span>, <span class="string">"Investigación"</span>, <span class="string">"Rescate"</span>, <span class="string">"Suministros"</span>]
+        <span class="variable">tipo</span> = <span class="module">random</span>.<span class="function">choice</span>(<span class="variable">tipos_mision</span>)
+        <span class="variable">destino</span> = <span class="module">random</span>.<span class="function">choice</span>(<span class="function">list</span>(<span class="variable">self</span>.planetas.<span class="function">keys</span>()))
+        <span class="variable">astronauta</span> = <span class="module">random</span>.<span class="function">choice</span>(<span class="variable">self</span>.astronautas)
+        
+        <span class="comment"># Calcular duración basada en distancia</span>
+        <span class="variable">distancia</span> = <span class="variable">self</span>.planetas[<span class="variable">destino</span>][<span class="string">"distancia_km"</span>]
+        <span class="variable">velocidad_promedio</span> = <span class="number">58000</span>  <span class="comment"># km/h</span>
+        <span class="variable">horas_viaje</span> = <span class="variable">distancia</span> / <span class="variable">velocidad_promedio</span>
+        
+        <span class="comment"># Agregar variación aleatoria</span>
+        <span class="variable">factor_aleatorio</span> = <span class="module">random</span>.<span class="function">uniform</span>(<span class="number">0.8</span>, <span class="number">1.2</span>)
+        <span class="variable">horas_viaje</span> *= <span class="variable">factor_aleatorio</span>
+        
+        <span class="variable">mision</span> = {
+            <span class="string">"id"</span>: <span class="module">random</span>.<span class="function">randint</span>(<span class="number">1000</span>, <span class="number">9999</span>),
+            <span class="string">"tipo"</span>: <span class="variable">tipo</span>,
+            <span class="string">"destino"</span>: <span class="variable">destino</span>,
+            <span class="string">"astronauta"</span>: <span class="variable">astronauta</span>,
+            <span class="string">"duracion_horas"</span>: <span class="function">round</span>(<span class="variable">horas_viaje</span>, <span class="number">2</span>),
+            <span class="string">"fecha_lanzamiento"</span>: <span class="module">datetime</span>.<span class="module">datetime</span>.<span class="function">now</span>() + 
+                                  <span class="module">datetime</span>.<span class="function">timedelta</span>(<span class="variable">days</span>=<span class="module">random</span>.<span class="function">randint</span>(<span class="number">1</span>, <span class="number">30</span>)),
+            <span class="string">"estado"</span>: <span class="string">"Preparando"</span>,
+            <span class="string">"probabilidad_exito"</span>: <span class="module">random</span>.<span class="function">uniform</span>(<span class="number">0.85</span>, <span class="number">0.99</span>)
+        }
+        
+        <span class="variable">self</span>.misiones_activas.<span class="function">append</span>(<span class="variable">mision</span>)
+        <span class="keyword">return</span> <span class="variable">mision</span>
+    
+    <span class="keyword">def</span> <span class="function">simular_evento_aleatorio</span>(<span class="variable">self</span>):
+        <span class="string">"""Simula eventos aleatorios durante la misión"""</span>
+        <span class="variable">eventos</span> = [
+            (<span class="string">"🌟 Descubrimiento científico"</span>, <span class="number">0.1</span>),
+            (<span class="string">"☄️ Lluvia de meteoritos detectada"</span>, <span class="number">0.15</span>),
+            (<span class="string">"🛸 Señal extraña recibida"</span>, <span class="number">0.05</span>),
+            (<span class="string">"⚡ Tormenta solar"</span>, <span class="number">0.2</span>),
+            (<span class="string">"✅ Todo normal"</span>, <span class="number">0.5</span>)
+        ]
+        
+        <span class="comment"># Seleccionar evento basado en probabilidades</span>
+        <span class="variable">rand</span> = <span class="module">random</span>.<span class="function">random</span>()
+        <span class="variable">acumulado</span> = <span class="number">0</span>
+        
+        <span class="keyword">for</span> <span class="variable">evento</span>, <span class="variable">probabilidad</span> <span class="keyword">in</span> <span class="variable">eventos</span>:
+            <span class="variable">acumulado</span> += <span class="variable">probabilidad</span>
+            <span class="keyword">if</span> <span class="variable">rand</span> <= <span class="variable">acumulado</span>:
+                <span class="keyword">return</span> <span class="variable">evento</span>
+        
+        <span class="keyword">return</span> <span class="variable">eventos</span>[-<span class="number">1</span>][<span class="number">0</span>]
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Implementar cálculos de trayectoria con math</h4>
+                <div class="codigo-ejemplo">
+    <span class="keyword">def</span> <span class="function">calcular_trayectoria</span>(<span class="variable">self</span>, <span class="variable">destino</span>, <span class="variable">angulo_lanzamiento</span>):
+        <span class="string">"""Calcula la trayectoria óptima usando funciones matemáticas"""</span>
+        <span class="variable">distancia</span> = <span class="variable">self</span>.planetas[<span class="variable">destino</span>][<span class="string">"distancia_km"</span>]
+        <span class="variable">gravedad_destino</span> = <span class="variable">self</span>.planetas[<span class="variable">destino</span>][<span class="string">"gravedad"</span>]
+        
+        <span class="comment"># Convertir ángulo a radianes</span>
+        <span class="variable">angulo_rad</span> = <span class="module">math</span>.<span class="function">radians</span>(<span class="variable">angulo_lanzamiento</span>)
+        
+        <span class="comment"># Velocidad de escape (simplificada)</span>
+        <span class="variable">velocidad_escape</span> = <span class="module">math</span>.<span class="function">sqrt</span>(<span class="number">2</span> * <span class="number">9.81</span> * <span class="number">6371000</span>)  <span class="comment"># m/s</span>
+        
+        <span class="comment"># Componentes de velocidad</span>
+        <span class="variable">vx</span> = <span class="variable">velocidad_escape</span> * <span class="module">math</span>.<span class="function">cos</span>(<span class="variable">angulo_rad</span>)
+        <span class="variable">vy</span> = <span class="variable">velocidad_escape</span> * <span class="module">math</span>.<span class="function">sin</span>(<span class="variable">angulo_rad</span>)
+        
+        <span class="comment"># Tiempo de vuelo (simplificado)</span>
+        <span class="variable">tiempo_vuelo</span> = <span class="variable">distancia</span> * <span class="number">1000</span> / <span class="variable">vx</span>  <span class="comment"># segundos</span>
+        
+        <span class="comment"># Combustible necesario (fórmula simplificada)</span>
+        <span class="variable">delta_v</span> = <span class="variable">gravedad_destino</span> * <span class="variable">tiempo_vuelo</span>
+        <span class="variable">combustible_necesario</span> = <span class="variable">delta_v</span> * <span class="number">0.1</span>  <span class="comment"># kg</span>
+        <span class="keyword">return</span> {
+            <span class="string">"velocidad_x"</span>: <span class="variable">vx</span>,
+            <span class="string">"velocidad_y"</span>: <span class="variable">vy</span>,
+            <span class="string">"tiempo_vuelo"</span>: <span class="function">round</span>(<span class="variable">tiempo_vuelo</span> / <span class="number">3600</span>, <span class="number">2</span>),  <span class="comment"># horas</span>
+            <span class="string">"combustible_necesario"</span>: <span class="function">round</span>(<span class="variable">combustible_necesario</span>, <span class="number">2</span>)  <span class="comment"># kg</span>
+        }
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Simular una misión completa con eventos aleatorios</h4>
+                <div class="codigo-ejemplo">
+    <span class="keyword">def</span> <span class="function">simular_mision</span>(<span class="variable">self</span>, <span class="variable">mision</span>):
+        <span class="string">"""Simula una misión completa con eventos aleatorios"""</span>
+        <span class="function">print</span>(<span class="string">f"🚀 Iniciando misión {mision[<span class="string">"id"</span>]}: {mision[<span class="string">"tipo"</span>]} a {mision[<span class="string">"destino"</span>]}"</span>)
+        <span class="function">print</span>(<span class="string">f"👨‍🚀 Astronauta: {mision[<span class="string">"astronauta"</span>]}"</span>)
+        <span class="function">print</span>(<span class="string">f"⏳ Duración estimada: {mision[<span class="string">"duracion_horas"</span>]} horas"</span>)
+        <span class="function">print</span>(<span class="string">f"📅 Fecha de lanzamiento: {mision[<span class="string">"fecha_lanzamiento"</span>].strftime('%Y-%m-%d %H:%M:%S')}"</span>)
+        <span class="function">print</span>(<span class="string">f"✅ Probabilidad de éxito: {mision[<span class="string">"probabilidad_exito"</span>]:.2%}"</span>)
+        <span class="variable">trayectoria</span> = <span class="variable">self</span>.<span class="function">calcular_trayectoria</span>(<span class="variable">mision</span>[<span class="string">"destino"</span>], <span class="number">45</span>)
+        <span class="function">print</span>(<span class="string">f"🛰️ Trayectoria calculada: Velocidad X: {trayectoria[<span class="string">"velocidad_x"</span>]:.2f} m/s, Velocidad Y: {trayectoria[<span class="string">"velocidad_y"</span>]:.2f} m/s"</span>)
+        <span class="function">print</span>(<span class="string">f"⏱️ Tiempo de vuelo: {trayectoria[<span class="string">"tiempo_vuelo"</span>]} horas"</span>)
+        <span class="function">print</span>(<span class="string">f"💼 Combustible necesario: {trayectoria[<span class="string">"combustible_necesario"</span>]} kg"</span>)
+        <span class="function">print</span>(<span class="string">"🌌 Simulando eventos aleatorios..."</span>)
+        <span class="variable">evento</span> = <span class="variable">self</span>.<span class="function">simular_evento_aleatorio</span>()
+        <span class="function">print</span>(<span class="string">f"🔮 Evento aleatorio: {evento}"</span>)
+        <span class="function">print</span>(<span class="string">"🚀 Misión completada con éxito!"</span>)
+        <span class="variable">mision</span>[<span class="string">"estado"</span>] = <span class="string">"Completada"</span>
+        <span class="function">print</span>(<span class="string">f"🎉 Misión {mision[<span class="string">"id"</span>]} finalizada"</span>)
+        <span class="function">print</span>(<span class="string">f"⏳ Tiempo total transcurrido: {<span class="variable">self</span>.<span class="function">tiempo_transcurrido</span>().total_seconds() / <span class="number">3600</span>:.2f} horas"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="5">
+                <h4>Ejecutar el centro de comando y simular una misión</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">if</span> <span class="function">__name__</span> == <span class="string">"__main__"</span>:
+    <span class="variable">centro</span> = <span class="function">CentroComandoEspacial</span>()
+    <span class="variable">mision</span> = <span class="variable">centro</span>.<span class="function">generar_mision</span>()
+    <span class="variable">centro</span>.<span class="function">simular_mision</span>(<span class="variable">mision</span>)
+    <span class="function">print</span>(<span class="string">"🚀 Misión generada: {mision[<span class="string">"id"</span>]} - {mision[<span class="string">"tipo"</span>]} a {mision[<span class="string">"destino"</span>]}"</span>)
+<span class="function">print</span>(<span class="string">"👨‍🚀 Astronauta: {mision[<span class="string">"astronauta"</span>]}"</span>)
+<span class="function">print</span>(<span class="string">"⏳ Duración estimada: {mision[<span class="string">"duracion_horas"</span>]} horas"</span>)
+<span class="function">print</span>(<span class="string">"📅 Fecha
+    de lanzamiento: {mision[<span class="string">"fecha_lanzamiento"</span>].strftime('%Y-%m-%d %H:%M:%S')}"</span>)    
+<span class="function">print</span>(<span class="string">"✅ Probabilidad de éxito: {mision[<span class="string">"probabilidad_exito"</span>]:.2%}"</span>)
+<span class="variable">trayectoria</span> = <span class="variable">centro</span>.<span class="function">calcular_trayectoria</span>(<span class="variable">mision</span>[<span class="string">"destino"</span>], <span class="number">45</span>)
+<span class="function">print</span>(<span class="string">"🛰
+️ Trayectoria calculada: Velocidad X: {trayectoria[<span class="string">"velocidad_x"</span>]:.2f} m/s, Velocidad Y: {trayectoria[<span class="string">"velocidad_y"</span>]:.2f} m/s"</span>)
+<span class="function">print</span>(<span class="string">"⏱️ Tiempo de vuelo: {trayectoria[<span class="string">"tiempo_vuelo"</span>]} horas"</span>)
+<span class="function">print</span>(<span class="string">"💼 Combustible necesario: {trayectoria[<span class="string">"combustible_necesario"</span>]} kg"</span>)
+<span class="function">print</span>(<span class="string">"🌌 Simulando eventos aleatorios..."</span>)
+<span class="variable">evento</span> = <span class="variable">centro</span>.<span class="function">simular_evento_aleatorio</span>()
+<span class="function">print</span>(<span class="string">"🔮 Evento
+    aleatorio: {evento}"</span>)
+<span class="function">print</span>(<span class="string">"🚀 Misión completada con éxito!"</span>)
+<span class="variable">mision</span>[<span class="string">"estado"</span>] = <span class="string">"Completada"</span>
+<span class="function">print</span>(<span class="string">"🎉 Misión {mision[<span class="string">"id"</span>]} finalizada"</span>)
+<span class="function">print</span>(<span class="string"> 
+"⏳ Tiempo total transcurrido: {centro.tiempo_transcurrido().total_seconds() / <span class="number">3600</span>:.2f} horas"</span>)
+                </div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📝 Ejercicio Propuesto</h2>
+            <div class="ejercicio-propuesto">
+                <p>Desarrolla un sistema de gestión de misiones espaciales que permita:</p>
+                <ul>
+                    <li>Crear misiones con diferentes tipos y destinos</li>
+                    <li>Simular eventos aleatorios durante las misiones</li>
+                    <li>Calcular trayectorias y combustible necesario</li>
+                    <li>Registrar el tiempo transcurrido en cada misión</li>
+                </ul>
+                <p>Utiliza los módulos datetime, random y math para implementar las funcionalidades.</p>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📜 Código Completo del Ejercicio</h2>
+            <div class="consola-output">
+                <pre><code class="python">import datetime
+import random
+import math
+import time
+class CentroComandoEspacial:
+    def __init__(self):
+        self.nombre = "Centro Houston"
+        self.tiempo_inicio = datetime.datetime.now()
+        self.misiones_activas = []
+        self.astronautas = ["Neil A.", "Buzz A.", "Sally R.", "Yuri G."]
+        self.planetas = {
+            "Marte": {"distancia_km": 225000000, "gravedad": 3.71},
+            "Luna": {"distancia_km": 384400, "gravedad": 1.62},
+            "Venus": {"distancia_km": 108000000, "gravedad": 8.87}
+        }
+        
+        print(f"🚀 {self.nombre} inicializado")
+        print(f"Hora del sistema: {self.tiempo_inicio.strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    def tiempo_transcurrido(self):
+        ahora = datetime.datetime.now()
+        transcurrido = ahora - self.tiempo_inicio
+        return transcurrido
+    def generar_mision(self):
+        tipos_mision = ["Exploración", "Investigación", "Rescate", "Suministros"]
+        tipo = random.choice(tipos_mision)
+        destino = random.choice(list(self.planetas.keys()))
+        astronauta = random.choice(self.astronautas)
+        # Calcular duración basada en distancia
+        distancia = self.planetas[destino]["distancia_km"]
+        velocidad_promedio = 58000  # km/h
+        horas_viaje = distancia / velocidad_promedio
+        # Agregar variación aleatoria
+        factor_aleatorio = random.uniform(0.8, 1.2)
+        horas_viaje *= factor_aleatorio
+        mision = {
+            "id": random.randint(1000, 9999),
+            "tipo": tipo,
+            "destino": destino,
+            "astronauta": astronauta,
+            "duracion_horas": round(horas_viaje, 2),
+            "fecha_lanzamiento": datetime.datetime.now() + datetime.timedelta(days=random.randint(1, 30)),
+            "estado": "Preparando",
+            "probabilidad_exito": random.uniform(0.85, 0.99)
+        }
+        self.misiones_activas.append(mision)
+        return mision
+    def simular_evento_aleatorio(self):
+        eventos = [
+            ("🌟 Descubrimiento científico", 0.1),
+            ("☄️ Lluvia de meteoritos detectada", 0.15),
+            ("🛸 Señal extraña recibida", 0.05),
+            ("⚡ Tormenta solar", 0.2),
+            ("✅ Todo normal", 0.5)
+        ]
+        
+        # Seleccionar evento basado en probabilidades
+        rand = random.random()
+        acumulado = 0
+        
+        for evento, probabilidad in eventos:
+            acumulado += probabilidad
+            if rand <= acumulado:
+                return evento
+        
+        return eventos[-1][0]
+    def calcular_trayectoria(self, destino, angulo_lanzamiento):
+        distancia = self.planetas[destino]["distancia_km"]
+        gravedad_destino = self.planetas[destino]["gravedad"]
+        # Convertir ángulo a radianes
+        angulo_rad = math.radians(angulo_lanzamiento)
+        # Velocidad de escape (simplificada)
+        velocidad_escape = math.sqrt(2 * 9.81 * 6371000)  # m/s
+        # Componentes de velocidad
+        vx = velocidad_escape * math.cos(angulo_rad)
+        vy = velocidad_escape * math.sin(angulo_rad)
+        # Tiempo de vuelo (simplificado)
+        tiempo_vuelo = distancia * 1000 / vx  # segundos 
+        # Combustible necesario (fórmula simplificada)
+        delta_v = gravedad_destino * tiempo_vuelo
+        combustible_necesario = delta_v * 0.1  # kg
+        return {
+            "velocidad_x": vx,
+            "velocidad_y": vy,
+            "tiempo_vuelo": round(tiempo_vuelo / 3600, 2),  # horas
+            "combustible_necesario": round(combustible_necesario, 2)  # kg
+        }
+    def simular_mision(self, mision):
+        print(f"🚀 Iniciando misión {mision['id']}: {
+            mision['tipo']} a {mision['destino']}")
+        print(f"👨‍🚀 Astronauta: {mision['astronauta']}")
+        print(f"⏳ Duración estimada: {mision['duracion_hras']} horas")
+        print(f"📅 Fecha de lanzamiento: {mision['fecha_lanzamiento'].strftime('%Y-%m-%d %H:%M:%S')}")
+        print(f"✅ Probabilidad de éxito: {mision['probabilidad_exito']:.2%}")
+        trayectoria = self.calcular_trayectoria(mision['destino'], 45)
+        print(f"🛰️ Trayectoria calculada: Velocidad X: {trayectoria['velocidad_x']:.2f} m/s, Velocidad Y: {trayectoria['velocidad_y']:.2f} m/s")
+        print(f"⏱️ Tiempo de vuelo: {trayectoria['tiempo_vuelo']} horas")
+        print(f"💼 Combustible necesario: {trayectoria['combustible_necesario']} kg")
+        print("🌌 Simulando eventos aleatorios...")
+        evento = self.simular_evento_aleatorio()
+        print(f"🔮 Evento aleatorio: {evento}")
+        print("🚀 Misión completada con éxito!")
+        mision["estado"] = "Completada"
+        print(f"🎉 Misión {mision['id']} finalizada")
+        print(f"⏳ Tiempo total transcurrido: {self.tiempo_transcurrido().total_seconds() / 3600:.2f} horas")
+if __name__ == "__main__":
+    centro = CentroComandoEspacial()
+    mision = centro.generar_mision()
+    centro.simular_mision(mision)
+    print(f"🚀 Misión generada: {mision['id']} - {mision['tipo']} a {mision['destino']}")
+    print(f"👨‍🚀 Astronauta: {mision['Astronauta']}")
+    print(f"⏳ Duración estimada: {mision['duracion_horas   ']} horas")
+    print(f"📅 Fecha de lanzamiento: {mision['fecha_lanzamiento'].strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"✅ Probabilidad de éxito: {mision['probabilidad_exito']:.2%}")
+    trayectoria = centro.calcular_trayectoria(mision['destino'], 45)
+    print(f"🛰️ Trayectoria calculada: Velocidad X: {trayectoria['velocidad_x']:.2f} m/s, Velocidad Y: {trayectoria['velocidad_y']:.2f} m/s")
+    print(f"⏱️ Tiempo de vuelo: {trayectoria['tiempo_vuelo']} horas")
+    print(f"💼 Combustible necesario: {trayectoria['combustible_necesario']} kg")
+    print("🌌 Simulando eventos aleatorios..." )
+    print(f"🔮 Evento aleatorio: {evento}")
+    print("🚀 Misión completada con éxito!")
+    print(f"🎉 Misión {mision['id']} finalizada")
+    print(f"⏳ Tiempo total transcurrido: {centro.tiempo_transcurrido().total_seconds() / 3600:.2f} horas")</code></pre>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
+    <script> 
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('pre code').forEach((block) => {
+                hljs.highlightBlock(block);
+            });
+        });
+    </script>
+</body>
+</html>
