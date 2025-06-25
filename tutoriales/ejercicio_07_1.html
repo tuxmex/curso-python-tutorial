@@ -419,6 +419,22 @@
                 transform: translateX(0);
             }
         }
+         .instructor-info {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .instructor-info a {
+            color: #2a5298;
+            text-decoration: none;
+        }
+        
+        .instructor-info a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -872,6 +888,16 @@ if __name__ == "__main__":
     print(f"🎉 Misión {mision['id']} finalizada")
     print(f"⏳ Tiempo total transcurrido: {centro.tiempo_transcurrido().total_seconds() / 3600:.2f} horas")</code></pre>
             </div>
+        </div>
+
+        <div class="instructor-info">
+            <p><strong>Instructor:</strong> Anastacio Rodríguez García</p>
+            <p>
+                <a href="https://www.linkedin.com/in/anastacio-rodríguez-garcía-5702b7183/" target="_blank">
+                    LinkedIn
+                </a> | 
+                <a href="mailto:anastaciorodriguez@utng.edu.mx">Contacto</a>
+            </p>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.5.1/highlight.min.js"></script>
