@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Curso de Python para la Industria - Recursos Mejorados</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .section {
+            padding: 30px;
+            border-bottom: 1px solid #eee;
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            font-size: 1.8em;
+            color: #1e40af;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .resource-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .resource-title {
+            font-weight: bold;
+            color: #3b82f6;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        .resource-description {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+        .resource-link {
+            display: inline-block;
+            background: #3b82f6;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+        .resource-link:hover {
+            background: #1e40af;
+        }
+        .faq-item {
+            background: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+        .faq-question {
+            background: #3b82f6;
+            color: white;
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+        .faq-question:hover {
+            background: #1e40af;
+        }
+        .faq-answer {
+            padding: 20px;
+            background: white;
+        }
+        .exercise-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .beginner {
+            background: #dcfce7;
+            color: #166534;
+        }
+        .intermediate {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .advanced {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Curso de Python para la Industria</h1>
+            <p>Recursos Mejorados y Materiales del Curso</p>
+        </div>
+
+        <!-- 🛠️ Recursos Adicionales -->
+        <div class="section">
+            <h2 class="section-title">🛠️ Recursos Adicionales</h2>
+            <div class="highlight-box">
+                <strong>💡 Para Docentes:</strong> Estos recursos están diseñados para complementar las clases presenciales y proporcionar ejemplos prácticos que los estudiantes puedan explorar de forma independiente.
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-title">📚 Documentación Oficial de Python</div>
+                    <div class="resource-description">Referencia completa del lenguaje, perfecta para consultas durante el desarrollo de proyectos industriales.</div>
+                    <a href="https://docs.python.org/es/3/" class="resource-link" target="_blank">Acceder →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">🤖 PyAutoGUI - Automatización GUI</div>
+                    <div class="resource-description">Librería para automatizar interfaces gráficas, ideal para tareas repetitivas en entornos industriales.</div>
+                    <a href="https://pyautogui.readthedocs.io/en/latest/" class="resource-link" target="_blank">Documentación →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">🔧 Pandas para Análisis Industrial</div>
+                    <div class="resource-description">Herramientas para análisis de datos de sensores, logs de producción y métricas de calidad.</div>
+                    <a href="https://pandas.pydata.org/docs/getting_started/intro_tutorials/" class="resource-link" target="_blank">Tutoriales →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">🌐 Selenium para Automatización Web</div>
+                    <div class="resource-description">Automatización de procesos web en sistemas ERP, MES y dashboards industriales.</div>
+                    <a href="https://selenium-python.readthedocs.io/" class="resource-link" target="_blank">Guía →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">📊 Matplotlib para Visualización</div>
+                    <div class="resource-description">Creación de gráficos para monitoreo de KPIs y análisis de tendencias en producción.</div>
+                    <a href="https://matplotlib.org/stable/tutorials/index.html" class="resource-link" target="_blank">Tutoriales →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">🔌 PySerial para Comunicación</div>
+                    <div class="resource-description">Comunicación con dispositivos industriales a través de puertos serie (PLCs, sensores).</div>
+                    <a href="https://pyserial.readthedocs.io/en/latest/" class="resource-link" target="_blank">Documentación →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 💻 Ejercicios Prácticos -->
+        <div class="section">
+            <h2 class="section-title">💻 Ejercicios Prácticos</h2>
+            <div class="highlight-box">
+                <strong>🎯 Metodología:</strong> Los ejercicios están organizados por nivel de dificultad. Recomendamos que los estudiantes completen al menos un proyecto de cada nivel para consolidar su aprendizaje.
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="exercise-level beginner">PRINCIPIANTE</div>
+                    <div class="resource-title">🔢 Calculadora de OEE (Overall Equipment Effectiveness)</div>
+                    <div class="resource-description">Desarrolla una aplicación que calcule el OEE basado en disponibilidad, rendimiento y calidad. Incluye interfaz gráfica con Tkinter.</div>
+                    <a href="https://www.practicepython.org/" class="resource-link" target="_blank">Ejercicios Base →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="exercise-level beginner">PRINCIPIANTE</div>
+                    <div class="resource-title">📈 Monitor de Temperatura en Tiempo Real</div>
+                    <div class="resource-description">Simula la lectura de sensores de temperatura y crea alertas cuando se excedan los límites establecidos.</div>
+                    <a href="https://www.geeksforgeeks.org/python/python-exercises-practice-questions-and-solutions/" class="resource-link" target="_blank">Ejercicios →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="exercise-level intermediate">INTERMEDIO</div>
+                    <div class="resource-title">🏭 Sistema de Inventario Automatizado</div>
+                    <div class="resource-description">Crea un sistema que gestione el inventario de materias primas, genere órdenes de compra automáticas y produzca reportes.</div>
+                    <a href="https://www.dataquest.io/blog/python-projects-for-beginners/" class="resource-link" target="_blank">Proyectos →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="exercise-level intermediate">INTERMEDIO</div>
+                    <div class="resource-title">📊 Dashboard de Producción</div>
+                    <div class="resource-description">Desarrolla un dashboard web con Flask que muestre métricas de producción en tiempo real usando datos simulados.</div>
+                    <a href="https://pynative.com/python-exercises-with-solutions/" class="resource-link" target="_blank">Ejercicios →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="exercise-level advanced">AVANZADO</div>
+                    <div class="resource-title">🤖 Predicción de Mantenimiento</div>
+                    <div class="resource-description">Utiliza machine learning para predecir fallos en equipos basándose en datos históricos de sensores.</div>
+                    <a href="https://www.datacamp.com/blog/60-python-projects-for-all-levels-expertise" class="resource-link" target="_blank">Proyectos ML →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="exercise-level advanced">AVANZADO</div>
+                    <div class="resource-title">🔗 Integración IoT Industrial</div>
+                    <div class="resource-description">Desarrolla un sistema que recopile datos de múltiples dispositivos IoT y los integre en una base de datos centralizada.</div>
+                    <a href="https://github.com/zhiwehu/Python-programming-exercises" class="resource-link" target="_blank">Ejercicios Avanzados →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 🔗 Enlaces Útiles -->
+        <div class="section">
+            <h2 class="section-title">🔗 Enlaces Útiles</h2>
+            <div class="highlight-box">
+                <strong>📖 Recursos Curados:</strong> Enlaces seleccionados específicamente para complementar el aprendizaje de Python en contextos industriales y de automatización.
+            </div>
+            
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <div class="resource-title">🏭 PLCnext Community - Python Industrial</div>
+                    <div class="resource-description">Comunidad especializada en aplicaciones de Python para automatización industrial y control de procesos.</div>
+                    <a href="https://www.plcnext-community.net/" class="resource-link" target="_blank">Visitar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">🤖 Automate the Boring Stuff</div>
+                    <div class="resource-description">Libro gratuito que enseña automatización práctica con Python, ideal para tareas repetitivas en la industria.</div>
+                    <a href="https://automatetheboringstuff.com/" class="resource-link" target="_blank">Leer →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">🎓 Real Python - Industrial Applications</div>
+                    <div class="resource-description">Tutoriales avanzados sobre aplicaciones industriales de Python, incluyendo casos de estudio reales.</div>
+                    <a href="https://realpython.com/" class="resource-link" target="_blank">Explorar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">📚 Python Package Index (PyPI)</div>
+                    <div class="resource-description">Repositorio oficial de paquetes Python, esencial para encontrar librerías especializadas en automatización.</div>
+                    <a href="https://pypi.org/" class="resource-link" target="_blank">Buscar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">🔧 Stack Overflow - Python Industrial</div>
+                    <div class="resource-description">Comunidad para resolver dudas específicas sobre programación Python en entornos industriales.</div>
+                    <a href="https://stackoverflow.com/questions/tagged/python+industrial" class="resource-link" target="_blank">Preguntar →</a>
+                </div>
+                
+                <div class="resource-card">
+                    <div class="resource-title">📖 Google's Python Class</div>
+                    <div class="resource-description">Curso intensivo de Google sobre Python, con enfoque en aplicaciones prácticas y ejercicios.</div>
+                    <a href="https://developers.google.com/edu/python" class="resource-link" target="_blank">Estudiar →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ❓ Preguntas Frecuentes -->
+        <div class="section">
+            <h2 class="section-title">❓ Preguntas Frecuentes</h2>
+            <div class="highlight-box">
+                <strong>🎯 Para Estudiantes:</strong> Estas son las dudas más comunes que surgen durante el aprendizaje de Python aplicado a la industria. Hemos incluido ejemplos prácticos para facilitar la comprensión.
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    🐍 ¿Qué versión de Python debo usar para aplicaciones industriales?
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    <strong>Recomendamos Python 3.9 o superior</strong> para aplicaciones industriales. Esta versión ofrece:
+                    <ul>
+                        <li><strong>Estabilidad:</strong> Menos bugs y mejor rendimiento</li>
+                        <li><strong>Compatibilidad:</strong> Con la mayoría de librerías industriales como PySerial, pandas, numpy</li>
+                        <li><strong>Funciones modernas:</strong> Como el operador walrus (:=) útil para procesamiento de datos</li>
+                    </ul>
+                    <em>Ejemplo práctico:</em> Para leer datos de un sensor cada segundo:
+                    <code style="background: #f4f4f4; padding: 10px; display: block; margin: 10px 0;">
+                        while (data := sensor.read()) is not None:
+                            process_data(data)
+                    </code>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    🔌 ¿Cómo puedo conectar Python con equipos industriales (PLCs, sensores)?
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    <strong>Existen varios métodos según el tipo de comunicación:</strong>
+                    <ul>
+                        <li><strong>Comunicación Serie (RS232/RS485):</strong> Usar PySerial</li>
+                        <li><strong>Modbus:</strong> Librerías como pymodbus o minimalmodbus</li>
+                        <li><strong>Ethernet/TCP:</strong> Socket programming o librerías específicas del fabricante</li>
+                        <li><strong>OPC UA:</strong> Usar python-opcua para comunicación estándar industrial</li>
+                    </ul>
+                    <em>Ejemplo con PySerial:</em>
+                    <code style="background: #f4f4f4; padding: 10px; display: block; margin: 10px 0;">
+                        import serial<br>
+                        ser = serial.Serial('/dev/ttyUSB0', 9600)<br>
+                        data = ser.readline()
+                    </code>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    📊 ¿Qué librerías son esenciales para análisis de datos industriales?
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    <strong>Las librerías fundamentales incluyen:</strong>
+                    <ul>
+                        <li><strong>Pandas:</strong> Para manipulación de datos de sensores y logs</li>
+                        <li><strong>NumPy:</strong> Cálculos numéricos y análisis estadístico</li>
+                        <li><strong>Matplotlib/Seaborn:</strong> Visualización de tendencias y KPIs</li>
+                        <li><strong>SciPy:</strong> Análisis avanzado y procesamiento de señales</li>
+                        <li><strong>Scikit-learn:</strong> Machine learning para mantenimiento predictivo</li>
+                    </ul>
+                    <em>Ejemplo de análisis de OEE:</em>
+                    <code style="background: #f4f4f4; padding: 10px; display: block; margin: 10px 0;">
+                        import pandas as pd<br>
+                        df = pd.read_csv('production_data.csv')<br>
+                        oee = (df['availability'] * df['performance'] * df['quality']).mean()
+                    </code>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    🛡️ ¿Cómo garantizar la seguridad en aplicaciones Python industriales?
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    <strong>La seguridad industrial requiere múltiples capas:</strong>
+                    <ul>
+                        <li><strong>Validación de entrada:</strong> Siempre validar datos de sensores y usuarios</li>
+                        <li><strong>Manejo de excepciones:</strong> Usar try/except para evitar paradas no planificadas</li>
+                        <li><strong>Logging:</strong> Registrar todas las operaciones críticas</li>
+                        <li><strong>Redundancia:</strong> Implementar sistemas de respaldo</li>
+                        <li><strong>Cifrado:</strong> Para comunicaciones sensibles usar SSL/TLS</li>
+                    </ul>
+                    <em>Ejemplo de validación robusta:</em>
+                    <code style="background: #f4f4f4; padding: 10px; display: block; margin: 10px 0;">
+                        try:<br>
+                        &nbsp;&nbsp;temp = float(sensor_data)<br>
+                        &nbsp;&nbsp;if 0 <= temp <= 100:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;process_temperature(temp)<br>
+                        &nbsp;&nbsp;else:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("Temperatura fuera de rango")<br>
+                        except Exception as e:<br>
+                        &nbsp;&nbsp;log_error(f"Error en sensor: {e}")
+                    </code>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    ⚡ ¿Cómo optimizar el rendimiento de Python en tiempo real?
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    <strong>Para aplicaciones de tiempo real considera:</strong>
+                    <ul>
+                        <li><strong>NumPy:</strong> Para operaciones numéricas vectorizadas</li>
+                        <li><strong>Asyncio:</strong> Para manejo concurrente de múltiples sensores</li>
+                        <li><strong>Cython:</strong> Para código crítico que requiere máxima velocidad</li>
+                        <li><strong>Multiprocessing:</strong> Para distribuir carga en múltiples cores</li>
+                        <li><strong>Profiling:</strong> Usar cProfile para identificar cuellos de botella</li>
+                    </ul>
+                    <em>Ejemplo con asyncio para múltiples sensores:</em>
+                    <code style="background: #f4f4f4; padding: 10px; display: block; margin: 10px 0;">
+                        import asyncio<br>
+                        async def read_sensor(sensor_id):<br>
+                        &nbsp;&nbsp;while True:<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;data = await sensor.read_async(sensor_id)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;await process_data(data)<br>
+                        &nbsp;&nbsp;&nbsp;&nbsp;await asyncio.sleep(0.1)
+                    </code>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)">
+                    🚀 ¿Cuáles son las mejores prácticas para proyectos Python industriales?
+                </div>
+                <div class="faq-answer" style="display: none;">
+                    <strong>Sigue estas prácticas esenciales:</strong>
+                    <ul>
+                        <li><strong>Documentación:</strong> Documenta todas las funciones con docstrings</li>
+                        <li><strong>Testing:</strong> Usa pytest para pruebas unitarias y de integración</li>
+                        <li><strong>Control de versiones:</strong> Git con ramas para desarrollo y producción</li>
+                        <li><strong>Virtual environments:</strong> Aísla dependencias con venv o conda</li>
+                        <li><strong>Configuración:</strong> Usa archivos .env para configuraciones</li>
+                        <li><strong>Monitoreo:</strong> Implementa health checks y alertas</li>
+                    </ul>
+                    <em>Estructura de proyecto recomendada:</em>
+                    <code style="background: #f4f4f4; padding: 10px; display: block; margin: 10px 0;">
+                        industrial_project/<br>
+                        ├── src/industrial_app/<br>
+                        ├── tests/<br>
+                        ├── docs/<br>
+                        ├── requirements.txt<br>
+                        ├── .env<br>
+                        └── README.md
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFAQ(element) {
+            const answer = element.nextElementSibling;
+            const isVisible = answer.style.display !== 'none';
+            
+            // Cerrar todas las respuestas
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.style.display = 'none';
+            });
+            
+            // Abrir la seleccionada si estaba cerrada
+            if (!isVisible) {
+                answer.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
