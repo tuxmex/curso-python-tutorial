@@ -2,181 +2,1281 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Presentación - Ejercicio 8: Manejo de Errores en Python</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 8.1: El Cajero Automático Inteligente</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(120deg, #f8fafc 0%, #e0e7ff 100%);
-            color: #22223b;
+        * {
             margin: 0;
             padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            background: #fff;
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
-        .container:hover {
-            box-shadow: 0 12px 36px rgba(58, 90, 64, 0.15);
-            transform: translateY(-4px) scale(1.01);
-        }
-        .step ul, .theory ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .step ul li, .theory ul li {
-            position: relative;
-            padding-left: 36px;
-            margin-bottom: 14px;
-            font-size: 1.08em;
-            animation: fadeInUp 0.7s;
-        }
-        .step ul li::before {
-            content: "💡";
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1.2em;
-            animation: bounceIn 0.7s;
-        }
-        .theory ul li::before {
-            content: "✨";
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1.2em;
-            animation: pulse 1.2s infinite alternate;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0.5);}
-            60% { transform: scale(1.2);}
-            100% { transform: scale(1);}
-        }
-        @keyframes pulse {
-            from { color: #b5838d;}
-            to { color: #ffb4a2;}
-        }
-
-        .container {
-            border-radius: 16px;
-            box-shadow: 0 6px 24px rgba(34,34,59,0.08);
-            padding: 32px 40px;
+            box-sizing: border-box;
         }
         
-        h1, h2 {
-            color: #3a5a40;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
         }
-        h1 {
-            margin-bottom: 0.5em;
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
         }
-        .step {
-            background: #e9f5db;
-            border-left: 6px solid #3a5a40;
-            padding: 18px 24px;
-            margin: 24px 0;
-            border-radius: 8px;
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
         }
-        code, pre {
-            background: #f0efeb;
-            color: #22223b;
-            border-radius: 6px;
-            padding: 2px 6px;
-            font-size: 1em;
+        
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
-        pre {
-            padding: 16px;
-            overflow-x: auto;
+        
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
         }
-        ul {
-            margin-top: 0.5em;
+        
+        .slide {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: slideIn 0.8s ease-out;
         }
-        .theory {
-            background: #f7cad0;
-            border-left: 6px solid #b5838d;
-            padding: 16px 24px;
-            border-radius: 8px;
-            margin: 24px 0;
+        
+        .slide h2 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #2a5298;
         }
-        .highlight {
-            color: #3a86ff;
+        
+        .slide h3 {
+            color: #2a5298;
+            margin: 20px 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .objetivo {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .teoria {
+            background: #f0f8ff;
+            border-left: 5px solid #2a5298;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .teoria h4 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+        
+        .cajero-visual {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 400px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cajero-visual::before {
+            content: "💳";
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 100px;
+            opacity: 0.1;
+        }
+        
+        .pantalla-cajero {
+            background: rgba(0,0,0,0.8);
+            border: 3px solid #00ff00;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            text-align: left;
+            box-shadow: inset 0 0 20px rgba(0,255,0,0.2);
+        }
+        
+        .boton-cajero {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
             font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .boton-cajero:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .codigo-ejemplo {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 1.05em;
+            line-height: 1.8;
+            position: relative;
+        }
+        
+        .codigo-ejemplo::before {
+            content: "Python";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #2a5298;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        
+        .comment {
+            color: #6A9955;
+            font-style: italic;
+        }
+        
+        .string {
+            color: #CE9178;
+        }
+        
+        .keyword {
+            color: #C586C0;
+        }
+        
+        .try-keyword {
+            color: #C586C0;
+            font-weight: bold;
+        }
+        
+        .except-keyword {
+            color: #C586C0;
+            font-weight: bold;
+        }
+        
+        .function {
+            color: #DCDCAA;
+        }
+        
+        .variable {
+            color: #9CDCFE;
+        }
+        
+        .number {
+            color: #B5CEA8;
+        }
+        
+        .error-type {
+            color: #F44747;
+            font-weight: bold;
+        }
+        
+        .paso {
+            background: #e8f5e9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 2px solid #4CAF50;
+            position: relative;
+            padding-left: 70px;
+        }
+        
+        .paso::before {
+            content: attr(data-paso);
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #4CAF50;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .error-ejemplo {
+            background: #ffebee;
+            border: 2px solid #f44336;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .error-ejemplo::before {
+            content: "❌";
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 1.5em;
+        }
+        
+        .exito-ejemplo {
+            background: #e8f5e9;
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            position: relative;
+        }
+        
+        .exito-ejemplo::before {
+            content: "✅";
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            font-size: 1.5em;
+        }
+        
+        .flujo-try {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .flujo-bloque {
+            background: #e3f2fd;
+            border: 2px solid #2196F3;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .flujo-bloque.try {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+        
+        .flujo-bloque.except {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .flujo-bloque.finally {
+            background: #fff8e1;
+            border-color: #FFC107;
+        }
+        
+        .flujo-flecha {
+            font-size: 2em;
+            color: #666;
+        }
+        
+        .tabla-errores {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .tabla-errores th {
+            background: #1e3c72;
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .tabla-errores td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .tabla-errores tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+        
+        .tabla-errores code {
+            background: #e8f5e9;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-family: monospace;
+            color: #2e7d32;
+        }
+        
+        .tip {
+            background: #fffde7;
+            border: 2px solid #FBC02D;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .tip::before {
+            content: "💡";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .warning {
+            background: #fff3e0;
+            border: 2px solid #FF9800;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            position: relative;
+            padding-left: 60px;
+        }
+        
+        .warning::before {
+            content: "⚠️";
+            position: absolute;
+            left: 15px;
+            top: 20px;
+            font-size: 2em;
+        }
+        
+        .ejercicio-propuesto {
+            background: linear-gradient(135deg, #FA8BFF 0%, #2BD2FF 50%, #2BFF88 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        
+        .consola-error {
+            background: #2b2b2b;
+            color: #f44747;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            border-left: 4px solid #f44747;
+            white-space: pre-wrap;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Ejercicio 8: Manejo de Errores y Excepciones en Python</h1>
-        <div class="theory">
-            <h2>¿Por qué es importante el manejo de errores?</h2>
-            <p>
-                Cuando escribimos programas, es común que ocurran errores inesperados, como ingresar un dato incorrecto o intentar dividir por cero.
-                <span class="highlight">Python</span> nos permite manejar estos errores de forma elegante usando <code>try</code>, <code>except</code>, <code>else</code> y <code>finally</code>.
-            </p>
+        <div class="header">
+            <h1>🏦 El Cajero Automático Inteligente</h1>
+            <p>Módulo 8: Manejo de Errores y Excepciones - Ejercicio 8.1</p>
         </div>
 
-        <div class="step">
-            <h2>Paso 1: Estructura básica</h2>
-            <p>
-                La estructura para manejar errores es:
-            </p>
-            <pre><code>try:
-    # Código que puede causar un error
-except TipoDeError:
-    # Qué hacer si ocurre ese error
-else:
-    # (Opcional) Si no hubo error
-finally:
-    # (Opcional) Siempre se ejecuta
-</code></pre>
+        <div class="slide">
+            <h2>📎 Información del Ejercicio</h2>
+            
+            <div class="objetivo">
+                <strong>🎯 Objetivo:</strong> Aprender a manejar errores y excepciones en Python creando un cajero automático que maneje graciosamente situaciones de error comunes. Los estudiantes comprenderán la importancia del manejo de errores para crear aplicaciones robustas y amigables con el usuario.
+            </div>
+
+            <h3>🛡️ ¿Por qué Manejar Errores?</h3>
+            
+            <div class="teoria">
+                <h4>El Problema: Los Errores Rompen el Programa</h4>
+                <p>Sin manejo de errores, un programa se detiene abruptamente cuando algo sale mal:</p>
+                <ul>
+                    <li>💥 El usuario ingresa texto en lugar de números</li>
+                    <li>🚫 Se intenta dividir entre cero</li>
+                    <li>📁 Un archivo no existe</li>
+                    <li>🌐 No hay conexión a internet</li>
+                    <li>💰 Fondos insuficientes en una transacción</li>
+                </ul>
+            </div>
+
+            <div class="cajero-visual">
+                <h3>💳 Banco Python</h3>
+                <div class="pantalla-cajero">
+                    > BIENVENIDO<br>
+                    > Saldo: $1,000.00<br>
+                    > _
+                </div>
+                <div>
+                    <button class="boton-cajero">Retirar</button>
+                    <button class="boton-cajero">Depositar</button>
+                    <button class="boton-cajero">Consultar</button>
+                </div>
+            </div>
+
+            <div class="teoria">
+                <h4>La Solución: Try/Except</h4>
+                <p>Python proporciona una forma elegante de manejar errores sin que el programa se detenga:</p>
+                <ul>
+                    <li>✅ <strong>try:</strong> Intenta ejecutar código que podría fallar</li>
+                    <li>🛡️ <strong>except:</strong> Captura el error si ocurre</li>
+                    <li>🔄 <strong>else:</strong> Se ejecuta si NO hay error</li>
+                    <li>🎯 <strong>finally:</strong> Se ejecuta SIEMPRE</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="step">
-            <h2>Paso 2: Ejemplo práctico</h2>
-            <p>
-                Analicemos el siguiente código:
-            </p>
-            <pre><code>try:
-    numero = int(input("Introduce un número: "))
-    resultado = 10 / numero
-    print("El resultado es:", resultado)
-except ValueError:
-    print("Debes introducir un número entero.")
-except ZeroDivisionError:
-    print("No se puede dividir entre cero.")
-except Exception as e:
-    print("Ocurrió un error:", e)
-else:
-    print("La operación se realizó correctamente.")
-finally:
-    print("Fin del programa.")
-</code></pre>
+        <div class="slide">
+            <h2>🔍 Tipos Comunes de Errores</h2>
+            
+            <table class="tabla-errores">
+                <thead>
+                    <tr>
+                        <th>Error</th>
+                        <th>Descripción</th>
+                        <th>Ejemplo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>ValueError</code></td>
+                        <td>Valor incorrecto para el tipo esperado</td>
+                        <td><code>int("abc")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>TypeError</code></td>
+                        <td>Operación con tipo incorrecto</td>
+                        <td><code>"2" + 2</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>ZeroDivisionError</code></td>
+                        <td>División entre cero</td>
+                        <td><code>10 / 0</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>FileNotFoundError</code></td>
+                        <td>Archivo no existe</td>
+                        <td><code>open("noexiste.txt")</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>IndexError</code></td>
+                        <td>Índice fuera de rango</td>
+                        <td><code>lista[10]</code> (lista de 5 elementos)</td>
+                    </tr>
+                    <tr>
+                        <td><code>KeyError</code></td>
+                        <td>Clave no existe en diccionario</td>
+                        <td><code>dict["clave_inexistente"]</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="flujo-try">
+                <div class="flujo-bloque try">
+                    <h4>TRY</h4>
+                    <p>Código que podría fallar</p>
+                </div>
+                <div class="flujo-flecha">→</div>
+                <div class="flujo-bloque except">
+                    <h4>EXCEPT</h4>
+                    <p>Si hay error</p>
+                </div>
+                <div class="flujo-flecha">→</div>
+                <div class="flujo-bloque finally">
+                    <h4>FINALLY</h4>
+                    <p>Siempre se ejecuta</p>
+                </div>
+            </div>
         </div>
 
-        <div class="step">
-            <h2>Paso 3: Explicación paso a paso</h2>
-            <ul>
-                <li><b>try:</b> Intenta convertir la entrada a entero y dividir 10 por ese número.</li>
-                <li><b>except ValueError:</b> Si el usuario no ingresa un número válido, muestra un mensaje de error.</li>
-                <li><b>except ZeroDivisionError:</b> Si el usuario ingresa 0, evita la división por cero.</li>
-                <li><b>except Exception as e:</b> Captura cualquier otro error inesperado.</li>
-                <li><b>else:</b> Si no hubo errores, informa que todo salió bien.</li>
-                <li><b>finally:</b> Siempre se ejecuta, mostrando el fin del programa.</li>
-            </ul>
+        <div class="slide">
+            <h2>👨‍💻 Desarrollo Paso a Paso</h2>
+
+            <div class="paso" data-paso="1">
+                <h4>Crear la clase base del cajero con manejo básico de errores</h4>
+                <div class="codigo-ejemplo">
+<span class="keyword">class</span> <span class="function">CajeroAutomatico</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">saldo_inicial</span>=<span class="number">1000</span>):
+        <span class="string">"""Inicializa el cajero con un saldo inicial"""</span>
+        <span class="try-keyword">try</span>:
+            <span class="variable">self</span>.saldo = <span class="function">float</span>(<span class="variable">saldo_inicial</span>)
+            <span class="keyword">if</span> <span class="variable">self</span>.saldo < <span class="number">0</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"El saldo inicial no puede ser negativo"</span>)
+            
+            <span class="variable">self</span>.historial = []
+            <span class="variable">self</span>.intentos_pin = <span class="number">0</span>
+            <span class="variable">self</span>.bloqueado = <span class="keyword">False</span>
+            
+            <span class="function">print</span>(<span class="string">f"💳 Cajero inicializado con saldo: ${self.saldo:.2f}"</span>)
+            
+        <span class="except-keyword">except</span> <span class="error-type">ValueError</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="function">print</span>(<span class="string">f"❌ Error al inicializar: {e}"</span>)
+            <span class="variable">self</span>.saldo = <span class="number">0</span>
+        
+        <span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="function">print</span>(<span class="string">f"❌ Error inesperado: {e}"</span>)
+            <span class="variable">self</span>.saldo = <span class="number">0</span>
+    
+    <span class="keyword">def</span> <span class="function">validar_pin</span>(<span class="variable">self</span>, <span class="variable">pin</span>):
+        <span class="string">"""Valida el PIN del usuario con manejo de errores"""</span>
+        <span class="try-keyword">try</span>:
+            <span class="keyword">if</span> <span class="variable">self</span>.bloqueado:
+                <span class="keyword">raise</span> <span class="error-type">PermissionError</span>(<span class="string">"Cajero bloqueado por seguridad"</span>)
+            
+            <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">pin</span>.<span class="function">isdigit</span>():
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"El PIN debe contener solo números"</span>)
+            
+            <span class="keyword">if</span> <span class="function">len</span>(<span class="variable">pin</span>) != <span class="number">4</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"El PIN debe tener 4 dígitos"</span>)
+            
+            <span class="comment"># Simulación de validación (PIN correcto: 1234)</span>
+            <span class="keyword">if</span> <span class="variable">pin</span> == <span class="string">"1234"</span>:
+                <span class="variable">self</span>.intentos_pin = <span class="number">0</span>
+                <span class="keyword">return</span> <span class="keyword">True</span>
+            <span class="keyword">else</span>:
+                <span class="variable">self</span>.intentos_pin += <span class="number">1</span>
+                <span class="keyword">if</span> <span class="variable">self</span>.intentos_pin >= <span class="number">3</span>:
+                    <span class="variable">self</span>.bloqueado = <span class="keyword">True</span>
+                    <span class="keyword">raise</span> <span class="error-type">PermissionError</span>(<span class="string">"Demasiados intentos fallidos. Cajero bloqueado."</span>)
+                <span class="keyword">return</span> <span class="keyword">False</span>
+                
+        <span class="except-keyword">except</span> (<span class="error-type">ValueError</span>, <span class="error-type">PermissionError</span>) <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="function">print</span>(<span class="string">f"❌ Error de validación: {e}"</span>)
+            <span class="keyword">raise</span>  <span class="comment"># Re-lanzamos el error para manejarlo arriba</span>
+                </div>
+            </div>
+
+            <div class="paso" data-paso="2">
+                <h4>Implementar función de retiro con múltiples validaciones</h4>
+                <div class="codigo-ejemplo">
+    <span class="keyword">def</span> <span class="function">retirar_dinero</span>(<span class="variable">self</span>, <span class="variable">cantidad_str</span>):
+        <span class="string">"""Retira dinero del cajero con manejo completo de errores"""</span>
+        <span class="try-keyword">try</span>:
+            <span class="comment"># Convertir entrada a número</span>
+            <span class="variable">cantidad</span> = <span class="function">float</span>(<span class="variable">cantidad_str</span>)
+            
+            <span class="comment"># Validaciones</span>
+            <span class="keyword">if</span> <span class="variable">cantidad</span> <= <span class="number">0</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"La cantidad debe ser mayor a cero"</span>)
+            
+            <span class="keyword">if</span> <span class="variable">cantidad</span> % <span class="number">10</span> != <span class="number">0</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"Solo se pueden retirar múltiplos de $10"</span>)
+            
+            <span class="keyword">if</span> <span class="variable">cantidad</span> > <span class="number">1000</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"Límite máximo de retiro: $1000"</span>)
+            
+            <span class="keyword">if</span> <span class="variable">cantidad</span> > <span class="variable">self</span>.saldo:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">f"Fondos insuficientes. Saldo disponible: ${self.saldo:.2f}"</span>)
+            
+            <span class="comment"># Realizar retiro</span>
+            <span class="variable">self</span>.saldo -= <span class="variable">cantidad</span>
+            <span class="variable">self</span>.<span class="function">registrar_transaccion</span>(<span class="string">"Retiro"</span>, <span class="variable">cantidad</span>)
+            
+            <span class="keyword">return</span> {
+                <span class="string">"exito"</span>: <span class="keyword">True</span>,
+                <span class="string">"mensaje"</span>: <span class="string">f"✅ Retiro exitoso: ${cantidad:.2f}"</span>,
+                <span class="string">"nuevo_saldo"</span>: <span class="variable">self</span>.saldo
+            }
+            
+        <span class="except-keyword">except</span> <span class="error-type">ValueError</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="keyword">if</span> <span class="string">"could not convert"</span> <span class="keyword">in</span> <span class="function">str</span>(<span class="variable">e</span>):
+                <span class="variable">mensaje</span> = <span class="string">"❌ Por favor ingrese un número válido"</span>
+            <span class="keyword">else</span>:
+                <span class="variable">mensaje</span> = <span class="string">f"❌ {e}"</span>
+            
+            <span class="keyword">return</span> {
+                <span class="string">"exito"</span>: <span class="keyword">False</span>,
+                <span class="string">"mensaje"</span>: <span class="variable">mensaje</span>,
+                <span class="string">"nuevo_saldo"</span>: <span class="variable">self</span>.saldo
+            }
+            
+        <span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="comment"># Captura cualquier otro error no previsto</span>
+            <span class="keyword">return</span> {
+                <span class="string">"exito"</span>: <span class="keyword">False</span>,
+                <span class="string">"mensaje"</span>: <span class="string">f"❌ Error inesperado: {e}"</span>,
+                <span class="string">"nuevo_saldo"</span>: <span class="variable">self</span>.saldo
+            }
+            
+        <span class="keyword">finally</span>:
+            <span class="comment"># Siempre mostrar el saldo actual</span>
+            <span class="function">print</span>(<span class="string">f"💰 Saldo actual: ${self.saldo:.2f}"</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="3">
+                <h4>Crear funciones adicionales con manejo de errores</h4>
+                <div class="codigo-ejemplo">
+    <span class="keyword">def</span> <span class="function">depositar_dinero</span>(<span class="variable">self</span>, <span class="variable">cantidad_str</span>):
+        <span class="string">"""Deposita dinero con validaciones"""</span>
+        <span class="try-keyword">try</span>:
+            <span class="variable">cantidad</span> = <span class="function">float</span>(<span class="variable">cantidad_str</span>)
+            
+            <span class="keyword">if</span> <span class="variable">cantidad</span> <= <span class="number">0</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"La cantidad debe ser positiva"</span>)
+            
+            <span class="keyword">if</span> <span class="variable">cantidad</span> > <span class="number">10000</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"Depósito máximo: $10,000"</span>)
+            
+            <span class="variable">self</span>.saldo += <span class="variable">cantidad</span>
+            <span class="variable">self</span>.<span class="function">registrar_transaccion</span>(<span class="string">"Depósito"</span>, <span class="variable">cantidad</span>)
+            
+            <span class="keyword">return</span> {
+                <span class="string">"exito"</span>: <span class="keyword">True</span>,
+                <span class="string">"mensaje"</span>: <span class="string">f"✅ Depósito exitoso: ${cantidad:.2f}"</span>,
+                <span class="string">"nuevo_saldo"</span>: <span class="variable">self</span>.saldo
+            }
+            
+        <span class="except-keyword">except</span> <span class="error-type">ValueError</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="keyword">if</span> <span class="string">"could not convert"</span> <span class="keyword">in</span> <span class="function">str</span>(<span class="variable">e</span>):
+                <span class="variable">mensaje</span> = <span class="string">"❌ Ingrese un número válido"</span>
+            <span class="keyword">else</span>:
+                <span class="variable">mensaje</span> = <span class="string">f"❌ {e}"</span>
+            
+            <span class="keyword">return</span> {
+                <span class="string">"exito"</span>: <span class="keyword">False</span>,
+                <span class="string">"mensaje"</span>: <span class="variable">mensaje</span>,
+                <span class="string">"nuevo_saldo"</span>: <span class="variable">self</span>.saldo
+            }
+    
+    <span class="keyword">def</span> <span class="function">consultar_saldo</span>(<span class="variable">self</span>):
+        <span class="string">"""Consulta el saldo actual de forma segura"""</span>
+        <span class="try-keyword">try</span>:
+            <span class="keyword">if</span> <span class="variable">self</span>.saldo < <span class="number">0</span>:
+                <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"Error: Saldo inconsistente"</span>)
+            
+            <span class="keyword">return</span> {
+                <span class="string">"exito"</span>: <span class="keyword">True</span>,
+                <span class="string">"saldo"</span>: <span class="variable">self</span>.saldo,
+                <span class="string">"mensaje"</span>: <span class="string">f"💰 Su saldo actual es: ${self.saldo:.2f}"</span>
+            }
+            
+        <span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="keyword">return</span> {
+                <span class="string">"exito"</span>: <span class="keyword">False</span>,
+                <span class="string">"mensaje"</span>: <span class="string">f"❌ Error al consultar saldo: {e}"</span>
+            }
+    
+    <span class="keyword">def</span> <span class="function">registrar_transaccion</span>(<span class="variable">self</span>, <span class="variable">tipo</span>, <span class="variable">cantidad</span>):
+        <span class="string">"""Registra una transacción en el historial"""</span>
+        <span class="try-keyword">try</span>:
+            <span class="keyword">from</span> <span class="variable">datetime</span> <span class="keyword">import</span> <span class="variable">datetime</span>
+            
+            <span class="variable">transaccion</span> = {
+                <span class="string">"tipo"</span>: <span class="variable">tipo</span>,
+                <span class="string">"cantidad"</span>: <span class="variable">cantidad</span>,
+                <span class="string">"fecha"</span>: <span class="variable">datetime</span>.<span class="function">now</span>().<span class="function">strftime</span>(<span class="string">"%Y-%m-%d %H:%M:%S"</span>),
+                <span class="string">"saldo_resultante"</span>: <span class="variable">self</span>.saldo
+            }
+            
+            <span class="variable">self</span>.historial.<span class="function">append</span>(<span class="variable">transaccion</span>)
+            
+        <span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="function">print</span>(<span class="string">f"⚠️ Error al registrar transacción: {e}"</span>)
+    
+    <span class="keyword">def</span> <span class="function">mostrar_historial</span>(<span class="variable">self</span>):
+        <span class="string">"""Muestra el historial de transacciones con manejo de errores"""</span>
+        <span class="try-keyword">try</span>:
+            <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">self</span>.historial:
+                <span class="keyword">return</span> <span class="string">"📋 No hay transacciones registradas"</span>
+            
+            <span class="variable">resultado</span> = <span class="string">"📋 Historial de Transacciones:\\n"</span>
+            <span class="variable">resultado</span> += <span class="string">"="</span> * <span class="number">50</span> + <span class="string">"\\n"</span>
+            
+            <span class="keyword">for</span> <span class="variable">i</span>, <span class="variable">transaccion</span> <span class="keyword">in</span> <span class="function">enumerate</span>(<span class="variable">self</span>.historial, <span class="number">1</span>):
+                <span class="variable">resultado</span> += <span class="string">f"{i}. {transaccion['tipo']} - ${transaccion['cantidad']:.2f}\\n"</span>
+                <span class="variable">resultado</span> += <span class="string">f"   Fecha: {transaccion['fecha']}\\n"</span>
+                <span class="variable">resultado</span> += <span class="string">f"   Saldo después: ${transaccion['saldo_resultante']:.2f}\\n\\n"</span>
+            
+            <span class="keyword">return</span> <span class="variable">resultado</span>
+            
+        <span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+            <span class="keyword">return</span> <span class="string">f"❌ Error al mostrar historial: {e}"</span>
+                </div>
+            </div>
+
+            <div class="paso" data-paso="4">
+                <h4>Crear el menú principal con manejo integral de errores</h4>
+                <div class="codigo-ejemplo">
+    <span class="keyword">def</span> <span class="function">menu_principal</span>(<span class="variable">self</span>):
+        <span class="string">"""Menú principal del cajero con manejo completo de errores"""</span>
+        <span class="keyword">while</span> <span class="keyword">True</span>:
+            <span class="try-keyword">try</span>:
+                <span class="function">print</span>(<span class="string">"\\n" + "="*40</span>)
+                <span class="function">print</span>(<span class="string">"🏦 CAJERO AUTOMÁTICO BANCO PYTHON"</span>)
+                <span class="function">print</span>(<span class="string">"="*40</span>)
+                <span class="function">print</span>(<span class="string">"1. 💰 Consultar Saldo"</span>)
+                <span class="function">print</span>(<span class="string">"2. 💸 Retirar Dinero"</span>)
+                <span class="function">print</span>(<span class="string">"3. 💵 Depositar Dinero"</span>)
+                <span class="function">print</span>(<span class="string">"4. 📋 Ver Historial"</span>)
+                <span class="function">print</span>(<span class="string">"5. 🚪 Salir"</span>)
+                <span class="function">print</span>(<span class="string">"="*40</span>)
+                
+                <span class="variable">opcion</span> = <span class="function">input</span>(<span class="string">"Seleccione una opción (1-5): "</span>).<span class="function">strip</span>()
+                
+                <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">opcion</span>:
+                    <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"Debe ingresar una opción"</span>)
+                
+                <span class="keyword">if</span> <span class="variable">opcion</span> == <span class="string">"1"</span>:
+                    <span class="variable">resultado</span> = <span class="variable">self</span>.<span class="function">consultar_saldo</span>()
+                    <span class="function">print</span>(<span class="variable">resultado</span>[<span class="string">"mensaje"</span>])
+                    
+                <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"2"</span>:
+                    <span class="variable">cantidad</span> = <span class="function">input</span>(<span class="string">"Ingrese la cantidad a retirar: $"</span>)
+                    <span class="variable">resultado</span> = <span class="variable">self</span>.<span class="function">retirar_dinero</span>(<span class="variable">cantidad</span>)
+                    <span class="function">print</span>(<span class="variable">resultado</span>[<span class="string">"mensaje"</span>])
+                    
+                <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"3"</span>:
+                    <span class="variable">cantidad</span> = <span class="function">input</span>(<span class="string">"Ingrese la cantidad a depositar: $"</span>)
+                    <span class="variable">resultado</span> = <span class="variable">self</span>.<span class="function">depositar_dinero</span>(<span class="variable">cantidad</span>)
+                    <span class="function">print</span>(<span class="variable">resultado</span>[<span class="string">"mensaje"</span>])
+                    
+                <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"4"</span>:
+                    <span class="function">print</span>(<span class="variable">self</span>.<span class="function">mostrar_historial</span>())
+                    
+                <span class="keyword">elif</span> <span class="variable">opcion</span> == <span class="string">"5"</span>:
+                    <span class="function">print</span>(<span class="string">"👋 Gracias por usar el Cajero Automático"</span>)
+                    <span class="function">print</span>(<span class="string">"🔒 Sesión cerrada de forma segura"</span>)
+                    <span class="keyword">break</span>
+                    
+                <span class="keyword">else</span>:
+                    <span class="keyword">raise</span> <span class="error-type">ValueError</span>(<span class="string">"Opción no válida. Seleccione 1-5"</span>)
+                    
+            <span class="except-keyword">except</span> <span class="error-type">ValueError</span> <span class="keyword">as</span> <span class="variable">e</span>:
+                <span class="function">print</span>(<span class="string">f"❌ Error de entrada: {e}"</span>)
+                
+            <span class="except-keyword">except</span> <span class="error-type">KeyboardInterrupt</span>:
+                <span class="function">print</span>(<span class="string">"\\n🚨 Operación interrumpida por el usuario"</span>)
+                <span class="function">print</span>(<span class="string">"🔒 Cerrando sesión de forma segura..."</span>)
+                <span class="keyword">break</span>
+                
+            <span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+                <span class="function">print</span>(<span class="string">f"❌ Error inesperado: {e}"</span>)
+                <span class="function">print</span>(<span class="string">"🔄 Intentando continuar..."</span>)
+                
+            <span class="keyword">finally</span>:
+                <span class="comment"># Pausa para que el usuario pueda leer los mensajes</span>
+                <span class="keyword">if</span> <span class="variable">opcion</span> != <span class="string">"5"</span>:
+                    <span class="function">input</span>(<span class="string">"\\nPresione Enter para continuar..."</span>)
+                </div>
+            </div>
+
+            <div class="paso" data-paso="5">
+                <h4>Función principal con validación de PIN</h4>
+                <div class="codigo-ejemplo">
+<span class="comment"># Función principal para ejecutar el programa</span>
+<span class="keyword">def</span> <span class="function">main</span>():
+    <span class="string">"""Función principal que inicia el cajero automático"""</span>
+    <span class="try-keyword">try</span>:
+        <span class="function">print</span>(<span class="string">"🏦 Bienvenido al Cajero Automático Banco Python"</span>)
+        <span class="function">print</span>(<span class="string">"🔐 Por favor, ingrese su PIN para continuar"</span>)
+        
+        <span class="comment"># Crear instancia del cajero</span>
+        <span class="variable">cajero</span> = <span class="function">CajeroAutomatico</span>(<span class="number">1500</span>)  <span class="comment"># Saldo inicial de $1500</span>
+        
+        <span class="comment"># Validar PIN antes de permitir acceso</span>
+        <span class="variable">intentos_maximos</span> = <span class="number">3</span>
+        <span class="variable">pin_valido</span> = <span class="keyword">False</span>
+        
+        <span class="keyword">for</span> <span class="variable">intento</span> <span class="keyword">in</span> <span class="function">range</span>(<span class="variable">intentos_maximos</span>):
+            <span class="try-keyword">try</span>:
+                <span class="variable">pin_usuario</span> = <span class="function">input</span>(<span class="string">f"🔑 Ingrese su PIN (Intento {intento + 1}/{intentos_maximos}): "</span>)
+                
+                <span class="keyword">if</span> <span class="variable">cajero</span>.<span class="function">validar_pin</span>(<span class="variable">pin_usuario</span>):
+                    <span class="function">print</span>(<span class="string">"✅ PIN correcto. Acceso concedido."</span>)
+                    <span class="variable">pin_valido</span> = <span class="keyword">True</span>
+                    <span class="keyword">break</span>
+                <span class="keyword">else</span>:
+                    <span class="variable">intentos_restantes</span> = <span class="variable">intentos_maximos</span> - (<span class="variable">intento</span> + <span class="number">1</span>)
+                    <span class="keyword">if</span> <span class="variable">intentos_restantes</span> > <span class="number">0</span>:
+                        <span class="function">print</span>(<span class="string">f"❌ PIN incorrecto. Le quedan {intentos_restantes} intentos."</span>)
+                        
+            <span class="except-keyword">except</span> (<span class="error-type">ValueError</span>, <span class="error-type">PermissionError</span>) <span class="keyword">as</span> <span class="variable">e</span>:
+                <span class="function">print</span>(<span class="string">f"❌ {e}"</span>)
+                <span class="keyword">if</span> <span class="string">"bloqueado"</span> <span class="keyword">in</span> <span class="function">str</span>(<span class="variable">e</span>).<span class="function">lower</span>():
+                    <span class="keyword">break</span>
+                    
+            <span class="except-keyword">except</span> <span class="error-type">KeyboardInterrupt</span>:
+                <span class="function">print</span>(<span class="string">"\\n🚨 Operación cancelada por el usuario"</span>)
+                <span class="keyword">return</span>
+        
+        <span class="comment"># Si el PIN es válido, mostrar el menú principal</span>
+        <span class="keyword">if</span> <span class="variable">pin_valido</span>:
+            <span class="variable">cajero</span>.<span class="function">menu_principal</span>()
+        <span class="keyword">else</span>:
+            <span class="function">print</span>(<span class="string">"🚫 Acceso denegado. El cajero se ha bloqueado por seguridad."</span>)
+            
+    <span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+        <span class="function">print</span>(<span class="string">f"❌ Error crítico en el sistema: {e}"</span>)
+        <span class="function">print</span>(<span class="string">"🔧 Contacte al administrador del sistema"</span>)
+        
+    <span class="keyword">finally</span>:
+        <span class="function">print</span>(<span class="string">"🔒 Sistema de cajero automático finalizado"</span>)
+
+<span class="comment"># Ejecutar el programa principal</span>
+<span class="keyword">if</span> <span class="variable">__name__</span> == <span class="string">"__main__"</span>:
+    <span class="function">main</span>()
+                </div>
+            </div>
         </div>
 
-        <div class="theory">
-            <h2>¡Recuerda!</h2>
-            <ul>
-                <li>El manejo de errores hace tus programas más robustos y fáciles de usar.</li>
-                <li>Siempre que esperes un posible error, usa <code>try</code> y <code>except</code>.</li>
-                <li>¡Practica modificando el código y probando diferentes entradas!</li>
-            </ul>
+        <div class="slide">
+            <h2>🧪 Ejemplos de Ejecución</h2>
+            
+            <h3>✅ Ejemplo de Uso Exitoso</h3>
+            <div class="exito-ejemplo">
+                <h4>Secuencia de operaciones exitosas:</h4>
+                <div class="consola-error">🏦 Bienvenido al Cajero Automático Banco Python
+🔐 Por favor, ingrese su PIN para continuar
+💳 Cajero inicializado con saldo: $1500.00
+🔑 Ingrese su PIN (Intento 1/3): 1234
+✅ PIN correcto. Acceso concedido.
+
+========================================
+🏦 CAJERO AUTOMÁTICO BANCO PYTHON
+========================================
+1. 💰 Consultar Saldo
+2. 💸 Retirar Dinero
+3. 💵 Depositar Dinero
+4. 📋 Ver Historial
+5. 🚪 Salir
+========================================
+Seleccione una opción (1-5): 1
+💰 Su saldo actual es: $1500.00
+
+Seleccione una opción (1-5): 2
+Ingrese la cantidad a retirar: $200
+✅ Retiro exitoso: $200.00
+💰 Saldo actual: $1300.00</div>
+            </div>
+
+            <h3>❌ Ejemplos de Manejo de Errores</h3>
+            
+            <div class="error-ejemplo">
+                <h4>Error 1: PIN Incorrecto</h4>
+                <div class="consola-error">🔑 Ingrese su PIN (Intento 1/3): 0000
+❌ PIN incorrecto. Le quedan 2 intentos.
+🔑 Ingrese su PIN (Intento 2/3): abcd
+❌ Error de validación: El PIN debe contener solo números
+🔑 Ingrese su PIN (Intento 3/3): 12345
+❌ Error de validación: El PIN debe tener 4 dígitos
+🚫 Acceso denegado. El cajero se ha bloqueado por seguridad.</div>
+            </div>
+
+            <div class="error-ejemplo">
+                <h4>Error 2: Fondos Insuficientes</h4>
+                <div class="consola-error">Seleccione una opción (1-5): 2
+Ingrese la cantidad a retirar: $2000
+❌ Fondos insuficientes. Saldo disponible: $1500.00
+💰 Saldo actual: $1500.00</div>
+            </div>
+
+            <div class="error-ejemplo">
+                <h4>Error 3: Entrada Inválida</h4>
+                <div class="consola-error">Seleccione una opción (1-5): 2
+Ingrese la cantidad a retirar: $abc
+❌ Por favor ingrese un número válido
+💰 Saldo actual: $1500.00
+
+Seleccione una opción (1-5): 2
+Ingrese la cantidad a retirar: $15
+❌ Solo se pueden retirar múltiplos de $10
+💰 Saldo actual: $1500.00</div>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🎓 Conceptos Clave Aprendidos</h2>
+            
+            <div class="tip">
+                <h4>🔑 Principios del Manejo de Errores</h4>
+                <ul>
+                    <li><strong>Anticipación:</strong> Prever qué puede salir mal</li>
+                    <li><strong>Especificidad:</strong> Capturar errores específicos, no genéricos</li>
+                    <li><strong>Graceful Degradation:</strong> El programa sigue funcionando aunque algo falle</li>
+                    <li><strong>Información útil:</strong> Mensajes de error claros para el usuario</li>
+                    <li><strong>Logging:</strong> Registrar errores para debugging</li>
+                </ul>
+            </div>
+
+            <div class="warning">
+                <h4>⚠️ Errores Comunes al Manejar Excepciones</h4>
+                <ul>
+                    <li><strong>Capturar todo con Exception:</strong> Demasiado genérico</li>
+                    <li><strong>Ignorar errores:</strong> Usar <code>pass</code> en except</li>
+                    <li><strong>No usar finally:</strong> Para código que siempre debe ejecutarse</li>
+                    <li><strong>Mensajes poco útiles:</strong> No explicar qué pasó ni cómo solucionarlo</li>
+                    <li><strong>No re-lanzar errores:</strong> Cuando es necesario propagar el error</li>
+                </ul>
+            </div>
+
+            <h3>🏗️ Estructura del Try/Except Completo</h3>
+            <div class="codigo-ejemplo">
+<span class="try-keyword">try</span>:
+    <span class="comment"># Código que puede fallar</span>
+    <span class="variable">resultado</span> = <span class="function">operacion_riesgosa</span>()
+    
+<span class="except-keyword">except</span> <span class="error-type">ValueError</span> <span class="keyword">as</span> <span class="variable">e</span>:
+    <span class="comment"># Error específico de valor</span>
+    <span class="function">print</span>(<span class="string">f"Error de valor: {e}"</span>)
+    
+<span class="except-keyword">except</span> <span class="error-type">TypeError</span> <span class="keyword">as</span> <span class="variable">e</span>:
+    <span class="comment"># Error específico de tipo</span>
+    <span class="function">print</span>(<span class="string">f"Error de tipo: {e}"</span>)
+    
+<span class="except-keyword">except</span> <span class="error-type">Exception</span> <span class="keyword">as</span> <span class="variable">e</span>:
+    <span class="comment"># Cualquier otro error</span>
+    <span class="function">print</span>(<span class="string">f"Error inesperado: {e}"</span>)
+    
+<span class="keyword">else</span>:
+    <span class="comment"># Se ejecuta si NO hay error</span>
+    <span class="function">print</span>(<span class="string">"Operación exitosa"</span>)
+    
+<span class="keyword">finally</span>:
+    <span class="comment"># SIEMPRE se ejecuta</span>
+    <span class="function">print</span>(<span class="string">"Limpieza final"</span>)
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>🚀 Ejercicios Propuestos</h2>
+            
+            <div class="ejercicio-propuesto">
+                <h3>🎯 Ejercicio 1: Mejorar el Cajero</h3>
+                <p><strong>Objetivo:</strong> Añadir nuevas funcionalidades con manejo de errores</p>
+                <ul>
+                    <li>🔄 Transferencia entre cuentas</li>
+                    <li>💳 Cambio de PIN</li>
+                    <li>📊 Estadísticas de uso</li>
+                    <li>💰 Límites diarios de retiro</li>
+                    <li>🔐 Desbloqueo de cuenta</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h3>🎯 Ejercicio 2: Calculadora Robusta</h3>
+                <p><strong>Objetivo:</strong> Crear una calculadora que maneje todos los errores posibles</p>
+                <ul>
+                    <li>➕ Operaciones básicas (+, -, *, /)</li>
+                    <li>🔢 Validación de números</li>
+                    <li>🚫 División por cero</li>
+                    <li>📝 Historial de cálculos</li>
+                    <li>💾 Guardar/cargar historial desde archivo</li>
+                </ul>
+            </div>
+
+            <div class="ejercicio-propuesto">
+                <h3>🎯 Ejercicio 3: Gestor de Archivos</h3>
+                <p><strong>Objetivo:</strong> Programa que maneje archivos con control de errores</p>
+                <ul>
+                    <li>📂 Leer archivos de texto</li>
+                    <li>✏️ Escribir archivos</li>
+                    <li>🔍 Buscar en archivos</li>
+                    <li>🗂️ Crear directorios</li>
+                    <li>❌ Manejo de permisos y archivos inexistentes</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="slide">
+            <h2>📝 Evaluación y Rúbrica</h2>
+            
+            <table class="tabla-errores">
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Excelente (4)</th>
+                        <th>Bueno (3)</th>
+                        <th>Regular (2)</th>
+                        <th>Deficiente (1)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Manejo de Errores</strong></td>
+                        <td>Maneja todos los errores específicos con mensajes claros</td>
+                        <td>Maneja la mayoría de errores específicos</td>
+                        <td>Manejo básico con algunos errores genéricos</td>
+                        <td>Manejo mínimo o inexistente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Experiencia de Usuario</strong></td>
+                        <td>Interfaz intuitiva, mensajes claros, programa nunca se rompe</td>
+                        <td>Buena experiencia con mensajes útiles</td>
+                        <td>Experiencia aceptable con algunos problemas</td>
+                        <td>Experiencia confusa o programa se rompe</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Estructura del Código</strong></td>
+                        <td>Código limpio, bien documentado, uso correcto de try/except</td>
+                        <td>Código bien estructurado con buena documentación</td>
+                        <td>Estructura aceptable con documentación básica</td>
+                        <td>Estructura confusa o mal documentada</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Funcionalidad</strong></td>
+                        <td>Todas las funciones implementadas correctamente</td>
+                        <td>Mayoría de funciones funcionan bien</td>
+                        <td>Funciones básicas implementadas</td>
+                        <td>Funcionalidad limitada o incorrecta</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="slide">
+            <h2>🎉 Conclusión</h2>
+            
+            <div class="objetivo">
+                <h3>🏆 ¡Felicitaciones! Has Completado el Ejercicio</h3>
+                <p>Has aprendido a crear aplicaciones robustas que manejan errores de manera elegante. Estos son los conceptos clave que dominas ahora:</p>
+            </div>
+
+            <h3>📚 Conocimientos Adquiridos</h3>
+            <div class="teoria">
+                <h4>🔧 Técnicas de Manejo de Errores</h4>
+                <ul>
+                    <li>✅ <strong>Try/Except específico:</strong> Capturar errores concretos</li>
+                    <li>✅ <strong>Finally:</strong> Código que siempre se ejecuta</li>
+                    <li>✅ <strong>Else:</strong> Código que se ejecuta solo si no hay errores</li>
+                    <li>✅ <strong>Raise:</strong> Lanzar errores personalizados</li>
+                    <li>✅ <strong>Logging:</strong> Registrar eventos para debugging</li>
+                </ul>
+            </div>
+
+            <div class="teoria">
+                <h4>🎯 Principios de Programación Defensiva</h4>
+                <ul>
+                    <li>🛡️ <strong>Validación de entradas:</strong> Nunca confiar en datos del usuario</li>
+                    <li>🔍 <strong>Verificación de precondiciones:</strong> Comprobar antes de ejecutar</li>
+                    <li>📝 <strong>Mensajes informativos:</strong> Ayudar al usuario a entender qué pasó</li>
+                    <li>🔄 <strong>Recuperación graceful:</strong> El programa sigue funcionando</li>
+                    <li>🎭 <strong>Experiencia de usuario:</strong> Errores no rompen la experiencia</li>
+                </ul>
+            </div>
+
+            <h3>🚀 Próximos Pasos</h3>
+            <div class="tip">
+                <h4>💡 Para Seguir Mejorando</h4>
+                <p>Ahora que dominas el manejo de errores, puedes:</p>
+                <ul>
+                    <li>🔗 <strong>Integrar con bases de datos:</strong> Manejo de errores de conexión</li>
+                    <li>🌐 <strong>APIs y web services:</strong> Errores de red y timeout</li>
+                    <li>📊 <strong>Procesamiento de datos:</strong> Validación de archivos grandes</li>
+                    <li>🎮 <strong>Interfaces gráficas:</strong> Manejo de eventos y errores visuales</li>
+                    <li>⚡ <strong>Programación asincrónica:</strong> Errores en concurrencia</li>
+                </ul>
+            </div>
+
+            <h3>🎖️ Certificado de Completación</h3>
+            <div class="cajero-visual">
+                <h3>🏆 CERTIFICADO</h3>
+                <div class="pantalla-cajero" style="color: #00ff00;">
+                    ┌─────────────────────────────┐<br>
+                    │  MANEJO DE ERRORES EN PYTHON │<br>
+                    │                             │<br>
+                    │  ✅ Try/Except Mastery      │<br>
+                    │  ✅ Error Handling Expert   │<br>
+                    │  ✅ Defensive Programming   │<br>
+                    │                             │<br>
+                    │  CAJERO AUTOMÁTICO v1.0     │<br>
+                    └─────────────────────────────┘
+                </div>
+                <p style="margin-top: 15px; font-size: 1.1em;">
+                    ¡Has completado exitosamente el ejercicio de manejo de errores!
+                </p>
+            </div>
+
+            <div class="warning">
+                <h4>🎯 Recuerda: La Práctica Hace al Maestro</h4>
+                <p>El manejo de errores es una habilidad que se perfecciona con la práctica. Cada proyecto que desarrolles será una oportunidad para aplicar estos conceptos y volverse más experto en crear aplicaciones robustas y confiables.</p>
+            </div>
+
+            <h3>📖 Recursos Adicionales</h3>
+            <div class="teoria">
+                <h4>📚 Para Profundizar</h4>
+                <ul>
+                    <li>📘 <strong>Documentación oficial:</strong> Python Exception Handling</li>
+                    <li>🔍 <strong>Logging module:</strong> Para registros profesionales</li>
+                    <li>🧪 <strong>Unit testing:</strong> Probar manejo de errores</li>
+                    <li>🏗️ <strong>Design patterns:</strong> Patterns para manejo de errores</li>
+                    <li>⚡ <strong>Async exceptions:</strong> Errores en programación asíncrona</li>
+                </ul>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; color: white;">
+                <h2 style="margin: 0; color: white;">🎊 ¡Excelente Trabajo! 🎊</h2>
+                <p style="margin: 10px 0; font-size: 1.2em;">Has demostrado que puedes crear aplicaciones robustas y profesionales</p>
+                <div style="font-size: 2em; margin: 15px 0;">
+                    🏆 👨‍💻 🎯 💪 🚀
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        // Función para resaltar código cuando se hace clic
+        document.querySelectorAll('.codigo-ejemplo').forEach(codigo => {
+            codigo.addEventListener('click', function() {
+                this.style.transform = 'scale(1.02)';
+                this.style.transition = 'transform 0.2s ease';
+                
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 200);
+            });
+        });
+
+        // Animación para los pasos cuando se hace scroll
+        function animateOnScroll() {
+            const pasos = document.querySelectorAll('.paso');
+            
+            pasos.forEach(paso => {
+                const rect = paso.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible && !paso.classList.contains('animated')) {
+                    paso.classList.add('animated');
+                    paso.style.animation = 'slideIn 0.6s ease-out';
+                }
+            });
+        }
+
+        // Ejecutar animación en scroll
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Ejecutar una vez al cargar
+        document.addEventListener('DOMContentLoaded', animateOnScroll);
+
+        // Efecto de typing para la consola
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            
+            type();
+        }
+
+        // Aplicar efecto typing a algunos elementos de consola
+        document.addEventListener('DOMContentLoaded', function() {
+            const consolaElements = document.querySelectorAll('.consola-error');
+            
+            consolaElements.forEach((consola, index) => {
+                const originalText = consola.textContent;
+                
+                // Activar efecto cuando el elemento sea visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !entry.target.classList.contains('typed')) {
+                            entry.target.classList.add('typed');
+                            setTimeout(() => {
+                                typeWriter(entry.target, originalText, 30);
+                            }, index * 500);
+                        }
+                    });
+                });
+                
+                observer.observe(consola);
+            });
+        });
+
+        // Función para copiar código al portapapeles
+        document.querySelectorAll('.codigo-ejemplo').forEach(codigo => {
+            // Crear botón de copiar
+            const copyBtn = document.createElement('button');
+            copyBtn.innerHTML = '📋 Copiar';
+            copyBtn.style.cssText = `
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background: #4CAF50;
+                color: white;
+                border: none;
+                padding: 5px 10px;
+                border-radius: 3px;
+                cursor: pointer;
+                font-size: 0.8em;
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            `;
+            
+            codigo.style.position = 'relative';
+            codigo.appendChild(copyBtn);
+            
+            // Mostrar botón al hover
+            codigo.addEventListener('mouseenter', () => {
+                copyBtn.style.opacity = '1';
+            });
+            
+            codigo.addEventListener('mouseleave', () => {
+                copyBtn.style.opacity = '0';
+            });
+            
+            // Funcionalidad de copiar
+            copyBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const text = codigo.textContent.replace('📋 Copiar', '').replace('Python', '').trim();
+                
+                navigator.clipboard.writeText(text).then(() => {
+                    copyBtn.innerHTML = '✅ Copiado';
+                    setTimeout(() => {
+                        copyBtn.innerHTML = '📋 Copiar';
+                    }, 2000);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
