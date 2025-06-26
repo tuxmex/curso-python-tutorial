@@ -1,0 +1,22 @@
+# receta_detalle.py
+# Ejercicio 2: agregar tiempo de preparación y dificultad
+
+print("=== RECETA: SÁNDWICH DE VARIABLES ===")
+print("")
+print("TIEMPO DE PREPARACIÓN: 10 minutos")
+print("DIFICULTAD: Fácil (★☆☆☆☆)")
+print("")
+print("INGREDIENTES:")
+print("- 2 rebanadas de pan (strings)")
+print("- 1 variable de huevo")
+print("- 1 cucharada de lógica")
+print("- Opcional: comentarios al gusto")
+print("")
+print("INSTRUCCIONES:")
+print("1. Abrir el IDE (como tostar el pan)")
+print("2. Declarar variables (como colocar ingredientes)")
+print("3. Crear función ensambladora")
+print("4. Ejecutar función (como dar el primer bocado)")
+print("5. Depurar si algo se desarma")
+print("")
+print("¡Listo! Un sándwich de código para disfrutar ☕")
