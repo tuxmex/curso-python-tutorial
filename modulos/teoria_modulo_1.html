@@ -1,0 +1,3103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Teoría Completa - Curso de Python para la Industria</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .nav-menu {
+            background: #1e40af;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 0 20px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: background 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .module {
+            margin-bottom: 60px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .module-header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 25px 30px;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .module-content {
+            background: white;
+            padding: 30px;
+        }
+
+        .theory-section {
+            margin-bottom: 30px;
+        }
+
+        .theory-section h3 {
+            color: #1e40af;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+            border-left: 4px solid #3b82f6;
+            padding-left: 15px;
+        }
+
+        .theory-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+            color: #4b5563;
+        }
+
+        .code-example {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            overflow-x: auto;
+        }
+
+        .code-example pre {
+            color: #1e293b;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .highlight-box strong {
+            color: #92400e;
+        }
+
+        .questions-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .questions-section h4 {
+            color: #0c4a6e;
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .question {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #0ea5e9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .question-number {
+            background: #0ea5e9;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
+
+        .question-text {
+            color: #1e293b;
+            font-weight: 500;
+        }
+
+        .instructor-info {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
+        }
+
+        .instructor-info h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .instructor-info a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 25px;
+            background: rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .instructor-info a:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .nav-menu ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .module-header {
+                font-size: 1.4em;
+                padding: 20px;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .back-to-top:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Teoría Completa de Python</h1>
+            <p>Curso de Python para la Industria - Material Teórico Completo</p>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#modulo1">01. Introducción</a></li>
+                <li><a href="#modulo2">02. Tipos de Datos</a></li>
+                <li><a href="#modulo3">03. Operadores</a></li>
+                <li><a href="#modulo4">04. Estructuras Control</a></li>
+                <li><a href="#modulo5">05. Funciones</a></li>
+                <li><a href="#modulo6">06. Estructuras Datos</a></li>
+                <li><a href="#modulo7">07. Módulos</a></li>
+                <li><a href="#modulo8">08. Excepciones</a></li>
+                <li><a href="#modulo9">09. Archivos</a></li>
+                <li><a href="#modulo10">10. POO</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- MÓDULO 1: Introducción a Python -->
+            <div class="module" id="modulo1">
+                <div class="module-header">
+                    📚 Módulo 1: Introducción a Python y Configuración
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>¿Qué es Python?</h3>
+                        <p>Python es un lenguaje de programación de alto nivel, interpretado y de propósito general, creado por Guido van Rossum en 1991. Se caracteriza por su sintaxis clara y legible, lo que lo convierte en una excelente opción tanto para principiantes como para desarrolladores experimentados en el ámbito industrial.</p>
+                        
+                        <div class="highlight-box">
+                            <strong>💡 Para la Industria:</strong> Python es ampliamente utilizado en automatización industrial, análisis de datos de sensores, control de procesos, IoT, y sistemas de monitoreo en tiempo real.
+                        </div>
+
+                        <h3>Características Principales</h3>
+                        <p><strong>Sintaxis Simple:</strong> Python utiliza indentación para definir bloques de código, eliminando la necesidad de llaves o palabras clave adicionales. Esto mejora la legibilidad y reduce errores.</p>
+                        <p><strong>Interpretado:</strong> No necesita compilación previa, el código se ejecuta línea por línea, facilitando el desarrollo y pruebas rápidas.</p>
+                        <p><strong>Multiplataforma:</strong> Funciona en Windows, Linux, macOS, y sistemas embebidos industriales.</p>
+                        <p><strong>Extensa Biblioteca Estándar:</strong> Incluye módulos para comunicación serie, redes, matemáticas, fechas, y más.</p>
+
+                        <h3>Instalación y Configuración</h3>
+                        <p>Para entornos industriales, recomendamos Python 3.9 o superior. La instalación incluye:</p>
+                        
+                        <div class="code-example">
+<pre># Verificar instalación
+python --version
+python -m pip --version
+
+# Crear entorno virtual (recomendado para proyectos industriales)
+python -m venv mi_proyecto_industrial
+source mi_proyecto_industrial/bin/activate  # Linux/Mac
+mi_proyecto_industrial\Scripts\activate     # Windows</pre>
+                        </div>
+
+                        <h3>Primer Programa</h3>
+                        <p>El tradicional "Hola Mundo" en Python demuestra la simplicidad del lenguaje:</p>
+                        
+                        <div class="code-example">
+<pre># Mi primer programa en Python
+print("¡Hola, mundo industrial!")
+print("Python versión:", __import__('sys').version)
+
+# Comentarios son fundamentales en código industrial
+# Siempre documentar el propósito y autor del código</pre>
+                        </div>
+
+                        <h3>Entornos de Desarrollo</h3>
+                        <p><strong>IDLE:</strong> Incluido con Python, ideal para aprendizaje.</p>
+                        <p><strong>PyCharm:</strong> IDE profesional con depuración avanzada.</p>
+                        <p><strong>VS Code:</strong> Editor ligero con extensiones para Python.</p>
+                        <p><strong>Jupyter Notebook:</strong> Excelente para análisis de datos industriales.</p>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 1</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Cuáles son las tres características principales que hacen a Python ideal para aplicaciones industriales y por qué?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">Explica la diferencia entre un lenguaje interpretado y compilado. ¿Qué ventajas ofrece Python al ser interpretado en entornos de desarrollo industrial?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Por qué es recomendable usar entornos virtuales en proyectos industriales de Python? Menciona dos escenarios específicos.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">¿Qué significa que Python use indentación para definir bloques de código? Proporciona un ejemplo de cómo esto mejora la legibilidad.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">Menciona tres aplicaciones específicas de Python en la industria 4.0 y explica brevemente cada una.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 2: Tipos de datos y variables -->
+            <div class="module" id="modulo2">
+                <div class="module-header">
+                    🔢 Módulo 2: Tipos de Datos y Variables
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>Variables en Python</h3>
+                        <p>Las variables en Python son contenedores que almacenan valores de datos. A diferencia de otros lenguajes, Python es de tipado dinámico, lo que significa que no necesitas declarar el tipo de variable explícitamente.</p>
+
+                        <div class="code-example">
+<pre># Declaración de variables (tipado dinámico)
+temperatura_sensor = 25.5    # float
+numero_piezas = 100         # int
+estado_maquina = True       # bool
+nombre_operario = "Juan"    # str
+
+# Python determina automáticamente el tipo</pre>
+                        </div>
+
+                        <h3>Tipos de Datos Básicos</h3>
+                        <p><strong>Enteros (int):</strong> Números sin decimales, ideales para contadores, IDs de equipos.</p>
+                        <p><strong>Flotantes (float):</strong> Números con decimales, perfectos para mediciones de sensores.</p>
+                        <p><strong>Cadenas (str):</strong> Texto, útiles para nombres de equipos, códigos de producto.</p>
+                        <p><strong>Booleanos (bool):</strong> True/False, esenciales para estados de equipos.</p>
+
+                        <div class="code-example">
+<pre># Ejemplos industriales de tipos de datos
+presion_sistema = 4.2        # float - bar
+numero_lote = 2024001       # int - identificador
+codigo_producto = "ABC-123"  # str - referencia
+bomba_activa = False        # bool - estado</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Aplicación Industrial:</strong> En sistemas de control, los sensores envían datos float (temperaturas, presiones), los contadores usan int (piezas producidas), y los estados de equipos se representan con bool.
+                        </div>
+
+                        <h3>Conversión de Tipos</h3>
+                        <p>La conversión de tipos es crucial cuando se reciben datos de sensores o interfaces:</p>
+
+                        <div class="code-example">
+<pre># Conversiones comunes en aplicaciones industriales
+dato_sensor = "25.6"        # Datos de sensor como string
+temperatura = float(dato_sensor)  # Convertir a float
+
+contador_str = "150"
+piezas = int(contador_str)  # Convertir a int
+
+# Verificar tipos
+print(type(temperatura))   # &lt;class 'float'&gt;
+print(type(piezas))        # &lt;class 'int'&gt;</pre>
+                        </div>
+
+                        <h3>Reglas de Nomenclatura</h3>
+                        <p>En entornos industriales, es crucial seguir convenciones claras:</p>
+                        <p>• Usar nombres descriptivos: <code>temperatura_horno</code> en lugar de <code>t</code></p>
+                        <p>• Usar snake_case: <code>presion_aceite_motor</code></p>
+                        <p>• Incluir unidades cuando sea relevante: <code>velocidad_rpm</code></p>
+                        <p>• Evitar caracteres especiales y espacios</p>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 2</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Qué significa que Python sea de "tipado dinámico"? Explica con un ejemplo industrial cómo esto puede ser ventajoso y cuándo podría ser problemático.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">En un sistema de control industrial, necesitas almacenar: temperatura del horno (23.5°C), número de piezas producidas (1500), código del producto ("MOT-2024"), y estado de la bomba (encendida). ¿Qué tipo de dato usarías para cada uno y por qué?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Por qué es importante la conversión de tipos cuando se trabaja con datos de sensores industriales? Proporciona un ejemplo práctico.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">Explica la diferencia entre las variables <code>presion = 4.2</code> y <code>presion = "4.2"</code>. ¿Qué problemas podrían surgir si confundes estos tipos en un sistema de control?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Cuáles son las mejores prácticas para nombrar variables en código industrial? Menciona al menos 4 reglas y justifica cada una.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 3: Operadores y expresiones -->
+            <div class="module" id="modulo3">
+                <div class="module-header">
+                    ⚡ Módulo 3: Operadores y Expresiones
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>Operadores Aritméticos</h3>
+                        <p>Los operadores aritméticos son fundamentales para cálculos en sistemas industriales:</p>
+
+                        <div class="code-example">
+<pre># Operadores aritméticos en contexto industrial
+temperatura_c = 25
+temperatura_f = (temperatura_c * 9/5) + 32  # Conversión °C a °F
+
+potencia = 1500  # Watts
+tiempo = 2.5     # Horas
+energia = potencia * tiempo  # kWh
+
+# Operadores básicos
+suma = 10 + 5        # Adición: 15
+resta = 10 - 5       # Sustracción: 5
+multiplicacion = 10 * 5  # Multiplicación: 50
+division = 10 / 5    # División: 2.0 (siempre float)
+division_entera = 10 // 3  # División entera: 3
+modulo = 10 % 3      # Módulo (resto): 1
+potencia = 2 ** 3    # Exponenciación: 8</pre>
+                        </div>
+
+                        <h3>Operadores de Comparación</h3>
+                        <p>Esenciales para sistemas de control y monitoreo:</p>
+
+                        <div class="code-example">
+<pre># Comparaciones en sistemas de control
+temperatura_actual = 85
+temperatura_limite = 80
+
+sobrecalentamiento = temperatura_actual > temperatura_limite  # True
+temperatura_ok = temperatura_actual <= temperatura_limite     # False
+
+# Operadores de comparación
+igual = 5 == 5           # True
+diferente = 5 != 3       # True
+mayor = 8 > 5            # True
+menor = 3 < 7            # True
+mayor_igual = 5 >= 5     # True
+menor_igual = 4 <= 9     # True</pre>
+                        </div>
+
+                        <h3>Operadores Lógicos</h3>
+                        <p>Cruciales para lógica de control compleja:</p>
+
+                        <div class="code-example">
+<pre># Lógica de control industrial
+temperatura = 75
+presion = 3.2
+nivel_tanque = 85
+
+# Condiciones de operación segura
+operacion_segura = (temperatura < 80) and (presion < 5.0) and (nivel_tanque > 20)
+
+# Activar alarma si cualquier parámetro está fuera de rango
+alarma = (temperatura >= 80) or (presion >= 5.0) or (nivel_tanque <= 20)
+
+# Operadores lógicos
+and_logico = True and False   # False
+or_logico = True or False     # True
+not_logico = not True         # False</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🔧 Aplicación Industrial:</strong> Los operadores lógicos son esenciales para crear sistemas de seguridad. Por ejemplo, una máquina solo debe operar si la temperatura es adecuada AND la presión está en rango AND hay material suficiente.
+                        </div>
+
+                        <h3>Operadores de Asignación</h3>
+                        <p>Útiles para actualizar valores de sensores y contadores:</p>
+
+                        <div class="code-example">
+<pre># Operadores de asignación en contadores industriales
+contador_piezas = 0
+
+# Incrementar contador
+contador_piezas += 1    # Equivale a: contador_piezas = contador_piezas + 1
+contador_piezas += 5    # Sumar 5 piezas
+
+# Otros operadores de asignación
+energia_total = 100
+energia_total -= 25     # Restar: 75
+energia_total *= 2      # Multiplicar: 150
+energia_total /= 3      # Dividir: 50.0</pre>
+                        </div>
+
+                        <h3>Precedencia de Operadores</h3>
+                        <p>El orden de evaluación es crucial para cálculos correctos:</p>
+
+                        <div class="code-example">
+<pre># Precedencia en cálculos industriales
+resultado1 = 2 + 3 * 4      # = 14 (multiplicación primero)
+resultado2 = (2 + 3) * 4    # = 20 (paréntesis primero)
+
+# Cálculo de eficiencia con precedencia correcta
+piezas_buenas = 950
+piezas_totales = 1000
+eficiencia = (piezas_buenas / piezas_totales) * 100  # 95.0%</pre>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 3</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Cuál es la diferencia entre los operadores / y // en Python? ¿En qué situaciones industriales sería importante esta distinción?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">En un sistema de control, necesitas que una máquina opere solo si: temperatura < 90°C AND presión < 5 bar AND nivel_combustible > 10%. Escribe la expresión lógica y explica por qué usas AND en lugar de OR.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Qué ventaja tienen los operadores de asignación como += y -= en sistemas industriales donde se manejan contadores y acumuladores?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">Explica por qué la expresión 2 + 3 * 4 da como resultado 14 y no 20. ¿Cómo garantizarías el orden correcto en un cálculo de eficiencia industrial?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Cuándo usarías el operador módulo (%) en aplicaciones industriales? Proporciona dos ejemplos prácticos.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 4: Estructuras de control -->
+            <div class="module" id="modulo4">
+                <div class="module-header">
+                    🔄 Módulo 4: Estructuras de Control (if, while, for)
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>Estructura Condicional if</h3>
+                        <p>Las estructuras condicionales permiten que el programa tome decisiones basadas en condiciones, esencial en sistemas de control industrial:</p>
+
+                        <div class="code-example">
+<pre># Control de temperatura en horno industrial
+temperatura = 850
+
+if temperatura > 900:
+    print("ALERTA: Temperatura crítica - Reducir potencia")
+    accion = "reducir_potencia"
+elif temperatura > 800:
+    print("Temperatura alta - Monitorear")
+    accion = "monitorear"
+elif temperatura < 700:
+    print("Temperatura baja - Aumentar potencia")
+    accion = "aumentar_potencia"
+else:
+    print("Temperatura óptima")
+    accion = "mantener"</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Control Industrial:</strong> Las estructuras if/elif/else son la base de los sistemas de control automático. Permiten que el sistema reaccione automáticamente a diferentes condiciones de los sensores.
+                        </div>
+
+                        <h3>Bucle while</h3>
+                        <p>El bucle while ejecuta código repetidamente mientras una condición sea verdadera:</p>
+
+                        <div class="code-example">
+<pre># Monitoreo continuo de proceso industrial
+import time
+
+temperatura = 20
+objetivo = 80
+
+print("Iniciando calentamiento...")
+while temperatura < objetivo:
+    temperatura += 2  # Simular incremento de temperatura
+    print(f"Temperatura actual: {temperatura}°C")
+    time.sleep(1)  # Esperar 1 segundo
+    
+    # Condición de seguridad
+    if temperatura > 100:
+        print("EMERGENCIA: Sobrecalentamiento detectado!")
+        break
+
+print("Temperatura objetivo alcanzada")</pre>
+                        </div>
+
+                        <h3>Bucle for</h3>
+                        <p>El bucle for itera sobre secuencias, ideal para procesar datos de sensores:</p>
+
+                        <div class="code-example">
+<pre># Procesar datos de múltiples sensores
+sensores_temperatura = [23.5, 24.1, 25.0, 23.8, 24.2]
+sensores_id = ["T001", "T002", "T003", "T004", "T005"]
+
+print("Reporte de temperaturas:")
+for i in range(len(sensores_temperatura)):
+    temp = sensores_temperatura[i]
+    sensor = sensores_id[i]
+    
+    if temp > 25:
+        estado = "ALTO"
+    elif temp < 23:
+        estado = "BAJO"
+    else:
+        estado = "OK"
+    
+    print(f"Sensor {sensor}: {temp}°C - Estado: {estado}")
+
+# Usando enumerate para código más elegante
+print("\nReporte mejorado:")
+for i, temp in enumerate(sensores_temperatura):
+    print(f"Sensor {i+1}: {temp}°C")</pre>
+                        </div>
+
+                        <h3>Estructuras de Control Anidadas</h3>
+                        <p>Combinación de estructuras para lógica compleja:</p>
+
+                        <div class="code-example">
+<pre># Sistema de control de calidad automatizado
+lotes_produccion = [
+    {"id": "L001", "piezas": 100, "defectuosas": 3},
+    {"id": "L002", "piezas": 150, "defectuosas": 2},
+    {"id": "L003", "piezas": 120, "defectuosas": 8},
+    {"id": "L004", "piezas": 200, "defectuosas": 1}
+]
+
+for lote in lotes_produccion:
+    calidad = (lote["piezas"] - lote["defectuosas"]) / lote["piezas"] * 100
+    
+    print(f"\nLote {lote['id']}:")
+    print(f"  Piezas totales: {lote['piezas']}")
+    print(f"  Defectuosas: {lote['defectuosas']}")
+    print(f"  Calidad: {calidad:.1f}%")
+    
+    if calidad >= 98:
+        print("  ✅ APROBADO - Calidad excelente")
+    elif calidad >= 95:
+        print("  ⚠️ APROBADO - Revisar proceso")
+    else:
+        print("  ❌ RECHAZADO - Investigar causas")
+        # Bucle anidado para análisis detallado
+        contador = 0
+        while contador < 3:
+            print(f"    Intento de re-análisis {contador + 1}")
+            contador += 1</pre>
+                </div>
+
+                        <h3>Control de Bucles: break y continue</h3>
+                        <p>Herramientas para controlar la ejecución de bucles:</p>
+
+                        <div class="code-example">
+<pre># Búsqueda de equipos con fallas
+equipos = ["Bomba1", "Motor2", "Sensor3", "Actuador4", "Bomba5"]
+estados = ["OK", "OK", "FALLA", "OK", "OK"]
+
+# Buscar primer equipo con falla
+for i, equipo in enumerate(equipos):
+    if estados[i] == "FALLA":
+        print(f"¡Falla detectada en {equipo}!")
+        break  # Salir del bucle inmediatamente
+    print(f"{equipo}: Funcionando correctamente")
+
+print("\n--- Reporte de equipos operativos ---")
+# Mostrar solo equipos operativos
+for i, equipo in enumerate(equipos):
+    if estados[i] == "FALLA":
+        continue  # Saltar a la siguiente iteración
+    print(f"✅ {equipo}: Operativo")</pre>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 4</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Cuál es la diferencia entre usar if/elif/else y múltiples sentencias if independientes? ¿En qué escenario industrial sería crítica esta diferencia?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">¿Cuándo usarías un bucle while en lugar de un bucle for en aplicaciones industriales? Proporciona un ejemplo específico de cada caso.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Qué riesgos presenta un bucle while mal diseñado en un sistema de control industrial? ¿Cómo los evitarías?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">Explica la diferencia entre break y continue. ¿En qué situación industrial usarías cada uno?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Por qué son importantes las estructuras de control anidadas en sistemas industriales complejos? Proporciona un ejemplo de un caso que requiera al menos dos niveles de anidación.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 5: Funciones -->
+            <div class="module" id="modulo5">
+                <div class="module-header">
+                    🔧 Módulo 5: Funciones
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>¿Qué son las Funciones?</h3>
+                        <p>Las funciones son bloques de código reutilizable que realizan tareas específicas. En aplicaciones industriales, las funciones permiten modularizar operaciones comunes como lectura de sensores, cálculos de eficiencia, y control de equipos.</p>
+
+                        <div class="code-example">
+<pre># Función básica para calcular eficiencia
+def calcular_eficiencia(piezas_buenas, piezas_totales):
+    """
+    Calcula la eficiencia de producción.
+    
+    Args:
+        piezas_buenas (int): Número de piezas sin defectos
+        piezas_totales (int): Número total de piezas producidas
+    
+    Returns:
+        float: Porcentaje de eficiencia
+    """
+    if piezas_totales == 0:
+        return 0
+    
+    eficiencia = (piezas_buenas / piezas_totales) * 100
+    return round(eficiencia, 2)
+
+# Uso de la función
+resultado = calcular_eficiencia(950, 1000)
+print(f"Eficiencia de producción: {resultado}%")</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Ventajas en la Industria:</strong> Las funciones permiten reutilizar código para operaciones repetitivas, facilitan el mantenimiento, y reducen errores al centralizar la lógica en un solo lugar.
+                        </div>
+
+                        <h3>Parámetros y Argumentos</h3>
+                        <p>Los parámetros permiten que las funciones sean flexibles y adaptables:</p>
+
+                        <div class="code-example">
+<pre># Función con parámetros múltiples para control de motor
+def controlar_motor(velocidad_rpm, direccion="horario", tiempo_segundos=10):
+    """
+    Controla un motor industrial.
+    
+    Args:
+        velocidad_rpm (int): Velocidad en revoluciones por minuto
+        direccion (str): "horario" o "antihorario" (por defecto: "horario")
+        tiempo_segundos (int): Tiempo de operación (por defecto: 10)
+    """
+    print(f"Motor iniciado:")
+    print(f"  Velocidad: {velocidad_rpm} RPM")
+    print(f"  Dirección: {direccion}")
+    print(f"  Tiempo: {tiempo_segundos} segundos")
+    
+    # Simulación de control
+    if velocidad_rpm > 3000:
+        print("  ⚠️ ADVERTENCIA: Velocidad alta")
+    
+    return {"velocidad": velocidad_rpm, "direccion": direccion, "tiempo": tiempo_segundos}
+
+# Diferentes formas de llamar la función
+controlar_motor(1500)  # Solo velocidad
+controlar_motor(2000, "antihorario")  # Velocidad y dirección
+controlar_motor(1800, tiempo_segundos=30)  # Parámetro nombrado</pre>
+                        </div>
+
+                        <h3>Funciones con Valores de Retorno</h3>
+                        <p>Las funciones pueden devolver resultados para su uso posterior:</p>
+
+                        <div class="code-example">
+<pre># Función para procesar datos de sensor
+def procesar_sensor_temperatura(lecturas_raw):
+    """
+    Procesa lecturas crudas de sensor de temperatura.
+    
+    Args:
+        lecturas_raw (list): Lista de lecturas del sensor
+    
+    Returns:
+        dict: Estadísticas procesadas
+    """
+    if not lecturas_raw:
+        return {"error": "No hay datos"}
+    
+    # Filtrar lecturas válidas (eliminar valores extremos)
+    lecturas_validas = [x for x in lecturas_raw if 0 <= x <= 200]
+    
+    if not lecturas_validas:
+        return {"error": "No hay lecturas válidas"}
+    
+    # Calcular estadísticas
+    promedio = sum(lecturas_validas) / len(lecturas_validas)
+    maximo = max(lecturas_validas)
+    minimo = min(lecturas_validas)
+    
+    # Determinar estado
+    if promedio > 80:
+        estado = "ALTA"
+    elif promedio < 20:
+        estado = "BAJA"
+    else:
+        estado = "NORMAL"
+    
+    return {
+        "promedio": round(promedio, 1),
+        "maximo": maximo,
+        "minimo": minimo,
+        "total_lecturas": len(lecturas_validas),
+        "estado": estado
+    }
+
+# Uso de la función
+datos_sensor = [23.5, 24.1, 25.0, 23.8, 24.2, 180, 23.9]  # Incluye un valor extremo
+resultado = procesar_sensor_temperatura(datos_sensor)
+print("Resultado del sensor:", resultado)</pre>
+                        </div>
+
+                        <h3>Alcance de Variables (Scope)</h3>
+                        <p>El alcance determina dónde pueden usarse las variables:</p>
+
+                        <div class="code-example">
+<pre># Variables globales para configuración del sistema
+TEMPERATURA_MAXIMA = 85  # Constante global
+contador_alarmas = 0     # Variable global
+
+def verificar_temperatura(temp_actual):
+    """Verifica si la temperatura está en rango seguro."""
+    global contador_alarmas  # Acceso a variable global
+    
+    # Variable local
+    margen_seguridad = 5
+    temp_limite = TEMPERATURA_MAXIMA - margen_seguridad
+    
+    if temp_actual > temp_limite:
+        contador_alarmas += 1
+        return f"ALARMA {contador_alarmas}: Temperatura {temp_actual}°C excede límite"
+    else:
+        return f"Temperatura {temp_actual}°C: OK"
+
+# Uso
+print(verificar_temperatura(82))
+print(verificar_temperatura(88))
+print(f"Total de alarmas: {contador_alarmas}")</pre>
+                        </div>
+
+                        <h3>Funciones Lambda</h3>
+                        <p>Funciones pequeñas y anónimas, útiles para operaciones simples:</p>
+
+                        <div class="code-example">
+<pre># Funciones lambda para conversiones rápidas
+celsius_a_fahrenheit = lambda c: (c * 9/5) + 32
+fahrenheit_a_celsius = lambda f: (f - 32) * 5/9
+bar_a_psi = lambda bar: bar * 14.5038
+
+# Uso en procesamiento de datos
+temperaturas_c = [20, 25, 30, 35]
+temperaturas_f = list(map(celsius_a_fahrenheit, temperaturas_c))
+print("Temperaturas en Fahrenheit:", temperaturas_f)
+
+# Filtrar datos de sensores
+presiones = [2.1, 3.5, 1.8, 4.2, 2.9, 3.1]
+presiones_altas = list(filter(lambda p: p > 3.0, presiones))
+print("Presiones altas:", presiones_altas)</pre>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 5</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Por qué son importantes las funciones en el desarrollo de software industrial? Menciona al menos tres ventajas específicas.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">¿Cuál es la diferencia entre parámetros obligatorios y opcionales en una función? ¿Cuándo usarías cada tipo en aplicaciones industriales?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Qué es el "alcance" o "scope" de una variable? ¿Por qué es importante el concepto de variables globales vs locales en sistemas de control?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">¿Cuándo es apropiado usar funciones lambda en lugar de funciones regulares? Proporciona un ejemplo industrial.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Por qué es importante documentar las funciones con docstrings en código industrial? ¿Qué información debe incluir una buena documentación de función?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 6: Listas, tuplas, conjuntos y diccionarios -->
+            <div class="module" id="modulo6">
+                <div class="module-header">
+                    📊 Módulo 6: Listas, Tuplas, Conjuntos y Diccionarios
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>Listas (Lists)</h3>
+                        <p>Las listas son colecciones ordenadas y modificables, ideales para almacenar datos de sensores, registros de producción, y secuencias de comandos:</p>
+
+                        <div class="code-example">
+<pre># Lista de temperaturas de sensores
+temperaturas_horno = [750, 755, 760, 758, 762, 759]
+
+# Operaciones básicas con listas
+temperaturas_horno.append(761)  # Agregar nueva lectura
+print(f"Última temperatura: {temperaturas_horno[-1]}°C")
+
+# Procesar datos de la lista
+temperatura_promedio = sum(temperaturas_horno) / len(temperaturas_horno)
+temperatura_maxima = max(temperaturas_horno)
+temperatura_minima = min(temperaturas_horno)
+
+print(f"Promedio: {temperatura_promedio:.1f}°C")
+print(f"Rango: {temperatura_minima}°C - {temperatura_maxima}°C")
+
+# Lista de equipos con estados
+equipos_linea = [
+    "Transportador_1", "Robot_Soldador", "Control_Calidad", 
+    "Empaquetadora", "Transportador_2"
+]
+
+# Acceso por índice
+primer_equipo = equipos_linea[0]
+ultimo_equipo = equipos_linea[-1]
+equipos_centrales = equipos_linea[1:4]  # Slicing
+
+print(f"Línea de producción: {' -> '.join(equipos_linea)}")</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Uso Industrial:</strong> Las listas son perfectas para almacenar series temporales de datos (temperaturas, presiones, velocidades), listas de equipos, secuencias de operaciones, y registros de eventos.
+                        </div>
+
+                        <h3>Tuplas (Tuples)</h3>
+                        <p>Las tuplas son colecciones ordenadas e inmutables, ideales para datos que no deben cambiar:</p>
+
+                        <div class="code-example">
+<pre># Coordenadas de sensores (inmutables)
+sensor_posiciones = [
+    ("Sensor_T1", 10.5, 25.3, 5.0),  # (id, x, y, z)
+    ("Sensor_P1", 15.2, 30.1, 3.5),
+    ("Sensor_V1", 8.7, 22.8, 7.2)
+]
+
+# Configuración de máquina (no debe cambiar durante operación)
+config_motor = ("Motor_A1", 1800, "trifásico", 50)  # (id, rpm, tipo, frecuencia)
+id_motor, rpm_nominal, tipo, frecuencia = config_motor  # Desempaquetado
+
+print(f"Motor {id_motor}: {rpm_nominal} RPM, {tipo}, {frecuencia}Hz")
+
+# Tuplas para representar rangos operativos
+rango_temperatura = (70, 85)  # (mínimo, máximo)
+rango_presion = (2.0, 4.5)
+rango_velocidad = (100, 300)
+
+# Verificar si valor está en rango
+def en_rango(valor, rango):
+    return rango[0] <= valor <= rango[1]
+
+temp_actual = 78
+if en_rango(temp_actual, rango_temperatura):
+    print(f"Temperatura {temp_actual}°C: En rango operativo")
+else:
+    print(f"Temperatura {temp_actual}°C: FUERA DE RANGO")</pre>
+                        </div>
+
+                        <h3>Conjuntos (Sets)</h3>
+                        <p>Los conjuntos almacenan elementos únicos, útiles para operaciones de membresía y eliminación de duplicados:</p>
+
+                        <div class="code-example">
+<pre># Códigos de productos únicos en producción
+productos_turno_mañana = {"ABC-001", "DEF-002", "GHI-003", "ABC-001", "JKL-004"}
+productos_turno_tarde = {"DEF-002", "MNO-005", "GHI-003", "PQR-006"}
+
+print(f"Productos únicos mañana: {len(productos_turno_mañana)}")  # Elimina duplicados automáticamente
+
+# Operaciones de conjuntos
+productos_comunes = productos_turno_mañana & productos_turno_tarde  # Intersección
+productos_todos = productos_turno_mañana | productos_turno_tarde    # Unión
+productos_solo_mañana = productos_turno_mañana - productos_turno_tarde  # Diferencia
+
+print(f"Productos comunes: {productos_comunes}")
+print(f"Solo en turno mañana: {productos_solo_mañana}")
+
+# Verificar membresía (muy rápido en conjuntos)
+equipos_mantenimiento = {"Motor_A1", "Bomba_B2", "Sensor_C3", "Actuador_D4"}
+
+def necesita_mantenimiento(equipo_id):
+    return equipo_id in equipos_mantenimiento
+
+print(f"Motor_A1 necesita mantenimiento: {necesita_mantenimiento('Motor_A1')}")</pre>
+                        </div>
+
+                        <h3>Diccionarios (Dictionaries)</h3>
+                        <p>Los diccionarios almacenan pares clave-valor, ideales para representar equipos con sus propiedades, configuraciones, y datos estructurados:</p>
+
+                        <div class="code-example">
+<pre># Información de equipos industriales
+equipos_planta = {
+    "Motor_A1": {
+        "tipo": "Trifásico",
+        "potencia_kw": 15,
+        "rpm": 1800,
+        "temperatura_max": 85,
+        "estado": "operativo",
+        "ultima_mantenimiento": "2024-01-15"
+    },
+    "Bomba_B2": {
+        "tipo": "Centrífuga",
+        "caudal_lpm": 500,
+        "presion_bar": 3.5,
+        "temperatura_max": 60,
+        "estado": "mantenimiento",
+        "ultima_mantenimiento": "2024-02-01"
+    }
+}
+
+# Acceso a información específica
+motor_info = equipos_planta["Motor_A1"]
+print(f"Motor A1 - Potencia: {motor_info['potencia_kw']} kW")
+print(f"Estado: {motor_info['estado'].upper()}")
+
+# Agregar nuevo equipo
+equipos_planta["Sensor_C3"] = {
+    "tipo": "Temperatura",
+    "rango": (-50, 150),
+    "precision": 0.1,
+    "estado": "operativo"
+}
+
+# Iterar sobre equipos
+print("\n=== REPORTE DE EQUIPOS ===")
+for equipo_id, info in equipos_planta.items():
+    estado_emoji = "✅" if info["estado"] == "operativo" else "🔧"
+    print(f"{estado_emoji} {equipo_id}: {info['tipo']}")
+
+# Diccionario para almacenar lecturas de sensores
+lecturas_sensores = {}
+
+def registrar_lectura(sensor_id, valor, timestamp):
+    if sensor_id not in lecturas_sensores:
+        lecturas_sensores[sensor_id] = []
+    
+    lecturas_sensores[sensor_id].append({
+        "valor": valor,
+        "timestamp": timestamp,
+        "estado": "normal" if -50 <= valor <= 150 else "alarma"
+    })
+
+# Registrar algunas lecturas
+registrar_lectura("T001", 25.5, "2024-01-15 10:30:00")
+registrar_lectura("T001", 26.1, "2024-01-15 10:31:00")
+registrar_lectura("T002", 180, "2024-01-15 10:30:00")  # Valor de alarma
+
+print(f"\nLecturas registradas: {len(lecturas_sensores)} sensores")</pre>
+                        </div>
+
+                        <h3>Comprensiones de Listas</h3>
+                        <p>Forma concisa de crear listas, muy útil para procesamiento de datos:</p>
+
+                        <div class="code-example">
+<pre># Conversión de temperaturas usando comprensión de listas
+temperaturas_celsius = [20, 25, 30, 35, 40]
+temperaturas_fahrenheit = [(c * 9/5) + 32 for c in temperaturas_celsius]
+
+print(f"Celsius: {temperaturas_celsius}")
+print(f"Fahrenheit: {temperaturas_fahrenheit}")
+
+# Filtrar equipos por estado
+equipos_operativos = [
+    equipo_id for equipo_id, info in equipos_planta.items() 
+    if info["estado"] == "operativo"
+]
+
+print(f"Equipos operativos: {equipos_operativos}")
+
+# Crear lista de alarmas
+presiones = [2.1, 4.8, 3.2, 5.1, 2.9, 4.2]
+presion_limite = 4.5
+alarmas = [
+    f"Presión {p} bar excede límite" 
+    for p in presiones 
+    if p > presion_limite
+]
+
+print(f"Alarmas de presión: {alarmas}")</pre>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 6</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Cuáles son las principales diferencias entre listas y tuplas? ¿En qué casos usarías cada una en aplicaciones industriales?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">¿Por qué los conjuntos (sets) son especialmente útiles para operaciones de verificación de membresía? Proporciona un ejemplo industrial donde esto sea crítico.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Cuáles son las ventajas de usar diccionarios para representar equipos industriales en lugar de listas? Explica con un ejemplo práctico.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">¿Qué es una comprensión de lista y cuándo es preferible usarla en lugar de un bucle for tradicional? Proporciona un caso de uso industrial.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Cómo decidirías qué estructura de datos usar para almacenar información de sensores en un sistema de monitoreo industrial? Justifica tu elección considerando acceso, modificación y rendimiento.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 7: Módulos y paquetes -->
+            <div class="module" id="modulo7">
+                <div class="module-header">
+                    📦 Módulo 7: Módulos y Paquetes
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>¿Qué son los Módulos?</h3>
+                        <p>Los módulos son archivos Python que contienen definiciones y declaraciones. Permiten organizar código en archivos separados, facilitando la reutilización y el mantenimiento en proyectos industriales complejos.</p>
+
+                        <div class="code-example">
+<pre># Ejemplo de módulo personalizado: sensor_utils.py
+"""
+Módulo para utilidades de sensores industriales.
+Autor: Equipo de Automatización
+Fecha: 2024-01-15
+"""
+
+def leer_temperatura(sensor_id):
+    """Simula lectura de sensor de temperatura."""
+    import random
+    temperatura = round(random.uniform(20, 80), 1)
+    return {"sensor_id": sensor_id, "temperatura": temperatura, "unidad": "°C"}
+
+def convertir_celsius_fahrenheit(celsius):
+    """Convierte temperatura de Celsius a Fahrenheit."""
+    return (celsius * 9/5) + 32
+
+def validar_rango_temperatura(temperatura, min_temp=0, max_temp=100):
+    """Valida si la temperatura está en el rango especificado."""
+    return min_temp <= temperatura <= max_temp
+
+# Constantes del módulo
+TEMPERATURA_CRITICA = 85
+TEMPERATURA_OPTIMA = 25
+
+# Uso del módulo en otro archivo
+# import sensor_utils
+# lectura = sensor_utils.leer_temperatura("T001")</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Organización Industrial:</strong> Los módulos permiten separar funcionalidades: sensor_utils.py para sensores, motor_control.py para motores, data_analysis.py para análisis. Esto facilita el mantenimiento y la colaboración en equipo.
+                        </div>
+
+                        <h3>Importación de Módulos</h3>
+                        <p>Diferentes formas de importar y usar módulos:</p>
+
+                        <div class="code-example">
+<pre># Diferentes formas de importar módulos
+
+# 1. Importar módulo completo
+import math
+import datetime
+resultado = math.sqrt(16)
+fecha_actual = datetime.datetime.now()
+
+# 2. Importar funciones específicas
+from math import sqrt, pi, sin
+from datetime import datetime, timedelta
+area_circulo = pi * (5 ** 2)
+tiempo_futuro = datetime.now() + timedelta(hours=2)
+
+# 3. Importar con alias (útil para nombres largos)
+import datetime as dt
+import numpy as np  # Común en análisis de datos industriales
+fecha = dt.date.today()
+
+# 4. Importar todo (NO recomendado en producción)
+from math import *  # Evitar en código industrial
+
+# Ejemplo práctico: sistema de control industrial
+import time
+import random
+from datetime import datetime
+
+def monitorear_sistema():
+    """Función principal de monitoreo."""
+    while True:
+        # Obtener timestamp actual
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        # Simular lectura de sensores
+        temperatura = random.uniform(20, 80)
+        presion = random.uniform(1, 5)
+        
+        # Usar funciones matemáticas
+        temperatura_promedio = math.ceil(temperatura)
+        
+        print(f"[{timestamp}] Temp: {temperatura:.1f}°C, Presión: {presion:.1f} bar")
+        
+        # Pausa de 5 segundos
+        time.sleep(5)
+        break  # Solo una iteración para el ejemplo</pre>
+                        </div>
+
+                        <h3>Módulos de la Biblioteca Estándar</h3>
+                        <p>Python incluye muchos módulos útiles para aplicaciones industriales:</p>
+
+                        <div class="code-example">
+<pre># Módulos estándar útiles en industria
+
+# 1. datetime - Manejo de fechas y horas
+from datetime import datetime, timedelta
+import time
+
+inicio_turno = datetime(2024, 1, 15, 8, 0, 0)  # 8:00 AM
+duracion_turno = timedelta(hours=8)
+fin_turno = inicio_turno + duracion_turno
+print(f"Turno: {inicio_turno.strftime('%H:%M')} - {fin_turno.strftime('%H:%M')}")
+
+# 2. random - Simulación de datos
+import random
+def simular_sensor():
+    return random.normalvariate(25, 2)  # Distribución normal
+
+# 3. os - Interacción con sistema operativo
+import os
+directorio_logs = "/var/log/industrial"
+if not os.path.exists(directorio_logs):
+    print(f"Creando directorio: {directorio_logs}")
+
+# 4. json - Manejo de datos JSON (común en IoT)
+import json
+
+config_equipo = {
+    "motor_id": "M001",
+    "velocidad_max": 3000,
+    "temperatura_limite": 85,
+    "mantenimiento_horas": 1000
+}
+
+# Guardar configuración
+config_json = json.dumps(config_equipo, indent=2)
+print("Configuración JSON:", config_json)
+
+# 5. csv - Manejo de archivos CSV (reportes industriales)
+import csv
+datos_produccion = [
+    ["Fecha", "Turno", "Piezas", "Defectos"],
+    ["2024-01-15", "Mañana", 150, 3],
+    ["2024-01-15", "Tarde", 145, 2]
+]
+
+# 6. sqlite3 - Base de datos ligera
+import sqlite3
+# Útil para almacenar históricos de sensores localmente</pre>
+                        </div>
+
+                        <h3>Creación de Paquetes</h3>
+                        <p>Los paquetes son directorios que contienen múltiples módulos, ideales para proyectos grandes:</p>
+
+                        <div class="code-example">
+<pre># Estructura de paquete industrial
+industrial_control/
+    __init__.py          # Hace que sea un paquete
+    sensores/
+        __init__.py
+        temperatura.py
+        presion.py
+        velocidad.py
+    motores/
+        __init__.py
+        control.py
+        mantenimiento.py
+    reportes/
+        __init__.py
+        produccion.py
+        calidad.py
+
+# Contenido de __init__.py en paquete principal
+"""
+Paquete de Control Industrial
+Versión: 1.0
+Autor: Equipo de Automatización
+"""
+
+__version__ = "1.0.0"
+__author__ = "Equipo de Automatización"
+
+# Importaciones convenientes
+from .sensores import temperatura, presion
+from .motores import control
+
+# Contenido de sensores/temperatura.py
+class SensorTemperatura:
+    def __init__(self, sensor_id, rango_min=-50, rango_max=150):
+        self.sensor_id = sensor_id
+        self.rango_min = rango_min
+        self.rango_max = rango_max
+        self.ultima_lectura = None
+    
+    def leer(self):
+        """Simula lectura del sensor."""
+        import random
+        lectura = round(random.uniform(20, 80), 1)
+        self.ultima_lectura = lectura
+        return lectura
+    
+    def validar_lectura(self, valor):
+        """Valida si la lectura está en rango."""
+        return self.rango_min <= valor <= self.rango_max
+
+# Uso del paquete
+# from industrial_control.sensores.temperatura import SensorTemperatura
+# sensor = SensorTemperatura("T001")
+# temp = sensor.leer()</pre>
+                        </div>
+
+                        <h3>Módulos de Terceros Importantes</h3>
+                        <p>Librerías externas esenciales para aplicaciones industriales:</p>
+
+                        <div class="code-example">
+<pre># Instalación de módulos de terceros
+# pip install numpy pandas matplotlib pyserial requests
+
+# 1. NumPy - Computación numérica
+import numpy as np
+
+# Análisis de datos de sensores
+lecturas = np.array([23.5, 24.1, 25.0, 23.8, 24.2])
+promedio = np.mean(lecturas)
+desviacion = np.std(lecturas)
+print(f"Promedio: {promedio:.1f}, Desviación: {desviacion:.2f}")
+
+# 2. Pandas - Análisis de datos
+import pandas as pd
+
+# Crear DataFrame de producción
+datos = {
+    'fecha': ['2024-01-15', '2024-01-16', '2024-01-17'],
+    'turno': ['Mañana', 'Tarde', 'Noche'],
+    'piezas': [150, 145, 160],
+    'defectos': [3, 2, 4]
+}
+df = pd.DataFrame(datos)
+df['eficiencia'] = ((df['piezas'] - df['defectos']) / df['piezas'] * 100).round(1)
+print(df)
+
+# 3. Matplotlib - Gráficos
+import matplotlib.pyplot as plt
+
+# Gráfico de temperaturas
+tiempo = range(1, 11)
+temperaturas = [23, 25, 28, 30, 32, 35, 33, 31, 29, 27]
+
+plt.figure(figsize=(10, 6))
+plt.plot(tiempo, temperaturas, 'b-o', linewidth=2)
+plt.title('Evolución de Temperatura del Horno')
+plt.xlabel('Tiempo (horas)')
+plt.ylabel('Temperatura (°C)')
+plt.grid(True, alpha=0.3)
+plt.show()
+
+# 4. PySerial - Comunicación serie
+try:
+    import serial
+    # puerto = serial.Serial('/dev/ttyUSB0', 9600)
+    # datos = puerto.readline()
+    print("PySerial disponible para comunicación con equipos")
+except ImportError:
+    print("PySerial no instalado")
+
+# 5. Requests - Comunicación HTTP (APIs industriales)
+try:
+    import requests
+    # Ejemplo de envío de datos a sistema SCADA
+    # datos_sensor = {"temperatura": 25.5, "timestamp": "2024-01-15T10:30:00"}
+    # response = requests.post("http://scada.empresa.com/api/datos", json=datos_sensor)
+    print("Requests disponible para comunicación HTTP")
+except ImportError:
+    print("Requests no instalado")</pre>
+                        </div>
+
+                        <h3>Mejores Prácticas</h3>
+                        <p>Recomendaciones para usar módulos en entornos industriales:</p>
+
+                        <div class="highlight-box">
+                            <strong>📋 Mejores Prácticas:</strong><br>
+                            • <strong>Documentación:</strong> Siempre incluir docstrings en módulos<br>
+                            • <strong>Versionado:</strong> Usar __version__ en módulos personalizados<br>
+                            • <strong>Importaciones específicas:</strong> Importar solo lo necesario<br>
+                            • <strong>Manejo de errores:</strong> Verificar disponibilidad de módulos<br>
+                            • <strong>Entornos virtuales:</strong> Aislar dependencias por proyecto
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 7</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Cuáles son las ventajas de organizar código en módulos separados en proyectos industriales grandes? Menciona al menos tres beneficios específicos.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">¿Cuál es la diferencia entre "import math" y "from math import sqrt"? ¿Cuándo usarías cada forma en aplicaciones industriales?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Qué es un paquete en Python y cómo se diferencia de un módulo? ¿Por qué necesitas un archivo __init__.py?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">Menciona cinco módulos de la biblioteca estándar de Python que sean especialmente útiles en aplicaciones industriales y explica brevemente el uso de cada uno.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Por qué es importante usar entornos virtuales cuando trabajas con módulos de terceros en proyectos industriales? ¿Qué problemas evitas?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 8: Manejo de errores y excepciones -->
+            <div class="module" id="modulo8">
+                <div class="module-header">
+                    ⚠️ Módulo 8: Manejo de Errores y Excepciones
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>¿Qué son las Excepciones?</h3>
+                        <p>Las excepciones son eventos que interrumpen el flujo normal del programa. En aplicaciones industriales, el manejo adecuado de errores es crítico para mantener la continuidad operativa y la seguridad.</p>
+
+                        <div class="code-example">
+<pre># Ejemplo sin manejo de errores (PELIGROSO en industria)
+def calcular_eficiencia_unsafe(piezas_buenas, piezas_totales):
+    return (piezas_buenas / piezas_totales) * 100
+
+# ¡PROBLEMA! Si piezas_totales es 0, el programa se detiene
+# resultado = calcular_eficiencia_unsafe(100, 0)  # ZeroDivisionError
+
+# Versión segura con manejo de errores
+def calcular_eficiencia_safe(piezas_buenas, piezas_totales):
+    try:
+        eficiencia = (piezas_buenas / piezas_totales) * 100
+        return round(eficiencia, 2)
+    except ZeroDivisionError:
+        print("ERROR: No se pueden procesar lotes sin piezas totales")
+        return 0
+    except TypeError:
+        print("ERROR: Los valores deben ser números")
+        return None
+
+# Uso seguro
+resultado1 = calcular_eficiencia_safe(95, 100)  # 95.0
+resultado2 = calcular_eficiencia_safe(50, 0)    # 0 (maneja el error)
+resultado3 = calcular_eficiencia_safe("abc", 100)  # None (maneja el error)</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Importancia Industrial:</strong> En sistemas industriales, un error no manejado puede detener líneas de producción completas. El manejo de excepciones garantiza que el sistema continúe operando o se detenga de forma segura.
+                        </div>
+
+                        <h3>Estructura try-except-else-finally</h3>
+                        <p>Estructura completa para manejo robusto de errores:</p>
+
+                        <div class="code-example">
+<pre># Ejemplo completo: lectura de sensor con manejo robusto
+import random
+import time
+import logging
+
+def leer_sensor_temperatura(sensor_id):
+    """
+    Lee temperatura de sensor con manejo completo de errores.
+    """
+    archivo_log = None
+    try:
+        # Intentar conectar con el sensor
+        print(f"Conectando con sensor {sensor_id}...")
+        
+        # Simular posible falla de conexión
+        if random.random() < 0.1:  # 10% probabilidad de falla
+            raise ConnectionError(f"No se puede conectar con sensor {sensor_id}")
+        
+        # Simular lectura
+        temperatura = round(random.uniform(20, 80), 1)
+        
+        # Validar rango
+        if temperatura < -50 or temperatura > 150:
+            raise ValueError(f"Temperatura fuera de rango: {temperatura}°C")
+        
+        print(f"Lectura exitosa: {temperatura}°C")
+        
+    except ConnectionError as e:
+        print(f"ERROR DE CONEXIÓN: {e}")
+        temperatura = None
+        # Activar protocolo de emergencia
+        activar_sensor_backup(sensor_id)
+        
+    except ValueError as e:
+        print(f"ERROR DE VALIDACIÓN: {e}")
+        temperatura = None
+        # Revisar calibración del sensor
+        solicitar_calibracion(sensor_id)
+        
+    except Exception as e:
+        print(f"ERROR INESPERADO: {e}")
+        temperatura = None
+        
+    else:
+        # Solo se ejecuta si NO hubo excepciones
+        print("Lectura procesada correctamente")
+        registrar_lectura_exitosa(sensor_id, temperatura)
+        
+    finally:
+        # SIEMPRE se ejecuta
+        print("Cerrando conexión con sensor")
+        if archivo_log:
+            archivo_log.close()
+        timestamp = time.strftime("%Y-%m-%d %H:%M:%S")
+        log_operacion(f"[{timestamp}] Operación completada en sensor {sensor_id}")
+    
+    return temperatura
+
+def activar_sensor_backup(sensor_id):
+    print(f"🔄 Activando sensor de respaldo para {sensor_id}")
+
+def solicitar_calibracion(sensor_id):
+    print(f"⚙️ Solicitando calibración para sensor {sensor_id}")
+
+def registrar_lectura_exitosa(sensor_id, temperatura):
+    print(f"✅ Lectura registrada: {sensor_id} = {temperatura}°C")
+
+def log_operacion(mensaje):
+    print(f"📝 LOG: {mensaje}")
+
+# Uso del sistema robusto
+temp = leer_sensor_temperatura("T001")</pre>
+                        </div>
+
+                        <h3>Tipos Comunes de Excepciones</h3>
+                        <p>Excepciones frecuentes en aplicaciones industriales:</p>
+
+                        <div class="code-example">
+<pre># Excepciones comunes en sistemas industriales
+
+# 1. ValueError - Valores incorrectos
+def configurar_velocidad_motor(rpm):
+    try:
+        rpm = int(rpm)
+        if rpm < 0 or rpm > 3600:
+            raise ValueError(f"RPM fuera de rango: {rpm}")
+        print(f"Motor configurado a {rpm} RPM")
+    except ValueError as e:
+        print(f"Error de valor: {e}")
+
+# 2. FileNotFoundError - Archivos de configuración
+def cargar_configuracion(archivo):
+    try:
+        with open(archivo, 'r') as f:
+            config = f.read()
+        return config
+    except FileNotFoundError:
+        print(f"Archivo de configuración no encontrado: {archivo}")
+        return crear_configuracion_default()
+
+def crear_configuracion_default():
+    return {"velocidad": 1000, "temperatura_max": 80}
+
+# 3. KeyError - Datos faltantes en diccionarios
+def procesar_datos_equipo(datos_equipo):
+    try:
+        nombre = datos_equipo["nombre"]
+        estado = datos_equipo["estado"]
+        temperatura = datos_equipo["temperatura"]
+        print(f"Procesando {nombre}: {estado}, {temperatura}°C")
+    except KeyError as e:
+        print(f"Dato faltante en equipo: {e}")
+        return False
+    return True
+
+# 4. IndexError - Acceso a índices inexistentes
+def obtener_ultima_lectura(lecturas):
+    try:
+        return lecturas[-1]  # Último elemento
+    except IndexError:
+        print("No hay lecturas disponibles")
+        return None
+
+# 5. TypeError - Tipos de datos incorrectos
+def calcular_promedio(valores):
+    try:
+        return sum(valores) / len(valores)
+    except TypeError:
+        print("Error: valores debe ser una lista de números")
+        return None
+    except ZeroDivisionError:
+        print("Error: lista vacía")
+        return None
+
+# Ejemplos de uso
+configurar_velocidad_motor("2500")  # OK
+configurar_velocidad_motor("abc")   # ValueError
+configurar_velocidad_motor("5000")  # ValueError (fuera de rango)
+
+datos_completos = {"nombre": "Motor_A1", "estado": "OK", "temperatura": 45}
+datos_incompletos = {"nombre": "Motor_B2", "estado": "OK"}  # Falta temperatura
+
+procesar_datos_equipo(datos_completos)    # OK
+procesar_datos_equipo(datos_incompletos)  # KeyError</pre>
+                        </div>
+
+                        <h3>Excepciones Personalizadas</h3>
+                        <p>Crear excepciones específicas para tu dominio industrial:</p>
+
+                        <div class="code-example">
+<pre># Definir excepciones personalizadas para control industrial
+class ErrorControlIndustrial(Exception):
+    """Excepción base para errores de control industrial."""
+    pass
+
+class TemperaturaFueraDeRango(ErrorControlIndustrial):
+    """Excepción cuando la temperatura excede límites seguros."""
+    def __init__(self, temperatura, limite_min, limite_max):
+        self.temperatura = temperatura
+        self.limite_min = limite_min
+        self.limite_max = limite_max
+        super().__init__(f"Temperatura {temperatura}°C fuera del rango seguro [{limite_min}, {limite_max}]")
+
+class PresionCritica(ErrorControlIndustrial):
+    """Excepción para presiones críticas."""
+    def __init__(self, presion, limite_critico):
+        self.presion = presion
+        self.limite_critico = limite_critico
+        super().__init__(f"Presión crítica detectada: {presion} bar (límite: {limite_critico})")
+
+class EquipoNoDisponible(ErrorControlIndustrial):
+    """Excepción cuando un equipo no está disponible."""
+    pass
+
+# Uso de excepciones personalizadas
+class ControladorHorno:
+    def __init__(self):
+        self.temperatura_min = 200
+        self.temperatura_max = 800
+        self.presion_maxima = 5.0
+    
+    def verificar_condiciones(self, temperatura, presion):
+        # Verificar temperatura
+        if temperatura < self.temperatura_min or temperatura > self.temperatura_max:
+            raise TemperaturaFueraDeRango(temperatura, self.temperatura_min, self.temperatura_max)
+        
+        # Verificar presión
+        if presion > self.presion_maxima:
+            raise PresionCritica(presion, self.presion_maxima)
+        
+        return True
+
+# Sistema de control con manejo específico
+def operar_horno():
+    controlador = ControladorHorno()
+    
+    try:
+        # Simular lecturas de sensores
+        temp_actual = 850  # Temperatura alta
+        presion_actual = 3.2
+        
+        controlador.verificar_condiciones(temp_actual, presion_actual)
+        print("✅ Condiciones normales - Horno operando")
+        
+    except TemperaturaFueraDeRango as e:
+        print(f"🔥 ALERTA DE TEMPERATURA: {e}")
+        print("🔧 Acción: Activando sistema de enfriamiento")
+        
+    except PresionCritica as e:
+        print(f"💨 ALERTA DE PRESIÓN: {e}")
+        print("🔧 Acción: Liberando válvulas de seguridad")
+        
+    except ErrorControlIndustrial as e:
+        print(f"⚠️ ERROR DE CONTROL: {e}")
+        print("🔧 Acción: Detención segura del sistema")
+
+operar_horno()</pre>
+                        </div>
+
+                        <h3>Logging para Sistemas Industriales</h3>
+                        <p>Registro de errores para análisis posterior:</p>
+
+                        <div class="code-example">
+<pre># Sistema de logging industrial
+import logging
+from datetime import datetime
+
+# Configurar logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler('sistema_industrial.log'),
+        logging.StreamHandler()  # También mostrar en consola
+    ]
+)
+
+logger = logging.getLogger('SistemaIndustrial')
+
+def monitorear_equipo(equipo_id):
+    """Monitoreo con logging completo."""
+    try:
+        logger.info(f"Iniciando monitoreo de {equipo_id}")
+        
+        # Simular operación
+        temperatura = random.uniform(20, 100)
+        
+        if temperatura > 85:
+            logger.warning(f"{equipo_id}: Temperatura alta detectada: {temperatura:.1f}°C")
+            if temperatura > 95:
+                raise TemperaturaFueraDeRango(temperatura, 20, 85)
+        
+        logger.info(f"{equipo_id}: Operación normal - Temp: {temperatura:.1f}°C")
+        
+    except TemperaturaFueraDeRango as e:
+        logger.error(f"{equipo_id}: {e}")
+        logger.critical(f"{equipo_id}: PARADA DE EMERGENCIA ACTIVADA")
+        
+    except Exception as e:
+        logger.exception(f"{equipo_id}: Error inesperado")
+        
+    finally:
+        logger.info(f"Monitoreo de {equipo_id} completado")
+
+# Ejecutar monitoreo
+for equipo in ["Motor_A1", "Bomba_B2", "Horno_C3"]:
+    monitorear_equipo(equipo)</pre>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 8</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Por qué es especialmente importante el manejo de excepciones en sistemas industriales? Menciona al menos tres riesgos de no manejar errores adecuadamente.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">¿Cuál es la diferencia entre los bloques except, else y finally en una estructura try-except? ¿Cuándo se ejecuta cada uno?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Cuándo es apropiado crear excepciones personalizadas en lugar de usar las excepciones estándar de Python? Proporciona un ejemplo industrial.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">¿Qué tipos de excepciones son más comunes en aplicaciones industriales y por qué? Menciona al menos cinco tipos con ejemplos.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Por qué es importante implementar logging junto con el manejo de excepciones en sistemas industriales? ¿Qué información debe incluir un buen log de errores?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 9: Archivos y entrada/salida -->
+            <div class="module" id="modulo9">
+                <div class="module-header">
+                    📁 Módulo 9: Archivos y Entrada/Salida
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>Trabajo con Archivos</h3>
+                        <p>En aplicaciones industriales, el manejo de archivos es crucial para almacenar configuraciones, logs de operación, datos de sensores, y reportes de producción.</p>
+
+                        <div class="code-example">
+<pre># Operaciones básicas con archivos
+
+# 1. Escribir archivo de configuración
+configuracion_motor = """# Configuración Motor Industrial A1
+velocidad_maxima=3000
+temperatura_limite=85
+modo_operacion=automatico
+mantenimiento_horas=1000
+fecha_ultima_revision=2024-01-15
+"""
+
+# Escribir archivo
+with open('config_motor_a1.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write(configuracion_motor)
+    print("✅ Archivo de configuración creado")
+
+# 2. Leer archivo de configuración
+try:
+    with open('config_motor_a1.txt', 'r', encoding='utf-8') as archivo:
+        contenido = archivo.read()
+        print("📄 Contenido del archivo:")
+        print(contenido)
+except FileNotFoundError:
+    print("❌ Archivo de configuración no encontrado")
+
+# 3. Leer línea por línea (eficiente para archivos grandes)
+print("📋 Procesando configuración línea por línea:")
+with open('config_motor_a1.txt', 'r', encoding='utf-8') as archivo:
+    for numero_linea, linea in enumerate(archivo, 1):
+        linea = linea.strip()  # Eliminar espacios y saltos de línea
+        if linea and not linea.startswith('#'):  # Ignorar comentarios y líneas vacías
+            clave, valor = linea.split('=')
+            print(f"  {numero_linea}: {clave} = {valor}")
+
+# 4. Anexar datos (append) - útil para logs
+import datetime
+
+def registrar_evento(mensaje):
+    timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    with open('log_operaciones.txt', 'a', encoding='utf-8') as log:
+        log.write(f"[{timestamp}] {mensaje}\n")
+
+# Registrar algunos eventos
+registrar_evento("Sistema iniciado")
+registrar_evento("Motor A1 configurado a 2500 RPM")
+registrar_evento("Temperatura estable: 45°C")</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Buenas Prácticas:</strong> Siempre usar <code>with open()</code> para garantizar que los archivos se cierren correctamente, especificar encoding='utf-8' para caracteres especiales, y manejar FileNotFoundError en aplicaciones industriales.
+                        </div>
+
+                        <h3>Procesamiento de Datos CSV</h3>
+                        <p>CSV es un formato común para datos de producción, reportes, y intercambio de información:</p>
+
+                        <div class="code-example">
+<pre># Manejo de archivos CSV industriales
+import csv
+from datetime import datetime, timedelta
+
+# 1. Crear reporte de producción en CSV
+datos_produccion = [
+    ['fecha', 'turno', 'linea', 'producto', 'cantidad', 'defectos', 'operario'],
+    ['2024-01-15', 'Mañana', 'L001', 'MOT-150', 120, 2, 'Juan García'],
+    ['2024-01-15', 'Mañana', 'L002', 'MOT-200', 95, 1, 'Ana López'],
+    ['2024-01-15', 'Tarde', 'L001', 'MOT-150', 115, 3, 'Carlos Ruiz'],
+    ['2024-01-15', 'Tarde', 'L002', 'MOT-200', 100, 0, 'María Silva'],
+    ['2024-01-16', 'Mañana', 'L001', 'MOT-150', 125, 1, 'Juan García']
+]
+
+# Escribir CSV
+with open('reporte_produccion.csv', 'w', newline='', encoding='utf-8') as archivo:
+    escritor = csv.writer(archivo)
+    escritor.writerows(datos_produccion)
+    print("✅ Reporte CSV creado")
+
+# 2. Leer y procesar datos CSV
+print("\n📊 ANÁLISIS DE PRODUCCIÓN:")
+with open('reporte_produccion.csv', 'r', encoding='utf-8') as archivo:
+    lector = csv.DictReader(archivo)  # Usar primera fila como nombres de columnas
+    
+    total_piezas = 0
+    total_defectos = 0
+    produccion_por_linea = {}
+    
+    for fila in lector:
+        cantidad = int(fila['cantidad'])
+        defectos = int(fila['defectos'])
+        linea = fila['linea']
+        
+        total_piezas += cantidad
+        total_defectos += defectos
+        
+        # Acumular por línea
+        if linea not in produccion_por_linea:
+            produccion_por_linea[linea] = {'piezas': 0, 'defectos': 0}
+        
+        produccion_por_linea[linea]['piezas'] += cantidad
+        produccion_por_linea[linea]['defectos'] += defectos
+
+# Mostrar resultados
+print(f"Total piezas producidas: {total_piezas}")
+print(f"Total defectos: {total_defectos}")
+print(f"Eficiencia general: {((total_piezas - total_defectos) / total_piezas * 100):.1f}%")
+
+print("\nPor línea de producción:")
+for linea, datos in produccion_por_linea.items():
+    eficiencia = (datos['piezas'] - datos['defectos']) / datos['piezas'] * 100
+    print(f"  {linea}: {datos['piezas']} piezas, {datos['defectos']} defectos, {eficiencia:.1f}% eficiencia")</pre>
+                        </div>
+
+                        <h3>Manejo de Archivos JSON</h3>
+                        <p>JSON es ideal para configuraciones complejas y comunicación con APIs:</p>
+
+                        <div class="code-example">
+<pre># Configuración industrial en formato JSON
+import json
+
+# 1. Crear configuración compleja de planta
+configuracion_planta = {
+    "planta_info": {
+        "nombre": "Planta Norte",
+        "ubicacion": "Zona Industrial A",
+        "fecha_instalacion": "2020-03-15"
+    },
+            "equipos": {
+        "motores": [
+            {
+                "id": "MOT-001",
+                "tipo": "trifasico",
+                "potencia_kw": 15,
+                "rpm_nominal": 1800,
+                "temperatura_max": 85,
+                "estado": "operativo",
+                "ultima_mantenimiento": "2024-01-10"
+            },
+            {
+                "id": "MOT-002",
+                "tipo": "monofasico",
+                "potencia_kw": 5,
+                "rpm_nominal": 1500,
+                "temperatura_max": 70,
+                "estado": "mantenimiento",
+                "ultima_mantenimiento": "2024-01-05"
+            }
+        ],
+        "sensores": [
+            {
+                "id": "TEMP-001",
+                "tipo": "temperatura",
+                "ubicacion": "Horno Principal",
+                "rango_min": 0,
+                "rango_max": 1000,
+                "precision": 0.1
+            },
+            {
+                "id": "PRES-001",
+                "tipo": "presion",
+                "ubicacion": "Linea Neumatica",
+                "rango_min": 0,
+                "rango_max": 10,
+                "precision": 0.01
+            }
+        ]
+    },
+    "configuracion_operativa": {
+        "turno_horas": 8,
+        "turnos_por_dia": 3,
+        "dias_laborales": 5,
+        "temperatura_ambiente_max": 35,
+        "humedad_relativa_max": 80
+    }
+}
+
+# Guardar configuración en JSON
+with open('configuracion_planta.json', 'w', encoding='utf-8') as archivo:
+    json.dump(configuracion_planta, archivo, indent=2, ensure_ascii=False)
+    print("✅ Configuración JSON guardada")
+
+# 2. Leer y procesar configuración JSON
+with open('configuracion_planta.json', 'r', encoding='utf-8') as archivo:
+    config = json.load(archivo)
+    
+    print(f"\n🏭 PLANTA: {config['planta_info']['nombre']}")
+    print(f"📍 Ubicación: {config['planta_info']['ubicacion']}")
+    
+    # Procesar motores
+    print(f"\n⚙️  MOTORES ({len(config['equipos']['motores'])} unidades):")
+    for motor in config['equipos']['motores']:
+        estado_emoji = "✅" if motor['estado'] == "operativo" else "🔧"
+        print(f"  {estado_emoji} {motor['id']}: {motor['potencia_kw']} kW, {motor['rpm_nominal']} RPM")
+    
+    # Procesar sensores
+    print(f"\n🌡️  SENSORES ({len(config['equipos']['sensores'])} unidades):")
+    for sensor in config['equipos']['sensores']:
+        print(f"  📊 {sensor['id']}: {sensor['tipo'].title()} en {sensor['ubicacion']}")
+
+# 3. Actualizar configuración dinámicamente
+def actualizar_estado_motor(motor_id, nuevo_estado):
+    with open('configuracion_planta.json', 'r', encoding='utf-8') as archivo:
+        config = json.load(archivo)
+    
+    # Buscar y actualizar motor
+    for motor in config['equipos']['motores']:
+        if motor['id'] == motor_id:
+            motor['estado'] = nuevo_estado
+            motor['ultima_actualizacion'] = datetime.now().isoformat()
+            break
+    
+    # Guardar cambios
+    with open('configuracion_planta.json', 'w', encoding='utf-8') as archivo:
+        json.dump(config, archivo, indent=2, ensure_ascii=False)
+    
+    print(f"✅ Estado de {motor_id} actualizado a: {nuevo_estado}")
+
+# Actualizar estado de un motor
+actualizar_estado_motor("MOT-002", "operativo")</pre>
+                    </div>
+
+                    <div class="theory-section">
+                        <h3>Gestión de Rutas y Directorios</h3>
+                        <p>Manejo de estructura de directorios para organizar datos industriales:</p>
+
+                        <div class="code-example">
+<pre># Gestión de directorios para datos industriales
+import os
+from pathlib import Path
+import shutil
+
+# 1. Crear estructura de directorios
+def crear_estructura_datos():
+    """Crea estructura estándar para datos industriales."""
+    directorios = [
+        'datos_industriales/configuraciones',
+        'datos_industriales/logs',
+        'datos_industriales/reportes',
+        'datos_industriales/respaldos',
+        'datos_industriales/sensores/temperatura',
+        'datos_industriales/sensores/presion',
+        'datos_industriales/sensores/velocidad'
+    ]
+    
+    for directorio in directorios:
+        Path(directorio).mkdir(parents=True, exist_ok=True)
+        print(f"📁 Directorio creado: {directorio}")
+
+crear_estructura_datos()
+
+# 2. Funciones útiles para rutas
+def obtener_ruta_config(nombre_archivo):
+    """Obtiene ruta completa para archivo de configuración."""
+    return Path('datos_industriales/configuraciones') / nombre_archivo
+
+def obtener_ruta_log(fecha, equipo_id):
+    """Obtiene ruta para archivo de log específico."""
+    nombre_log = f"log_{equipo_id}_{fecha}.txt"
+    return Path('datos_industriales/logs') / nombre_log
+
+def obtener_ruta_sensor(tipo_sensor, sensor_id, fecha):
+    """Obtiene ruta para datos de sensor."""
+    nombre_archivo = f"{sensor_id}_{fecha}.csv"
+    return Path(f'datos_industriales/sensores/{tipo_sensor}') / nombre_archivo
+
+# 3. Listar archivos por tipo
+def listar_archivos_por_extension(directorio, extension):
+    """Lista archivos con extensión específica."""
+    ruta = Path(directorio)
+    if ruta.exists():
+        archivos = list(ruta.glob(f"*.{extension}"))
+        return sorted(archivos)
+    return []
+
+# Listar archivos de configuración
+configs = listar_archivos_por_extension('datos_industriales/configuraciones', 'json')
+print(f"\n📋 Archivos de configuración encontrados: {len(configs)}")
+
+# 4. Respaldo automático
+def crear_respaldo(archivo_origen):
+    """Crea respaldo de archivo importante."""
+    origen = Path(archivo_origen)
+    if origen.exists():
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        nombre_respaldo = f"{origen.stem}_{timestamp}{origen.suffix}"
+        ruta_respaldo = Path('datos_industriales/respaldos') / nombre_respaldo
+        
+        shutil.copy2(origen, ruta_respaldo)
+        print(f"💾 Respaldo creado: {ruta_respaldo}")
+        return ruta_respaldo
+    return None
+
+# Crear respaldo de configuración
+respaldo = crear_respaldo('configuracion_planta.json')</pre>
+                        </div>
+
+                        <h3>Monitoreo de Archivos de Sensores</h3>
+                        <p>Sistema para procesar datos de sensores en tiempo real:</p>
+
+                        <div class="code-example">
+<pre># Sistema de monitoreo de archivos de sensores
+import csv
+import time
+import random
+from datetime import datetime, timedelta
+
+class MonitorSensores:
+    def __init__(self, directorio_sensores):
+        self.directorio = Path(directorio_sensores)
+        self.sensores_activos = {}
+    
+    def generar_datos_sensor(self, sensor_id, tipo_sensor):
+        """Genera datos simulados de sensor."""
+        timestamp = datetime.now()
+        
+        if tipo_sensor == 'temperatura':
+            valor = round(random.uniform(20, 80), 1)
+            unidad = '°C'
+        elif tipo_sensor == 'presion':
+            valor = round(random.uniform(1, 5), 2)
+            unidad = 'bar'
+        elif tipo_sensor == 'velocidad':
+            valor = round(random.uniform(100, 300), 0)
+            unidad = 'rpm'
+        else:
+            valor = 0
+            unidad = ''
+        
+        return {
+            'timestamp': timestamp.isoformat(),
+            'sensor_id': sensor_id,
+            'valor': valor,
+            'unidad': unidad,
+            'estado': 'normal' if valor < 70 else 'alerta'
+        }
+    
+    def guardar_lectura_sensor(self, sensor_id, tipo_sensor, datos):
+        """Guarda lectura individual de sensor."""
+        fecha_hoy = datetime.now().strftime("%Y%m%d")
+        archivo_sensor = self.directorio / tipo_sensor / f"{sensor_id}_{fecha_hoy}.csv"
+        
+        # Crear archivo con headers si no existe
+        if not archivo_sensor.exists():
+            with open(archivo_sensor, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.DictWriter(f, fieldnames=datos.keys())
+                writer.writeheader()
+        
+        # Agregar nueva lectura
+        with open(archivo_sensor, 'a', newline='', encoding='utf-8') as f:
+            writer = csv.DictWriter(f, fieldnames=datos.keys())
+            writer.writerow(datos)
+    
+    def procesar_archivo_sensor(self, archivo_sensor):
+        """Procesa archivo completo de sensor para análisis."""
+        try:
+            with open(archivo_sensor, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                lecturas = list(reader)
+            
+            if not lecturas:
+                return None
+            
+            # Análisis básico
+            valores = [float(lectura['valor']) for lectura in lecturas]
+            analisis = {
+                'sensor_id': lecturas[0]['sensor_id'],
+                'total_lecturas': len(lecturas),
+                'valor_promedio': round(sum(valores) / len(valores), 2),
+                'valor_maximo': max(valores),
+                'valor_minimo': min(valores),
+                'alertas': len([l for l in lecturas if l['estado'] == 'alerta']),
+                'ultima_lectura': lecturas[-1]['timestamp']
+            }
+            
+            return analisis
+            
+        except Exception as e:
+            print(f"Error procesando {archivo_sensor}: {e}")
+            return None
+    
+    def generar_reporte_diario(self, fecha=None):
+        """Genera reporte diario de todos los sensores."""
+        if fecha is None:
+            fecha = datetime.now().strftime("%Y%m%d")
+        
+        reporte = {
+            'fecha': fecha,
+            'sensores': {},
+            'resumen': {'total_sensores': 0, 'total_alertas': 0}
+        }
+        
+        # Procesar cada tipo de sensor
+        for tipo_sensor in ['temperatura', 'presion', 'velocidad']:
+            directorio_tipo = self.directorio / tipo_sensor
+            if directorio_tipo.exists():
+                archivos_fecha = list(directorio_tipo.glob(f"*_{fecha}.csv"))
+                
+                for archivo in archivos_fecha:
+                    analisis = self.procesar_archivo_sensor(archivo)
+                    if analisis:
+                        sensor_id = analisis['sensor_id']
+                        reporte['sensores'][sensor_id] = analisis
+                        reporte['resumen']['total_sensores'] += 1
+                        reporte['resumen']['total_alertas'] += analisis['alertas']
+        
+        return reporte
+
+# Uso del sistema de monitoreo
+monitor = MonitorSensores('datos_industriales/sensores')
+
+# Simular lecturas de varios sensores
+sensores_config = [
+    ('TEMP-001', 'temperatura'),
+    ('TEMP-002', 'temperatura'),
+    ('PRES-001', 'presion'),
+    ('VEL-001', 'velocidad')
+]
+
+print("🔄 Simulando lecturas de sensores...")
+for i in range(5):  # 5 lecturas por sensor
+    for sensor_id, tipo in sensores_config:
+        datos = monitor.generar_datos_sensor(sensor_id, tipo)
+        monitor.guardar_lectura_sensor(sensor_id, tipo, datos)
+        print(f"📊 {sensor_id}: {datos['valor']} {datos['unidad']} ({datos['estado']})")
+    
+    time.sleep(1)  # Esperar 1 segundo
+
+# Generar reporte diario
+reporte = monitor.generar_reporte_diario()
+print(f"\n📈 REPORTE DIARIO - {reporte['fecha']}")
+print(f"Sensores monitoreados: {reporte['resumen']['total_sensores']}")
+print(f"Total de alertas: {reporte['resumen']['total_alertas']}")
+
+for sensor_id, datos in reporte['sensores'].items():
+    print(f"\n🔸 {sensor_id}:")
+    print(f"  Lecturas: {datos['total_lecturas']}")
+    print(f"  Promedio: {datos['valor_promedio']}")
+    print(f"  Rango: {datos['valor_minimo']} - {datos['valor_maximo']}")
+    print(f"  Alertas: {datos['alertas']}")</pre>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 9</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Por qué es importante usar la declaración "with open()" en lugar de open() directamente en aplicaciones industriales? ¿Qué problemas previene?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">¿Cuáles son las ventajas de usar JSON sobre archivos de texto plano para configuraciones industriales complejas? Menciona al menos tres beneficios.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Cuándo usarías CSV y cuándo JSON para almacenar datos industriales? Proporciona ejemplos específicos de cada caso.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">¿Por qué es importante especificar encoding='utf-8' al trabajar con archivos en aplicaciones industriales? ¿Qué problemas pueden surgir si no lo haces?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Qué estrategias implementarías para organizar y gestionar archivos de datos en un sistema industrial que genera miles de archivos diariamente?</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MÓDULO 10: Introducción a POO -->
+            <div class="module" id="modulo10">
+                <div class="module-header">
+                    🏗️ Módulo 10: Introducción a POO (Programación Orientada a Objetos)
+                </div>
+                <div class="module-content">
+                    <div class="theory-section">
+                        <h3>¿Qué es la Programación Orientada a Objetos?</h3>
+                        <p>La POO es un paradigma de programación que organiza el código en "objetos" que contienen datos (atributos) y funciones (métodos). En aplicaciones industriales, la POO permite modelar equipos, sensores, y procesos de manera intuitiva y reutilizable.</p>
+
+                        <div class="code-example">
+<pre># Ejemplo básico: Modelar un motor industrial
+class MotorIndustrial:
+    """Clase para representar un motor industrial."""
+    
+    def __init__(self, motor_id, potencia_kw, rpm_nominal):
+        """Constructor: inicializa el motor con sus características."""
+        self.motor_id = motor_id
+        self.potencia_kw = potencia_kw
+        self.rpm_nominal = rpm_nominal
+        self.estado = "detenido"
+        self.rpm_actual = 0
+        self.temperatura = 25.0  # Temperatura ambiente inicial
+        self.horas_operacion = 0
+    
+    def arrancar(self):
+        """Arranca el motor."""
+        if self.estado == "detenido":
+            self.estado = "arrancando"
+            print(f"🟢 Motor {self.motor_id} arrancando...")
+            self.rpm_actual = self.rpm_nominal
+            self.estado = "operativo"
+            return True
+        else:
+            print(f"⚠️ Motor {self.motor_id} ya está en estado: {self.estado}")
+            return False
+    
+    def detener(self):
+        """Detiene el motor."""
+        if self.estado == "operativo":
+            self.estado = "deteniendo"
+            print(f"🔴 Motor {self.motor_id} deteniéndose...")
+            self.rpm_actual = 0
+            self.estado = "detenido"
+            return True
+        else:
+            print(f"⚠️ Motor {self.motor_id} no está operativo")
+            return False
+    
+    def obtener_info(self):
+        """Devuelve información completa del motor."""
+        return {
+            "id": self.motor_id,
+            "potencia": f"{self.potencia_kw} kW",
+            "rpm_nominal": self.rpm_nominal,
+            "rpm_actual": self.rpm_actual,
+            "estado": self.estado,
+            "temperatura": f"{self.temperatura}°C",
+            "horas_operacion": self.horas_operacion
+        }
+
+# Uso de la clase
+motor1 = MotorIndustrial("MOT-001", 15, 1800)
+motor2 = MotorIndustrial("MOT-002", 5, 1500)
+
+# Operar motores
+motor1.arrancar()
+motor2.arrancar()
+
+# Obtener información
+print("\n📊 Información de motores:")
+for motor in [motor1, motor2]:
+    info = motor.obtener_info()
+    print(f"Motor {info['id']}: {info['estado']}, {info['rpm_actual']} RPM")</pre>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>🏭 Ventajas en la Industria:</strong> La POO permite modelar equipos industriales de forma natural, facilita el mantenimiento del código, permite reutilizar código para equipos similares, y organiza mejor sistemas complejos.
+                        </div>
+
+                        <h3>Atributos y Métodos</h3>
+                        <p>Los atributos almacenan el estado del objeto, mientras que los métodos definen su comportamiento:</p>
+
+                        <div class="code-example">
+<pre># Clase más completa de sensor industrial
+class SensorIndustrial:
+    """Clase base para sensores industriales."""
+    
+    # Atributo de clase (compartido por todas las instancias)
+    total_sensores = 0
+    
+    def __init__(self, sensor_id, tipo, ubicacion, rango_min, rango_max, precision=0.1):
+        """Constructor con validación de parámetros."""
+        # Atributos de instancia (únicos para cada objeto)
+        self.sensor_id = sensor_id
+        self.tipo = tipo
+        self.ubicacion = ubicacion
+        self.rango_min = rango_min
+        self.rango_max = rango_max
+        self.precision = precision
+        self.activo = False
+        self.ultima_lectura = None
+        self.contador_lecturas = 0
+        self.historial_alarmas = []
+        
+        # Incrementar contador de clase
+        SensorIndustrial.total_sensores += 1
+    
+    def activar(self):
+        """Activa el sensor."""
+        self.activo = True
+        print(f"🟢 Sensor {self.sensor_id} activado")
+    
+    def desactivar(self):
+        """Desactiva el sensor."""
+        self.activo = False
+        print(f"🔴 Sensor {self.sensor_id} desactivado")
+    
+    def leer_valor(self):
+        """Lee valor del sensor (simulado)."""
+        if not self.activo:
+            print(f"⚠️ Sensor {self.sensor_id} está desactivado")
+            return None
+        
+        import random
+        # Simular lectura dentro del rango
+        valor = round(random.uniform(self.rango_min, self.rango_max), 1)
+        self.ultima_lectura = valor
+        self.contador_lecturas += 1
+        
+        return valor
+    
+    def validar_lectura(self, valor):
+        """Valida si una lectura está en rango normal."""
+        if valor is None:
+            return False, "Lectura nula"
+        
+        if valor < self.rango_min:
+            mensaje = f"Valor {valor} por debajo del mínimo ({self.rango_min})"
+            self.historial_alarmas.append(("BAJO", valor, mensaje))
+            return False, mensaje
+        elif valor > self.rango_max:
+            mensaje = f"Valor {valor} por encima del máximo ({self.rango_max})"
+            self.historial_alarmas.append(("ALTO", valor, mensaje))
+            return False, mensaje
+        else:
+            return True, "Lectura normal"
+    
+    def obtener_estadisticas(self):
+        """Obtiene estadísticas del sensor."""
+        return {
+            "sensor_id": self.sensor_id,
+            "tipo": self.tipo,
+            "ubicacion": self.ubicacion,
+            "estado": "Activo" if self.activo else "Inactivo",
+            "total_lecturas": self.contador_lecturas,
+            "ultima_lectura": self.ultima_lectura,
+            "total_alarmas": len(self.historial_alarmas),
+            "rango_operativo": f"{self.rango_min} - {self.rango_max}"
+        }
+    
+    @classmethod
+    def obtener_total_sensores(cls):
+        """Método de clase: obtiene total de sensores creados."""
+        return cls.total_sensores
+    
+    @staticmethod
+    def convertir_celsius_fahrenheit(celsius):
+        """Método estático: conversión de temperatura."""
+        return (celsius * 9/5) + 32
+
+# Crear varios sensores
+sensor_temp = SensorIndustrial("TEMP-001", "Temperatura", "Horno Principal", 0, 100, 0.1)
+sensor_pres = SensorIndustrial("PRES-001", "Presión", "Línea Neumática", 0, 10, 0.01)
+sensor_vel = SensorIndustrial("VEL-001", "Velocidad", "Eje Principal", 0, 3000, 1)
+
+print(f"📊 Total de sensores creados: {SensorIndustrial.obtener_total_sensores()}")
+
+# Operar sensores
+sensor_temp.activar()
+sensor_pres.activar()
+
+# Tomar lecturas
+for i in range(3):
+    temp = sensor_temp.leer_valor()
+    pres = sensor_pres.leer_valor()
+    
+    # Validar lecturas
+    temp_valida, temp_msg = sensor_temp.validar_lectura(temp)
+    pres_valida, pres_msg = sensor_pres.validar_lectura(pres)
+    
+    print(f"Lectura {i+1}: Temp={temp}°C ({temp_msg}), Presión={pres} bar ({pres_msg})")
+
+# Mostrar estadísticas
+print(f"\n📈 Estadísticas de sensores:")
+for sensor in [sensor_temp, sensor_pres]:
+    stats = sensor.obtener_estadisticas()
+    print(f"{stats['sensor_id']}: {stats['total_lecturas']} lecturas, {stats['total_alarmas']} alarmas")</pre>
+                        </div>
+
+                        <h3>Herencia</h3>
+                        <p>La herencia permite crear clases especializadas basadas en clases existentes:</p>
+
+                        <div class="code-example">
+<pre># Herencia: Sensores especializados
+class SensorTemperatura(SensorIndustrial):
+    """Sensor especializado en temperatura."""
+    
+    def __init__(self, sensor_id, ubicacion, rango_min=-50, rango_max=150):
+        # Llamar al constructor de la clase padre
+        super().__init__(sensor_id, "Temperatura", ubicacion, rango_min, rango_max, 0.1)
+        self.unidad = "°C"
+        self.calibracion_offset = 0.0
+    
+    def calibrar(self, offset):
+        """Calibra el sensor con un offset."""
+        self.calibracion_offset = offset
+        print(f"🔧 Sensor {self.sensor_id} calibrado con offset: {offset}°C")
+    
+    def leer_temperatura(self):
+        """Lee temperatura con calibración aplicada."""
+        valor_raw = self.leer_valor()
+        if valor_raw is not None:
+            valor_calibrado = valor_raw + self.calibracion_offset
+            return round(valor_calibrado, 1)
+        return None
+    
+    def convertir_a_fahrenheit(self, celsius=None):
+        """Convierte la última lectura a Fahrenheit."""
+        if celsius is None:
+            celsius = self.ultima_lectura
+        if celsius is not None:
+            return self.convertir_celsius_fahrenheit(celsius)
+        return None
+
+class SensorPresion(SensorIndustrial):
+    """Sensor especializado en presión."""
+    
+    def __init__(self, sensor_id, ubicacion, rango_max=10):
+        super().__init__(sensor_id, "Presión", ubicacion, 0, rango_max, 0.01)
+        self.unidad = "bar"
+        self.presion_atmosferica = 1.013  # bar
+    
+    def leer_presion_absoluta(self):
+        """Lee presión absoluta (incluyendo atmosférica)."""
+        presion_relativa = self.leer_valor()
+        if presion_relativa is not None:
+            return presion_relativa + self.presion_atmosferica
+        return None
+    
+    def convertir_a_psi(self, presion_bar=None):
+        """Convierte presión de bar a PSI."""
+        if presion_bar is None:
+            presion_bar = self.ultima_lectura
+        if presion_bar is not None:
+            return round(presion_bar * 14.5038, 2)
+        return None
+
+# Crear sensores especializados
+temp_horno = SensorTemperatura("TEMP-H001", "Horno Cerámico", 0, 1200)
+presion_hidraulica = SensorPresion("PRES-H001", "Sistema Hidráulico", 200)
+
+# Calibrar sensor de temperatura
+temp_horno.calibrar(-2.5)  # Compensar deriva del sensor
+
+# Operar sensores especializados
+temp_horno.activar()
+presion_hidraulica.activar()
+
+print(f"\n🌡️  SENSOR DE TEMPERATURA:")
+for i in range(3):
+    temp_c = temp_horno.leer_temperatura()
+    temp_f = temp_horno.convertir_a_fahrenheit(temp_c)
+    print(f"  Lectura {i+1}: {temp_c}°C ({temp_f}°F)")
+
+print(f"\n💨 SENSOR DE PRESIÓN:")
+for i in range(3):
+    presion_bar = presion_hidraulica.leer_valor()
+    presion_psi = presion_hidraulica.convertir_a_psi(presion_bar)
+    presion_abs = presion_hidraulica.leer_presion_absoluta()
+    print(f"  Lectura {i+1}: {presion_bar} bar ({presion_psi} PSI, {presion_abs:.2f} bar abs)")</pre>
+                        </div>
+
+                        <h3>Encapsulamiento</h3>
+                        <p>El encapsulamiento protege los datos internos del objeto:</p>
+
+                        <div class="code-example">
+<pre># Encapsulamiento: Proteger datos críticos
+class ControladorSeguridad:
+    """Controlador de seguridad con encapsulamiento."""
+    
+    def __init__(self, sistema_id):
+        self.sistema_id = sistema_id
+        # Atributos públicos
+        self.estado_sistema = "normal"
+        
+        # Atributos protegidos (convención: _nombre)
+        self._nivel_autorizacion = 1
+        self._ultima_revision = None
+        
+        # Atributos privados (convención: __nombre)
+        self.__codigo_seguridad = "SEC-2024-001"
+        self.__intentos_acceso = 0
+        self.__max_intentos = 3
+    
+    def obtener_estado(self):
+        """Getter público para obtener estado."""
+        return {
+            "sistema_id": self.sistema_id,
+            "estado": self.estado_sistema,
+            "nivel_autorizacion": self._nivel_autorizacion
+        }
+    
+    def verificar_acceso(self, codigo_ingresado):
+        """Verifica código de acceso de forma segura."""
+        self.__intentos_acceso += 1
+        
+        if self.__intentos_acceso > self.__max_intentos:
+            self.estado_sistema = "bloqueado"
+            print(f"🚨 Sistema {self.sistema_id} BLOQUEADO por exceso de intentos")
+            return False
+        
+        if codigo_ingresado == self.__codigo_seguridad:
+            self.__intentos_acceso = 0  # Resetear contador
+            self._nivel_autorizacion = 3  # Aumentar nivel de autorización
+            print(f"✅ Acceso autorizado al sistema {self.sistema_id}")
+            return True
+        else:
+            intentos_restantes = self.__max_intentos - self.__intentos_acceso
+            print(f"❌ Código incorrecto. Intentos restantes: {intentos_restantes}")
+            return False
+    
+    def cambiar_codigo_seguridad(self, codigo_actual, codigo_nuevo):
+        """Cambia código de seguridad (requiere código actual)."""
+        if codigo_actual == self.__codigo_seguridad:
+            self.__codigo_seguridad = codigo_nuevo
+            print(f"🔐 Código de seguridad actualizado para {self.sistema_id}")
+            return True
+        else:
+            print(f"❌ Código actual incorrecto")
+            return False
+    
+    def resetear_intentos(self, codigo_maestro="MASTER-RESET-2024"):
+        """Resetea intentos con código maestro (uso de emergencia)."""
+        if codigo_maestro == "MASTER-RESET-2024":
+            self.__intentos_acceso = 0
+            self.estado_sistema = "normal"
+            print(f"🔄 Sistema {self.sistema_id} desbloqueado por administrador")
+            return True
+        return False
+    
+    # Propiedad para acceso controlado a datos protegidos
+    @property
+    def nivel_autorizacion(self):
+        """Getter para nivel de autorización."""
+        return self._nivel_autorizacion
+    
+    @nivel_autorizacion.setter
+    def nivel_autorizacion(self, nuevo_nivel):
+        """Setter con validación para nivel de autorización."""
+        if 1 <= nuevo_nivel <= 5:
+            self._nivel_autorizacion = nuevo_nivel
+            print(f"🔧 Nivel de autorización cambiado a: {nuevo_nivel}")
+        else:
+            print(f"❌ Nivel inválido: {nuevo_nivel}. Debe estar entre 1 y 5")
+
+# Uso del controlador de seguridad
+controlador = ControladorSeguridad("CTRL-SEC-001")
+
+# Intentar acceso con código incorrecto
+print("🔍 Intentando acceso con código incorrecto:")
+controlador.verificar_acceso("CODIGO-MALO")
+controlador.verificar_acceso("OTRO-MALO")
+
+# Acceso correcto
+print("\n🔍 Intentando acceso con código correcto:")
+controlador.verificar_acceso("SEC-2024-001")
+
+# Usar propiedad para cambiar nivel
+controlador.nivel_autorizacion = 4
+
+# Intentar acceso directo a atributos privados (no recomendado)
+print(f"\n🔍 Estado del sistema: {controlador.obtener_estado()}")
+# print(controlador.__codigo_seguridad)  # Esto daría error</pre>
+                        </div>
+
+                        <h3>Polimorfismo</h3>
+                        <p>El polimorfismo permite que diferentes clases respondan de manera diferente al mismo método:</p>
+
+                        <div class="code-example">
+<pre># Polimorfismo: Diferentes equipos con comportamiento común
+class EquipoIndustrial:
+    """Clase base para equipos industriales."""
+    
+    def __init__(self, equipo_id, tipo):
+        self.equipo_id = equipo_id
+        self.tipo = tipo
+        self.estado = "detenido"
+    
+    def arrancar(self):
+        """Método base para arrancar (será sobrescrito)."""
+        raise NotImplementedError("Subclase debe implementar arrancar()")
+    
+    def detener(self):
+        """Método base para detener (será sobrescrito)."""
+        raise NotImplementedError("Subclase debe implementar detener()")
+    
+    def obtener_estado(self):
+        """Método común para obtener estado."""
+        return f"{self.tipo} {self.equipo_id}: {self.estado}"
+
+class Bomba(EquipoIndustrial):
+    """Bomba industrial."""
+    
+    def __init__(self, bomba_id, caudal_lpm):
+        super().__init__(bomba_id, "Bomba")
+        self.caudal_lpm = caudal_lpm
+        self.presion_actual = 0
+    
+    def arrancar(self):
+        """Arranque específico de bomba."""
+        print(f"💧 Bomba {self.equipo_id}: Cebando sistema...")
+        print(f"💧 Bomba {self.equipo_id}: Verificando válvulas...")
+        self.estado = "operativo"
+        self.presion_actual = 3.5
+        print(f"💧 Bomba {self.equipo_id}: Operativa - {self.caudal_lpm} L/min")
+    
+    def detener(self):
+        """Detención específica de bomba."""
+        print(f"💧 Bomba {self.equipo_id}: Reduciendo caudal...")
+        self.presion_actual = 0
+        self.estado = "detenido"
+        print(f"💧 Bomba {self.equipo_id}: Detenida")
+
+class Compresor(EquipoIndustrial):
+    """Compresor industrial."""
+    
+    def __init__(self, compresor_id, presion_max):
+        super().__init__(compresor_id, "Compresor")
+        self.presion_max = presion_max
+        self.presion_actual = 0
+    
+    def arrancar(self):
+        """Arranque específico de compresor."""
+        print(f"💨 Compresor {self.equipo_id}: Verificando filtros...")
+        print(f"💨 Compresor {self.equipo_id}: Presurizando sistema...")
+        self.estado = "operativo"
+        self.presion_actual = self.presion_max * 0.8
+        print(f"💨 Compresor {self.equipo_id}: Operativo - {self.presion_actual} bar")
+    
+    def detener(self):
+        """Detención específica de compresor."""
+        print(f"💨 Compresor {self.equipo_id}: Despresurializando...")
+        self.presion_actual = 0
+        self.estado = "detenido"
+        print(f"💨 Compresor {self.equipo_id}: Detenido")
+
+class Horno(EquipoIndustrial):
+    """Horno industrial."""
+    
+    def __init__(self, horno_id, temperatura_max):
+        super().__init__(horno_id, "Horno")
+        self.temperatura_max = temperatura_max
+        self.temperatura_actual = 25
+    
+    def arrancar(self):
+        """Arranque específico de horno."""
+        print(f"🔥 Horno {self.equipo_id}: Verificando sistemas de seguridad...")
+        print(f"🔥 Horno {self.equipo_id}: Encendiendo quemadores...")
+        print(f"🔥 Horno {self.equipo_id}: Calentando a temperatura objetivo...")
+        self.estado = "calentando"
+        self.temperatura_actual = self.temperatura_max * 0.9
+        print(f"🔥 Horno {self.equipo_id}: Operativo - {self.temperatura_actual}°C")
+        self.estado = "operativo"
+    
+    def detener(self):
+        """Detención específica de horno."""
+        print(f"🔥 Horno {self.equipo_id}: Apagando quemadores...")
+        print(f"🔥 Horno {self.equipo_id}: Iniciando enfriamiento...")
+        self.estado = "enfriando"
+        self.temperatura_actual = 25
+        print(f"🔥 Horno {self.equipo_id}: Detenido y enfriado")
+        self.estado = "detenido"
+
+# Crear equipos diversos
+equipos = [
+    Bomba("B001", 500),
+    Compresor("C001", 8),
+    Horno("H001", 800),
+    Bomba("B002", 300),
+    Compresor("C002", 10)
+]
+
+# Polimorfismo: mismo método, comportamiento diferente
+print("🚀 ARRANQUE DE EQUIPOS:")
+for equipo in equipos:
+    print(f"\n--- {equipo.obtener_estado()} ---")
+    equipo.arrancar()  # Cada equipo arranca de forma diferente
+
+print(f"\n" + "="*50)
+print("⏹️  DETENCIÓN DE EQUIPOS:")
+for equipo in equipos:
+    print(f"\n--- {equipo.obtener_estado()} ---")
+    equipo.detener()  # Cada equipo se detiene de forma diferente
+
+# Función que trabaja con cualquier equipo (polimorfismo)
+def operar_equipo_automaticamente(equipo):
+    """Función que puede operar cualquier tipo de equipo."""
+    print(f"\n🤖 Operación automática de {equipo.obtener_estado()}")
+    
+    if equipo.estado == "detenido":
+        equipo.arrancar()
+        print(f"  ✅ {equipo.tipo} {equipo.equipo_id} arrancado automáticamente")
+    
+    # Simular operación durante un tiempo
+    import time
+    print(f"  ⏱️  Operando durante 2 segundos...")
+    time.sleep(2)
+    
+    equipo.detener()
+    print(f"  ⏹️  {equipo.tipo} {equipo.equipo_id} detenido automáticamente")
+
+# Usar polimorfismo para operar diferentes equipos con la misma función
+print(f"\n" + "="*50)
+print("🤖 OPERACIÓN AUTOMÁTICA:")
+for equipo in equipos[:2]:  # Solo los primeros 2 para el ejemplo
+    operar_equipo_automaticamente(equipo)</pre>
+                        </div>
+
+                        <h3>Composición y Agregación</h3>
+                        <p>Relaciones entre objetos para crear sistemas complejos:</p>
+
+                        <div class="code-example">
+<pre># Composición: Sistema complejo formado por componentes
+class LineaProduccion:
+    """Línea de producción completa (composición de equipos)."""
+    
+    def __init__(self, linea_id, descripcion):
+        self.linea_id = linea_id
+        self.descripcion = descripcion
+        self.equipos = []  # Lista de equipos
+        self.sensores = []  # Lista de sensores
+        self.estado_general = "detenida"
+        self.productos_procesados = 0
+    
+    def agregar_equipo(self, equipo):
+        """Agrega un equipo a la línea."""
+        self.equipos.append(equipo)
+        print(f"➕ {equipo.tipo} {equipo.equipo_id} agregado a línea {self.linea_id}")
+    
+    def agregar_sensor(self, sensor):
+        """Agrega un sensor a la línea."""
+        self.sensores.append(sensor)
+        print(f"📊 Sensor {sensor.sensor_id} agregado a línea {self.linea_id}")
+    
+    def arrancar_linea(self):
+        """Arranca toda la línea de producción."""
+        print(f"\n🚀 ARRANCANDO LÍNEA {self.linea_id}: {self.descripcion}")
+        
+        # 1. Activar sensores
+        print("📊 Activando sensores...")
+        for sensor in self.sensores:
+            sensor.activar()
+        
+        # 2. Arrancar equipos en secuencia
+        print("⚙️  Arrancando equipos...")
+        for i, equipo in enumerate(self.equipos):
+            print(f"  Paso {i+1}:")
+            equipo.arrancar()
+            time.sleep(1)  # Pausa entre arranques
+        
+        self.estado_general = "operativa"
+        print(f"✅ Línea {self.linea_id} completamente operativa")
+    
+    def detener_linea(self):
+        """Detiene toda la línea de producción."""
+        print(f"\n⏹️  DETENIENDO LÍNEA {self.linea_id}")
+        
+        # 1. Detener equipos en orden inverso
+        print("⚙️  Deteniendo equipos...")
+        for i, equipo in enumerate(reversed(self.equipos)):
+            print(f"  Paso {i+1}:")
+            equipo.detener()
+            time.sleep(1)
+        
+        # 2. Desactivar sensores
+        print("📊 Desactivando sensores...")
+        for sensor in self.sensores:
+            sensor.desactivar()
+        
+        self.estado_general = "detenida"
+        print(f"✅ Línea {self.linea_id} completamente detenida")
+    
+    def procesar_lote(self, cantidad_productos):
+        """Simula procesamiento de un lote de productos."""
+        if self.estado_general != "operativa":
+            print(f"❌ Línea {self.linea_id} no está operativa")
+            return False
+        
+        print(f"\n🏭 PROCESANDO LOTE de {cantidad_productos} productos")
+        
+        # Simular procesamiento
+        for i in range(cantidad_productos):
+            # Leer sensores durante procesamiento
+            for sensor in self.sensores:
+                valor = sensor.leer_valor()
+                valido, mensaje = sensor.validar_lectura(valor)
+                if not valido:
+                    print(f"⚠️ Alarma en {sensor.sensor_id}: {mensaje}")
+            
+            self.productos_procesados += 1
+            if (i + 1) % 10 == 0:  # Mostrar progreso cada 10 productos
+                print(f"  📦 Procesados: {i + 1}/{cantidad_productos}")
+        
+        print(f"✅ Lote completado. Total procesado: {self.productos_procesados}")
+        return True
+    
+    def obtener_reporte(self):
+        """Genera reporte completo de la línea."""
+        reporte = {
+            "linea_id": self.linea_id,
+            "descripcion": self.descripcion,
+            "estado": self.estado_general,
+            "productos_procesados": self.productos_procesados,
+            "total_equipos": len(self.equipos),
+            "total_sensores": len(self.sensores),
+            "equipos_detalle": [equipo.obtener_estado() for equipo in self.equipos],
+            "sensores_detalle": [sensor.obtener_estadisticas() for sensor in self.sensores]
+        }
+        return reporte
+
+# Crear línea de producción completa
+linea_motores = LineaProduccion("L001", "Ensamble de Motores Eléctricos")
+
+# Crear y agregar equipos
+bomba_refrigeracion = Bomba("B001", 200)
+compresor_neumatico = Compresor("C001", 6)
+horno_secado = Horno("H001", 150)
+
+linea_motores.agregar_equipo(bomba_refrigeracion)
+linea_motores.agregar_equipo(compresor_neumatico)
+linea_motores.agregar_equipo(horno_secado)
+
+# Crear y agregar sensores
+sensor_temp_horno = SensorTemperatura("TEMP-H001", "Horno de Secado", 0, 200)
+sensor_pres_neumatica = SensorPresion("PRES-C001", "Línea Neumática", 8)
+
+linea_motores.agregar_sensor(sensor_temp_horno)
+linea_motores.agregar_sensor(sensor_pres_neumatica)
+
+# Operar línea completa
+linea_motores.arrancar_linea()
+
+# Procesar lote de productos
+linea_motores.procesar_lote(25)
+
+# Generar reporte
+reporte = linea_motores.obtener_reporte()
+print(f"\n📊 REPORTE DE LÍNEA {reporte['linea_id']}:")
+print(f"Estado: {reporte['estado']}")
+print(f"Productos procesados: {reporte['productos_procesados']}")
+print(f"Equipos: {reporte['total_equipos']}, Sensores: {reporte['total_sensores']}")
+
+# Detener línea
+linea_motores.detener_linea()</pre>
+                        </div>
+                    </div>
+
+                    <div class="questions-section">
+                        <h4>🤔 Preguntas Teóricas - Módulo 10</h4>
+                        
+                        <div class="question">
+                            <div class="question-number">Pregunta 1</div>
+                            <div class="question-text">¿Cuáles son las principales ventajas de usar Programación Orientada a Objetos en sistemas industriales complejos? Menciona al menos cuatro beneficios específicos.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 2</div>
+                            <div class="question-text">¿Cuál es la diferencia entre atributos de clase y atributos de instancia? Proporciona un ejemplo industrial donde cada tipo sea apropiado.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 3</div>
+                            <div class="question-text">¿Qué es la herencia en POO y cómo puede ser útil para modelar diferentes tipos de equipos industriales? Explica con un ejemplo práctico.</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 4</div>
+                            <div class="question-text">¿Por qué es importante el encapsulamiento en sistemas de control industrial? ¿Qué problemas de seguridad puede prevenir?</div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Pregunta 5</div>
+                            <div class="question-text">¿Qué es el polimorfismo y cómo permite escribir código más flexible para manejar diferentes tipos de equipos industriales? Proporciona un ejemplo específico.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Información del Instructor -->
+            <div class="instructor-info">
+                <h3>👨‍🏫 Instructor del Curso</h3>
+                <p><strong>Instructor:</strong> Anastacio Rodríguez García</p>
+                <p>
+                    <a href="https://www.linkedin.com/in/anastacio-rodríguez-garcía-5702b7183/" target="_blank">
+                        🔗 LinkedIn
+                    </a> | 
+                    <a href="mailto:anastaciorodriguez@utng.edu.mx">
+                        ✉️ Contacto
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <a href="#top" class="back-to-top">↑</a>
+    </div>
+
+    <script>
+        // Funcionalidad para menú de navegación suave
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mostrar/ocultar botón de "volver arriba"
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Funcionalidad del botón "volver arriba"
+        document.querySelector('.back-to-top').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
