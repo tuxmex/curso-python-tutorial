@@ -1,4 +1,4 @@
-# 🐾 La Tienda de Mascotas Virtuales
+# 🐾 Módulo 1 – Ejercicios 02: La Tienda de Mascotas Virtuales
 
 Este proyecto introduce los fundamentos de Python utilizando una temática divertida: crear y manipular datos relacionados con mascotas virtuales. A través de ejemplos prácticos, los estudiantes exploran tipos de datos, listas, operaciones matemáticas y estructuras de control.
 
