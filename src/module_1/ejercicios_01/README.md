@@ -1,6 +1,3 @@
-
-
-````markdown
 # 🧑‍🍳 Módulo 1 – Ejercicios 01: Recetas en Python
 
 Este módulo introduce los fundamentos de la programación en Python a través de ejercicios lúdicos que comparan el desarrollo de software con la preparación de recetas. Está orientado a quienes se inician en programación y desean desarrollar habilidades de entrada/salida de datos, uso de `print()`, secuencia lógica y sintaxis básica.
