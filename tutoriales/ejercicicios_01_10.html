@@ -1,0 +1,3083 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📁 Ejercicios Módulo 1 - Archivos Python</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .exercise {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .exercise-header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .exercise-content {
+            padding: 25px;
+        }
+
+        .exercise-description {
+            background: #e0f2fe;
+            border-left: 4px solid #0ea5e9;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            position: relative;
+        }
+
+        .filename {
+            background: #059669;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px 8px 0 0;
+            font-weight: bold;
+            margin: 0 0 -5px 0;
+            display: inline-block;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .copy-btn:hover {
+            background: #1e40af;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 4px solid #f59e0b;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+
+        .instructor-note {
+            background: #f0f9ff;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .instructor-note strong {
+            color: #0c4a6e;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+
+        .keyword { color: #f97316; }
+        .string { color: #22c55e; }
+        .comment { color: #94a3b8; font-style: italic; }
+        .function { color: #3b82f6; }
+        .number { color: #06b6d4; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📁 Ejercicios Prácticos Módulo 1</h1>
+            <p>Archivos Python completos para cada ejercicio</p>
+        </div>
+
+        <div class="content">
+            <div class="highlight-box">
+                <strong>📋 Instrucciones para el Docente:</strong><br>
+                Cada archivo .py está completo y listo para usar. Los estudiantes pueden ejecutar cada archivo individualmente o copiar el código para experimentar. Todos los ejercicios incluyen comentarios educativos y ejemplos prácticos.
+            </div>
+
+            <!-- Ejercicio 1 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🍳 Ejercicio 1: Sintaxis Básica - Analogía de Cocinar
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Familiarizarse con la sintaxis básica de Python usando la analogía de cocinar. Aprender a usar comentarios y la función print() para mostrar información.
+                    </div>
+
+                    <div class="filename">ejercicio_01_sintaxis_basica.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 1: Sintaxis Básica de Python - Analogía de Cocinar
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Introducción a Python usando conceptos familiares de cocina
+"""</span>
+
+<span class="comment"># Importar módulo para pausas</span>
+<span class="keyword">import</span> time
+
+<span class="comment"># ==========================================
+# PARTE 1: COMENTARIOS Y DOCUMENTACIÓN
+# ==========================================</span>
+
+<span class="comment"># Esto es un comentario de una línea
+# Los comentarios explican qué hace el código</span>
+
+<span class="string">"""
+Esto es un comentario de múltiples líneas (docstring).
+Se usa para documentar funciones, clases o módulos.
+En la industria, la documentación es CRUCIAL.
+"""</span>
+
+<span class="function">print</span>(<span class="string">"🍳 ¡Bienvenido al Laboratorio de Cocina Python!"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># ==========================================
+# PARTE 2: VARIABLES COMO INGREDIENTES
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n📦 PREPARANDO INGREDIENTES (Variables):"</span>)
+
+<span class="comment"># En Python, las variables son como recipientes para ingredientes</span>
+ingrediente_principal = <span class="string">"Harina"</span>
+cantidad_gramos = <span class="number">500</span>
+temperatura_horno = <span class="number">180.5</span>
+horno_precalentado = <span class="keyword">True</span>
+
+<span class="comment"># Mostrar nuestros "ingredientes" (variables)</span>
+<span class="function">print</span>(<span class="string">f"Ingrediente principal: {ingrediente_principal}"</span>)
+<span class="function">print</span>(<span class="string">f"Cantidad: {cantidad_gramos} gramos"</span>)
+<span class="function">print</span>(<span class="string">f"Temperatura del horno: {temperatura_horno}°C"</span>)
+<span class="function">print</span>(<span class="string">f"¿Horno precalentado? {horno_precalentado}"</span>)
+
+<span class="comment"># ==========================================
+# PARTE 3: OPERACIONES COMO PREPARACIÓN
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔥 PREPARANDO LA RECETA (Operaciones):"</span>)
+
+<span class="comment"># Operaciones matemáticas como cálculos de cocina</span>
+porciones = <span class="number">8</span>
+gramos_por_porcion = cantidad_gramos / porciones
+tiempo_horneado_minutos = <span class="number">25</span>
+tiempo_total = tiempo_horneado_minutos + <span class="number">10</span>  <span class="comment"># Incluir tiempo de enfriado</span>
+
+<span class="function">print</span>(<span class="string">f"📊 Calculando porciones:"</span>)
+<span class="function">print</span>(<span class="string">f"   - Total de porciones: {porciones}"</span>)
+<span class="function">print</span>(<span class="string">f"   - Gramos por porción: {gramos_por_porcion:.1f}g"</span>)
+<span class="function">print</span>(<span class="string">f"   - Tiempo total: {tiempo_total} minutos"</span>)
+
+<span class="comment"># ==========================================
+# PARTE 4: SECUENCIA DE COCCIÓN (Algoritmo)
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n👨‍🍳 PROCESO DE COCCIÓN (Secuencia de pasos):"</span>)
+
+<span class="comment"># Paso 1: Verificar precalentamiento</span>
+<span class="function">print</span>(<span class="string">"1. Verificando horno..."</span>)
+<span class="keyword">if</span> horno_precalentado:
+    <span class="function">print</span>(<span class="string">f"   ✅ Horno listo a {temperatura_horno}°C"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"   ❌ ¡Precalentar horno primero!"</span>)
+
+<span class="comment"># Paso 2: Preparar masa</span>
+<span class="function">print</span>(<span class="string">"2. Mezclando ingredientes..."</span>)
+time.sleep(<span class="number">1</span>)  <span class="comment"># Simular tiempo de mezclado</span>
+<span class="function">print</span>(<span class="string">f"   🥄 Mezclando {cantidad_gramos}g de {ingrediente_principal}"</span>)
+
+<span class="comment"># Paso 3: Hornear</span>
+<span class="function">print</span>(<span class="string">"3. Horneando..."</span>)
+<span class="function">print</span>(<span class="string">f"   ⏰ {tiempo_horneado_minutos} minutos a {temperatura_horno}°C"</span>)
+
+<span class="comment"># Paso 4: Resultado final</span>
+<span class="function">print</span>(<span class="string">"4. ¡Listo para servir!"</span>)
+<span class="function">print</span>(<span class="string">f"   🍰 {porciones} porciones deliciosas"</span>)
+
+<span class="comment"># ==========================================
+# PARTE 5: APLICACIÓN INDUSTRIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏭 CONEXIÓN CON LA INDUSTRIA:"</span>)
+<span class="function">print</span>(<span class="string">"En la industria alimentaria, este mismo concepto se aplica:"</span>)
+
+<span class="comment"># Parámetros de producción industrial</span>
+lote_produccion = <span class="number">1000</span>  <span class="comment"># kg</span>
+temperatura_proceso = <span class="number">165.0</span>  <span class="comment"># °C</span>
+control_calidad_activo = <span class="keyword">True</span>
+
+<span class="function">print</span>(<span class="string">f"📈 Producción industrial:"</span>)
+<span class="function">print</span>(<span class="string">f"   - Lote: {lote_produccion} kg"</span>)
+<span class="function">print</span>(<span class="string">f"   - Temperatura proceso: {temperatura_proceso}°C"</span>)
+<span class="function">print</span>(<span class="string">f"   - Control de calidad: {'Activo' if control_calidad_activo else 'Inactivo'}"</span>)
+
+<span class="comment"># Cálculo de eficiencia</span>
+eficiencia_esperada = <span class="number">95.5</span>  <span class="comment"># porcentaje</span>
+produccion_real = lote_produccion * (eficiencia_esperada / <span class="number">100</span>)
+
+<span class="function">print</span>(<span class="string">f"   - Eficiencia esperada: {eficiencia_esperada}%"</span>)
+<span class="function">print</span>(<span class="string">f"   - Producción real estimada: {produccion_real:.1f} kg"</span>)
+
+<span class="comment"># ==========================================
+# MENSAJE FINAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n" + "="</span> * <span class="number">50</span>)
+<span class="function">print</span>(<span class="string">"🎉 ¡Felicidades! Has completado tu primera 'receta' en Python"</span>)
+<span class="function">print</span>(<span class="string">"📚 Conceptos aprendidos:"</span>)
+<span class="function">print</span>(<span class="string">"   ✓ Comentarios y documentación"</span>)
+<span class="function">print</span>(<span class="string">"   ✓ Variables y tipos de datos"</span>)
+<span class="function">print</span>(<span class="string">"   ✓ Operaciones básicas"</span>)
+<span class="function">print</span>(<span class="string">"   ✓ Función print() y formato de strings"</span>)
+<span class="function">print</span>(<span class="string">"   ✓ Estructura secuencial de programa"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)</pre>
+                    </div>
+
+                    <div class="instructor-note">
+                        <strong>💡 Nota para el Instructor:</strong> Este ejercicio introduce conceptos fundamentales usando analogías familiares. Los estudiantes aprenden variables, operaciones, y secuencia sin sentirse abrumados. La conexión industrial al final muestra aplicaciones reales.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 2 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🐕 Ejercicio 2: Tipos de Datos - Registro de Mascotas
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Aprender a trabajar con diferentes tipos de datos en Python (strings, integers, floats, booleans y listas) creando variables para representar mascotas.
+                    </div>
+
+                    <div class="filename">ejercicio_02_tipos_datos.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 2: Tipos de Datos en Python - Registro de Mascotas
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Explorar todos los tipos de datos básicos de Python
+"""</span>
+
+<span class="function">print</span>(<span class="string">"🏥 CLÍNICA VETERINARIA - SISTEMA DE REGISTRO"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># ==========================================
+# TIPO STRING (str) - Texto
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n📝 TIPO STRING (Texto):"</span>)
+
+<span class="comment"># Strings: Para nombres, descripciones, etc.</span>
+nombre_mascota = <span class="string">"Luna"</span>
+especie = <span class="string">"Perro"</span>
+raza = <span class="string">"Golden Retriever"</span>
+color_pelaje = <span class="string">"Dorado"</span>
+propietario = <span class="string">"María García"</span>
+
+<span class="comment"># Diferentes formas de crear strings</span>
+descripcion_corta = <span class="string">'Mascota amigable'</span>  <span class="comment"># Comillas simples</span>
+descripcion_larga = <span class="string">"""Luna es una perra muy 
+amigable y juguetona. Le encanta 
+correr en el parque."""</span>  <span class="comment"># Triple comillas para múltiples líneas</span>
+
+<span class="function">print</span>(<span class="string">f"Nombre: {nombre_mascota}"</span>)
+<span class="function">print</span>(<span class="string">f"Especie: {especie}"</span>)
+<span class="function">print</span>(<span class="string">f"Raza: {raza}"</span>)
+<span class="function">print</span>(<span class="string">f"Color: {color_pelaje}"</span>)
+<span class="function">print</span>(<span class="string">f"Propietario: {propietario}"</span>)
+
+<span class="comment"># Operaciones con strings</span>
+nombre_completo = raza + <span class="string">" "</span> + color_pelaje
+<span class="function">print</span>(<span class="string">f"Descripción: {nombre_completo}"</span>)
+<span class="function">print</span>(<span class="string">f"Longitud del nombre: {len(nombre_mascota)} caracteres"</span>)
+
+<span class="comment"># ==========================================
+# TIPO INTEGER (int) - Números enteros
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔢 TIPO INTEGER (Números enteros):"</span>)
+
+<span class="comment"># Integers: Para cantidades, edades, IDs, etc.</span>
+edad_meses = <span class="number">18</span>
+numero_chip = <span class="number">123456789</span>
+visitas_clinica = <span class="number">5</span>
+vacunas_aplicadas = <span class="number">3</span>
+
+<span class="function">print</span>(<span class="string">f"Edad: {edad_meses} meses"</span>)
+<span class="function">print</span>(<span class="string">f"Número de chip: {numero_chip}"</span>)
+<span class="function">print</span>(<span class="string">f"Visitas a la clínica: {visitas_clinica}"</span>)
+<span class="function">print</span>(<span class="string">f"Vacunas aplicadas: {vacunas_aplicadas}"</span>)
+
+<span class="comment"># Operaciones con integers</span>
+edad_años = edad_meses // <span class="number">12</span>  <span class="comment"># División entera</span>
+meses_restantes = edad_meses % <span class="number">12</span>  <span class="comment"># Módulo (resto)</span>
+total_procedimientos = visitas_clinica + vacunas_aplicadas
+
+<span class="function">print</span>(<span class="string">f"Edad en años: {edad_años} años y {meses_restantes} meses"</span>)
+<span class="function">print</span>(<span class="string">f"Total de procedimientos: {total_procedimientos}"</span>)
+
+<span class="comment"># ==========================================
+# TIPO FLOAT (float) - Números decimales
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n💰 TIPO FLOAT (Números decimales):"</span>)
+
+<span class="comment"># Floats: Para medidas precisas, precios, etc.</span>
+peso_kg = <span class="number">28.5</span>
+altura_cm = <span class="number">65.2</span>
+temperatura_corporal = <span class="number">38.7</span>
+costo_consulta = <span class="number">450.00</span>
+descuento_porcentaje = <span class="number">15.5</span>
+
+<span class="function">print</span>(<span class="string">f"Peso: {peso_kg} kg"</span>)
+<span class="function">print</span>(<span class="string">f"Altura: {altura_cm} cm"</span>)
+<span class="function">print</span>(<span class="string">f"Temperatura corporal: {temperatura_corporal}°C"</span>)
+<span class="function">print</span>(<span class="string">f"Costo de consulta: ${costo_consulta}"</span>)
+
+<span class="comment"># Operaciones con floats</span>
+imc_perro = peso_kg / ((altura_cm / <span class="number">100</span>) ** <span class="number">2</span>)  <span class="comment"># Cálculo aproximado</span>
+costo_con_descuento = costo_consulta * (<span class="number">1</span> - descuento_porcentaje / <span class="number">100</span>)
+
+<span class="function">print</span>(<span class="string">f"IMC aproximado: {imc_perro:.2f}"</span>)
+<span class="function">print</span>(<span class="string">f"Costo con descuento ({descuento_porcentaje}%): ${costo_con_descuento:.2f}"</span>)
+
+<span class="comment"># ==========================================
+# TIPO BOOLEAN (bool) - Verdadero/Falso
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n✅ TIPO BOOLEAN (Verdadero/Falso):"</span>)
+
+<span class="comment"># Booleans: Para estados, condiciones, flags</span>
+esta_vacunado = <span class="keyword">True</span>
+esta_castrado = <span class="keyword">False</span>
+necesita_cirugia = <span class="keyword">False</span>
+tiene_seguro = <span class="keyword">True</span>
+es_agresivo = <span class="keyword">False</span>
+
+<span class="function">print</span>(<span class="string">f"¿Está vacunado? {esta_vacunado}"</span>)
+<span class="function">print</span>(<span class="string">f"¿Está castrado? {esta_castrado}"</span>)
+<span class="function">print</span>(<span class="string">f"¿Necesita cirugía? {necesita_cirugia}"</span>)
+<span class="function">print</span>(<span class="string">f"¿Tiene seguro? {tiene_seguro}"</span>)
+<span class="function">print</span>(<span class="string">f"¿Es agresivo? {es_agresivo}"</span>)
+
+<span class="comment"># Operaciones lógicas con booleans</span>
+puede_interactuar = <span class="keyword">not</span> es_agresivo <span class="keyword">and</span> esta_vacunado
+necesita_atencion_especial = necesita_cirugia <span class="keyword">or</span> <span class="keyword">not</span> esta_vacunado
+
+<span class="function">print</span>(<span class="string">f"¿Puede interactuar con otras mascotas? {puede_interactuar}"</span>)
+<span class="function">print</span>(<span class="string">f"¿Necesita atención especial? {necesita_atencion_especial}"</span>)
+
+<span class="comment"># ==========================================
+# TIPO LIST (list) - Listas
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n📋 TIPO LIST (Listas):"</span>)
+
+<span class="comment"># Listas: Para colecciones de datos relacionados</span>
+vacunas_aplicadas_nombres = [<span class="string">"Rabia"</span>, <span class="string">"Moquillo"</span>, <span class="string">"Parvovirus"</span>]
+fechas_visitas = [<span class="string">"2024-01-15"</span>, <span class="string">"2024-02-20"</span>, <span class="string">"2024-03-25"</span>, <span class="string">"2024-04-30"</span>, <span class="string">"2024-05-15"</span>]
+pesos_historicos = [<span class="number">25.2</span>, <span class="number">26.8</span>, <span class="number">27.5</span>, <span class="number">28.0</span>, <span class="number">28.5</span>]
+necesidades_especiales = [<span class="string">"Dieta baja en sodio"</span>, <span class="string">"Ejercicio moderado"</span>]
+
+<span class="function">print</span>(<span class="string">f"Vacunas aplicadas: {vacunas_aplicadas_nombres}"</span>)
+<span class="function">print</span>(<span class="string">f"Fechas de visitas: {fechas_visitas}"</span>)
+<span class="function">print</span>(<span class="string">f"Historial de peso: {pesos_historicos} kg"</span>)
+<span class="function">print</span>(<span class="string">f"Necesidades especiales: {necesidades_especiales}"</span>)
+
+<span class="comment"># Operaciones con listas</span>
+<span class="function">print</span>(<span class="string">f"Total de vacunas: {len(vacunas_aplicadas_nombres)}"</span>)
+<span class="function">print</span>(<span class="string">f"Última visita: {fechas_visitas[-1]}"</span>)  <span class="comment"># -1 = último elemento</span>
+<span class="function">print</span>(<span class="string">f"Peso actual: {pesos_historicos[-1]} kg"</span>)
+<span class="function">print</span>(<span class="string">f"Primer peso registrado: {pesos_historicos[0]} kg"</span>)
+
+<span class="comment"># Cálculos con listas</span>
+ganancia_peso = pesos_historicos[-<span class="number">1</span>] - pesos_historicos[<span class="number">0</span>]
+peso_promedio = <span class="function">sum</span>(pesos_historicos) / <span class="function">len</span>(pesos_historicos)
+
+<span class="function">print</span>(<span class="string">f"Ganancia de peso total: {ganancia_peso:.1f} kg"</span>)
+<span class="function">print</span>(<span class="string">f"Peso promedio: {peso_promedio:.1f} kg"</span>)
+
+<span class="comment"># ==========================================
+# VERIFICACIÓN DE TIPOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔍 VERIFICACIÓN DE TIPOS:"</span>)
+
+<span class="function">print</span>(<span class="string">f"Tipo de 'nombre_mascota': {type(nombre_mascota)}"</span>)
+<span class="function">print</span>(<span class="string">f"Tipo de 'edad_meses': {type(edad_meses)}"</span>)
+<span class="function">print</span>(<span class="string">f"Tipo de 'peso_kg': {type(peso_kg)}"</span>)
+<span class="function">print</span>(<span class="string">f"Tipo de 'esta_vacunado': {type(esta_vacunado)}"</span>)
+<span class="function">print</span>(<span class="string">f"Tipo de 'vacunas_aplicadas_nombres': {type(vacunas_aplicadas_nombres)}"</span>)
+
+<span class="comment"># ==========================================
+# CONVERSIÓN DE TIPOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔄 CONVERSIÓN DE TIPOS:"</span>)
+
+<span class="comment"># Convertir entre tipos (muy común en aplicaciones reales)</span>
+edad_como_string = <span class="function">str</span>(edad_meses)
+peso_como_entero = <span class="function">int</span>(peso_kg)  <span class="comment"># Trunca decimales</span>
+temperatura_como_string = <span class="function">str</span>(temperatura_corporal)
+numero_chip_como_string = <span class="function">str</span>(numero_chip)
+
+<span class="function">print</span>(<span class="string">f"Edad como string: '{edad_como_string}' (tipo: {type(edad_como_string)})"</span>)
+<span class="function">print</span>(<span class="string">f"Peso como entero: {peso_como_entero} (tipo: {type(peso_como_entero)})"</span>)
+<span class="function">print</span>(<span class="string">f"Temperatura como string: '{temperatura_como_string}'"</span>)
+
+<span class="comment"># ==========================================
+# APLICACIÓN INDUSTRIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏭 APLICACIÓN EN INDUSTRIA ALIMENTARIA:"</span>)
+<span class="function">print</span>(<span class="string">"Los mismos tipos de datos se usan en control industrial:"</span>)
+
+<span class="comment"># Ejemplo: Sistema de control de calidad en planta procesadora</span>
+codigo_producto = <span class="string">"ALI-2024-001"</span>  <span class="comment"># string</span>
+lote_numero = <span class="number">12345</span>  <span class="comment"># integer</span>
+temperatura_proceso = <span class="number">75.5</span>  <span class="comment"># float</span>
+control_calidad_aprobado = <span class="keyword">True</span>  <span class="comment"># boolean</span>
+ingredientes = [<span class="string">"Agua"</span>, <span class="string">"Harina"</span>, <span class="string">"Sal"</span>, <span class="string">"Levadura"</span>]  <span class="comment"># list</span>
+
+<span class="function">print</span>(<span class="string">f"🏷️  Código de producto: {codigo_producto}"</span>)
+<span class="function">print</span>(<span class="string">f"📦 Número de lote: {lote_numero}"</span>)
+<span class="function">print</span>(<span class="string">f"🌡️  Temperatura de proceso: {temperatura_proceso}°C"</span>)
+<span class="function">print</span>(<span class="string">f"✅ Control de calidad: {control_calidad_aprobado}"</span>)
+<span class="function">print</span>(<span class="string">f"🧪 Ingredientes: {ingredientes}"</span>)
+
+<span class="comment"># ==========================================
+# RESUMEN EDUCATIVO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n" + "="</span> * <span class="number">50</span>)
+<span class="function">print</span>(<span class="string">"🎓 RESUMEN - TIPOS DE DATOS APRENDIDOS:"</span>)
+<span class="function">print</span>(<span class="string">"📝 STRING (str):   Texto, nombres, descripciones"</span>)
+<span class="function">print</span>(<span class="string">"🔢 INTEGER (int):  Números enteros, cantidades, IDs"</span>)
+<span class="function">print</span>(<span class="string">"💰 FLOAT (float):  Números decimales, medidas precisas"</span>)
+<span class="function">print</span>(<span class="string">"✅ BOOLEAN (bool): Verdadero/Falso, estados, condiciones"</span>)
+<span class="function">print</span>(<span class="string">"📋 LIST (list):    Colecciones de datos relacionados"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)</pre>
+                    </div>
+
+                    <div class="instructor-note">
+                        <strong>💡 Nota para el Instructor:</strong> Este ejercicio cubre todos los tipos de datos básicos usando un contexto familiar (mascotas). Los estudiantes ven aplicaciones prácticas y entienden cuándo usar cada tipo. La sección industrial conecta con aplicaciones reales.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 3 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🎯 Ejercicio 3: Operadores - Detector de Números Especiales
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Dominar operadores de comparación y lógicos creando un programa que detecte si un número cumple con condiciones especiales usando expresiones booleanas.
+                    </div>
+
+                    <div class="filename">ejercicio_03_operadores.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 3: Operadores en Python - Detector de Números Especiales
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Explorar operadores de comparación, lógicos y aritméticos
+"""</span>
+
+<span class="function">print</span>(<span class="string">"🎯 DETECTOR DE NÚMEROS ESPECIALES"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># Número a analizar (puedes cambiar este valor para probar)</span>
+numero = <span class="number">42</span>
+
+<span class="function">print</span>(<span class="string">f"🔍 Analizando el número: {numero}"</span>)
+<span class="function">print</span>(<span class="string">"-"</span> * <span class="number">30</span>)
+
+<span class="comment"># ==========================================
+# OPERADORES ARITMÉTICOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n➕ OPERADORES ARITMÉTICOS:"</span>)
+
+<span class="comment"># Operaciones básicas</span>
+suma = numero + <span class="number">10</span>
+resta = numero - <span class="number">15</span>
+multiplicacion = numero * <span class="number">2</span>
+division = numero / <span class="number">7</span>
+division_entera = numero // <span class="number">7</span>
+modulo = numero % <span class="number">7</span>
+potencia = numero ** <span class="number">2</span>
+
+<span class="function">print</span>(<span class="string">f"{numero} + 10 = {suma}"</span>)
+<span class="function">print</span>(<span class="string">f"{numero} - 15 = {resta}"</span>)
+<span class="function">print</span>(<span class="string">f"{numero} * 2 = {multiplicacion}"</span>)
+<span class="function">print</span>(<span class="string">f"{numero} / 7 = {division:.2f}"</span>)
+<span class="function">print</span>(<span class="string">f"{numero} // 7 = {division_entera} (división entera)"</span>)
+<span class="function">print</span>(<span class="string">f"{numero} % 7 = {modulo} (resto/módulo)"</span>)
+<span class="function">print</span>(<span class="string">f"{numero} ** 2 = {potencia} (potencia/exponenciación)"</span>)
+
+<span class="comment"># ==========================================
+# OPERADORES DE COMPARACIÓN
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔍 OPERADORES DE COMPARACIÓN:"</span>)
+
+<span class="comment"># Comparaciones que devuelven True o False</span>
+es_igual_42 = numero == <span class="number">42</span>
+es_diferente_0 = numero != <span class="number">0</span>
+es_mayor_30 = numero > <span class="number">30</span>
+es_menor_100 = numero < <span class="number">100</span>
+es_mayor_igual_42 = numero >= <span class="number">42</span>
+es_menor_igual_50 = numero <= <span class="number">50</span>
+
+<span class="function">print</span>(<span class="string">f"¿{numero} == 42? {es_igual_42}"</span>)
+<span class="function">print</span>(<span class="string">f"¿{numero} != 0? {es_diferente_0}"</span>)
+<span class="function">print</span>(<span class="string">f"¿{numero} > 30? {es_mayor_30}"</span>)
+<span class="function">print</span>(<span class="string">f"¿{numero} < 100? {es_menor_100}"</span>)
+<span class="function">print</span>(<span class="string">f"¿{numero} >= 42? {es_mayor_igual_42}"</span>)
+<span class="function">print</span>(<span class="string">f"¿{numero} <= 50? {es_menor_igual_50}"</span>)
+
+<span class="comment"># ==========================================
+# OPERADORES LÓGICOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🧠 OPERADORES LÓGICOS:"</span>)
+
+<span class="comment"># Combinando condiciones con AND, OR, NOT</span>
+es_par = numero % <span class="number">2</span> == <span class="number">0</span>
+es_positivo = numero > <span class="number">0</span>
+esta_en_rango = numero >= <span class="number">10</span> <span class="keyword">and</span> numero <= <span class="number">100</span>
+
+<span class="function">print</span>(<span class="string">f"¿{numero} es par? {es_par}"</span>)
+<span class="function">print</span>(<span class="string">f"¿{numero} es positivo? {es_positivo}"</span>)
+<span class="function">print</span>(<span class="string">f"¿{numero} está entre 10 y 100? {esta_en_rango}"</span>)
+
+<span class="comment"># Operaciones lógicas complejas</span>
+par_y_positivo = es_par <span class="keyword">and</span> es_positivo
+par_o_grande = es_par <span class="keyword">or</span> numero > <span class="number">100</span>
+no_es_par = <span class="keyword">not</span> es_par
+
+<span class="function">print</span>(<span class="string">f"¿Es par Y positivo? {par_y_positivo}"</span>)
+<span class="function">print</span>(<span class="string">f"¿Es par O mayor que 100? {par_o_grande}"</span>)
+<span class="function">print</span>(<span class="string">f"¿NO es par? {no_es_par}"</span>)
+
+<span class="comment"># ==========================================
+# DETECTOR DE CARACTERÍSTICAS ESPECIALES
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🌟 CARACTERÍSTICAS ESPECIALES DEL NÚMERO:"</span>)
+
+<span class="comment"># Múltiplo de 3</span>
+es_multiplo_3 = numero % <span class="number">3</span> == <span class="number">0</span>
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es múltiplo de 3? {es_multiplo_3}"</span>)
+
+<span class="comment"># Múltiplo de 5</span>
+es_multiplo_5 = numero % <span class="number">5</span> == <span class="number">0</span>
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es múltiplo de 5? {es_multiplo_5}"</span>)
+
+<span class="comment"># Múltiplo de 3 Y 5 (múltiplo de 15)</span>
+es_multiplo_15 = es_multiplo_3 <span class="keyword">and</span> es_multiplo_5
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es múltiplo de 15? {es_multiplo_15}"</span>)
+
+<span class="comment"># Número perfecto cuadrado</span>
+raiz_cuadrada = numero ** <span class="number">0.5</span>
+es_cuadrado_perfecto = raiz_cuadrada == <span class="function">int</span>(raiz_cuadrada)
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es cuadrado perfecto? {es_cuadrado_perfecto}"</span>)
+
+<span class="comment"># Dígitos del número</span>
+numero_como_string = <span class="function">str</span>(<span class="function">abs</span>(numero))  <span class="comment"># abs() elimina signo negativo</span>
+cantidad_digitos = <span class="function">len</span>(numero_como_string)
+es_numero_corto = cantidad_digitos <= <span class="number">2</span>
+<span class="function">print</span>(<span class="string">f"🔸 Cantidad de dígitos: {cantidad_digitos}"</span>)
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es número corto (≤ 2 dígitos)? {es_numero_corto}"</span>)
+
+<span class="comment"># ==========================================
+# CLASIFICACIÓN ESPECIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🎲 CLASIFICACIÓN ESPECIAL:"</span>)
+
+<span class="comment"># Número FizzBuzz especial</span>
+es_fizz = es_multiplo_3 <span class="keyword">and</span> <span class="keyword">not</span> es_multiplo_5
+es_buzz = es_multiplo_5 <span class="keyword">and</span> <span class="keyword">not</span> es_multiplo_3
+es_fizzbuzz = es_multiplo_3 <span class="keyword">and</span> es_multiplo_5
+
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es FIZZ (múltiplo de 3 pero no de 5)? {es_fizz}"</span>)
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es BUZZ (múltiplo de 5 pero no de 3)? {es_buzz}"</span>)
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es FIZZBUZZ (múltiplo de 3 Y 5)? {es_fizzbuzz}"</span>)
+
+<span class="comment"># Número en rangos específicos</span>
+es_adolescente = numero >= <span class="number">13</span> <span class="keyword">and</span> numero <= <span class="number">19</span>
+es_adulto_joven = numero >= <span class="number">20</span> <span class="keyword">and</span> numero <= <span class="number">35</span>
+es_maduro = numero >= <span class="number">36</span> <span class="keyword">and</span> numero <= <span class="number">65</span>
+
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es 'adolescente' (13-19)? {es_adolescente}"</span>)
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es 'adulto joven' (20-35)? {es_adulto_joven}"</span>)
+<span class="function">print</span>(<span class="string">f"🔸 ¿Es 'maduro' (36-65)? {es_maduro}"</span>)
+
+<span class="comment"># ==========================================
+# OPERADORES DE ASIGNACIÓN
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n📈 OPERADORES DE ASIGNACIÓN:"</span>)
+
+<span class="comment"># Empezar con una copia del número original</span>
+numero_copia = numero
+
+<span class="function">print</span>(<span class="string">f"Número original: {numero_copia}"</span>)
+
+<span class="comment"># Operadores de asignación combinados</span>
+numero_copia += <span class="number">10</span>  <span class="comment"># Equivale a: numero_copia = numero_copia + 10</span>
+<span class="function">print</span>(<span class="string">f"Después de += 10: {numero_copia}"</span>)
+
+numero_copia -= <span class="number">5</span>   <span class="comment"># Equivale a: numero_copia = numero_copia - 5</span>
+<span class="function">print</span>(<span class="string">f"Después de -= 5: {numero_copia}"</span>)
+
+numero_copia *= <span class="number">2</span>   <span class="comment"># Equivale a: numero_copia = numero_copia * 2</span>
+<span class="function">print</span>(<span class="string">f"Después de *= 2: {numero_copia}"</span>)
+
+numero_copia //= <span class="number">3</span>  <span class="comment"># División entera</span>
+<span class="function">print</span>(<span class="string">f"Después de //= 3: {numero_copia}"</span>)
+
+numero_copia **= <span class="number">2</span>  <span class="comment"># Elevar al cuadrado</span>
+<span class="function">print</span>(<span class="string">f"Después de **= 2: {numero_copia}"</span>)
+
+<span class="comment"># ==========================================
+# PRECEDENCIA DE OPERADORES
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔢 PRECEDENCIA DE OPERADORES:"</span>)
+
+<span class="comment"># Ejemplos de precedencia (orden de operaciones)</span>
+resultado1 = <span class="number">2</span> + <span class="number">3</span> * <span class="number">4</span>        <span class="comment"># Multiplicación primero: 2 + 12 = 14</span>
+resultado2 = (<span class="number">2</span> + <span class="number">3</span>) * <span class="number">4</span>      <span class="comment"># Paréntesis primero: 5 * 4 = 20</span>
+resultado3 = <span class="number">10</span> - <span class="number">5</span> + <span class="number">2</span>       <span class="comment"># Izquierda a derecha: 5 + 2 = 7</span>
+resultado4 = <span class="number">2</span> ** <span class="number">3</span> ** <span class="number">2</span>      <span class="comment"># Exponenciación de derecha a izquierda: 2^(3^2) = 2^9 = 512</span>
+
+<span class="function">print</span>(<span class="string">f"2 + 3 * 4 = {resultado1} (multiplicación primero)"</span>)
+<span class="function">print</span>(<span class="string">f"(2 + 3) * 4 = {resultado2} (paréntesis primero)"</span>)
+<span class="function">print</span>(<span class="string">f"10 - 5 + 2 = {resultado3} (izquierda a derecha)"</span>)
+<span class="function">print</span>(<span class="string">f"2 ** 3 ** 2 = {resultado4} (exponenciación derecha a izquierda)"</span>)
+
+<span class="comment"># ==========================================
+# APLICACIÓN INDUSTRIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏭 APLICACIÓN EN CONTROL INDUSTRIAL:"</span>)
+
+<span class="comment"># Ejemplo: Control de calidad en producción</span>
+temperatura_horno = <span class="number">180</span>  <span class="comment"># °C</span>
+presion_sistema = <span class="number">3.5</span>    <span class="comment"># bar</span>
+velocidad_motor = <span class="number">1800</span>   <span class="comment"># RPM</span>
+
+<span class="comment"># Rangos operativos seguros</span>
+temp_min, temp_max = <span class="number">170</span>, <span class="number">190</span>
+presion_min, presion_max = <span class="number">3.0</span>, <span class="number">4.0</span>
+velocidad_min, velocidad_max = <span class="number">1700</span>, <span class="number">1900</span>
+
+<span class="comment"># Verificaciones de seguridad usando operadores</span>
+temperatura_ok = temp_min <= temperatura_horno <= temp_max
+presion_ok = presion_min <= presion_sistema <= presion_max
+velocidad_ok = velocidad_min <= velocidad_motor <= velocidad_max
+
+<span class="comment"># Sistema completamente seguro</span>
+sistema_seguro = temperatura_ok <span class="keyword">and</span> presion_ok <span class="keyword">and</span> velocidad_ok
+
+<span class="function">print</span>(<span class="string">f"🌡️  Temperatura: {temperatura_horno}°C - {'✅ OK' if temperatura_ok else '❌ FUERA DE RANGO'}"</span>)
+<span class="function">print</span>(<span class="string">f"💨 Presión: {presion_sistema} bar - {'✅ OK' if presion_ok else '❌ FUERA DE RANGO'}"</span>)
+<span class="function">print</span>(<span class="string">f"⚙️  Velocidad: {velocidad_motor} RPM - {'✅ OK' if velocidad_ok else '❌ FUERA DE RANGO'}"</span>)
+<span class="function">print</span>(<span class="string">f"🏭 Sistema general: {'✅ SEGURO' if sistema_seguro else '⚠️ REVISAR'}"</span>)
+
+<span class="comment"># Cálculo de eficiencia usando operadores</span>
+produccion_actual = <span class="number">95</span>  <span class="comment"># piezas/hora</span>
+produccion_objetivo = <span class="number">100</span>  <span class="comment"># piezas/hora</span>
+eficiencia = (produccion_actual / produccion_objetivo) * <span class="number">100</span>
+eficiencia_aceptable = eficiencia >= <span class="number">90</span>
+
+<span class="function">print</span>(<span class="string">f"📊 Eficiencia: {eficiencia:.1f}% - {'✅ ACEPTABLE' if eficiencia_aceptable else '❌ MEJORAR'}"</span>)
+
+<span class="comment"># ==========================================
+# RESUMEN EDUCATIVO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n" + "="</span> * <span class="number">50</span>)
+<span class="function">print</span>(<span class="string">"🎓 OPERADORES APRENDIDOS:"</span>)
+<span class="function">print</span>(<span class="string">"➕ ARITMÉTICOS: +, -, *, /, //, %, **"</span>)
+<span class="function">print</span>(<span class="string">"🔍 COMPARACIÓN: ==, !=, >, <, >=, <="</span>)
+<span class="function">print</span>(<span class="string">"🧠 LÓGICOS: and, or, not"</span>)
+<span class="function">print</span>(<span class="string">"📈 ASIGNACIÓN: +=, -=, *=, //=, **="</span>)
+<span class="function">print</span>(<span class="string">"🔢 PRECEDENCIA: Paréntesis > Exponentes > */% > +- > Comparación > Lógicos"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)</pre>
+                    </div>
+
+                    <div class="instructor-note">
+                        <strong>💡 Nota para el Instructor:</strong> Este ejercicio demuestra todos los operadores de Python de forma práctica. Los estudiantes ven cómo combinar operadores para crear lógica compleja, esencial para programación industrial. La sección de control de calidad muestra aplicaciones reales.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 4 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🤔 Ejercicio 4: Estructuras Condicionales - Sistema de Decisiones
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Dominar las estructuras condicionales if/elif/else creando un programa que ayude a tomar decisiones basadas en múltiples factores y condiciones.
+                    </div>
+
+                    <div class="filename">ejercicio_04_condicionales.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 4: Estructuras Condicionales - Sistema de Decisiones
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Dominar if/elif/else para toma de decisiones complejas
+"""</span>
+
+<span class="keyword">import</span> random
+
+<span class="function">print</span>(<span class="string">"🤔 SISTEMA INTELIGENTE DE DECISIONES"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># ==========================================
+# SIMULACIÓN DE DATOS DE ENTRADA
+# ==========================================</span>
+
+<span class="comment"># Simular datos de sensores y condiciones</span>
+temperatura = random.randint(<span class="number">15</span>, <span class="number">35</span>)
+humedad = random.randint(<span class="number">30</span>, <span class="number">90</span>)
+velocidad_viento = random.randint(<span class="number">0</span>, <span class="number">25</span>)
+probabilidad_lluvia = random.randint(<span class="number">0</span>, <span class="number">100</span>)
+dia_semana = random.randint(<span class="number">1</span>, <span class="number">7</span>)  <span class="comment"># 1=Lunes, 7=Domingo</span>
+es_feriado = random.choice([<span class="keyword">True</span>, <span class="keyword">False</span>])
+
+<span class="function">print</span>(<span class="string">"📊 CONDICIONES ACTUALES:"</span>)
+<span class="function">print</span>(<span class="string">f"🌡️  Temperatura: {temperatura}°C"</span>)
+<span class="function">print</span>(<span class="string">f"💧 Humedad: {humedad}%"</span>)
+<span class="function">print</span>(<span class="string">f"💨 Velocidad del viento: {velocidad_viento} km/h"</span>)
+<span class="function">print</span>(<span class="string">f"🌧️  Probabilidad de lluvia: {probabilidad_lluvia}%"</span>)
+<span class="function">print</span>(<span class="string">f"📅 Día de la semana: {dia_semana} (1=Lun, 7=Dom)"</span>)
+<span class="function">print</span>(<span class="string">f"🎉 ¿Es feriado? {es_feriado}"</span>)
+
+<span class="comment"># ==========================================
+# DECISIÓN 1: CONDICIONES CLIMÁTICAS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🌤️  ANÁLISIS DEL CLIMA:"</span>)
+
+<span class="comment"># Estructura if/elif/else para clasificar el clima</span>
+<span class="keyword">if</span> temperatura >= <span class="number">30</span>:
+    clima = <span class="string">"Muy caluroso"</span>
+    emoji_temp = <span class="string">"🥵"</span>
+<span class="keyword">elif</span> temperatura >= <span class="number">25</span>:
+    clima = <span class="string">"Caluroso"</span>
+    emoji_temp = <span class="string">"☀️"</span>
+<span class="keyword">elif</span> temperatura >= <span class="number">20</span>:
+    clima = <span class="string">"Templado"</span>
+    emoji_temp = <span class="string">"🌤️"</span>
+<span class="keyword">elif</span> temperatura >= <span class="number">15</span>:
+    clima = <span class="string">"Fresco"</span>
+    emoji_temp = <span class="string">"🌥️"</span>
+<span class="keyword">else</span>:
+    clima = <span class="string">"Frío"</span>
+    emoji_temp = <span class="string">"🥶"</span>
+
+<span class="function">print</span>(<span class="string">f"{emoji_temp} Clasificación térmica: {clima}"</span>)
+
+<span class="comment"># Análisis de humedad</span>
+<span class="keyword">if</span> humedad >= <span class="number">80</span>:
+    nivel_humedad = <span class="string">"Muy húmedo"</span>
+    emoji_hum = <span class="string">"💦"</span>
+<span class="keyword">elif</span> humedad >= <span class="number">60</span>:
+    nivel_humedad = <span class="string">"Húmedo"</span>
+    emoji_hum = <span class="string">"💧"</span>
+<span class="keyword">elif</span> humedad >= <span class="number">40</span>:
+    nivel_humedad = <span class="string">"Normal"</span>
+    emoji_hum = <span class="string">"🌿"</span>
+<span class="keyword">else</span>:
+    nivel_humedad = <span class="string">"Seco"</span>
+    emoji_hum = <span class="string">"🏜️"</span>
+
+<span class="function">print</span>(<span class="string">f"{emoji_hum} Nivel de humedad: {nivel_humedad}"</span>)
+
+<span class="comment"># ==========================================
+# DECISIÓN 2: ACTIVIDADES RECOMENDADAS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🎯 RECOMENDACIONES DE ACTIVIDADES:"</span>)
+
+<span class="comment"># Decisión compleja basada en múltiples condiciones</span>
+<span class="keyword">if</span> probabilidad_lluvia > <span class="number">70</span>:
+    actividad = <span class="string">"Quedarse en casa"</span>
+    razon = <span class="string">"Alta probabilidad de lluvia"</span>
+    emoji_act = <span class="string">"🏠"</span>
+<span class="keyword">elif</span> temperatura > <span class="number">30</span> <span class="keyword">and</span> humedad > <span class="number">70</span>:
+    actividad = <span class="string">"Ir a la piscina"</span>
+    razon = <span class="string">"Día muy caluroso y húmedo"</span>
+    emoji_act = <span class="string">"🏊‍♂️"</span>
+<span class="keyword">elif</span> temperatura >= <span class="number">20</span> <span class="keyword">and</span> velocidad_viento < <span class="number">15</span> <span class="keyword">and</span> probabilidad_lluvia < <span class="number">30</span>:
+    actividad = <span class="string">"Hacer ejercicio al aire libre"</span>
+    razon = <span class="string">"Condiciones ideales para actividades exteriores"</span>
+    emoji_act = <span class="string">"🚴‍♂️"</span>
+<span class="keyword">elif</span> temperatura < <span class="number">15</span>:
+    actividad = <span class="string">"Actividades en interiores"</span>
+    razon = <span class="string">"Temperatura demasiado baja"</span>
+    emoji_act = <span class="string">"🏛️"</span>
+<span class="keyword">elif</span> velocidad_viento > <span class="number">20</span>:
+    actividad = <span class="string">"Evitar actividades al aire libre"</span>
+    razon = <span class="string">"Viento muy fuerte"</span>
+    emoji_act = <span class="string">"💨"</span>
+<span class="keyword">else</span>:
+    actividad = <span class="string">"Caminar en el parque"</span>
+    razon = <span class="string">"Condiciones moderadas"</span>
+    emoji_act = <span class="string">"🚶‍♂️"</span>
+
+<span class="function">print</span>(<span class="string">f"{emoji_act} Actividad recomendada: {actividad}"</span>)
+<span class="function">print</span>(<span class="string">f"📝 Razón: {razon}"</span>)
+
+<span class="comment"># ==========================================
+# DECISIÓN 3: PLANIFICACIÓN LABORAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n💼 PLANIFICACIÓN LABORAL:"</span>)
+
+<span class="comment"># Determinar tipo de día laboral</span>
+<span class="keyword">if</span> es_feriado:
+    tipo_dia = <span class="string">"Feriado"</span>
+    modalidad_trabajo = <span class="string">"Descanso"</span>
+    emoji_trabajo = <span class="string">"🎉"</span>
+<span class="keyword">elif</span> dia_semana == <span class="number">6</span> <span class="keyword">or</span> dia_semana == <span class="number">7</span>:  <span class="comment"># Sábado o Domingo</span>
+    tipo_dia = <span class="string">"Fin de semana"</span>
+    modalidad_trabajo = <span class="string">"Descanso"</span>
+    emoji_trabajo = <span class="string">"🏖️"</span>
+<span class="keyword">elif</span> dia_semana == <span class="number">1</span>:  <span class="comment"># Lunes</span>
+    tipo_dia = <span class="string">"Lunes"</span>
+    modalidad_trabajo = <span class="string">"Presencial - Inicio de semana"</span>
+    emoji_trabajo = <span class="string">"💪"</span>
+<span class="keyword">elif</span> dia_semana == <span class="number">5</span>:  <span class="comment"># Viernes</span>
+    tipo_dia = <span class="string">"Viernes"</span>
+    modalidad_trabajo = <span class="string">"Medio día - Fin de semana cerca"</span>
+    emoji_trabajo = <span class="string">"🎊"</span>
+<span class="keyword">else</span>:  <span class="comment"># Martes a Jueves</span>
+    tipo_dia = <span class="string">"Día laboral regular"</span>
+    <span class="comment"># Modalidad basada en condiciones climáticas</span>
+    <span class="keyword">if</span> probabilidad_lluvia > <span class="number">50</span> <span class="keyword">or</span> temperatura < <span class="number">10</span> <span class="keyword">or</span> temperatura > <span class="number">35</span>:
+        modalidad_trabajo = <span class="string">"Trabajo remoto recomendado"</span>
+        emoji_trabajo = <span class="string">"🏠"</span>
+    <span class="keyword">else</span>:
+        modalidad_trabajo = <span class="string">"Trabajo presencial"</span>
+        emoji_trabajo = <span class="string">"🏢"</span>
+
+<span class="function">print</span>(<span class="string">f"{emoji_trabajo} Tipo de día: {tipo_dia}"</span>)
+<span class="function">print</span>(<span class="string">f"💻 Modalidad: {modalidad_trabajo}"</span>)
+
+<span class="comment"># ==========================================
+# DECISIÓN 4: SISTEMA DE ALERTAS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🚨 SISTEMA DE ALERTAS:"</span>)
+
+<span class="comment"># Generar alertas basadas en condiciones críticas</span>
+alertas = []
+
+<span class="keyword">if</span> temperatura > <span class="number">35</span>:
+    alertas.append(<span class="string">"🔥 ALERTA: Temperatura extremadamente alta"</span>)
+<span class="keyword">elif</span> temperatura < <span class="number">0</span>:
+    alertas.append(<span class="string">"🧊 ALERTA: Riesgo de congelación"</span>)
+
+<span class="keyword">if</span> humedad > <span class="number">85</span>:
+    alertas.append(<span class="string">"💦 ALERTA: Humedad crítica"</span>)
+
+<span class="keyword">if</span> velocidad_viento > <span class="number">25</span>:
+    alertas.append(<span class="string">"💨 ALERTA: Vientos peligrosos"</span>)
+
+<span class="keyword">if</span> probabilidad_lluvia > <span class="number">80</span>:
+    alertas.append(<span class="string">"🌧️ ALERTA: Tormenta inminente"</span>)
+
+<span class="comment"># Mostrar alertas o mensaje de tranquilidad</span>
+<span class="keyword">if</span> alertas:
+    <span class="function">print</span>(<span class="string">"⚠️ ALERTAS ACTIVAS:"</span>)
+    <span class="keyword">for</span> alerta <span class="keyword">in</span> alertas:
+        <span class="function">print</span>(<span class="string">f"  {alerta}"</span>)
+<span class="keyword">else</span>:
+    <span class="function">print</span>(<span class="string">"✅ No hay alertas activas - Condiciones normales"</span>)
+
+<span class="comment"># ==========================================
+# DECISIÓN 5: SISTEMA DE PUNTUACIÓN
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n⭐ ÍNDICE DE BIENESTAR DEL DÍA:"</span>)
+
+<span class="comment"># Calcular puntuación basada en múltiples factores</span>
+puntuacion = <span class="number">50</span>  <span class="comment"># Puntuación base</span>
+
+<span class="comment"># Ajustar por temperatura</span>
+<span class="keyword">if</span> <span class="number">20</span> <= temperatura <= <span class="number">25</span>:
+    puntuacion += <span class="number">20</span>  <span class="comment"># Temperatura perfecta</span>
+<span class="keyword">elif</span> <span class="number">15</span> <= temperatura < <span class="number">20</span> <span class="keyword">or</span> <span class="number">25</span> < temperatura <= <span class="number">30</span>:
+    puntuacion += <span class="number">10</span>  <span class="comment"># Temperatura buena</span>
+<span class="keyword">elif</span> temperatura > <span class="number">35</span> <span class="keyword">or</span> temperatura < <span class="number">10</span>:
+    puntuacion -= <span class="number">20</span>  <span class="comment"># Temperatura extrema</span>
+
+<span class="comment"># Ajustar por humedad</span>
+<span class="keyword">if</span> <span class="number">40</span> <= humedad <= <span class="number">60</span>:
+    puntuacion += <span class="number">15</span>  <span class="comment"># Humedad ideal</span>
+<span class="keyword">elif</span> humedad > <span class="number">80</span> <span class="keyword">or</span> humedad < <span class="number">30</span>:
+    puntuacion -= <span class="number">10</span>  <span class="comment"># Humedad extrema</span>
+
+<span class="comment"># Ajustar por viento</span>
+<span class="keyword">if</span> velocidad_viento < <span class="number">10</span>:
+    puntuacion += <span class="number">10</span>  <span class="comment"># Viento suave</span>
+<span class="keyword">elif</span> velocidad_viento > <span class="number">20</span>:
+    puntuacion -= <span class="number">15</span>  <span class="comment"># Viento fuerte</span>
+
+<span class="comment"># Ajustar por lluvia</span>
+<span class="keyword">if</span> probabilidad_lluvia < <span class="number">20</span>:
+    puntuacion += <span class="number">15</span>  <span class="comment"># Día despejado</span>
+<span class="keyword">elif</span> probabilidad_lluvia > <span class="number">70</span>:
+    puntuacion -= <span class="number">20</span>  <span class="comment"># Muy lluvioso</span>
+
+<span class="comment"># Ajustar por día de la semana</span>
+<span class="keyword">if</span> es_feriado:
+    puntuacion += <span class="number">25</span>  <span class="comment"># ¡Feriado!</span>
+<span class="keyword">elif</span> dia_semana == <span class="number">6</span> <span class="keyword">or</span> dia_semana == <span class="number">7</span>:
+    puntuacion += <span class="number">20</span>  <span class="comment"># Fin de semana</span>
+<span class="keyword">elif</span> dia_semana == <span class="number">1</span>:
+    puntuacion -= <span class="number">5</span>   <span class="comment"># Lunes blues</span>
+
+<span class="comment"># Clasificar el día según puntuación</span>
+<span class="keyword">if</span> puntuacion >= <span class="number">90</span>:
+    clasificacion = <span class="string">"Día perfecto"</span>
+    emoji_dia = <span class="string">"🌟"</span>
+<span class="keyword">elif</span> puntuacion >= <span class="number">75</span>:
+    clasificacion = <span class="string">"Día excelente"</span>
+    emoji_dia = <span class="string">"😄"</span>
+<span class="keyword">elif</span> puntuacion >= <span class="number">60</span>:
+    clasificacion = <span class="string">"Día bueno"</span>
+    emoji_dia = <span class="string">"😊"</span>
+<span class="keyword">elif</span> puntuacion >= <span class="number">40</span>:
+    clasificacion = <span class="string">"Día regular"</span>
+    emoji_dia = <span class="string">"😐"</span>
+<span class="keyword">elif</span> puntuacion >= <span class="number">25</span>:
+    clasificacion = <span class="string">"Día complicado"</span>
+    emoji_dia = <span class="string">"😕"</span>
+<span class="keyword">else</span>:
+    clasificacion = <span class="string">"Día difícil"</span>
+    emoji_dia = <span class="string">"😞"</span>
+
+<span class="function">print</span>(<span class="string">f"{emoji_dia} Puntuación: {puntuacion}/100"</span>)
+<span class="function">print</span>(<span class="string">f"📊 Clasificación: {clasificacion}"</span>)
+
+<span class="comment"># ==========================================
+# APLICACIÓN INDUSTRIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏭 APLICACIÓN EN SISTEMA INDUSTRIAL:"</span>)
+
+<span class="comment"># Ejemplo: Sistema de control de invernadero</span>
+temp_invernadero = temperatura
+humedad_invernadero = humedad
+
+<span class="function">print</span>(<span class="string">"🌱 CONTROL DE INVERNADERO AUTOMATIZADO:"</span>)
+
+<span class="comment"># Decisiones de control del invernadero</span>
+<span class="keyword">if</span> temp_invernadero < <span class="number">18</span>:
+    accion_calefaccion = <span class="string">"Activar calefacción"</span>
+    potencia_calefaccion = <span class="number">100</span>  <span class="comment"># %</span>
+    emoji_temp_control = <span class="string">"🔥"</span>
+<span class="keyword">elif</span> temp_invernadero < <span class="number">22</span>:
+    accion_calefaccion = <span class="string">"Calefacción moderada"</span>
+    potencia_calefaccion = <span class="number">50</span>
+    emoji_temp_control = <span class="string">"🌡️"</span>
+<span class="keyword">elif</span> temp_invernadero > <span class="number">28</span>:
+    accion_calefaccion = <span class="string">"Activar ventilación"</span>
+    potencia_calefaccion = <span class="number">0</span>
+    emoji_temp_control = <span class="string">"💨"</span>
+<span class="keyword">else</span>:
+    accion_calefaccion = <span class="string">"Temperatura óptima"</span>
+    potencia_calefaccion = <span class="number">25</span>  <span class="comment"># Calefacción mínima</span>
+    emoji_temp_control = <span class="string">"✅"</span>
+
+<span class="comment"># Control de humedad</span>
+<span class="keyword">if</span> humedad_invernadero < <span class="number">40</span>:
+    accion_humedad = <span class="string">"Activar nebulizadores"</span>
+    emoji_hum_control = <span class="string">"💦"</span>
+<span class="keyword">elif</span> humedad_invernadero > <span class="number">80</span>:
+    accion_humedad = <span class="string">"Activar deshumidificador"</span>
+    emoji_hum_control = <span class="string">"🌬️"</span>
+<span class="keyword">else</span>:
+    accion_humedad = <span class="string">"Humedad adecuada"</span>
+    emoji_hum_control = <span class="string">"✅"</span>
+
+<span class="comment"># Decisión de riego basada en condiciones combinadas</span>
+<span class="keyword">if</span> humedad_invernadero < <span class="number">50</span> <span class="keyword">and</span> temp_invernadero > <span class="number">25</span>:
+    riego = <span class="string">"Riego intensivo necesario"</span>
+    duracion_riego = <span class="number">20</span>  <span class="comment"># minutos</span>
+    emoji_riego = <span class="string">"🚿"</span>
+<span class="keyword">elif</span> humedad_invernadero < <span class="number">60</span>:
+    riego = <span class="string">"Riego moderado"</span>
+    duracion_riego = <span class="number">10</span>
+    emoji_riego = <span class="string">"💧"</span>
+<span class="keyword">else</span>:
+    riego = <span class="string">"No requiere riego"</span>
+    duracion_riego = <span class="number">0</span>
+    emoji_riego = <span class="string">"⏹️"</span>
+
+<span class="function">print</span>(<span class="string">f"{emoji_temp_control} Control térmico: {accion_calefaccion} ({potencia_calefaccion}%)"</span>)
+<span class="function">print</span>(<span class="string">f"{emoji_hum_control} Control humedad: {accion_humedad}"</span>)
+<span class="function">print</span>(<span class="string">f"{emoji_riego} Sistema riego: {riego} ({duracion_riego} min)"</span>)
+
+<span class="comment"># Estado general del sistema</span>
+<span class="keyword">if</span> (<span class="number">20</span> <= temp_invernadero <= <span class="number">26</span>) <span class="keyword">and</span> (<span class="number">50</span> <= humedad_invernadero <= <span class="number">70</span>):
+    estado_invernadero = <span class="string">"Condiciones óptimas"</span>
+    emoji_estado = <span class="string">"🌱"</span>
+<span class="keyword">elif</span> (<span class="number">18</span> <= temp_invernadero <= <span class="number">30</span>) <span class="keyword">and</span> (<span class="number">40</span> <= humedad_invernadero <= <span class="number">80</span>):
+    estado_invernadero = <span class="string">"Condiciones aceptables"</span>
+    emoji_estado = <span class="string">"⚠️"</span>
+<span class="keyword">else</span>:
+    estado_invernadero = <span class="string">"Condiciones críticas - Revisar sistema"</span>
+    emoji_estado = <span class="string">"🚨"</span>
+
+<span class="function">print</span>(<span class="string">f"{emoji_estado} Estado general: {estado_invernadero}"</span>)
+
+<span class="comment"># ==========================================
+# RESUMEN EDUCATIVO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n" + "="</span> * <span class="number">50</span>)
+<span class="function">print</span>(<span class="string">"🎓 ESTRUCTURAS CONDICIONALES APRENDIDAS:"</span>)
+<span class="function">print</span>(<span class="string">"🔹 IF simple: if condicion:"</span>)
+<span class="function">print</span>(<span class="string">"🔹 IF-ELSE: if condicion: ... else:"</span>)
+<span class="function">print</span>(<span class="string">"🔹 IF-ELIF-ELSE: múltiples condiciones"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Condiciones complejas: and, or, not"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Anidación: if dentro de if"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Aplicaciones: control, clasificación, alertas"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)</pre>
+                    </div>
+
+                    <div class="instructor-note">
+                        <strong>💡 Nota para el Instructor:</strong> Este ejercicio demuestra la potencia de las estructuras condicionales para toma de decisiones complejas. Los estudiantes ven cómo combinar múltiples condiciones para crear sistemas inteligentes, fundamental en automatización industrial.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ejercicio 5 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🎉 Ejercicio 5: Funciones - Generador de Cumplidos Personalizados
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Aprender a crear y usar funciones básicas con parámetros en Python generando cumplidos personalizados y entendiendo cómo reutilizar código.
+                    </div>
+
+                    <div class="filename">ejercicio_05_funciones.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 5: Funciones en Python - Generador de Cumplidos Personalizados
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Aprender a crear, usar y combinar funciones
+"""</span>
+
+<span class="keyword">import</span> random
+
+<span class="function">print</span>(<span class="string">"🎉 GENERADOR DE CUMPLIDOS PERSONALIZADOS"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># ==========================================
+# FUNCIONES BÁSICAS SIN PARÁMETROS
+# ==========================================</span>
+
+<span class="function">def</span> <span class="function">saludar</span>():
+    <span class="string">"""Función simple que muestra un saludo."""</span>
+    <span class="function">print</span>(<span class="string">"¡Hola! Bienvenido al generador de cumplidos 😊"</span>)
+
+<span class="function">def</span> <span class="function">mostrar_separador</span>():
+    <span class="string">"""Función que muestra una línea separadora."""</span>
+    <span class="function">print</span>(<span class="string">"-" * 40</span>)
+
+<span class="comment"># Llamar funciones básicas</span>
+saludar()
+mostrar_separador()
+
+<span class="comment"># ==========================================
+# FUNCIONES CON PARÁMETROS
+# ==========================================</span>
+
+<span class="function">def</span> <span class="function">generar_cumplido_simple</span>(nombre):
+    <span class="string">"""
+    Genera un cumplido simple para una persona.
+    
+    Args:
+        nombre (str): Nombre de la persona
+    """</span>
+    cumplido = <span class="string">f"¡{nombre}, eres una persona increíble!"</span>
+    <span class="function">print</span>(cumplido)
+
+<span class="function">def</span> <span class="function">calcular_edad_en_dias</span>(edad_años):
+    <span class="string">"""
+    Calcula la edad aproximada en días.
+    
+    Args:
+        edad_años (int): Edad en años
+    """</span>
+    dias = edad_años * <span class="number">365</span>
+    <span class="function">print</span>(<span class="string">f"¡Has vivido aproximadamente {dias} días! 🎂"</span>)
+
+<span class="comment"># Probar funciones con parámetros</span>
+<span class="function">print</span>(<span class="string">"\n📝 CUMPLIDOS SIMPLES:"</span>)
+generar_cumplido_simple(<span class="string">"Ana"</span>)
+generar_cumplido_simple(<span class="string">"Carlos"</span>)
+calcular_edad_en_dias(<span class="number">25</span>)
+
+<span class="comment"># ==========================================
+# FUNCIONES CON MÚLTIPLES PARÁMETROS
+# ==========================================</span>
+
+<span class="function">def</span> <span class="function">cumplido_personalizado</span>(nombre, cualidad, hobby):
+    <span class="string">"""
+    Genera un cumplido personalizado con múltiples características.
+    
+    Args:
+        nombre (str): Nombre de la persona
+        cualidad (str): Una cualidad positiva
+        hobby (str): Un hobby o actividad que le gusta
+    """</span>
+    cumplido = <span class="string">f"¡Hola {nombre}! Eres muy {cualidad} y se nota tu pasión por {hobby}. ¡Sigue así! ⭐"</span>
+    <span class="function">print</span>(cumplido)
+
+<span class="function">def</span> <span class="function">calcular_estadisticas_nombre</span>(nombre, apellido, edad):
+    <span class="string">"""
+    Calcula estadísticas divertidas sobre un nombre.
+    
+    Args:
+        nombre (str): Primer nombre
+        apellido (str): Apellido
+        edad (int): Edad de la persona
+    """</span>
+    nombre_completo = nombre + <span class="string">" "</span> + apellido
+    total_letras = <span class="function">len</span>(nombre_completo.replace(<span class="string">" "</span>, <span class="string">""</span>))
+    letras_por_año = total_letras / edad <span class="keyword">if</span> edad > <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span>
+    
+    <span class="function">print</span>(<span class="string">f"\n📊 ESTADÍSTICAS DE {nombre_completo.upper()}:"</span>)
+    <span class="function">print</span>(<span class="string">f"   🔤 Total de letras: {total_letras}"</span>)
+    <span class="function">print</span>(<span class="string">f"   📈 Letras por año vivido: {letras_por_año:.2f}"</span>)
+    <span class="function">print</span>(<span class="string">f"   🎯 Nombre único y especial!"</span>)
+
+<span class="comment"># Probar funciones con múltiples parámetros</span>
+<span class="function">print</span>(<span class="string">"\n🌟 CUMPLIDOS PERSONALIZADOS:"</span>)
+cumplido_personalizado(<span class="string">"María"</span>, <span class="string">"inteligente"</span>, <span class="string">"la programación"</span>)
+cumplido_personalizado(<span class="string">"Luis"</span>, <span class="string">"creativo"</span>, <span class="string">"la música"</span>)
+calcular_estadisticas_nombre(<span class="string">"Ana"</span>, <span class="string">"García"</span>, <span class="number">22</span>)
+
+<span class="comment"># ==========================================
+# FUNCIONES CON PARÁMETROS POR DEFECTO
+# ==========================================</span>
+
+<span class="function">def</span> <span class="function">generar_cumplido_avanzado</span>(nombre, cualidad=<span class="string">"especial"</span>, emoji=<span class="string">"✨"</span>, repetir=<span class="number">1</span>):
+    <span class="string">"""
+    Genera cumplidos avanzados con parámetros opcionales.
+    
+    Args:
+        nombre (str): Nombre de la persona
+        cualidad (str, optional): Cualidad a destacar. Por defecto "especial"
+        emoji (str, optional): Emoji a usar. Por defecto "✨"
+        repetir (int, optional): Veces a repetir. Por defecto 1
+    """</span>
+    cumplido = <span class="string">f"{emoji} {nombre}, eres muy {cualidad}! {emoji}"</span>
+    
+    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="function">range</span>(repetir):
+        <span class="function">print</span>(cumplido)
+
+<span class="function">def</span> <span class="function">saludo_profesional</span>(nombre, titulo=<span class="string">"Colega"</span>, departamento=<span class="string">"Desarrollo"</span>):
+    <span class="string">"""
+    Genera saludo profesional con parámetros opcionales.
+    
+    Args:
+        nombre (str): Nombre del empleado
+        titulo (str, optional): Título profesional. Por defecto "Colega"
+        departamento (str, optional): Departamento. Por defecto "Desarrollo"
+    """</span>
+    saludo = <span class="string">f"🏢 Estimado/a {titulo} {nombre} del departamento de {departamento},"</span>
+    reconocimiento = <span class="string">f"Su trabajo y dedicación son muy valorados en el equipo. ¡Excelente labor!"</span>
+    
+    <span class="function">print</span>(saludo)
+    <span class="function">print</span>(reconocimiento)
+
+<span class="comment"># Probar funciones con parámetros por defecto</span>
+<span class="function">print</span>(<span class="string">"\n🚀 CUMPLIDOS AVANZADOS:"</span>)
+generar_cumplido_avanzado(<span class="string">"Pedro"</span>)  <span class="comment"># Usa valores por defecto</span>
+generar_cumplido_avanzado(<span class="string">"Sofia"</span>, <span class="string">"brillante"</span>, <span class="string">"🌟"</span>, <span class="number">2</span>)  <span class="comment"># Todos los parámetros</span>
+generar_cumplido_avanzado(<span class="string">"Diego"</span>, emoji=<span class="string">"🎯"</span>, repetir=<span class="number">3</span>)  <span class="comment"># Parámetros nombrados</span>
+
+<span class="function">print</span>(<span class="string">"\n💼 SALUDOS PROFESIONALES:"</span>)
+saludo_profesional(<span class="string">"Carmen"</span>)
+saludo_profesional(<span class="string">"Roberto"</span>, <span class="string">"Ingeniero"</span>, <span class="string">"Automatización"</span>)
+
+<span class="comment"># ==========================================
+# FUNCIONES QUE DEVUELVEN VALORES
+# ==========================================</span>
+
+<span class="function">def</span> <span class="function">crear_cumplido_aleatorio</span>(nombre):
+    <span class="string">"""
+    Crea un cumplido aleatorio y lo devuelve.
+    
+    Args:
+        nombre (str): Nombre de la persona
+        
+    Returns:
+        str: Cumplido generado aleatoriamente
+    """</span>
+    cualidades = [<span class="string">"increíble"</span>, <span class="string">"fantástico"</span>, <span class="string">"brillante"</span>, <span class="string">"excepcional"</span>, <span class="string">"maravilloso"</span>]
+    actividades = [<span class="string">"trabajar en equipo"</span>, <span class="string">"resolver problemas"</span>, <span class="string">"aprender cosas nuevas"</span>, <span class="string">"ayudar a otros"</span>, <span class="string">"ser creativo"</span>]
+    emojis = [<span class="string">"🌟"</span>, <span class="string">"⭐"</span>, <span class="string">"✨"</span>, <span class="string">"🎯"</span>, <span class="string">"🚀"</span>]
+    
+    cualidad = random.choice(cualidades)
+    actividad = random.choice(actividades)
+    emoji = random.choice(emojis)
+    
+    cumplido = <span class="string">f"{emoji} {nombre}, eres {cualidad} en {actividad}!"</span>
+    <span class="keyword">return</span> cumplido
+
+<span class="function">def</span> <span class="function">calcular_puntuacion_nombre</span>(nombre):
+    <span class="string">"""
+    Calcula una puntuación divertida basada en el nombre.
+    
+    Args:
+        nombre (str): Nombre a analizar
+        
+    Returns:
+        tuple: (puntuación, descripción)
+    """</span>
+    <span class="comment"># Algoritmo divertido para calcular puntuación</span>
+    puntuacion = <span class="number">0</span>
+    
+    <span class="comment"># Sumar valores ASCII de las letras</span>
+    <span class="keyword">for</span> letra <span class="keyword">in</span> nombre.lower():
+        <span class="keyword">if</span> letra.isalpha():
+            puntuacion += <span class="function">ord</span>(letra) - <span class="function">ord</span>(<span class="string">'a'</span>) + <span class="number">1</span>
+    
+    <span class="comment"># Ajustar por longitud</span>
+    puntuacion = puntuacion * <span class="function">len</span>(nombre)
+    
+    <span class="comment"># Normalizar a escala 1-100</span>
+    puntuacion_final = (puntuacion % <span class="number">100</span>) + <span class="number">1</span>
+    
+    <span class="comment"># Determinar descripción</span>
+    <span class="keyword">if</span> puntuacion_final >= <span class="number">80</span>:
+        descripcion = <span class="string">"¡Nombre de leyenda!"</span>
+    <span class="keyword">elif</span> puntuacion_final >= <span class="number">60</span>:
+        descripcion = <span class="string">"¡Nombre poderoso!"</span>
+    <span class="keyword">elif</span> puntuacion_final >= <span class="number">40</span>:
+        descripcion = <span class="string">"¡Nombre con carácter!"</span>
+    <span class="keyword">else</span>:
+        descripcion = <span class="string">"¡Nombre único y especial!"</span>
+    
+    <span class="keyword">return</span> puntuacion_final, descripcion
+
+<span class="function">def</span> <span class="function">generar_certificado</span>(nombre, curso, puntuacion):
+    <span class="string">"""
+    Genera un certificado de reconocimiento.
+    
+    Args:
+        nombre (str): Nombre del estudiante
+        curso (str): Nombre del curso
+        puntuacion (int): Puntuación obtenida
+        
+    Returns:
+        str: Certificado formateado
+    """</span>
+    certificado = <span class="string">f"""
+╔══════════════════════════════════════╗
+║           🏆 CERTIFICADO 🏆           ║
+╠══════════════════════════════════════╣
+║                                      ║
+║  Se otorga el presente certificado a ║
+║                                      ║
+║         {nombre.upper().center(20)}         ║
+║                                      ║
+║  Por completar exitosamente el curso ║
+║         "{curso}"          ║
+║                                      ║
+║  Con una puntuación de: {puntuacion}/100     ║
+║                                      ║
+║  ¡Excelente trabajo! 🌟              ║
+║                                      ║
+╚══════════════════════════════════════╝
+    """</span>
+    <span class="keyword">return</span> certificado
+
+<span class="comment"># Probar funciones que devuelven valores</span>
+<span class="function">print</span>(<span class="string">"\n🎲 CUMPLIDOS ALEATORIOS:"</span>)
+<span class="keyword">for</span> nombre <span class="keyword">in</span> [<span class="string">"Julia"</span>, <span class="string">"Andrés"</span>, <span class="string">"Valeria"</span>]:
+    cumplido_aleatorio = crear_cumplido_aleatorio(nombre)
+    <span class="function">print</span>(cumplido_aleatorio)
+    
+    <span class="comment"># Calcular puntuación del nombre</span>
+    puntos, desc = calcular_puntuacion_nombre(nombre)
+    <span class="function">print</span>(<span class="string">f"   Puntuación del nombre: {puntos}/100 - {desc}"</span>)
+
+<span class="comment"># Generar un certificado</span>
+<span class="function">print</span>(<span class="string">"\n📜 CERTIFICADO DE RECONOCIMIENTO:"</span>)
+certificado = generar_certificado(<span class="string">"Ana García"</span>, <span class="string">"Python Básico"</span>, <span class="number">95</span>)
+<span class="function">print</span>(certificado)
+
+<span class="comment"># ==========================================
+# FUNCIONES COMPUESTAS (USAN OTRAS FUNCIONES)
+# ==========================================</span>
+
+<span class="function">def</span> <span class="function">analisis_completo_persona</span>(nombre, apellido, edad, hobby):
+    <span class="string">"""
+    Realiza un análisis completo de una persona usando múltiples funciones.
+    
+    Args:
+        nombre (str): Primer nombre
+        apellido (str): Apellido  
+        edad (int): Edad
+        hobby (str): Hobby principal
+    """</span>
+    <span class="function">print</span>(<span class="string">f"\n🔍 ANÁLISIS COMPLETO DE {nombre.upper()}:"</span>)
+    mostrar_separador()
+    
+    <span class="comment"># Usar funciones previamente definidas</span>
+    cumplido_personalizado(nombre, <span class="string">"talentoso"</span>, hobby)
+    calcular_estadisticas_nombre(nombre, apellido, edad)
+    
+    <span class="comment"># Generar cumplido aleatorio</span>
+    cumplido_random = crear_cumplido_aleatorio(nombre)
+    <span class="function">print</span>(<span class="string">f"🎯 Cumplido especial: {cumplido_random}"</span>)
+    
+    <span class="comment"># Calcular puntuación</span>
+    puntos, descripcion = calcular_puntuacion_nombre(nombre)
+    <span class="function">print</span>(<span class="string">f"⭐ {descripcion} (Puntuación: {puntos})"</span>)
+
+<span class="function">def</span> <span class="function">sesion_motivacional</span>(lista_nombres):
+    <span class="string">"""
+    Genera una sesión motivacional para un grupo de personas.
+    
+    Args:
+        lista_nombres (list): Lista de nombres de participantes
+    """</span>
+    <span class="function">print</span>(<span class="string">"\n🎉 SESIÓN MOTIVACIONAL GRUPAL"</span>)
+    <span class="function">print</span>(<span class="string">"=" * 40</span>)
+    
+    <span class="keyword">for</span> i, nombre <span class="keyword">in</span> <span class="function">enumerate</span>(lista_nombres, <span class="number">1</span>):
+        <span class="function">print</span>(<span class="string">f"\n{i}. {nombre}:"</span>)
+        cumplido = crear_cumplido_aleatorio(nombre)
+        <span class="function">print</span>(<span class="string">f"   {cumplido}"</span>)
+        
+        puntos, desc = calcular_puntuacion_nombre(nombre)
+        <span class="function">print</span>(<span class="string">f"   {desc}"</span>)
+    
+    <span class="function">print</span>(<span class="string">f"\n🌟 ¡Todos ustedes forman un equipo increíble de {len(lista_nombres)} personas!"</span>)
+
+<span class="comment"># Probar funciones compuestas</span>
+analisis_completo_persona(<span class="string">"Carlos"</span>, <span class="string">"Mendoza"</span>, <span class="number">28</span>, <span class="string">"la fotografía"</span>)
+
+<span class="comment"># Sesión grupal</span>
+equipo_trabajo = [<span class="string">"Ana"</span>, <span class="string">"Luis"</span>, <span class="string">"María"</span>, <span class="string">"Pedro"</span>, <span class="string">"Sofia"</span>]
+sesion_motivacional(equipo_trabajo)
+
+<span class="comment"># ==========================================
+# APLICACIÓN INDUSTRIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏭 APLICACIÓN EN SISTEMA INDUSTRIAL:"</span>)
+
+<span class="function">def</span> <span class="function">calcular_eficiencia_operario</span>(piezas_producidas, piezas_objetivo, horas_trabajadas):
+    <span class="string">"""
+    Calcula la eficiencia de un operario industrial.
+    
+    Args:
+        piezas_producidas (int): Piezas realmente producidas
+        piezas_objetivo (int): Piezas que debía producir
+        horas_trabajadas (float): Horas trabajadas
+        
+    Returns:
+        dict: Diccionario con métricas de eficiencia
+    """</span>
+    eficiencia_porcentual = (piezas_producidas / piezas_objetivo) * <span class="number">100</span> <span class="keyword">if</span> piezas_objetivo > <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span>
+    piezas_por_hora = piezas_producidas / horas_trabajadas <span class="keyword">if</span> horas_trabajadas > <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span>
+    
+    <span class="keyword">if</span> eficiencia_porcentual >= <span class="number">100</span>:
+        nivel = <span class="string">"Excelente"</span>
+        emoji = <span class="string">"🏆"</span>
+    <span class="keyword">elif</span> eficiencia_porcentual >= <span class="number">90</span>:
+        nivel = <span class="string">"Muy bueno"</span>
+        emoji = <span class="string">"🌟"</span>
+    <span class="keyword">elif</span> eficiencia_porcentual >= <span class="number">80</span>:
+        nivel = <span class="string">"Bueno"</span>
+        emoji = <span class="string">"👍"</span>
+    <span class="keyword">else</span>:
+        nivel = <span class="string">"Mejorable"</span>
+        emoji = <span class="string">"📈"</span>
+    
+    <span class="keyword">return</span> {
+        <span class="string">"eficiencia_porcentual"</span>: eficiencia_porcentual,
+        <span class="string">"piezas_por_hora"</span>: piezas_por_hora,
+        <span class="string">"nivel"</span>: nivel,
+        <span class="string">"emoji"</span>: emoji
+    }
+
+<span class="function">def</span> <span class="function">generar_reporte_operario</span>(nombre_operario, turno, metricas):
+    <span class="string">"""
+    Genera un reporte motivacional para un operario.
+    
+    Args:
+        nombre_operario (str): Nombre del operario
+        turno (str): Turno trabajado
+        metricas (dict): Métricas de eficiencia
+    """</span>
+    <span class="function">print</span>(<span class="string">f"\n📊 REPORTE DE RENDIMIENTO - {turno.upper()}"</span>)
+    <span class="function">print</span>(<span class="string">f"👤 Operario: {nombre_operario}"</span>)
+    <span class="function">print</span>(<span class="string">f"📈 Eficiencia: {metricas['eficiencia_porcentual']:.1f}%"</span>)
+    <span class="function">print</span>(<span class="string">f"⚙️  Productividad: {metricas['piezas_por_hora']:.1f} piezas/hora"</span>)
+    <span class="function">print</span>(<span class="string">f"{metricas['emoji']} Nivel: {metricas['nivel']}"</span>)
+    
+    <span class="comment"># Generar mensaje motivacional personalizado</span>
+    <span class="keyword">if</span> metricas[<span class="string">"eficiencia_porcentual"</span>] >= <span class="number">100</span>:
+        mensaje = <span class="string">f"¡Felicitaciones {nombre_operario}! Has superado el objetivo. ¡Eres un ejemplo para el equipo!"</span>
+    <span class="keyword">elif</span> metricas[<span class="string">"eficiencia_porcentual"</span>] >= <span class="number">90</span>:
+        mensaje = <span class="string">f"¡Excelente trabajo {nombre_operario}! Estás muy cerca de la perfección."</span>
+    <span class="keyword">else</span>:
+        mensaje = <span class="string">f"Buen esfuerzo {nombre_operario}. Con un poco más de práctica alcanzarás la excelencia."</span>
+    
+    <span class="function">print</span>(<span class="string">f"💬 {mensaje}"</span>)
+
+<span class="function">def</span> <span class="function">evaluar_equipo_produccion</span>(operarios_data):
+    <span class="string">"""
+    Evalúa el rendimiento de todo un equipo de producción.
+    
+    Args:
+        operarios_data (list): Lista de diccionarios con datos de operarios
+    """</span>
+    <span class="function">print</span>(<span class="string">"\n🏭 EVALUACIÓN DE EQUIPO DE PRODUCCIÓN"</span>)
+    <span class="function">print</span>(<span class="string">"=" * 45</span>)
+    
+    total_eficiencia = <span class="number">0</span>
+    mejor_operario = <span class="keyword">None</span>
+    mejor_eficiencia = <span class="number">0</span>
+    
+    <span class="keyword">for</span> operario <span class="keyword">in</span> operarios_data:
+        metricas = calcular_eficiencia_operario(
+            operario[<span class="string">"piezas_producidas"</span>],
+            operario[<span class="string">"piezas_objetivo"</span>],
+            operario[<span class="string">"horas_trabajadas"</span>]
+        )
+        
+        generar_reporte_operario(operario[<span class="string">"nombre"</span>], operario[<span class="string">"turno"</span>], metricas)
+        
+        total_eficiencia += metricas[<span class="string">"eficiencia_porcentual"</span>]
+        
+        <span class="keyword">if</span> metricas[<span class="string">"eficiencia_porcentual"</span>] > mejor_eficiencia:
+            mejor_eficiencia = metricas[<span class="string">"eficiencia_porcentual"</span>]
+            mejor_operario = operario[<span class="string">"nombre"</span>]
+    
+    <span class="comment"># Estadísticas del equipo</span>
+    eficiencia_promedio = total_eficiencia / <span class="function">len</span>(operarios_data)
+    <span class="function">print</span>(<span class="string">f"\n🏆 ESTADÍSTICAS DEL EQUIPO:"</span>)
+    <span class="function">print</span>(<span class="string">f"📊 Eficiencia promedio: {eficiencia_promedio:.1f}%"</span>)
+    <span class="function">print</span>(<span class="string">f"🌟 Mejor operario: {mejor_operario} ({mejor_eficiencia:.1f}%)"</span>)
+    <span class="function">print</span>(<span class="string">f"👥 Total de operarios evaluados: {len(operarios_data)}"</span>)
+
+<span class="comment"># Datos simulados de operarios</span>
+operarios_turno_mañana = [
+    {<span class="string">"nombre"</span>: <span class="string">"Juan Pérez"</span>, <span class="string">"turno"</span>: <span class="string">"Mañana"</span>, <span class="string">"piezas_producidas"</span>: <span class="number">95</span>, <span class="string">"piezas_objetivo"</span>: <span class="number">100</span>, <span class="string">"horas_trabajadas"</span>: <span class="number">8</span>},
+    {<span class="string">"nombre"</span>: <span class="string">"María López"</span>, <span class="string">"turno"</span>: <span class="string">"Mañana"</span>, <span class="string">"piezas_producidas"</span>: <span class="number">108</span>, <span class="string">"piezas_objetivo"</span>: <span class="number">100</span>, <span class="string">"horas trabajadas"</span>: <span class="number">8</span>},
+    {<span class="string">"nombre"</span>: <span class="string">"Carlos García"</span>, <span class="string">"turno"</span>: <span class="string">"Mañana"</span>, <span class="string">"piezas_producidas"</span>: <span class="number">85</span>, <span class="string">"piezas_objetivo"</span>: <span class="number">100</span>, <span class="string">"horas_trabajadas"</span>: <span class="number">8</span>}
+]
+    {<span class="string">"nombre"</span>: <span class="string">"Ana Torres"</span>, <span class="string">"turno"</span>: <span class="string">"Mañana"</span>, <span class="string">"piezas_producidas"</span>: <span class="number">110</span>, <span class="string">"piezas_objetivo"</span>: <span class="number">100</span>, <span class="string">"horas_trabajadas"</span>: <span class="number">8</span>}
+]
+<span class="comment"># Evaluar equipo de producción del turno mañana</span>
+evaluar_equipo_produccion(operarios_turno_mañana)
+</pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+           
+
+
+    </div>
+ <!-- Ejercicio 6 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🦸‍♂️ Ejercicio 6: Diccionarios - Base de Datos de Superhéroes
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Dominar el uso de diccionarios anidados y estructuras de datos complejas para crear, manipular y consultar información de superhéroes.
+                    </div>
+
+                    <div class="filename">ejercicio_06_diccionarios.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 6: Diccionarios en Python - Base de Datos de Superhéroes
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Dominar diccionarios y estructuras de datos complejas
+"""</span>
+
+<span class="function">print</span>(<span class="string">"🦸‍♂️ BASE DE DATOS DE SUPERHÉROES"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># ==========================================
+# DICCIONARIOS BÁSICOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n📋 DICCIONARIOS BÁSICOS:"</span>)
+
+<span class="comment"># Diccionario simple de un superhéroe</span>
+superman = {
+    <span class="string">"nombre"</span>: <span class="string">"Superman"</span>,
+    <span class="string">"identidad_secreta"</span>: <span class="string">"Clark Kent"</span>,
+    <span class="string">"poder_principal"</span>: <span class="string">"Superfuerza"</span>,
+    <span class="string">"nivel_poder"</span>: <span class="number">95</span>,
+    <span class="string">"ciudad"</span>: <span class="string">"Metrópolis"</span>,
+    <span class="string">"activo"</span>: <span class="keyword">True</span>
+}
+
+<span class="comment"># Acceder a valores del diccionario</span>
+<span class="function">print</span>(<span class="string">f"Superhéroe: {superman['nombre']}"</span>)
+<span class="function">print</span>(<span class="string">f"Identidad secreta: {superman['identidad_secreta']}"</span>)
+<span class="function">print</span>(<span class="string">f"Poder principal: {superman['poder_principal']}"</span>)
+<span class="function">print</span>(<span class="string">f"Nivel de poder: {superman['nivel_poder']}/100"</span>)
+
+<span class="comment"># Modificar valores</span>
+superman[<span class="string">"nivel_poder"</span>] = <span class="number">98</span>  <span class="comment"># Actualizar poder</span>
+superman[<span class="string">"experiencia_años"</span>] = <span class="number">15</span>  <span class="comment"># Agregar nueva clave</span>
+
+<span class="function">print</span>(<span class="string">f"Nivel actualizado: {superman['nivel_poder']}/100"</span>)
+<span class="function">print</span>(<span class="string">f"Años de experiencia: {superman['experiencia_años']}"</span>)
+
+<span class="comment"># ==========================================
+# DICCIONARIOS ANIDADOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏗️ DICCIONARIOS ANIDADOS (COMPLEJOS):"</span>)
+
+<span class="comment"># Base de datos completa de superhéroes</span>
+base_datos_heroes = {
+    <span class="string">"SPM001"</span>: {
+        <span class="string">"informacion_personal"</span>: {
+            <span class="string">"nombre"</span>: <span class="string">"Superman"</span>,
+            <span class="string">"identidad_secreta"</span>: <span class="string">"Clark Kent"</span>,
+            <span class="string">"edad"</span>: <span class="number">35</span>,
+            <span class="string">"profesion"</span>: <span class="string">"Periodista"</span>
+        },
+        <span class="string">"poderes"</span>: {
+            <span class="string">"primario"</span>: <span class="string">"Superfuerza"</span>,
+            <span class="string">"secundarios"</span>: [<span class="string">"Vuelo"</span>, <span class="string">"Visión láser"</span>, <span class="string">"Invulnerabilidad"</span>],
+            <span class="string">"nivel_poder"</span>: <span class="number">98</span>,
+            <span class="string">"debilidad"</span>: <span class="string">"Kriptonita"</span>
+        },
+        <span class="string">"ubicacion"</span>: {
+            <span class="string">"ciudad_base"</span>: <span class="string">"Metrópolis"</span>,
+            <span class="string">"coordenadas"</span>: [<span class="number">40.7589</span>, <span class="number">-73.9851</span>],
+            <span class="string">"base_secreta"</span>: <span class="string">"Fortaleza de la Soledad"</span>
+        },
+        <span class="string">"estadisticas"</span>: {
+            <span class="string">"misiones_completadas"</span>: <span class="number">1247</span>,
+            <span class="string">"villanos_derrotados"</span>: <span class="number">89</span>,
+            <span class="string">"personas_salvadas"</span>: <span class="number">50000</span>,
+            <span class="string">"rating_popularidad"</span>: <span class="number">9.8</span>
+        },
+        <span class="string">"estado"</span>: {
+            <span class="string">"activo"</span>: <span class="keyword">True</span>,
+            <span class="string">"salud"</span>: <span class="number">100</span>,
+            <span class="string">"moral"</span>: <span class="number">95</span>,
+            <span class="string">"ultima_mision"</span>: <span class="string">"2024-01-15"</span>
+        }
+    },
+    <span class="string">"BTM001"</span>: {
+        <span class="string">"informacion_personal"</span>: {
+            <span class="string">"nombre"</span>: <span class="string">"Batman"</span>,
+            <span class="string">"identidad_secreta"</span>: <span class="string">"Bruce Wayne"</span>,
+            <span class="string">"edad"</span>: <span class="number">42</span>,
+            <span class="string">"profesion"</span>: <span class="string">"Empresario"</span>
+        },
+        <span class="string">"poderes"</span>: {
+            <span class="string">"primario"</span>: <span class="string">"Inteligencia superior"</span>,
+            <span class="string">"secundarios"</span>: [<span class="string">"Artes marciales"</span>, <span class="string">"Tecnología avanzada"</span>, <span class="string">"Estrategia"</span>],
+            <span class="string">"nivel_poder"</span>: <span class="number">87</span>,
+            <span class="string">"debilidad"</span>: <span class="string">"Es humano"</span>
+        },
+        <span class="string">"ubicacion"</span>: {
+            <span class="string">"ciudad_base"</span>: <span class="string">"Gótica"</span>,
+            <span class="string">"coordenadas"</span>: [<span class="number">40.6892</span>, <span class="number">-74.0445</span>],
+            <span class="string">"base_secreta"</span>: <span class="string">"Baticueva"</span>
+        },
+        <span class="string">"estadisticas"</span>: {
+            <span class="string">"misiones_completadas"</span>: <span class="number">2341</span>,
+            <span class="string">"villanos_derrotados"</span>: <span class="number">156</span>,
+            <span class="string">"personas_salvadas"</span>: <span class="number">25000</span>,
+            <span class="string">"rating_popularidad"</span>: <span class="number">9.2</span>
+        },
+        <span class="string">"estado"</span>: {
+            <span class="string">"activo"</span>: <span class="keyword">True</span>,
+            <span class="string">"salud"</span>: <span class="number">85</span>,
+            <span class="string">"moral"</span>: <span class="number">78</span>,
+            <span class="string">"ultima_mision"</span>: <span class="string">"2024-01-14"</span>
+        }
+    },
+    <span class="string">"WWM001"</span>: {
+        <span class="string">"informacion_personal"</span>: {
+            <span class="string">"nombre"</span>: <span class="string">"Wonder Woman"</span>,
+            <span class="string">"identidad_secreta"</span>: <span class="string">"Diana Prince"</span>,
+            <span class="string">"edad"</span>: <span class="number">3000</span>,  <span class="comment"># Es amazona</span>
+            <span class="string">"profesion"</span>: <span class="string">"Princesa Amazona"</span>
+        },
+        <span class="string">"poderes"</span>: {
+            <span class="string">"primario"</span>: <span class="string">"Fuerza divina"</span>,
+            <span class="string">"secundarios"</span>: [<span class="string">"Vuelo"</span>, <span class="string">"Lazo de la verdad"</span>, <span class="string">"Resistencia mágica"</span>],
+            <span class="string">"nivel_poder"</span>: <span class="number">93</span>,
+            <span class="string">"debilidad"</span>: <span class="string">"Piercing de brazaletes"</span>
+        },
+        <span class="string">"ubicacion"</span>: {
+            <span class="string">"ciudad_base"</span>: <span class="string">"Washington DC"</span>,
+            <span class="string">"coordenadas"</span>: [<span class="number">38.9072</span>, <span class="number">-77.0369</span>],
+            <span class="string">"base_secreta"</span>: <span class="string">"Embajada Themyscira"</span>
+        },
+        <span class="string">"estadisticas"</span>: {
+            <span class="string">"misiones_completadas"</span>: <span class="number">1876</span>,
+            <span class="string">"villanos_derrotados"</span>: <span class="number">134</span>,
+            <span class="string">"personas_salvadas"</span>: <span class="number">45000</span>,
+            <span class="string">"rating_popularidad"</span>: <span class="number">9.6</span>
+        },
+        <span class="string">"estado"</span>: {
+            <span class="string">"activo"</span>: <span class="keyword">True</span>,
+            <span class="string">"salud"</span>: <span class="number">98</span>,
+            <span class="string">"moral"</span>: <span class="number">100</span>,
+            <span class="string">"ultima_mision"</span>: <span class="string">"2024-01-16"</span>
+        }
+    }
+}
+
+<span class="comment"># ==========================================
+# CONSULTAS BÁSICAS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔍 CONSULTAS BÁSICAS:"</span>)
+
+<span class="comment"># Acceder a información anidada</span>
+<span class="keyword">for</span> codigo, heroe <span class="keyword">in</span> base_datos_heroes.items():
+    nombre = heroe[<span class="string">"informacion_personal"</span>][<span class="string">"nombre"</span>]
+    ciudad = heroe[<span class="string">"ubicacion"</span>][<span class="string">"ciudad_base"</span>]
+    poder = heroe[<span class="string">"poderes"</span>][<span class="string">"nivel_poder"</span>]
+    
+    <span class="function">print</span>(<span class="string">f"🦸 {codigo}: {nombre} - {ciudad} (Poder: {poder}/100)"</span>)
+
+<span class="comment"># ==========================================
+# FUNCIONES PARA MANEJO DE LA BASE DE DATOS
+# ==========================================</span>
+
+<span class="function">def</span> <span class="function">mostrar_perfil_heroe</span>(codigo_heroe):
+    <span class="string">"""Muestra el perfil completo de un superhéroe."""</span>
+    <span class="keyword">if</span> codigo_heroe <span class="keyword">in</span> base_datos_heroes:
+        heroe = base_datos_heroes[codigo_heroe]
+        info = heroe[<span class="string">"informacion_personal"</span>]
+        poderes = heroe[<span class="string">"poderes"</span>]
+        ubicacion = heroe[<span class="string">"ubicacion"</span>]
+        stats = heroe[<span class="string">"estadisticas"</span>]
+        estado = heroe[<span class="string">"estado"</span>]
+        
+        <span class="function">print</span>(<span class="string">f"\n🦸‍♂️ PERFIL DE {info['nombre'].upper()}"</span>)
+        <span class="function">print</span>(<span class="string">"=" * 40</span>)
+        <span class="function">print</span>(<span class="string">f"👤 Identidad: {info['identidad_secreta']} ({info['profesion']})"</span>)
+        <span class="function">print</span>(<span class="string">f"🎂 Edad: {info['edad']} años"</span>)
+        <span class="function">print</span>(<span class="string">f"⚡ Poder principal: {poderes['primario']}"</span>)
+        <span class="function">print</span>(<span class="string">f"🔋 Nivel de poder: {poderes['nivel_poder']}/100"</span>)
+        <span class="function">print</span>(<span class="string">f"🏙️  Ciudad base: {ubicacion['ciudad_base']}"</span>)
+        <span class="function">print</span>(<span class="string">f"📊 Misiones completadas: {stats['misiones_completadas']}"</span>)
+        <span class="function">print</span>(<span class="string">f"💚 Estado: {'Activo' if estado['activo'] else 'Inactivo'}"</span>)
+        <span class="function">print</span>(<span class="string">f"❤️  Salud: {estado['salud']}/100"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"❌ Superhéroe con código {codigo_heroe} no encontrado"</span>)
+
+<span class="function">def</span> <span class="function">buscar_por_ciudad</span>(ciudad_objetivo):
+    <span class="string">"""Busca superhéroes por ciudad."""</span>
+    <span class="function">print</span>(<span class="string">f"\n🏙️ SUPERHÉROES EN {ciudad_objetivo.upper()}:"</span>)
+    encontrados = []
+    
+    <span class="keyword">for</span> codigo, heroe <span class="keyword">in</span> base_datos_heroes.items():
+        <span class="keyword">if</span> heroe[<span class="string">"ubicacion"</span>][<span class="string">"ciudad_base"</span>].lower() == ciudad_objetivo.lower():
+            encontrados.append((codigo, heroe[<span class="string">"informacion_personal"</span>][<span class="string">"nombre"</span>]))
+    
+    <span class="keyword">if</span> encontrados:
+        <span class="keyword">for</span> codigo, nombre <span class="keyword">in</span> encontrados:
+            <span class="function">print</span>(<span class="string">f"  🦸 {codigo}: {nombre}"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"  ❌ No hay superhéroes registrados en {ciudad_objetivo}"</span>)
+    
+    <span class="keyword">return</span> encontrados
+
+<span class="function">def</span> <span class="function">ranking_poder</span>():
+    <span class="string">"""Genera ranking de superhéroes por nivel de poder."""</span>
+    <span class="function">print</span>(<span class="string">"\n🏆 RANKING DE PODER:"</span>)
+    
+    <span class="comment"># Crear lista de tuplas (nombre, poder, código)</span>
+    heroes_poder = []
+    <span class="keyword">for</span> codigo, heroe <span class="keyword">in</span> base_datos_heroes.items():
+        nombre = heroe[<span class="string">"informacion_personal"</span>][<span class="string">"nombre"</span>]
+        poder = heroe[<span class="string">"poderes"</span>][<span class="string">"nivel_poder"</span>]
+        heroes_poder.append((nombre, poder, codigo))
+    
+    <span class="comment"># Ordenar por poder (de mayor a menor)</span>
+    heroes_poder.sort(key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>], reverse=<span class="keyword">True</span>)
+    
+    <span class="keyword">for</span> i, (nombre, poder, codigo) <span class="keyword">in</span> <span class="function">enumerate</span>(heroes_poder, <span class="number">1</span>):
+        emoji = <span class="string">"🥇"</span> <span class="keyword">if</span> i == <span class="number">1</span> <span class="keyword">else</span> <span class="string">"🥈"</span> <span class="keyword">if</span> i == <span class="number">2</span> <span class="keyword">else</span> <span class="string">"🥉"</span> <span class="keyword">if</span> i == <span class="number">3</span> <span class="keyword">else</span> <span class="string">"🏅"</span>
+        <span class="function">print</span>(<span class="string">f"  {emoji} {i}. {nombre}: {poder}/100"</span>)
+
+<span class="function">def</span> <span class="function">agregar_heroe</span>(codigo, datos_heroe):
+    <span class="string">"""Agrega un nuevo superhéroe a la base de datos."""</span>
+    <span class="keyword">if</span> codigo <span class="keyword">not</span> <span class="keyword">in</span> base_datos_heroes:
+        base_datos_heroes[codigo] = datos_heroe
+        nombre = datos_heroe[<span class="string">"informacion_personal"</span>][<span class="string">"nombre"</span>]
+        <span class="function">print</span>(<span class="string">f"✅ {nombre} agregado exitosamente con código {codigo}"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"❌ Ya existe un superhéroe con código {codigo}"</span>)
+
+<span class="function">def</span> <span class="function">actualizar_mision</span>(codigo_heroe, resultado_mision):
+    <span class="string">"""Actualiza las estadísticas después de una misión."""</span>
+    <span class="keyword">if</span> codigo_heroe <span class="keyword">in</span> base_datos_heroes:
+        heroe = base_datos_heroes[codigo_heroe]
+        stats = heroe[<span class="string">"estadisticas"</span>]
+        estado = heroe[<span class="string">"estado"</span>]
+        
+        <span class="comment"># Actualizar estadísticas</span>
+        stats[<span class="string">"misiones_completadas"</span>] += <span class="number">1</span>
+        stats[<span class="string">"personas_salvadas"</span>] += resultado_mision.get(<span class="string">"personas_salvadas"</span>, <span class="number">0</span>)
+        
+        <span class="keyword">if</span> resultado_mision.get(<span class="string">"villano_derrotado"</span>, <span class="keyword">False</span>):
+            stats[<span class="string">"villanos_derrotados"</span>] += <span class="number">1</span>
+        
+        <span class="comment"># Actualizar estado</span>
+        estado[<span class="string">"salud"</span>] = <span class="function">max</span>(<span class="number">0</span>, estado[<span class="string">"salud"</span>] - resultado_mision.get(<span class="string">"daño_recibido"</span>, <span class="number">0</span>))
+        estado[<span class="string">"moral"</span>] = <span class="function">min</span>(<span class="number">100</span>, estado[<span class="string">"moral"</span>] + resultado_mision.get(<span class="string">"moral_ganada"</span>, <span class="number">0</span>))
+        estado[<span class="string">"ultima_mision"</span>] = <span class="string">"2024-01-17"</span>
+        
+        nombre = heroe[<span class="string">"informacion_personal"</span>][<span class="string">"nombre"</span>]
+        <span class="function">print</span>(<span class="string">f"✅ Misión de {nombre} actualizada"</span>)
+        <span class="function">print</span>(<span class="string">f"   Salud: {estado['salud']}/100, Moral: {estado['moral']}/100"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"❌ Superhéroe {codigo_heroe} no encontrado"</span>)
+
+<span class="comment"># ==========================================
+# PRUEBAS DE LAS FUNCIONES
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔬 PRUEBAS DE FUNCIONES:"</span>)
+
+<span class="comment"># Mostrar perfil completo</span>
+mostrar_perfil_heroe(<span class="string">"SPM001"</span>)
+
+<span class="comment"># Buscar por ciudad</span>
+buscar_por_ciudad(<span class="string">"Metrópolis"</span>)
+buscar_por_ciudad(<span class="string">"Ciudad Inventada"</span>)
+
+<span class="comment"># Mostrar ranking</span>
+ranking_poder()
+
+<span class="comment"># Agregar nuevo superhéroe</span>
+nuevo_heroe = {
+    <span class="string">"informacion_personal"</span>: {
+        <span class="string">"nombre"</span>: <span class="string">"Flash"</span>,
+        <span class="string">"identidad_secreta"</span>: <span class="string">"Barry Allen"</span>,
+        <span class="string">"edad"</span>: <span class="number">28</span>,
+        <span class="string">"profesion"</span>: <span class="string">"Científico forense"</span>
+    },
+    <span class="string">"poderes"</span>: {
+        <span class="string">"primario"</span>: <span class="string">"Supervelocidad"</span>,
+        <span class="string">"secundarios"</span>: [<span class="string">"Viaje en el tiempo"</span>, <span class="string">"Vibración molecular"</span>],
+        <span class="string">"nivel_poder"</span>: <span class="number">91</span>,
+        <span class="string">"debilidad"</span>: <span class="string">"Frío extremo"</span>
+    },
+    <span class="string">"ubicacion"</span>: {
+        <span class="string">"ciudad_base"</span>: <span class="string">"Central City"</span>,
+        <span class="string">"coordenadas"</span>: [<span class="number">39.7392</span>, <span class="number">-104.9903</span>],
+        <span class="string">"base_secreta"</span>: <span class="string">"Laboratorio STAR"</span>
+    },
+    <span class="string">"estadisticas"</span>: {
+        <span class="string">"misiones_completadas"</span>: <span class="number">847</span>,
+        <span class="string">"villanos_derrotados"</span>: <span class="number">67</span>,
+        <span class="string">"personas_salvadas"</span>: <span class="number">32000</span>,
+        <span class="string">"rating_popularidad"</span>: <span class="number">8.9</span>
+    },
+    <span class="string">"estado"</span>: {
+        <span class="string">"activo"</span>: <span class="keyword">True</span>,
+        <span class="string">"salud"</span>: <span class="number">100</span>,
+        <span class="string">"moral"</span>: <span class="number">90</span>,
+        <span class="string">"ultima_mision"</span>: <span class="string">"2024-01-12"</span>
+    }
+}
+
+agregar_heroe(<span class="string">"FLH001"</span>, nuevo_heroe)
+
+<span class="comment"># Actualizar misión</span>
+resultado_mision_superman = {
+    <span class="string">"personas_salvadas"</span>: <span class="number">150</span>,
+    <span class="string">"villano_derrotado"</span>: <span class="keyword">True</span>,
+    <span class="string">"daño_recibido"</span>: <span class="number<!DOCTYPE html>
+    </div>">10</span>,
+    <span class="string">"moral_ganada"</span>: <span class="number">5</span>
+}
+actualizar_mision(<span class="string">"SPM001"</span>, resultado_mision_superman)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+<span class="function">print</span>(<span class="string">"🎓 CON
+CEPTOS DE DICCIONARIOS APRENDIDOS:"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Diccionarios simples: {'clave': 'valor', ...}"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Diccionarios anidados: {'clave': {'subclave': 'valor', ...}, ...}"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Acceso a valores: diccionario['clave']"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Iteración: for clave, valor in diccionario.items():"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Funciones con diccionarios: def funcion(diccionario):"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Aplicaciones: bases de datos, configuraciones, estructuras complejas"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)</pre>
+                    </div>
+
+                    <div class="instructor-note">
+                    <strong>💡 Nota para el Instructor:</strong> Este ejercicio enseña el uso avanzado de diccionarios, incluyendo anidamiento y estructuras complejas. La base de datos de superhéroes permite a los estudiantes practicar consultas, actualizaciones y funciones con diccionarios, habilidades esenciales en programación.
+                    }</div>
+                </div>
+            </div>
+
+
+    <!-- Ejercicio 7 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🚀 Ejercicio 7: Módulos - Centro de Comando de Misiones Espaciales
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Aprender a importar y usar módulos estándar de Python (datetime, random, math) para simular un centro de comando de misiones espaciales.
+                    </div>
+
+                    <div class="filename">ejercicio_07_modulos.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 7: Módulos en Python - Centro de Comando de Misiones Espaciales
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Usar módulos estándar para simulaciones complejas
+"""</span>
+
+<span class="comment"># ==========================================
+# IMPORTACIÓN DE MÓDULOS
+# ==========================================</span>
+
+<span class="comment"># Diferentes formas de importar módulos</span>
+<span class="keyword">import</span> datetime  <span class="comment"># Módulo completo</span>
+<span class="keyword">import</span> random    <span class="comment"># Módulo completo</span>
+<span class="keyword">import</span> math      <span class="comment"># Módulo completo</span>
+<span class="keyword">import</span> time      <span class="comment"># Para pausas y simulaciones</span>
+
+<span class="keyword">from</span> datetime <span class="keyword">import</span> timedelta, date  <span class="comment"># Importar funciones específicas</span>
+<span class="keyword">from</span> math <span class="keyword">import</span> pi, sqrt, sin, cos, radians  <span class="comment"># Funciones matemáticas</span>
+<span class="keyword">from</span> random <span class="keyword">import</span> choice, uniform, randint  <span class="comment"># Funciones aleatorias</span>
+
+<span class="function">print</span>(<span class="string">"🚀 CENTRO DE COMANDO - MISIONES ESPACIALES"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># ==========================================
+# MÓDULO DATETIME - GESTIÓN DE TIEMPO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n⏰ SISTEMA DE TIEMPO DE MISIÓN:"</span>)
+
+<span class="comment"># Obtener fecha y hora actual</span>
+ahora = datetime.datetime.now()
+<span class="function">print</span>(<span class="string">f"🕐 Hora actual del centro de comando: {ahora.strftime('%Y-%m-%d %H:%M:%S')}"</span>)
+
+<span class="comment"># Calcular momentos importantes de la misión</span>
+inicio_mision = datetime.datetime(2024, 3, 15, 6, 30, 0)
+duracion_mision = timedelta(days=14, hours=8, minutes=30)
+fin_mision = inicio_mision + duracion_mision
+
+<span class="function">print</span>(<span class="string">f"🚀 Inicio de misión: {inicio_mision.strftime('%Y-%m-%d %H:%M:%S')}"</span>)
+<span class="function">print</span>(<span class="string">f"🏁 Fin estimado: {fin_mision.strftime('%Y-%m-%d %H:%M:%S')}"</span>)
+<span class="function">print</span>(<span class="string">f"⏱️  Duración total: {duracion_mision.days} días, {duracion_mision.seconds//3600} horas"</span>)
+
+<span class="comment"># Calcular tiempo transcurrido</span>
+<span class="keyword">if</span> ahora > inicio_mision:
+    tiempo_transcurrido = ahora - inicio_mision
+    <span class="function">print</span>(<span class="string">f"⌛ Tiempo transcurrido: {tiempo_transcurrido.days} días, {tiempo_transcurrido.seconds//3600} horas"</span>)
+<span class="keyword">else</span>:
+    tiempo_para_inicio = inicio_mision - ahora
+    <span class="function">print</span>(<span class="string">f"⏳ Tiempo para inicio: {tiempo_para_inicio.days} días, {tiempo_para_inicio.seconds//3600} horas"</span>)
+
+<span class="comment"># Horarios importantes usando datetime</span>
+<span class="function">def</span> <span class="function">generar_cronograma_mision</span>():
+    <span class="string">"""Genera cronograma detallado de la misión."""</span>
+    <span class="function">print</span>(<span class="string">"\n📅 CRONOGRAMA DE MISIÓN:"</span>)
+    
+    hitos = [
+        (<span class="string">"Lanzamiento"</span>, <span class="number">0</span>),
+        (<span class="string">"Separación de etapas"</span>, <span class="number">8</span>),  <span class="comment"># 8 minutos</span>
+        (<span class="string">"Inserción orbital"</span>, <span class="number">45</span>),  <span class="comment"># 45 minutos</span>
+        (<span class="string">"Despliegue de paneles solares"</span>, <span class="number">120</span>),  <span class="comment"># 2 horas</span>
+        (<span class="string">"Primera comunicación"</span>, <span class="number">180</span>),  <span class="comment"># 3 horas</span>
+        (<span class="string">"Inicio operaciones científicas"</span>, <span class="number">1440</span>)  <span class="comment"># 24 horas</span>
+    ]
+    
+    <span class="keyword">for</span> evento, minutos_desde_inicio <span class="keyword">in</span> hitos:
+        momento = inicio_mision + timedelta(minutes=minutos_desde_inicio)
+        <span class="function">print</span>(<span class="string">f"  🔸 {evento}: {momento.strftime('%Y-%m-%d %H:%M')}"</span>)
+
+generar_cronograma_mision()
+
+<span class="comment"># ==========================================
+# MÓDULO RANDOM - SIMULACIONES ALEATORIAS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🎲 SIMULADOR DE CONDICIONES ESPACIALES:"</span>)
+
+<span class="function">def</span> <span class="function">simular_condiciones_espaciales</span>():
+    <span class="string">"""Simula condiciones aleatorias en el espacio."""</span>
+    
+    <span class="comment"># Condiciones atmosféricas de la estación</span>
+    temperatura_interior = uniform(-5, 25)  <span class="comment"># °C</span>
+    presion_cabina = uniform(0.8, 1.2)  <span class="comment"># atm</span>
+    nivel_oxigeno = uniform(19, 23)  <span class="comment"># %</span>
+    
+    <span class="comment"># Condiciones externas</span>
+    radiacion_solar = uniform(0.1, 2.5)  <span class="comment"># unidades relativas</span>
+    velocidad_relativa = uniform(27000, 28000)  <span class="comment"># km/h</span>
+    
+    <span class="comment"># Eventos aleatorios</span>
+    eventos_posibles = [
+        <span class="string">"Lluvia de meteoritos detectada"</span>,
+        <span class="string">"Aurora boreal visible"</span>,
+        <span class="string">"Comunicación con la Tierra estable"</span>,
+        <span class="string">"Experimento científico en progreso"</span>,
+        <span class="string">"Maniobra de corrección orbital"</span>,
+        <span class="string">"Mantenimiento de rutina"</span>
+    ]
+    
+    evento_actual = choice(eventos_posibles)
+    probabilidad_exito = randint(75, 98)
+    
+    <span class="function">print</span>(<span class="string">f"🌡️  Temperatura interior: {temperatura_interior:.1f}°C"</span>)
+    <span class="function">print</span>(<span class="string">f"📊 Presión de cabina: {presion_cabina:.2f} atm"</span>)
+    <span class="function">print</span>(<span class="string">f"💨 Nivel de oxígeno: {nivel_oxigeno:.1f}%"</span>)
+    <span class="function">print</span>(<span class="string">f"☀️ Radiación solar: {radiacion_solar:.2f}"</span>)
+    <span class="function">print</span>(<span class="string">f"🚀 Velocidad: {velocidad_relativa:,.0f} km/h"</span>)
+    <span class="function">print</span>(<span class="string">f"📡 Evento actual: {evento_actual}"</span>)
+    <span class="function">print</span>(<span class="string">f"🎯 Probabilidad de éxito: {probabilidad_exito}%"</span>)
+    
+    <span class="keyword">return</span> {
+        <span class="string">"temperatura"</span>: temperatura_interior,
+        <span class="string">"presion"</span>: presion_cabina,
+        <span class="string">"oxigeno"</span>: nivel_oxigeno,
+        <span class="string">"radiacion"</span>: radiacion_solar,
+        <span class="string">"velocidad"</span>: velocidad_relativa,
+        <span class="string">"evento"</span>: evento_actual,
+        <span class="string">"probabilidad_exito"</span>: probabilidad_exito
+    }
+
+<span class="comment"># Generar simulación</span>
+condiciones = simular_condiciones_espaciales()
+
+<span class="comment"># Simulación de múltiples astronautas</span>
+<span class="function">def</span> <span class="function">generar_tripulacion</span>():
+    <span class="string">"""Genera una tripulación aleatoria."""</span>
+    nombres = [<span class="string">"Alex"</span>, <span class="string">"Sarah"</span>, <span class="string">"Miguel"</span>, <span class="string">"Chen"</span>, <span class="string">"Olga"</span>, <span class="string">"David"</span>]
+    especialidades = [<span class="string">"Piloto"</span>, <span class="string">"Ingeniero"</span>, <span class="string">"Científico"</span>, <span class="string">"Médico"</span>, <span class="string">"Especialista"</span>]
+    
+    <span class="function">print</span>(<span class="string">"\n👨‍🚀 TRIPULACIÓN DE LA MISIÓN:"</span>)
+    tripulacion = []
+    
+    <span class="keyword">for</span> i <span class="keyword">in</span> range(randint(<span class="number">3</span>, <span class="number">6</span>)):  <span class="comment"># 3-6 astronautas</span>
+        nombre = choice(nombres)
+        nombres.remove(nombre)  <span class="comment"># Evitar duplicados</span>
+        especialidad = choice(especialidades)
+        experiencia = randint(<span class="number">1</span>, <span class="number">20</span>)  <span class="comment"># años</span>
+        
+        astronauta = {
+            <span class="string">"nombre"</span>: nombre,
+            <span class="string">"especialidad"</span>: especialidad,
+            <span class="string">"experiencia"</span>: experiencia,
+            <span class="string">"estado_salud"</span>: randint(<span class="number">85</span>, <span class="number">100</span>)
+        }
+        
+        tripulacion.append(astronauta)
+        <span class="function">print</span>(<span class="string">f"  🧑‍🚀 {nombre} - {especialidad} ({experiencia} años exp., Salud: {astronauta['estado_salud']}%)"</span>)
+    
+    <span class="keyword">return</span> tripulacion
+
+tripulacion = generar_tripulacion()
+
+<span class="comment"># ==========================================
+# MÓDULO MATH - CÁLCULOS CIENTÍFICOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🔬 CÁLCULOS CIENTÍFICOS Y NAVEGACIÓN:"</span>)
+
+<span class="function">def</span> <span class="function">calcular_orbita</span>(altitud_km, radio_tierra=<span class="number">6371</span>):
+    <span class="string">"""
+    Calcula parámetros orbitales básicos.
+    
+    Args:
+        altitud_km (float): Altitud sobre la superficie en km
+        radio_tierra (float): Radio de la Tierra en km
+    
+    Returns:
+        dict: Parámetros orbitales calculados
+    """</span>
+    radio_orbital = radio_tierra + altitud_km
+    
+    <span class="comment"># Velocidad orbital (aproximada)</span>
+    G = <span class="number">6.67430e-11</span>  <span class="comment"># Constante gravitacional</span>
+    M = <span class="number">5.972e24</span>     <span class="comment"># Masa de la Tierra en kg</span>
+    velocidad_orbital = sqrt((G * M) / (radio_orbital * <span class="number">1000</span>)) / <span class="number">1000</span>  <span class="comment"># km/s</span>
+    
+    <span class="comment"># Período orbital</span>
+    circunferencia = <span class="number">2</span> * pi * radio_orbital
+    periodo_horas = circunferencia / (velocidad_orbital * <span class="number">3600</span>)
+    
+    <span class="comment"># Gravedad artificial (aceleración centrípeta)</span>
+    gravedad_artificial = (velocidad_orbital ** <span class="number">2</span>) / radio_orbital  <span class="comment"># km/s²</span>
+    gravedad_g = gravedad_artificial / <span class="number">9.81</span> * <span class="number">1000</span>  <span class="comment"># en términos de g terrestre</span>
+    
+    <span class="keyword">return</span> {
+        <span class="string">"radio_orbital"</span>: radio_orbital,
+        <span class="string">"velocidad_orbital"</span>: velocidad_orbital,
+        <span class="string">"periodo_horas"</span>: periodo_horas,
+        <span class="string">"gravedad_g"</span>: gravedad_g
+    }
+
+<span class="comment"># Calcular parámetros de la ISS</span>
+parametros_iss = calcular_orbita(<span class="number">408</span>)  <span class="comment"># ISS está a ~408 km</span>
+
+<span class="function">print</span>(<span class="string">f"🛰️  PARÁMETROS ORBITALES (ISS):"</span>)
+<span class="function">print</span>(<span class="string">f"   🌍 Radio orbital: {parametros_iss['radio_orbital']:,.0f} km"</span>)
+<span class="function">print</span>(<span class="string">f"   🚀 Velocidad orbital: {parametros_iss['velocidad_orbital']:.2f} km/s"</span>)
+<span class="function">print</span>(<span class="string">f"   ⏱️  Período orbital: {parametros_iss['periodo_horas']:.2f} horas"</span>)
+<span class="function">print</span>(<span class="string">f"   ⬇️  Gravedad aparente: {parametros_iss['gravedad_g']:.4f} g"</span>)
+
+<span class="function">def</span> <span class="function">calcular_distancia_tierra</span>(latitud, longitud):
+    <span class="string">"""
+    Calcula la distancia desde un punto en la Tierra.
+    
+    Args:
+        latitud (float): Latitud en grados
+        longitud (float): Longitud en grados
+    
+    Returns:
+        float: Distancia en km
+    """</span>
+    <span class="comment"># Coordenadas de ejemplo de centro de control (Houston)</span>
+    lat_houston = <span class="number">29.7604</span>
+    lon_houston = -<span class="number">95.3698</span>
+    
+    <span class="comment"># Convertir a radianes</span>
+    lat1, lon1 = radians(lat_houston), radians(lon_houston)
+    lat2, lon2 = radians(latitud), radians(longitud)
+    
+    <span class="comment"># Fórmula de haversine (simplificada)</span>
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    
+    a = sin(dlat/<span class="number">2</span>)**<span class="number">2</span> + cos(lat1) * cos(lat2) * sin(dlon/<span class="number">2</span>)**<span class="number">2</span>
+    c = <span class="number">2</span> * math.asin(sqrt(a))
+    
+    <span class="comment"># Radio de la Tierra</span>
+    R = <span class="number">6371</span>  <span class="comment"># km</span>
+    distancia = R * c
+    
+    <span class="keyword">return</span> distancia
+
+<span class="comment"># Calcular distancias a diferentes centros de control</span>
+centros_control = [
+    (<span class="string">"Houston (NASA)"</span>, <span class="number">29.7604</span>, -<span class="number">95.3698</span>),
+    (<span class="string">"Moscú (Roscosmos)"</span>, <span class="number">55.7558</span>, <span class="number">37.6176</span>),
+    (<span class="string">"Munich (ESA)"</span>, <span class="number">48.1351</span>, <span class="number">11.5820</span>),
+    (<span class="string">"Tsukuba (JAXA)"</span>, <span class="number">36.0839</span>, <span class="number">140.0759</span>)
+]
+
+<span class="function">print</span>(<span class="string">f"\n📡 DISTANCIAS A CENTROS DE CONTROL:"</span>)
+<span class="keyword">for</span> nombre, lat, lon <span class="keyword">in</span> centros_control:
+    distancia = calcular_distancia_tierra(lat, lon)
+    <span class="function">print</span>(<span class="string">f"   🗺️  {nombre}: {distancia:,.0f} km desde Houston"</span>)
+
+<span class="comment"># Cálculos de consumo de combustible</span>
+<span class="function">def</span> <span class="function">calcular_consumo_combustible</span>(masa_nave, delta_v_requerido):
+    <span class="string">"""
+    Calcula consumo de combustible usando la ecuación de Tsiolkovsky.
+    
+    Args:
+        masa_nave (float): Masa de la nave en kg
+        delta_v_requerido (float): Cambio de velocidad requerido en m/s
+    
+    Returns:
+        dict: Información sobre combustible
+    """</span>
+    <span class="comment"># Impulso específico típico de motores de hidrazina</span>
+    isp = <span class="number">300</span>  <span class="comment"># segundos</span>
+    g0 = <span class="number">9.81</span>  <span class="comment"># m/s²</span>
+    
+    <span class="comment"># Ecuación de Tsiolkovsky: Δv = Isp * g0 * ln(m0/m1)</span>
+    <span class="comment"># Resolviendo para la razón de masa</span>
+    razon_masa = math.exp(delta_v_requerido / (isp * g0))
+    masa_combustible = masa_nave * (razon_masa - <span class="number">1</span>) / razon_masa
+    
+    <span class="keyword">return</span> {
+        <span class="string">"masa_combustible_kg"</span>: masa_combustible,
+        <span class="string">"razon_masa"</span>: razon_masa,
+        <span class="string">"eficiencia"</span>: (<span class="number">1</span> - masa_combustible/masa_nave) * <span class="number">100</span>
+    }
+
+<span class="comment"># Ejemplo: maniobra de corrección orbital</span>
+combustible_info = calcular_consumo_combustible(<span class="number">420000</span>, <span class="number">50</span>)  <span class="comment"># ISS masa ~420 toneladas, Δv=50 m/s</span>
+
+<span class="function">print</span>(<span class="string">f"\n⛽ CÁLCULO DE COMBUSTIBLE:"</span>)
+<span class="function">print</span>(<span class="string">f"   🚀 Combustible requerido: {combustible_info['masa_combustible_kg']:,.0f} kg"</span>)
+<span class="function">print</span>(<span class="string">f"   📊 Razón de masa: {combustible_info['razon_masa']:.3f}"</span>)
+<span class="function">print</span>(<span class="string">f"   ⚡ Eficiencia: {combustible_info['eficiencia']:.1f}%"</span>)
+
+<span class="comment"># ==========================================
+# INTEGRACIÓN DE MÓDULOS - SIMULACIÓN COMPLETA
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🎮 SIMULACIÓN INTEGRADA DE MISIÓN:"</span>)
+
+<span class="function">def</span> <span class="function">ejecutar_simulacion_mision</span>(duracion_minutos=<span class="number">60</span>):
+    <span class="string">"""
+    Ejecuta una simulación completa de misión espacial.
+    
+    Args:
+        duracion_minutos (int): Duración de la simulación en minutos
+    """</span>
+    <span class="function">print</span>(<span class="string">f"🎬 INICIANDO SIMULACIÓN DE {duracion_minutos} MINUTOS"</span>)
+    <span class="function">print</span>(<span class="string">"=" * 50</span>)
+    
+    tiempo_inicio = datetime.datetime.now()
+    intervalo_reporte = <span class="number">10</span>  <span class="comment"># Reporte cada 10 minutos simulados</span>
+    
+    <span class="keyword">for</span> minuto <span class="keyword">in</span> range(<span class="number">0</span>, duracion_minutos + <span class="number">1</span>, intervalo_reporte):
+        tiempo_mision = tiempo_inicio + timedelta(minutes=minuto)
+        
+        <span class="function">print</span>(<span class="string">f"\n⏰ T+{minuto:02d}:{tiempo_mision.strftime('%H:%M')} - REPORTE DE ESTADO:"</span>)
+        
+        <span class="comment"># Generar condiciones aleatorias</span>
+        temperatura = uniform(-<span class="number">10</span>, <span class="number">25</span>)
+        radiacion = uniform(<span class="number">0.5</span>, <span class="number">2.0</span>)
+        comunicacion = choice([<span class="string">"Excelente"</span>, <span class="string">"Buena"</span>, <span class="string">"Regular"</span>, <span class="string">"Interferencia"</span>])
+        
+        <span class="comment"># Simular eventos basados en tiempo</span>
+        <span class="keyword">if</span> minuto == <span class="number">0</span>:
+            evento = <span class="string">"🚀 Lanzamiento exitoso"</span>
+        <span class="keyword">elif</span> minuto <= <span class="number">10</span>:
+            evento = <span class="string">"🛰️  Ascenso a órbita"</span>
+        <span class="keyword">elif</span> minuto <= <span class="number">30</span>:
+            evento = <span class="string">"🔧 Despliegue de equipos"</span>
+        <span class="keyword">elif</span> minuto <= <span class="number">45</span>:
+            evento = <span class="string">"🔬 Experimentos científicos"</span>
+        <span class="keyword">else</span>:
+            evento = <span class="string">"📡 Operaciones de rutina"</span>
+        
+        <span class="comment"># Calcular métricas</span>
+        distancia_tierra = <span class="number">408</span> + uniform(-<span class="number">20</span>, <span class="number">20</span>)  <span class="comment"># km</span>
+        velocidad = <span class="number">7.66</span> + uniform(-<span class="number">0.1</span>, <span class="number">0.1</span>)  <span class="comment"># km/s</span>
+        
+        <span class="comment"># Estado de la tripulación</span>
+        tripulacion_ok = randint(<span class="number">85</span>, <span class="number">100</span>)
+        
+        <span class="function">print</span>(<span class="string">f"   📊 Temperatura: {temperatura:.1f}°C"</span>)
+        <span class="function">print</span>(<span class="string">f"   ☀️ Radiación: {radiacion:.2f} unidades"</span>)
+        <span class="function">print</span>(<span class="string">f"   📡 Comunicación: {comunicacion}"</span>)
+        <span class="function">print</span>(<span class="string">f"   🌍 Altitud: {distancia_tierra:.0f} km"</span>)
+        <span class="function">print</span>(<span class="string">f"   🚀 Velocidad: {velocidad:.2f} km/s"</span>)
+        <span class="function">print</span>(<span class="string">f"   👨‍🚀 Estado tripulación: {tripulacion_ok}%"</span>)
+        <span class="function">print</span>(<span class="string">f"   🎯 Evento: {evento}"</span>)
+        
+        <span class="comment"># Simular problemas ocasionales</span>
+        <span class="keyword">if</span> random.random() < <span class="number">0.2</span>:  <span class="comment"># 20% probabilidad</span>
+            problemas = [
+                <span class="string">"⚠️ Alerta: Temperatura elevada en compartimento"</span>,
+                <span class="string">"⚠️ Alerta: Interferencia en comunicaciones"</span>,
+                <span class="string">"⚠️ Alerta: Ajuste menor en trayectoria"</span>,
+                <span class="string">"ℹ️  Info: Mantenimiento preventivo completado"</span>
+            ]
+            problema = choice(problemas)
+            <span class="function">print</span>(<span class="string">f"   {problema}"</span>)
+        
+        <span class="comment"># Pausa para simular tiempo real (opcional)</span>
+        time.sleep(<span class="number">1</span>)
+    
+    <span class="function">print</span>(<span class="string">f"\n✅ SIMULACIÓN COMPLETADA"</span>)
+    <span class="function">print</span>(<span class="string">f"🕐 Tiempo total simulado: {duracion_minutos} minutos"</span>)
+
+<span class="comment"># Ejecutar simulación corta</span>
+ejecutar_simulacion_mision(<span class="number">30</span>)
+
+<span class="comment"># ==========================================
+# APLICACIÓN INDUSTRIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏭 APLICACIÓN EN CONTROL INDUSTRIAL:"</span>)
+
+<span class="function">def</span> <span class="function">sistema_monitoreo_industrial</span>():
+    <span class="string">"""Sistema de monitoreo que usa múltiples módulos."""</span>
+    <span class="function">print</span>(<span class="string">"🏭 SISTEMA DE MONITOREO INDUSTRIAL 24/7"</span>)
+    <span class="function">print</span>(<span class="string">"=" * 45</span>)
+    
+    <span class="comment"># Usar datetime para turnos</span>
+    ahora = datetime.datetime.now()
+    hora_actual = ahora.hour
+    
+    <span class="keyword">if</span> <span class="number">6</span> <= hora_actual < <span class="number">14</span>:
+        turno = <span class="string">"Mañana"</span>
+        operadores = <span class="number">12</span>
+    <span class="keyword">elif</span> <span class="number">14</span> <= hora_actual < <span class="number">22</span>:
+        turno = <span class="string">"Tarde"</span>
+        operadores = <span class="number">10</span>
+    <span class="keyword">else</span>:
+        turno = <span class="string">"Noche"</span>
+        operadores = <span class="number">6</span>
+    
+    <span class="function">print</span>(<span class="string">f"🕐 Hora actual: {ahora.strftime('%H:%M:%S')}"</span>)
+    <span class="function">print</span>(<span class="string">f"👥 Turno {turno}: {operadores} operadores"</span>)
+    
+    <span class="comment"># Usar random para simular lecturas de sensores</span>
+    sensores = {
+        <span class="string">"Temperatura línea 1"</span>: uniform(<span class="number">65</span>, <span class="number">85</span>),
+        <span class="string">"Presión sistema"</span>: uniform(<span class="number">2.8</span>, <span class="number">3.5</span>),
+        <span class="string">"Velocidad motor A"</span>: uniform(<span class="number">1780</span>, <span class="number">1820</span>),
+        <span class="string">"Humedad ambiente"</span>: uniform(<span class="number">45</span>, <span class="number">65</span>)
+    }
+    
+    <span class="function">print</span>(<span class="string">f"\n📊 LECTURAS DE SENSORES:"</span>)
+    <span class="keyword">for</span> sensor, valor <span class="keyword">in</span> sensores.items():
+        <span class="function">print</span>(<span class="string">f"   📈 {sensor}: {valor:.1f}"</span>)
+    
+    <span class="comment"># Usar math para cálculos de eficiencia</span>
+    produccion_objetivo = <span class="number">1000</span>
+    produccion_actual = randint(<span class="number">920</span>, <span class="number">1050</span>)
+    eficiencia = (produccion_actual / produccion_objetivo) * <span class="number">100</span>
+    
+    <span class="comment"># Calcular tendencia usando funciones trigonométricas</span>
+    hora_normalizada = (hora_actual % <span class="number">24</span>) / <span class="number">24</span> * <span class="number">2</span> * pi
+    factor_hora = <span class="number">0.9</span> + <span class="number">0.1</span> * sin(hora_normalizada)  <span class="comment"># Variación por hora del día</span>
+    eficiencia_ajustada = eficiencia * factor_hora
+    
+    <span class="function">print</span>(<span class="string">f"\n📊 MÉTRICAS DE PRODUCCIÓN:"</span>)
+    <span class="function">print</span>(<span class="string">f"   🎯 Objetivo: {produccion_objetivo} unidades"</span>)
+    <span class="function">print</span>(<span class="string">f"   ✅ Actual: {produccion_actual} unidades"</span>)
+    <span class="function">print</span>(<span class="string">f"   📈 Eficiencia: {eficiencia:.1f}%"</span>)
+    <span class="function">print</span>(<span class="string">f"   🔧 Eficiencia ajustada: {eficiencia_ajustada:.1f}%"</span>)
+    
+    <span class="comment"># Predicción para próximas horas usando datetime</span>
+    proxima_hora = ahora + timedelta(hours=<span class="number">1</span>)
+    fin_turno = ahora.replace(hour=<span class="number">14</span> <span class="keyword">if</span> turno == <span class="string">"Mañana"</span> <span class="keyword">else</span> <span class="number">22</span> <span class="keyword">if</span> turno == <span class="string">"Tarde"</span> <span class="keyword">else</span> <span class="number">6</span>, minute=<span class="number">0</span>, second=<span class="number">0</span>)
+    
+    <span class="keyword">if</span> fin_turno < ahora:  <span class="comment"># Si es turno de noche</span>
+        fin_turno += timedelta(days=<span class="number">1</span>)
+    
+    tiempo_restante = fin_turno - ahora
+    horas_restantes = tiempo_restante.total_seconds() / <span class="number">3600</span>
+    
+    produccion_estimada = produccion_actual + (produccion_actual / <span class="number">8</span>) * horas_restantes
+    
+    <span class="function">print</span>(<span class="string">f"\n⏰ PROYECCIONES:"</span>)
+    <span class="function">print</span>(<span class="string">f"   🕐 Próxima hora: {proxima_hora.strftime('%H:%M')}"</span>)
+    <span class="function">print</span>(<span class="string">f"   🏁 Fin de turno: {fin_turno.strftime('%H:%M')}"</span>)
+    <span class="function">print</span>(<span class="string">f"   ⏳ Tiempo restante: {horas_restantes:.1f} horas"</span>)
+    <span class="function">print</span>(<span class="string">f"   📊 Producción estimada al final: {produccion_estimada:.0f} unidades"</span>)
+
+sistema_monitoreo_industrial()
+
+<span class="comment"># ==========================================
+# RESUMEN EDUCATIVO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n" + "="</span> * <span class="number">50</span>)
+<span class="function">print</span>(<span class="string">"🎓 MÓDULOS DE PYTHON APRENDIDOS:"</span>)
+<span class="function">print</span>(<span class="string">"⏰ DATETIME: fechas, horas, duraciones, cálculos temporales"</span>)
+<span class="function">print</span>(<span class="string">"🎲 RANDOM: números aleatorios, simulaciones, muestreo"</span>)
+<span class="function">print</span>(<span class="string">"🔬 MATH: funciones matemáticas, constantes, cálculos científicos"</span>)
+<span class="function">print</span>(<span class="string">"⏱️  TIME: pausas, medición de tiempo, sincronización"</span>)
+<span class="function">print</span>(<span class="string">"🔗 INTEGRACIÓN: combinar módulos para aplicaciones complejas"</span>)
+<span class="function">print</span>(<span class="string">"🏭 APLICACIONES: control industrial, simulaciones, monitoreo"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)</pre>
+                    </div>
+
+                    <div class="instructor-note">
+                        <strong>💡 Nota para el Instructor:</strong> Este ejercicio demuestra el poder de los módulos estándar de Python para crear simulaciones complejas. Los estudiantes aprenden a combinar datetime, random y math para aplicaciones reales, desde misiones espaciales hasta control industrial.
+                    </div>
+                </div>
+            </div>
+    <!-- Ejercicio 8 -->
+            <div class="exercise">
+                <div class="exercise-header">
+                    🛡️ Ejercicio 8: Manejo de Errores - Sistema Robusto Industrial
+                </div>
+                <div class="exercise-content">
+                    <div class="exercise-description">
+                        <strong>Objetivo:</strong> Aprender a manejar errores con try-except para hacer tus programas más robustos y profesionales, manejando situaciones inesperadas.
+                    </div>
+
+                    <div class="filename">ejercicio_08_manejo_errores.py</div>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copiar</button>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 8: Manejo de Errores y Excepciones - Sistema Robusto Industrial
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Crear sistemas robustos que manejen errores elegantemente
+"""</span>
+
+<span class="keyword">import</span> random
+<span class="keyword">import</span> datetime
+<span class="keyword">import</span> math
+
+<span class="function">print</span>(<span class="string">"🛡️ SISTEMA ROBUSTO DE CONTROL INDUSTRIAL"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)
+
+<span class="comment"># ==========================================
+# ERRORES BÁSICOS Y SU MANEJO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n📚 CONCEPTOS BÁSICOS DE MANEJO DE ERRORES:"</span>)
+
+<span class="function">def</span> <span class="function">division_segura</span>(dividendo, divisor):
+    <span class="string">"""
+    Realiza división con manejo de errores.
+    
+    Args:
+        dividendo (float): Número a dividir
+        divisor (float): Número divisor
+    
+    Returns:
+        float or None: Resultado de la división o None si hay error
+    """</span>
+    <span class="keyword">try</span>:
+        resultado = dividendo / divisor
+        <span class="function">print</span>(<span class="string">f"✅ {dividendo} ÷ {divisor} = {resultado:.2f}"</span>)
+        <span class="keyword">return</span> resultado
+    <span class="keyword">except</span> ZeroDivisionError:
+        <span class="function">print</span>(<span class="string">f"❌ Error: No se puede dividir {dividendo} entre cero"</span>)
+        <span class="keyword">return</span> <span class="keyword">None</span>
+    <span class="keyword">except</span> TypeError:
+        <span class="function">print</span>(<span class="string">f"❌ Error: Los valores deben ser números"</span>)
+        <span class="keyword">return</span> <span class="keyword">None</span>
+
+<span class="comment"># Probar la función con diferentes casos</span>
+<span class="function">print</span>(<span class="string">"🧪 Pruebas de división segura:"</span>)
+division_segura(<span class="number">10</span>, <span class="number">2</span>)      <span class="comment"># Caso normal</span>
+division_segura(<span class="number">15</span>, <span class="number">0</span>)      <span class="comment"># División por cero</span>
+division_segura(<span class="string">"abc"</span>, <span class="number">5</span>)   <span class="comment"># Tipo incorrecto</span>
+
+<span class="function">def</span> <span class="function">acceso_lista_seguro</span>(lista, indice):
+    <span class="string">"""
+    Accede a un elemento de lista de forma segura.
+    
+    Args:
+        lista (list): Lista a consultar
+        indice (int): Índice del elemento
+    
+    Returns:
+        any or None: Elemento encontrado o None si hay error
+    """</span>
+    <span class="keyword">try</span>:
+        elemento = lista[indice]
+        <span class="function">print</span>(<span class="string">f"✅ Elemento en posición {indice}: {elemento}"</span>)
+        <span class="keyword">return</span> elemento
+    <span class="keyword">except</span> IndexError:
+        <span class="function">print</span>(<span class="string">f"❌ Error: Índice {indice} fuera de rango (lista tiene {len(lista)} elementos)"</span>)
+        <span class="keyword">return</span> <span class="keyword">None</span>
+    <span class="keyword">except</span> TypeError:
+        <span class="function">print</span>(<span class="string">f"❌ Error: El índice debe ser un número entero"</span>)
+        <span class="keyword">return</span> <span class="keyword">None</span>
+
+<span class="comment"># Probar acceso a listas</span>
+temperaturas = [<span class="number">23.5</span>, <span class="number">24.1</span>, <span class="number">25.0</span>, <span class="number">23.8</span>]
+<span class="function">print</span>(<span class="string">f"\n🌡️ Temperaturas: {temperaturas}"</span>)
+acceso_lista_seguro(temperaturas, <span class="number">2</span>)    <span class="comment"># Índice válido</span>
+acceso_lista_seguro(temperaturas, <span class="number">10</span>)   <span class="comment"># Índice fuera de rango</span>
+acceso_lista_seguro(temperaturas, <span class="string">"abc"</span>) <span class="comment"># Tipo incorrecto</span>
+
+<span class="comment"># ==========================================
+# SISTEMA DE SENSORES CON MANEJO DE ERRORES
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🌡️ SISTEMA DE MONITOREO DE SENSORES:"</span>)
+
+<span class="keyword">class</span> <span class="function">SensorIndustrial</span>:
+    <span class="string">"""Sensor industrial con manejo robusto de errores."""</span>
+    
+    <span class="function">def</span> <span class="function">__init__</span>(self, sensor_id, tipo, rango_min, rango_max):
+        self.sensor_id = sensor_id
+        self.tipo = tipo
+        self.rango_min = rango_min
+        self.rango_max = rango_max
+        self.estado = <span class="string">"Inicializando"</span>
+        self.lecturas = []
+        self.errores_consecutivos = <span class="number">0</span>
+        self.max_errores = <span class="number">3</span>
+    
+    <span class="function">def</span> <span class="function">leer_sensor</span>(self):
+        <span class="string">"""
+        Simula lectura de sensor con posibles errores.
+        
+        Returns:
+            float or None: Lectura del sensor o None si hay error
+        """</span>
+        <span class="keyword">try</span>:
+            <span class="comment"># Simular fallas ocasionales del sensor</span>
+            <span class="keyword">if</span> random.random() < <span class="number">0.15</span>:  <span class="comment"># 15% probabilidad de falla</span>
+                <span class="keyword">raise</span> ConnectionError(<span class="string">f"Sensor {self.sensor_id} no responde"</span>)
+            
+            <span class="comment"># Simular lectura normal</span>
+            lectura = random.uniform(self.rango_min - <span class="number">5</span>, self.rango_max + <span class="number">5</span>)
+            
+            <span class="comment"># Validar rango</span>
+            <span class="keyword">if</span> lectura < self.rango_min <span class="keyword">or</span> lectura > self.rango_max:
+                <span class="keyword">raise</span> ValueError(<span class="string">f"Lectura fuera de rango: {lectura:.1f}"</span>)
+            
+            <span class="comment"># Lectura exitosa</span>
+            self.lecturas.append(lectura)
+            self.errores_consecutivos = <span class="number">0</span>
+            self.estado = <span class="string">"Operativo"</span>
+            
+            <span class="function">print</span>(<span class="string">f"✅ {self.sensor_id} ({self.tipo}): {lectura:.1f}"</span>)
+            <span class="keyword">return</span> lectura
+            
+        <span class="keyword">except</span> ConnectionError <span class="keyword">as</span> e:
+            self.errores_consecutivos += <span class="number">1</span>
+            <span class="function">print</span>(<span class="string">f"🔌 Error de conexión en {self.sensor_id}: {e}"</span>)
+            
+            <span class="keyword">if</span> self.errores_consecutivos >= self.max_errores:
+                self.estado = <span class="string">"Fuera de servicio"</span>
+                <span class="function">print</span>(<span class="string">f"🚨 {self.sensor_id} marcado como FUERA DE SERVICIO"</span>)
+            
+            <span class="keyword">return</span> <span class="keyword">None</span>
+            
+        <span class="keyword">except</span> ValueError <span class="keyword">as</span> e:
+            self.errores_consecutivos += <span class="number">1</span>
+            <span class="function">print</span>(<span class="string">f"📊 Error de rango en {self.sensor_id}: {e}"</span>)
+            <span class="function">print</span>(<span class="string">f"   Rango válido: {self.rango_min} - {self.rango_max}"</span>)
+            
+            <span class="comment"># Usar último valor válido si existe</span>
+            <span class="keyword">if</span> self.lecturas:
+                ultimo_valor = self.lecturas[-<span class="number">1</span>]
+                <span class="function">print</span>(<span class="string">f"   Usando último valor válido: {ultimo_valor:.1f}"</span>)
+                <span class="keyword">return</span> ultimo_valor
+            
+            <span class="keyword">return</span> <span class="keyword">None</span>
+            
+        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+            self.errores_consecutivos += <span class="number">1</span>
+            <span class="function">print</span>(<span class="string">f"⚠️ Error inesperado en {self.sensor_id}: {e}"</span>)
+            self.estado = <span class="string">"Error desconocido"</span>
+            <span class="keyword">return</span> <span class="keyword">None</span>
+    
+    <span class="function">def</span> <span class="function">obtener_estadisticas</span>(self):
+        <span class="string">"""Obtiene estadísticas del sensor con manejo de errores."""</span>
+        <span class="keyword">try</span>:
+            <span class="keyword">if</span> <span class="keyword">not</span> self.lecturas:
+                <span class="keyword">return</span> {<span class="string">"error"</span>: <span class="string">"No hay lecturas disponibles"</span>}
+            
+            promedio = sum(self.lecturas) / len(self.lecturas)
+            maximo = max(self.lecturas)
+            minimo = min(self.lecturas)
+            
+            <span class="keyword">return</span> {
+                <span class="string">"sensor_id"</span>: self.sensor_id,
+                <span class="string">"estado"</span>: self.estado,
+                <span class="string">"total_lecturas"</span>: len(self.lecturas),
+                <span class="string">"promedio"</span>: round(promedio, <span class="number">2</span>),
+                <span class="string">"maximo"</span>: maximo,
+                <span class="string">"minimo"</span>: minimo,
+                <span class="string">"errores_consecutivos"</span>: self.errores_consecutivos
+            }
+            
+        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+            <span class="keyword">return</span> {<span class="string">"error"</span>: <span class="string">f"Error calculando estadísticas: {e}"</span>}
+
+<span class="comment"># Crear sensores de prueba</span>
+sensores = [
+    SensorIndustrial(<span class="string">"TEMP_001"</span>, <span class="string">"Temperatura"</span>, <span class="number">20</span>, <span class="number">80</span>),
+    SensorIndustrial(<span class="string">"PRES_001"</span>, <span class="string">"Presión"</span>, <span class="number">1</span>, <span class="number">5</span>),
+    SensorIndustrial(<span class="string">"VEL_001"</span>, <span class="string">"Velocidad"</span>, <span class="number">1000</span>, <span class="number">3000</span>)
+]
+
+<span class="comment"># Simular lecturas con errores</span>
+<span class="function">print</span>(<span class="string">"📊 Simulando lecturas de sensores:"</span>)
+<span class="keyword">for</span> ciclo <span class="keyword">in</span> range(<span class="number">5</span>):
+    <span class="function">print</span>(<span class="string">f"\n🔄 Ciclo {ciclo + 1}:"</span>)
+    <span class="keyword">for</span> sensor <span class="keyword">in</span> sensores:
+        sensor.leer_sensor()
+
+<span class="comment"># Mostrar estadísticas finales</span>
+<span class="function">print</span>(<span class="string">f"\n📈 ESTADÍSTICAS FINALES:"</span>)
+<span class="keyword">for</span> sensor <span class="keyword">in</span> sensores:
+    stats = sensor.obtener_estadisticas()
+    <span class="keyword">if</span> <span class="string">"error"</span> <span class="keyword">in</span> stats:
+        <span class="function">print</span>(<span class="string">f"❌ {sensor.sensor_id}: {stats['error']}"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"📊 {stats['sensor_id']}: {stats['total_lecturas']} lecturas, "</span>
+              <span class="string">f"promedio: {stats['promedio']}, estado: {stats['estado']}"</span>)
+
+<span class="comment"># ==========================================
+# SISTEMA DE ENTRADA DE DATOS ROBUSTO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n💻 SISTEMA DE ENTRADA DE DATOS:"</span>)
+
+<span class="function">def</span> <span class="function">solicitar_numero</span>(mensaje, tipo=float, rango_min=<span class="keyword">None</span>, rango_max=<span class="keyword">None</span>, intentos_max=<span class="number">3</span>):
+    <span class="string">"""
+    Solicita un número con validación robusta.
+    
+    Args:
+        mensaje (str): Mensaje para mostrar al usuario
+        tipo (type): Tipo de número (int o float)
+        rango_min (float): Valor mínimo permitido
+        rango_max (float): Valor máximo permitido
+        intentos_max (int): Máximo número de intentos
+    
+    Returns:
+        number or None: Número válido o None si se agotaron intentos
+    """</span>
+    <span class="keyword">for</span> intento <span class="keyword">in</span> range(intentos_max):
+        <span class="keyword">try</span>:
+            <span class="comment"># Simular entrada del usuario (en aplicación real sería input())</span>
+            <span class="keyword">if</span> intento == <span class="number">0</span>:
+                entrada_simulada = <span class="string">"abc"</span>  <span class="comment"># Primer intento: texto inválido</span>
+            <span class="keyword">elif</span> intento == <span class="number">1</span>:
+                entrada_simulada = <span class="string">"-50"</span>   <span class="comment"># Segundo intento: fuera de rango</span>
+            <span class="keyword">else</span>:
+                entrada_simulada = <span class="string">"25.5"</span>  <span class="comment"># Tercer intento: válido</span>
+            
+            <span class="function">print</span>(<span class="string">f"Intento {intento + 1}: '{entrada_simulada}'"</span>)
+            
+            <span class="comment"># Convertir a número</span>
+            numero = tipo(entrada_simulada)
+            
+            <span class="comment"># Validar rango</span>
+            <span class="keyword">if</span> rango_min <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> numero < rango_min:
+                <span class="keyword">raise</span> ValueError(<span class="string">f"Valor debe ser mayor o igual a {rango_min}"</span>)
+            
+            <span class="keyword">if</span> rango_max <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> numero > rango_max:
+                <span class="keyword">raise</span> ValueError(<span class="string">f"Valor debe ser menor o igual a {rango_max}"</span>)
+            
+            <span class="function">print</span>(<span class="string">f"✅ Valor válido ingresado: {numero}"</span>)
+            <span class="keyword">return</span> numero
+            
+        <span class="keyword">except</span> ValueError <span class="keyword">as</span> e:
+            <span class="keyword">if</span> <span class="string">"could not convert"</span> <span class="keyword">in</span> str(e) <span class="keyword">or</span> <span class="string">"invalid literal"</span> <span class="keyword">in</span> str(e):
+                <span class="function">print</span>(<span class="string">f"❌ Error: '{entrada_simulada}' no es un número válido"</span>)
+            <span class="keyword">else</span>:
+                <span class="function">print</span>(<span class="string">f"❌ Error: {e}"</span>)
+            
+            <span class="keyword">if</span> intento < intentos_max - <span class="number">1</span>:
+                <span class="function">print</span>(<span class="string">f"Por favor, intenta de nuevo ({intentos_max - intento - 1} intentos restantes)"</span>)
+        
+        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+            <span class="function">print</span>(<span class="string">f"❌ Error inesperado: {e}"</span>)
+    
+    <span class="function">print</span>(<span class="string">f"❌ Se agotaron los intentos. Usando valor por defecto."</span>)
+    <span class="keyword">return</span> <span class="keyword">None</span>
+
+<span class="comment"># Probar entrada de datos</span>
+<span class="function">print</span>(<span class="string">"🔢 Prueba de entrada de temperatura (rango: 0-100°C):"</span>)
+temperatura = solicitar_numero(<span class="string">"Ingrese temperatura: "</span>, float, <span class="number">0</span>, <span class="number">100</span>)
+
+<span class="comment"># ==========================================
+# SISTEMA DE CÁLCULOS CON MANEJO DE ERRORES
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🧮 CALCULADORA INDUSTRIAL ROBUSTA:"</span>)
+
+<span class="function">def</span> <span class="function">calcular_eficiencia_segura</span>(produccion_actual, produccion_objetivo, horas_trabajadas):
+    <span class="string">"""
+    Calcula eficiencia con manejo completo de errores.
+    
+    Args:
+        produccion_actual (int): Piezas producidas
+        produccion_objetivo (int): Piezas objetivo
+        horas_trabajadas (float): Horas trabajadas
+    
+    Returns:
+        dict: Resultados del cálculo o errores
+    """</span>
+    resultados = {
+        <span class="string">"exito"</span>: <span class="keyword">False</span>,
+        <span class="string">"errores"</span>: [],
+        <span class="string">"advertencias"</span>: []
+    }
+    
+    <span class="keyword">try</span>:
+        <span class="comment"># Validar tipos de datos</span>
+        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(produccion_actual, (int, float)):
+            <span class="keyword">raise</span> TypeError(<span class="string">"Producción actual debe ser un número"</span>)
+        
+        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(produccion_objetivo, (int, float)):
+            <span class="keyword">raise</span> TypeError(<span class="string">"Producción objetivo debe ser un número"</span>)
+        
+        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(horas_trabajadas, (int, float)):
+            <span class="keyword">raise</span> TypeError(<span class="string">"Horas trabajadas debe ser un número"</span>)
+        
+        <span class="comment"># Validar valores lógicos</span>
+        <span class="keyword">if</span> produccion_actual < <span class="number">0</span>:
+            <span class="keyword">raise</span> ValueError(<span class="string">"Producción actual no puede ser negativa"</span>)
+        
+        <span class="keyword">if</span> produccion_objetivo <= <span class="number">0</span>:
+            <span class="keyword">raise</span> ValueError(<span class="string">"Producción objetivo debe ser mayor que cero"</span>)
+        
+        <span class="keyword">if</span> horas_trabajadas <= <span class="number">0</span>:
+            <span class="keyword">raise</span> ValueError(<span class="string">"Horas trabajadas debe ser mayor que cero"</span>)
+        
+        <span class="comment"># Advertencias para valores atípicos</span>
+        <span class="keyword">if</span> horas_trabajadas > <span class="number">24</span>:
+            resultados[<span class="string">"advertencias"</span>].append(<span class="string">"Horas trabajadas excede 24 horas"</span>)
+        
+        <span class="keyword">if</span> produccion_actual > produccion_objetivo * <span class="number">1.5</span>:
+            resultados[<span class="string">"advertencias"</span>].append(<span class="string">"Producción actual muy por encima del objetivo"</span>)
+        
+        <span class="comment"># Cálculos principales</span>
+        eficiencia_porcentual = (produccion_actual / produccion_objetivo) * <span class="number">100</span>
+        productividad_hora = produccion_actual / horas_trabajadas
+        
+        <span class="comment"># Cálculos adicionales con manejo de errores</span>
+        <span class="keyword">try</span>:
+            tiempo_por_pieza = horas_trabajadas / produccion_actual <span class="keyword">if</span> produccion_actual > <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span>
+        <span class="keyword">except</span> ZeroDivisionError:
+            tiempo_por_pieza = <span class="number">0</span>
+            resultados[<span class="string">"advertencias"</span>].append(<span class="string">"No se puede calcular tiempo por pieza (producción = 0)"</span>)
+        
+        <span class="comment"># Clasificar rendimiento</span>
+        <span class="keyword">if</span> eficiencia_porcentual >= <span class="number">100</span>:
+            clasificacion = <span class="string">"Excelente"</span>
+        <span class="keyword">elif</span> eficiencia_porcentual >= <span class="number">90</span>:
+            clasificacion = <span class="string">"Muy bueno"</span>
+        <span class="keyword">elif</span> eficiencia_porcentual >= <span class="number">80</span>:
+            clasificacion = <span class="string">"Bueno"</span>
+        <span class="keyword">elif</span> eficiencia_porcentual >= <span class="number">70</span>:
+            clasificacion = <span class="string">"Regular"</span>
+        <span class="keyword">else</span>:
+            clasificacion = <span class="string">"Necesita mejora"</span>
+        
+        <span class="comment"># Resultados exitosos</span>
+        resultados.update({
+            <span class="string">"exito"</span>: <span class="keyword">True</span>,
+            <span class="string">"eficiencia_porcentual"</span>: round(eficiencia_porcentual, <span class="number">2</span>),
+            <span class="string">"productividad_hora"</span>: round(productividad_hora, <span class="number">2</span>),
+            <span class="string">"tiempo_por_pieza"</span>: round(tiempo_por_pieza, <span class="number">3</span>),
+            <span class="string">"clasificacion"</span>: clasificacion,
+            <span class="string">"datos_entrada"</span>: {
+                <span class="string">"produccion_actual"</span>: produccion_actual,
+                <span class="string">"produccion_objetivo"</span>: produccion_objetivo,
+                <span class="string">"horas_trabajadas"</span>: horas_trabajadas
+            }
+        })
+        
+    <span class="keyword">except</span> TypeError <span class="keyword">as</span> e:
+        resultados[<span class="string">"errores"</span>].append(<span class="string">f"Error de tipo: {e}"</span>)
+    
+    <span class="keyword">except</span> ValueError <span class="keyword">as</span> e:
+        resultados[<span class="string">"errores"</span>].append(<span class="string">f"Error de valor: {e}"</span>)
+    
+    <span class="keyword">except</span> ZeroDivisionError <span class="keyword">as</span> e:
+        resultados[<span class="string">"errores"</span>].append(<span class="string">f"Error de división: No se puede dividir entre cero"</span>)
+    
+    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:
+        resultados[<span class="string">"errores"</span>].append(<span class="string">f"Error inesperado: {e}"</span>)
+    
+    <span class="keyword">finally</span>:
+        <span class="comment"># Este bloque SIEMPRE se ejecuta</span>
+        timestamp = datetime.datetime.now().strftime(<span class="string">"%Y-%m-%d %H:%M:%S"</span>)
+        resultados[<span class="string">"timestamp"</span>] = timestamp
+        <span class="function">print</span>(<span class="string">f"📝 Cálculo procesado a las {timestamp}"</span>)
+    
+    <span class="keyword">return</span> resultados
+
+<span class="function">def</span> <span class="function">mostrar_resultado_calculo</span>(resultado):
+    <span class="string">"""Muestra el resultado del cálculo de forma clara."""</span>
+    <span class="keyword">if</span> resultado[<span class="string">"exito"</span>]:
+        <span class="function">print</span>(<span class="string">f"✅ CÁLCULO EXITOSO:"</span>)
+        <span class="function">print</span>(<span class="string">f"   📊 Eficiencia: {resultado['eficiencia_porcentual']}%"</span>)
+        <span class="function">print</span>(<span class="string">f"   ⚡ Productividad: {resultado['productividad_hora']} piezas/hora"</span>)
+        <span class="function">print</span>(<span class="string">f"   ⏱️  Tiempo por pieza: {resultado['tiempo_por_pieza']} horas"</span>)
+        <span class="function">print</span>(<span class="string">f"   🏆 Clasificación: {resultado['clasificacion']}"</span>)
+        
+        <span class="keyword">if</span> resultado[<span class="string">"advertencias"</span>]:
+            <span class="function">print</span>(<span class="string">f"⚠️ Advertencias:"</span>)
+            <span class="keyword">for</span> advertencia <span class="keyword">in</span> resultado[<span class="string">"advertencias"</span>]:
+                <span class="function">print</span>(<span class="string">f"     • {advertencia}"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"❌ CÁLCULO FALLIDO:"</span>)
+        <span class="keyword">for</span> error <span class="keyword">in</span> resultado[<span class="string">"errores"</span>]:
+            resultado_mision_superman = {
+    <span class="string">"personas_salvadas"</span>: <span class="number">150</span>,
+    <span class="string">"villano_derrotado"</span>: <span class="keyword">True</span>,
+    <span class="string">"daño_recibido"</span>: <span class="number">5</span>,
+    <span class="string">"moral_ganada"</span>: <span class="number">3</span>
+}
+
+actualizar_mision(<span class="string">"SPM001"</span>, resultado_mision_superman)
+
+<span class="comment"># Ranking actualizado</span>
+ranking_poder()
+
+<span class="comment"># ==========================================
+# APLICACIÓN INDUSTRIAL
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🏭 APLICACIÓN EN SISTEMA INDUSTRIAL:"</span>)
+<span class="function">print</span>(<span class="string">"📊 BASE DE DATOS DE EQUIPOS INDUSTRIALES"</span>)
+
+<span class="comment"># Base de datos industrial usando diccionarios anidados</span>
+equipos_industriales = {
+    <span class="string">"MOT001"</span>: {
+        <span class="string">"informacion_general"</span>: {
+            <span class="string">"nombre"</span>: <span class="string">"Motor Trifásico Principal"</span>,
+            <span class="string">"fabricante"</span>: <span class="string">"Siemens"</span>,
+            <span class="string">"modelo"</span>: <span class="string">"1LA7 083-4AA60"</span>,
+            <span class="string">"año_instalacion"</span>: <span class="number">2020</span>
+        },
+        <span class="string">"especificaciones"</span>: {
+            <span class="string">"potencia_kw"</span>: <span class="number">15</span>,
+            <span class="string">"voltaje"</span>: <span class="number">380</span>,
+            <span class="string">"rpm_nominal"</span>: <span class="number">1800</span>,
+            <span class="string">"eficiencia"</span>: <span class="number">92.5</span>
+        },
+        <span class="string">"ubicacion"</span>: {
+            <span class="string">"planta"</span>: <span class="string">"Planta Norte"</span>,
+            <span class="string">"seccion"</span>: <span class="string">"Línea A"</span>,
+            <span class="string">"coordenadas"</span>: [<span class="number">25.5</span>, <span class="number">10.2</span>]
+        },
+        <span class="string">"mantenimiento"</span>: {
+            <span class="string">"ultimo_servicio"</span>: <span class="string">"2024-01-10"</span>,
+            <span class="string">"proximo_servicio"</span>: <span class="string">"2024-04-10"</span>,
+            <span class="string">"horas_operacion"</span>: <span class="number">8420</span>,
+            <span class="string">"estado"</span>: <span class="string">"Operativo"</span>
+        },
+        <span class="string">"sensores"</span>: {
+            <span class="string">"temperatura"</span>: <span class="number">65.2</span>,
+            <span class="string">"vibracion"</span>: <span class="number">2.1</span>,
+            <span class="string">"corriente"</span>: <span class="number">28.5</span>,
+            <span class="string">"ultima_lectura"</span>: <span class="string">"2024-01-17 10:30:00"</span>
+        }
+    },
+    <span class="string">"BOM001"</span>: {
+        <span class="string">"informacion_general"</span>: {
+            <span class="string">"nombre"</span>: <span class="string">"Bomba Centrífuga"</span>,
+            <span class="string">"fabricante"</span>: <span class="string">"Grundfos"</span>,
+            <span class="string">"modelo"</span>: <span class="string">"NK 65-250/220"</span>,
+            <span class="string">"año_instalacion"</span>: <span class="number">2019</span>
+        },
+        <span class="string">"especificaciones"</span>: {
+            <span class="string">"caudal_lpm"</span>: <span class="number">500</span>,
+            <span class="string">"presion_bar"</span>: <span class="number">3.5</span>,
+            <span class="string">"potencia_kw"</span>: <span class="number">5.5</span>,
+            <span class="string">"eficiencia"</span>: <span class="number">78.0</span>
+        },
+        <span class="string">"ubicacion"</span>: {
+            <span class="string">"planta"</span>: <span class="string">"Planta Norte"</span>,
+            <span class="string">"seccion"</span>: <span class="string">"Sistema Hidráulico"</span>,
+            <span class="string">"coordenadas"</span>: [<span class="number">15.8</span>, <span class="number">22.4</span>]
+        },
+        <span class="string">"mantenimiento"</span>: {
+            <span class="string">"ultimo_servicio"</span>: <span class="string">"2024-01-05"</span>,
+            <span class="string">"proximo_servicio"</span>: <span class="string">"2024-07-05"</span>,
+            <span class="string">"horas_operacion"</span>: <span class="number">12150</span>,
+            <span class="string">"estado"</span>: <span class="string">"Mantenimiento programado"</span>
+        },
+        <span class="string">"sensores"</span>: {
+            <span class="string">"presion_entrada"</span>: <span class="number">1.2</span>,
+            <span class="string">"presion_salida"</span>: <span class="number">3.4</span>,
+            <span class="string">"temperatura"</span>: <span class="number">45.6</span>,
+            <span class="string">"ultima_lectura"</span>: <span class="string">"2024-01-17 10:35:00"</span>
+        }
+    }
+}
+
+<span class="function">def</span> <span class="function">reporte_equipo_industrial</span>(codigo_equipo):
+    <span class="string">"""Genera reporte completo de un equipo industrial."""</span>
+    <span class="keyword">if</span> codigo_equipo <span class="keyword">in</span> equipos_industriales:
+        equipo = equipos_industriales[codigo_equipo]
+        info = equipo[<span class="string">"informacion_general"</span>]
+        specs = equipo[<span class="string">"especificaciones"</span>]
+        ubicacion = equipo[<span class="string">"ubicacion"</span>]
+        mant = equipo[<span class="string">"mantenimiento"</span>]
+        sensores = equipo[<span class="string">"sensores"</span>]
+        
+        <span class="function">print</span>(<span class="string">f"\n⚙️ REPORTE DE EQUIPO: {info['nombre'].upper()}"</span>)
+        <span class="function">print</span>(<span class="string">"=" * 50</span>)
+        <span class="function">print</span>(<span class="string">f"🏷️  Código: {codigo_equipo}"</span>)
+        <span class="function">print</span>(<span class="string">f"🏭 Fabricante: {info['fabricante']} - Modelo: {info['modelo']}"</span>)
+        <span class="function">print</span>(<span class="string">f"📅 Instalación: {info['año_instalacion']}"</span>)
+        <span class="function">print</span>(<span class="string">f"📍 Ubicación: {ubicacion['planta']} - {ubicacion['seccion']}"</span>)
+        <span class="function">print</span>(<span class="string">f"🔧 Estado: {mant['estado']}"</span>)
+        <span class="function">print</span>(<span class="string">f"⏰ Horas operación: {mant['horas_operacion']:,} hrs"</span>)
+        
+        <span class="comment"># Mostrar especificaciones específicas según tipo</span>
+        <span class="keyword">if</span> <span class="string">"potencia_kw"</span> <span class="keyword">in</span> specs:
+            <span class="function">print</span>(<span class="string">f"⚡ Potencia: {specs['potencia_kw']} kW"</span>)
+        <span class="keyword">if</span> <span class="string">"rpm_nominal"</span> <span class="keyword">in</span> specs:
+            <span class="function">print</span>(<span class="string">f"🔄 RPM nominal: {specs['rpm_nominal']}"</span>)
+        <span class="keyword">if</span> <span class="string">"caudal_lpm"</span> <span class="keyword">in</span> specs:
+            <span class="function">print</span>(<span class="string">f"💧 Caudal: {specs['caudal_lpm']} L/min"</span>)
+        
+        <span class="function">print</span>(<span class="string">f"📊 Eficiencia: {specs['eficiencia']}%"</span>)
+        
+        <span class="comment"># Estado de sensores</span>
+        <span class="function">print</span>(<span class="string">f"\n📡 LECTURAS DE SENSORES:"</span>)
+        <span class="keyword">for</span> sensor, valor <span class="keyword">in</span> sensores.items():
+            <span class="keyword">if</span> sensor != <span class="string">"ultima_lectura"</span>:
+                <span class="function">print</span>(<span class="string">f"  📊 {sensor.replace('_', ' ').title()}: {valor}"</span>)
+        <span class="function">print</span>(<span class="string">f"  🕐 Última lectura: {sensores['ultima_lectura']}"</span>)
+    
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"❌ Equipo {codigo_equipo} no encontrado"</span>)
+
+<span class="function">def</span> <span class="function">equipos_por_estado</span>(estado_objetivo):
+    <span class="string">"""Filtra equipos por estado de mantenimiento."""</span>
+    <span class="function">print</span>(<span class="string">f"\n🔍 EQUIPOS EN ESTADO: {estado_objetivo.upper()}"</span>)
+    encontrados = []
+    
+    <span class="keyword">for</span> codigo, equipo <span class="keyword">in</span> equipos_industriales.items():
+        <span class="keyword">if</span> estado_objetivo.lower() <span class="keyword">in</span> equipo[<span class="string">"mantenimiento"</span>][<span class="string">"estado"</span>].lower():
+            nombre = equipo[<span class="string">"informacion_general"</span>][<span class="string">"nombre"</span>]
+            horas = equipo[<span class="string">"mantenimiento"</span>][<span class="string">"horas_operacion"</span>]
+            encontrados.append((codigo, nombre, horas))
+    
+    <span class="keyword">if</span> encontrados:
+        <span class="keyword">for</span> codigo, nombre, horas <span class="keyword">in</span> encontrados:
+            <span class="function">print</span>(<span class="string">f"  ⚙️ {codigo}: {nombre} ({horas:,} hrs)"</span>)
+    <span class="keyword">else</span>:
+        <span class="function">print</span>(<span class="string">f"  ❌ No hay equipos en estado '{estado_objetivo}'"</span>)
+    
+    <span class="keyword">return</span> encontrados
+
+<span class="function">def</span> <span class="function">analisis_eficiencia_planta</span>():
+    <span class="string">"""Analiza la eficiencia general de la planta."""</span>
+    <span class="function">print</span>(<span class="string">f"\n📈 ANÁLISIS DE EFICIENCIA DE PLANTA:"</span>)
+    
+    total_equipos = <span class="function">len</span>(equipos_industriales)
+    suma_eficiencias = <span class="number">0</span>
+    equipos_operativos = <span class="number">0</span>
+    horas_totales = <span class="number">0</span>
+    
+    <span class="keyword">for</span> codigo, equipo <span class="keyword">in</span> equipos_industriales.items():
+        eficiencia = equipo[<span class="string">"especificaciones"</span>][<span class="string">"eficiencia"</span>]
+        estado = equipo[<span class="string">"mantenimiento"</span>][<span class="string">"estado"</span>]
+        horas = equipo[<span class="string">"mantenimiento"</span>][<span class="string">"horas_operacion"</span>]
+        
+        suma_eficiencias += eficiencia
+        horas_totales += horas
+        
+        <span class="keyword">if</span> <span class="string">"operativo"</span> <span class="keyword">in</span> estado.lower():
+            equipos_operativos += <span class="number">1</span>
+    
+    eficiencia_promedio = suma_eficiencias / total_equipos
+    disponibilidad = (equipos_operativos / total_equipos) * <span class="number">100</span>
+    horas_promedio = horas_totales / total_equipos
+    
+    <span class="function">print</span>(<span class="string">f"🏭 Total de equipos: {total_equipos}"</span>)
+    <span class="function">print</span>(<span class="string">f"✅ Equipos operativos: {equipos_operativos}"</span>)
+    <span class="function">print</span>(<span class="string">f"📊 Disponibilidad: {disponibilidad:.1f}%"</span>)
+    <span class="function">print</span>(<span class="string">f"⚡ Eficiencia promedio: {eficiencia_promedio:.1f}%"</span>)
+    <span class="function">print</span>(<span class="string">f"⏰ Horas promedio de operación: {horas_promedio:,.0f} hrs"</span>)
+    
+    <span class="comment"># Determinar estado general</span>
+    <span class="keyword">if</span> disponibilidad >= <span class="number">90</span> <span class="keyword">and</span> eficiencia_promedio >= <span class="number">85</span>:
+        estado_general = <span class="string">"🟢 EXCELENTE"</span>
+    <span class="keyword">elif</span> disponibilidad >= <span class="number">80</span> <span class="keyword">and</span> eficiencia_promedio >= <span class="number">75</span>:
+        estado_general = <span class="string">"🟡 BUENO"</span>
+    <span class="keyword">else</span>:
+        estado_general = <span class="string">"🔴 REQUIERE ATENCIÓN"</span>
+    
+    <span class="function">print</span>(<span class="string">f"🎯 Estado general de planta: {estado_general}"</span>)
+
+<span class="comment"># Probar funciones industriales</span>
+reporte_equipo_industrial(<span class="string">"MOT001"</span>)
+reporte_equipo_industrial(<span class="string">"BOM001"</span>)
+
+equipos_por_estado(<span class="string">"operativo"</span>)
+equipos_por_estado(<span class="string">"mantenimiento"</span>)
+
+analisis_eficiencia_planta()
+
+<span class="comment"># ==========================================
+# TÉCNICAS AVANZADAS CON DICCIONARIOS
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n🚀 TÉCNICAS AVANZADAS:"</span>)
+
+<span class="comment"># Dictionary comprehensions</span>
+<span class="function">print</span>(<span class="string">"\n📊 DICTIONARY COMPREHENSIONS:"</span>)
+
+<span class="comment"># Crear diccionario con niveles de poder</span>
+niveles_poder = {
+    codigo: heroe[<span class="string">"poderes"</span>][<span class="string">"nivel_poder"</span>] 
+    <span class="keyword">for</span> codigo, heroe <span class="keyword">in</span> base_datos_heroes.items()
+}
+<span class="function">print</span>(<span class="string">f"Niveles de poder: {niveles_poder}"</span>)
+
+<span class="comment"># Filtrar superhéroes activos</span>
+heroes_activos = {
+    codigo: heroe[<span class="string">"informacion_personal"</span>][<span class="string">"nombre"</span>]
+    <span class="keyword">for</span> codigo, heroe <span class="keyword">in</span> base_datos_heroes.items()
+    <span class="keyword">if</span> heroe[<span class="string">"estado"</span>][<span class="string">"activo"</span>]
+}
+<span class="function">print</span>(<span class="string">f"Héroes activos: {heroes_activos}"</span>)
+
+<span class="comment"># Métodos útiles de diccionarios</span>
+<span class="function">print</span>(<span class="string">"\n🔧 MÉTODOS DE DICCIONARIOS:"</span>)
+
+<span class="comment"># Obtener todas las claves</span>
+codigos = <span class="function">list</span>(base_datos_heroes.keys())
+<span class="function">print</span>(<span class="string">f"Códigos de héroes: {codigos}"</span>)
+
+<span class="comment"># Obtener todos los nombres</span>
+nombres = [heroe[<span class="string">"informacion_personal"</span>][<span class="string">"nombre"</span>] <span class="keyword">for</span> heroe <span class="keyword">in</span> base_datos_heroes.values()]
+<span class="function">print</span>(<span class="string">f"Nombres: {nombres}"</span>)
+
+<span class="comment"># Verificar existencia de clave</span>
+<span class="function">print</span>(<span class="string">f"¿Existe SPM001? {'SPM001' in base_datos_heroes}"</span>)
+<span class="function">print</span>(<span class="string">f"¿Existe XYZ999? {'XYZ999' in base_datos_heroes}"</span>)
+
+<span class="comment"># Usar get() para acceso seguro</span>
+heroe_inexistente = base_datos_heroes.get(<span class="string">"XYZ999"</span>, <span class="string">"No encontrado"</span>)
+<span class="function">print</span>(<span class="string">f"Héroe inexistente: {heroe_inexistente}"</span>)
+
+<span class="comment"># ==========================================
+# RESUMEN EDUCATIVO
+# ==========================================</span>
+
+<span class="function">print</span>(<span class="string">"\n" + "="</span> * <span class="number">50</span>)
+<span class="function">print</span>(<span class="string">"🎓 CONCEPTOS DE DICCIONARIOS APRENDIDOS:"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Diccionarios básicos: {'clave': 'valor'}"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Diccionarios anidados: {'clave': {'subclave': 'valor'}}"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Acceso: diccionario['clave']"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Métodos: keys(), values(), items(), get()"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Dictionary comprehensions: {k: v for k, v in dict.items()}"</span>)
+<span class="function">print</span>(<span class="string">"🔹 Aplicaciones: bases de datos, configuraciones, APIs"</span>)
+<span class="function">print</span>(<span class="string">"="</span> * <span class="number">50</span>)</pre>
+                    </div>
+
+                    <div class="instructor-note">
+                        <strong>💡 Nota para el Instructor:</strong> Este ejercicio demuestra el poder de los diccionarios para estructurar datos complejos. Los estudiantes aprenden desde conceptos básicos hasta estructuras anidadas complejas, esenciales para APIs, bases de datos, y configuraciones industriales.
+                    </div>
+                </div>
+            </div>
+ <div class="instructor-note">
+                <strong>👨‍🏫 Información del Instructor:</strong><br>
+                <strong>Instructor:</strong> Anastacio Rodríguez García<br>
+                <a href="https://www.linkedin.com/in/anastacio-rodríguez-garcía-5702b7183/" target="_blank">🔗 LinkedIn</a> | 
+                <a href="mailto:anastaciorodriguez@utng.edu.mx">✉️ Contacto</a>
+            </div>
+        </div>
+    <script>
+        function copyCode(button) {
+            const codeBlock = button.nextElementSibling;
+            const text = codeBlock.textContent;
+            
+            navigator.clipboard.writeText(text).then(function() {
+                const originalText = button.textContent;
+                button.textContent = '¡Copiado!';
+                button.style.background = '#059669';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Error al copiar: ', err);
+                button.textContent = 'Error';
+                button.style.background = '#dc2626';
+                
+                setTimeout(() => {
+                    button.textContent = 'Copiar';
+                    button.style.background = '#3b82f6';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
