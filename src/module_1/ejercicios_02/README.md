@@ -19,16 +19,16 @@ Este proyecto introduce los fundamentos de Python utilizando una temática diver
 ## 🚀 Cómo ejecutar
 
 1. Clona el repositorio o descarga esta carpeta:
-   ```bash
+```bash
    git clone https://github.com/tuxmex/curso-python-tutorial.git
    cd curso-python-tutorial/src/module_1/ejercicios_02
 ````
 
 2. Ejecuta cualquier archivo con Python 3:
 
-   ```bash
+```bash
    python tienda_mascotas.py
-   ```
+```
 
 ---
 
@@ -73,6 +73,6 @@ Este proyecto introduce los fundamentos de Python utilizando una temática diver
 
 Este contenido forma parte del curso de Python de [TuxMex](https://github.com/tuxmex) y está liberado bajo la Licencia MIT.
 
-```
+
 
 
