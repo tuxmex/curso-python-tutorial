@@ -533,4 +533,293 @@
                     "Por la dirección de las flechas en la línea de asociación"
                 ],
                 correct: 3,
-                explanation: "La multiplicidad de
+                explanation: "La multiplicidad de una asociación entre dos entidades en el Domain Model de Mendix se indica por etiquetas en los extremos de la línea de asociación, como 1, 0..1, 1..*, o 0..*."
+            },
+            {
+                question: "¿Cuál es el término para ciclos de trabajo cortos e iterativos en la metodología Agile?",
+                options: [
+                    "Iterations",
+                    "Timeboxes",
+                    "Sprints",
+                    "Phases"
+                ],
+                correct: 3,
+                explanation: "Los Sprints son ciclos de trabajo cortos e iterativos típicamente de 1-4 semanas en Scrum, un framework dentro de la metodología Agile. Permiten a los equipos desarrollar, probar y lanzar pequeños incrementos del producto."
+            },
+            {
+                question: "¿Qué significa el círculo rojo en un microflow de Mendix?",
+                options: [
+                    "Un error o problema que necesita ser resuelto",
+                    "El evento de fin del microflow",
+                    "Un breakpoint configurado para propósitos de debugging",
+                    "Un punto de decisión crítico en la lógica"
+                ],
+                correct: 3,
+                explanation: "El círculo rojo en un microflow de Mendix significa un breakpoint, que se utiliza para propósitos de debugging para pausar la ejecución e inspeccionar el estado."
+            },
+            {
+                question: "En el contexto de un Domain Model de Mendix, ¿qué es una 'entity key'?",
+                options: [
+                    "Un identificador único usado para encriptar datos de entidad",
+                    "Un conjunto de atributos que identifican únicamente una instancia de entidad",
+                    "Un token usado para acceder a entidades durante llamadas de web service",
+                    "Una contraseña requerida para modificar el Domain Model"
+                ],
+                correct: 2,
+                explanation: "Una entity key en un Domain Model de Mendix es un conjunto de atributos que identifican únicamente cada instancia de una entidad."
+            },
+            {
+                question: "¿Por qué se abordan las preocupaciones de seguridad tanto a nivel de Módulo como de Aplicación dentro de Mendix?",
+                options: [
+                    "Para asegurar cumplimiento con estándares internacionales de seguridad",
+                    "Para diferenciar entre ambientes de desarrollo y producción",
+                    "Para permitir control de acceso granular dentro de módulos y control más amplio a nivel de aplicación",
+                    "Para facilitar acceso basado en roles en colaboración con sistemas externos"
+                ],
+                correct: 3,
+                explanation: "Abordar la seguridad en ambos niveles permite control de acceso detallado dentro de módulos específicos mientras se mantiene control más amplio sobre toda la aplicación."
+            },
+            {
+                question: "¿Cuál es el propósito de usar una actividad 'Commit' en un microflow?",
+                options: [
+                    "Para iniciar una nueva transacción en la base de datos",
+                    "Para guardar cambios realizados a un objeto en la base de datos",
+                    "Para revertir cambios realizados a un objeto en el microflow",
+                    "Para duplicar un objeto en la base de datos"
+                ],
+                correct: 2,
+                explanation: "El propósito principal de una actividad 'Commit' en un microflow es guardar cualquier cambio realizado a un objeto en la base de datos, haciendo los cambios persistentes."
+            },
+            {
+                question: "¿Cuál es el impacto de configurar un atributo como 'required' en el Domain Model de una aplicación Mendix?",
+                options: [
+                    "El atributo debe tener un valor por defecto configurado",
+                    "El atributo será indexado para operaciones de búsqueda más rápidas",
+                    "El atributo debe ser llenado por el usuario; no puede dejarse en blanco",
+                    "El atributo generará automáticamente un valor único para cada instancia de entidad"
+                ],
+                correct: 3,
+                explanation: "Configurar un atributo como 'required' asegura que el usuario debe proporcionar un valor para este atributo antes de que la entidad pueda ser guardada."
+            },
+            {
+                question: "¿Cuál es el resultado de usar una actividad 'Rollback' en un objeto dentro de un microflow?",
+                options: [
+                    "Duplica el objeto",
+                    "Confirma los cambios del objeto a la base de datos",
+                    "Restaura el objeto a su último estado confirmado",
+                    "Elimina el objeto de la base de datos"
+                ],
+                correct: 3,
+                explanation: "Una actividad de rollback restaura el objeto a su último estado confirmado, efectivamente deshaciendo cualquier cambio no confirmado realizado al objeto."
+            },
+            {
+                question: "¿Dónde es más apropiado para participar con la comunidad Mendix y discutir propuestas de nuevas características?",
+                options: [
+                    "Mendix Community Forums",
+                    "Mendix Support Tickets",
+                    "Blogs personales sobre Mendix",
+                    "Foros de discusión tecnológica general"
+                ],
+                correct: 1,
+                explanation: "Los Mendix Community Forums son el lugar más apropiado para discutir propuestas de nuevas características ya que están específicamente diseñados para participación de la comunidad y feedback sobre temas relacionados con Mendix."
+            },
+            {
+                question: "¿Cuál es el resultado de usar un 'End event' en un microflow de Mendix?",
+                options: [
+                    "Pausa la ejecución del microflow esperando input del usuario",
+                    "Significa la finalización de la ejecución del microflow",
+                    "Crea una nueva instancia de una entidad",
+                    "Revierte cualquier cambio realizado durante la ejecución del microflow"
+                ],
+                correct: 2,
+                explanation: "Un 'End event' en un microflow de Mendix indica que el microflow ha completado su ejecución. Marca el punto en el que no se tomarán más acciones dentro de ese microflow."
+            },
+            {
+                question: "¿Cómo puedes forzar que el valor de un atributo no se deje vacío en Mendix?",
+                options: [
+                    "Configurando el atributo como 'opcional' en el domain model",
+                    "Utilizando una regla de validación 'Not empty' en el atributo",
+                    "Creando un microflow personalizado para verificar el valor del atributo",
+                    "Deshabilitando el widget de input en la interfaz de usuario"
+                ],
+                correct: 2,
+                explanation: "Utilizar una regla de validación 'Not empty' asegura que el atributo no pueda dejarse vacío, forzando la integridad de datos a nivel del modelo."
+            },
+            {
+                question: "¿Cuál es la consecuencia de configurar el delete behavior de un atributo a 'Cascade' en Mendix?",
+                options: [
+                    "El atributo se configurará a un valor por defecto cuando se elimine",
+                    "Los objetos asociados se eliminarán cuando se elimine el objeto propietario",
+                    "El atributo se ocultará de la interfaz de usuario tras la eliminación",
+                    "El atributo se archivará en lugar de eliminarse"
+                ],
+                correct: 2,
+                explanation: "El delete behavior 'Cascade' significa que cuando se elimina un objeto propietario, todos los objetos asociados con él también se eliminarán automáticamente."
+            },
+            {
+                question: "¿Cuál es el efecto de usar un 'Exclusive Split' en un microflow?",
+                options: [
+                    "Combina múltiples flujos en una sola ruta",
+                    "Distribuye el flujo en múltiples rutas paralelas",
+                    "Crea un punto de decisión que ramifica el flujo basado en una condición",
+                    "Excluye ciertos objetos de ser procesados en el microflow"
+                ],
+                correct: 3,
+                explanation: "Un 'Exclusive Split' crea un punto de decisión en un microflow, ramificando el flujo en diferentes rutas basadas en condiciones específicas."
+            },
+            {
+                question: "¿Cuál es la función principal del Mendix Data Hub?",
+                options: [
+                    "Para servir como almacenamiento de backup para aplicaciones Mendix",
+                    "Para proporcionar un servicio de compartición de datos centralizado",
+                    "Para ofrecer herramientas de análisis de datos y reportes",
+                    "Para actuar como herramienta de migración de datos entre diferentes aplicaciones"
+                ],
+                correct: 2,
+                explanation: "El ecosistema Mendix está diseñado para facilitar el desarrollo rápido de aplicaciones y gestión de datos centralizados. Proporciona herramientas para desarrollar, desplegar y gestionar aplicaciones, con un fuerte énfasis en compartir datos entre estas aplicaciones."
+            },
+            {
+                question: "¿Qué práctica Agile involucra colaboración continua con stakeholders a lo largo del proyecto?",
+                options: [
+                    "Stakeholder Sign-off",
+                    "Customer Interviews",
+                    "Stakeholder Engagement",
+                    "Market Analysis"
+                ],
+                correct: 3,
+                explanation: "Stakeholder Engagement involucra interacción y colaboración continua con stakeholders a lo largo del proyecto para asegurar que sus necesidades y feedback sean abordados."
+            },
+            {
+                question: "¿Qué característica de Mendix es crucial para asegurar integraciones de API REST dentro de una aplicación?",
+                options: [
+                    "Módulo OAuth para autenticación basada en tokens",
+                    "Timers de microflow para regular llamadas API",
+                    "Validaciones de nanoflow del cliente antes de solicitudes API",
+                    "Acciones Java personalizadas para encriptar payloads de API"
+                ],
+                correct: 1,
+                explanation: "OAuth proporciona un framework robusto para autenticación basada en tokens, asegurando acceso seguro a APIs REST validando credenciales de usuario y permisos."
+            },
+            {
+                question: "¿Qué tipos de validación están disponibles para atributos en el domain model de Mendix?",
+                options: [
+                    "Regular expression, Range, y Unique",
+                    "String length, Numeric value, y Binary",
+                    "Mandatory, Default value, y Constant",
+                    "Comparison, Enumeration, y File type"
+                ],
+                correct: 1,
+                explanation: "Estos son tipos válidos de validación para atributos en el domain model de Mendix. Las expresiones regulares aseguran el formato, el rango verifica los límites de valor, y único asegura que no haya valores duplicados."
+            }
+        ];
+
+        function generateExcel() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = '<div class="status info">Generando archivo Excel...</div>';
+            
+            try {
+                // Crear nuevo workbook
+                const wb = XLSX.utils.book_new();
+                
+                // Crear los datos para la hoja
+                const wsData = [
+                    // Header row
+                    [
+                        'Question Text',
+                        'Question Type',
+                        'Option 1',
+                        'Option 2',
+                        'Option 3',
+                        'Option 4',
+                        'Option 5',
+                        'Correct Answer',
+                        'Time in seconds',
+                        'Image Link',
+                        'Answer explanation'
+                    ],
+                    // Subheader row with instructions
+                    [
+                        'Text of the question\n\n(required)',
+                        'Question Type\n\n(default is Multiple Choice)',
+                        'Text for option 1\n\n(required in all cases except open-ended & draw questions)',
+                        'Text for option 2\n\n(required in all cases except open-ended & draw questions)',
+                        'Text for option 3\n\n(optional)',
+                        'Text for option 4\n\n(optional)',
+                        'Text for option 5\n\n(optional)',
+                        'The correct option choice (between 1-5).\n\nLeave blank for "Open-Ended", "Poll", "Draw" and "Fill-in-the-Blank".',
+                        'Time in seconds\n\n(optional, default value is 30 seconds)',
+                        'Link of the image\n\n(optional)',
+                        'Explanation for the answer\n(optional)'
+                    ]
+                ];
+                
+                // Agregar todas las preguntas
+                questions.forEach(q => {
+                    wsData.push([
+                        q.question,
+                        'Multiple Choice',
+                        q.options[0],
+                        q.options[1],
+                        q.options[2] || '',
+                        q.options[3] || '',
+                        '', // Option 5 - vacío
+                        q.correct,
+                        60, // Time in seconds
+                        '', // Image link - vacío
+                        q.explanation
+                    ]);
+                });
+                
+                // Crear worksheet
+                const ws = XLSX.utils.aoa_to_sheet(wsData);
+                
+                // Configurar anchos de columna
+                const colWidths = [
+                    { wch: 80 }, // Question Text
+                    { wch: 15 }, // Question Type
+                    { wch: 50 }, // Option 1
+                    { wch: 50 }, // Option 2
+                    { wch: 50 }, // Option 3
+                    { wch: 50 }, // Option 4
+                    { wch: 15 }, // Option 5
+                    { wch: 15 }, // Correct Answer
+                    { wch: 15 }, // Time
+                    { wch: 15 }, // Image Link
+                    { wch: 80 }  // Explanation
+                ];
+                
+                ws['!cols'] = colWidths;
+                
+                // Agregar worksheet al workbook
+                XLSX.utils.book_append_sheet(wb, ws, 'Create a Quiz');
+                
+                // Generar archivo Excel
+                const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
+                
+                // Crear blob y descargar
+                const blob = new Blob([wbout], { type: 'application/octet-stream' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'Examen_Mendix_50_Preguntas.xlsx';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                statusDiv.innerHTML = '<div class="status success">✅ Archivo Excel generado exitosamente!<br>📁 Descargado como: Examen_Mendix_50_Preguntas.xlsx</div>';
+                
+            } catch (error) {
+                console.error('Error generando Excel:', error);
+                statusDiv.innerHTML = '<div class="status error">❌ Error al generar el archivo Excel. Por favor, intenta nuevamente.</div>';
+            }
+        }
+        
+        // Mostrar información inicial
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusDiv = document.getElementById('status');
+            statusDiv.innerHTML = '<div class="status info">📋 Listo para generar archivo Excel con 50 preguntas del examen Mendix</div>';
+        });
+    </script>
+</body>
+</html>
