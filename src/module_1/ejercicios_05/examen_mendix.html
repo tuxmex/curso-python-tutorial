@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Excel - Examen Mendix</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+        .button:disabled {
+            background-color: #bdc3c7;
+            cursor: not-allowed;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        .preview {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border: 1px solid #dee2e6;
+        }
+        .question-count {
+            font-size: 18px;
+            color: #2c3e50;
+            margin: 10px 0;
+        }
+        .domain-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .domain-card {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .domain-name {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .domain-count {
+            font-size: 24px;
+            color: #3498db;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎓 Examen Mendix - Generador de Excel</h1>
+        
+        <div class="question-count">
+            <strong>Total de preguntas: 50</strong>
+        </div>
+        
+        <div class="domain-stats">
+            <div class="domain-card">
+                <div class="domain-name">Security</div>
+                <div class="domain-count">8</div>
+            </div>
+            <div class="domain-card">
+                <div class="domain-name">Microflows</div>
+                <div class="domain-count">12</div>
+            </div>
+            <div class="domain-card">
+                <div class="domain-name">Domain Model</div>
+                <div class="domain-count">6</div>
+            </div>
+            <div class="domain-card">
+                <div class="domain-name">Associations</div>
+                <div class="domain-count">6</div>
+            </div>
+            <div class="domain-card">
+                <div class="domain-name">Agile</div>
+                <div class="domain-count">6</div>
+            </div>
+            <div class="domain-card">
+                <div class="domain-name">Ecosystem</div>
+                <div class="domain-count">5</div>
+            </div>
+            <div class="domain-card">
+                <div class="domain-name">Validation</div>
+                <div class="domain-count">4</div>
+            </div>
+            <div class="domain-card">
+                <div class="domain-name">Others</div>
+                <div class="domain-count">3</div>
+            </div>
+        </div>
+        
+        <div class="preview">
+            <h3>📋 Estructura del archivo Excel:</h3>
+            <ul>
+                <li><strong>Columna A:</strong> Question Text</li>
+                <li><strong>Columna B:</strong> Question Type (Multiple Choice)</li>
+                <li><strong>Columnas C-G:</strong> Options 1-5</li>
+                <li><strong>Columna H:</strong> Correct Answer (1-4)</li>
+                <li><strong>Columna I:</strong> Time in seconds (60)</li>
+                <li><strong>Columna J:</strong> Image Link (vacío)</li>
+                <li><strong>Columna K:</strong> Answer Explanation</li>
+            </ul>
+        </div>
+        
+        <div style="text-align: center;">
+            <button class="button" onclick="generateExcel()">
+                📊 Generar Archivo Excel
+            </button>
+        </div>
+        
+        <div id="status"></div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "¿Dónde se encuentra la ubicación central para gestionar la configuración de seguridad integral de una aplicación en Mendix?",
+                options: [
+                    "En la configuración del Environment bajo Project Dashboard",
+                    "En el Modeler bajo la pestaña 'Security'",
+                    "Dentro de la configuración del módulo del Marketplace",
+                    "En la configuración del proyecto bajo el nivel 'Security'"
+                ],
+                correct: 2,
+                explanation: "La pestaña 'Security' en el Mendix Modeler es la ubicación central para gestionar la configuración de seguridad integral de una aplicación, incluyendo roles de usuario, roles de módulo y reglas de acceso."
+            },
+            {
+                question: "¿Cuál es el propósito de una actividad de 'decisión' en un microflow de Mendix?",
+                options: [
+                    "Para realizar cálculos y manipulaciones de datos",
+                    "Para determinar la dirección del flujo basándose en una condición",
+                    "Para combinar múltiples flujos en una sola ruta",
+                    "Para iniciar o finalizar el microflow"
+                ],
+                correct: 2,
+                explanation: "Una actividad de 'decisión' en un microflow de Mendix se utiliza para evaluar una condición y dirigir el flujo basándose en si la condición es verdadera o falsa."
+            },
+            {
+                question: "¿Qué actividad de microflow en Mendix se utiliza para revertir cambios realizados a un objeto?",
+                options: [
+                    "Actividad Delete object",
+                    "Actividad Rollback object",
+                    "Actividad Change object",
+                    "Actividad Refresh object"
+                ],
+                correct: 2,
+                explanation: "La actividad Rollback object está específicamente diseñada para deshacer cualquier cambio realizado a un objeto desde que fue confirmado por última vez en la base de datos."
+            },
+            {
+                question: "En Mendix, ¿cuál es el propósito de los Criterios de Aceptación de User Stories?",
+                options: [
+                    "Para definir el presupuesto de implementación de la user story",
+                    "Para listar las especificaciones técnicas de la historia",
+                    "Para proporcionar directrices claras sobre cuándo la historia se considera terminada",
+                    "Para delinear los elementos de diseño requeridos para la historia"
+                ],
+                correct: 3,
+                explanation: "Los Criterios de Aceptación de User Stories proporcionan directrices claras y medibles sobre cuándo una historia se considera completa y aceptable."
+            },
+            {
+                question: "¿Qué widget de Mendix se debe usar para mostrar datos asociados en un escenario Master-Detail, donde seleccionar un elemento de una lista proporciona más detalles en otra parte de la página?",
+                options: [
+                    "List View",
+                    "Data Grid",
+                    "Template Grid",
+                    "Reference Selector"
+                ],
+                correct: 1,
+                explanation: "List View es ideal para mostrar una lista de elementos de los cuales un usuario puede seleccionar, activando la visualización de detalles asociados en otra parte de la página."
+            },
+            {
+                question: "¿Cuál es el papel del Mendix Marketplace en el proceso de desarrollo?",
+                options: [
+                    "Para vender aplicaciones completas construidas con Mendix",
+                    "Para proporcionar un espacio para publicitar servicios de desarrolladores",
+                    "Para ofrecer una colección de componentes y módulos reutilizables",
+                    "Para actuar como plataforma de distribución de actualizaciones de software de Mendix"
+                ],
+                correct: 3,
+                explanation: "El Mendix Marketplace está diseñado para proporcionar una colección de componentes, módulos, widgets y conectores reutilizables que los desarrolladores pueden usar para acelerar el proceso de desarrollo de aplicaciones."
+            },
+            {
+                question: "¿Cuál es el propósito principal de un índice en un atributo en el Domain Model de una aplicación Mendix?",
+                options: [
+                    "Para asegurar que el valor del atributo sea único",
+                    "Para aumentar el rendimiento de las operaciones de base de datos que involucran el atributo",
+                    "Para almacenar el valor del atributo como un hash encriptado",
+                    "Para definir el atributo como la clave primaria de la entidad"
+                ],
+                correct: 2,
+                explanation: "Los índices se utilizan principalmente para acelerar la recuperación de registros proporcionando una forma más rápida de localizar datos sin escanear toda la tabla."
+            },
+            {
+                question: "¿Cuál es el resultado cuando navegas entre entidades asociadas en Mendix usando un microflow que recupera objetos sobre una asociación?",
+                options: [
+                    "El microflow crea una nueva asociación entre los objetos",
+                    "El microflow recupera un conjunto de objetos basado en la asociación definida",
+                    "El microflow elimina la asociación entre las entidades",
+                    "El microflow solicita al usuario definir el tipo de asociación"
+                ],
+                correct: 2,
+                explanation: "Cuando navegas entre entidades asociadas en Mendix usando un microflow, el microflow recupera objetos que están vinculados por la asociación definida."
+            },
+            {
+                question: "Antes de crear páginas en una aplicación Mendix, ¿por qué es importante definir el Domain Model?",
+                options: [
+                    "Para asegurar que la interfaz de usuario de la aplicación sea visualmente atractiva",
+                    "Para configurar las opciones de seguridad para cada página",
+                    "Para establecer la estructura de datos con la que las páginas interactuarán",
+                    "Para determinar el número de páginas que tendrá la aplicación"
+                ],
+                correct: 3,
+                explanation: "El Domain Model es esencial para definir las entidades de datos y sus relaciones, con las que las páginas de la aplicación interactuarán. Asegura que la estructura de datos esté alineada con los requisitos de la aplicación."
+            },
+            {
+                question: "En Mendix, ¿qué se logra usando el 'Start event' en un microflow?",
+                options: [
+                    "Significa el punto inicial de ejecución de la lógica en el microflow",
+                    "Activa el microflow para que inicie en un momento programado",
+                    "Indica el inicio de una nueva sesión de usuario",
+                    "Inicializa todas las variables usadas en el microflow"
+                ],
+                correct: 1,
+                explanation: "El 'Start event' en un microflow de Mendix marca el comienzo del flujo de lógica y operaciones que se ejecutarán. Es el punto de entrada para el microflow."
+            },
+            {
+                question: "Después de la fase de 'Diseño' en el Ciclo de Vida de Aplicaciones Mendix, ¿cuál es el siguiente paso?",
+                options: [
+                    "Despliegue",
+                    "Desarrollo",
+                    "Retroalimentación",
+                    "Pruebas"
+                ],
+                correct: 2,
+                explanation: "El Desarrollo es la fase que sigue a la fase de diseño. En esta fase, los desarrolladores comienzan a construir la aplicación basándose en las especificaciones de diseño."
+            },
+            {
+                question: "¿Cómo aseguras que un microflow en Mendix confirme cambios a la base de datos?",
+                options: [
+                    "Usando una actividad 'Save changes'",
+                    "Configurando la propiedad 'Commit' en verdadero en actividades de cambio de objeto",
+                    "Llamando un microflow 'Commit'",
+                    "Habilitando commits automáticos en la configuración del proyecto"
+                ],
+                correct: 2,
+                explanation: "Configurar la propiedad 'Commit' en verdadero en actividades de cambio de objeto asegura que los cambios se confirmen a la base de datos. Esta es la forma estándar de confirmar cambios en Mendix."
+            },
+            {
+                question: "¿Qué dos actividades de microflow se pueden utilizar para imitar el comportamiento de guardado estándar para persistir datos?",
+                options: [
+                    "Create object y Commit object",
+                    "Change object y Refresh object",
+                    "Retrieve object y Commit object",
+                    "Change object y Commit object"
+                ],
+                correct: 4,
+                explanation: "Cambiar un objeto actualiza sus datos, y confirmarlo guarda los cambios en la base de datos, imitando el comportamiento de guardado estándar."
+            },
+            {
+                question: "Para asegurar claridad y comprensión del usuario, ¿cómo se deben agregar múltiples mensajes de validación para una sola entidad?",
+                options: [
+                    "Usando una acción de validation feedback en un microflow",
+                    "Creando una página de error personalizada para cada entidad",
+                    "Mediante un evento programado que consolide mensajes",
+                    "Enviando todos los mensajes al email del usuario"
+                ],
+                correct: 1,
+                explanation: "Usar una acción de validation feedback en un microflow es la forma más efectiva de agregar múltiples mensajes de validación para una sola entidad, asegurando claridad y comprensión del usuario dentro de la interfaz de la aplicación."
+            },
+            {
+                question: "¿Cómo puede un desarrollador de Mendix asegurar que un usuario pueda ver pero no eliminar un objeto asociado en una relación uno-a-muchos?",
+                options: [
+                    "Configurar el comportamiento de eliminación de asociación a 'Protect'",
+                    "Remover el botón de eliminar de la página del objeto asociado",
+                    "Crear un microflow que deshabilite la funcionalidad de eliminación",
+                    "Configurar el acceso a entidad para prohibir acciones de eliminación para el rol de usuario"
+                ],
+                correct: 4,
+                explanation: "Configurar el acceso a entidad para prohibir acciones de eliminación para el rol de usuario es la forma más segura y eficiente de asegurar que los usuarios puedan ver pero no eliminar objetos asociados."
+            },
+            {
+                question: "¿Dónde pueden los usuarios de Mendix encontrar logs de errores detallados y métricas de rendimiento para sus aplicaciones?",
+                options: [
+                    "Mendix Support Portal",
+                    "Mendix Application Dashboard",
+                    "Mendix Developer App",
+                    "Mendix Cloud Portal"
+                ],
+                correct: 4,
+                explanation: "El Mendix Cloud Portal proporciona logs de errores detallados y métricas de rendimiento para aplicaciones desplegadas en Mendix Cloud, convirtiéndolo en la fuente correcta para esta información."
+            },
+            {
+                question: "¿Cómo se utiliza la 'Definition of Done' en el desarrollo Agile?",
+                options: [
+                    "Para especificar requisitos de servidor e infraestructura",
+                    "Para describir el estado final del producto para lanzamiento",
+                    "Para delinear los criterios de que el trabajo se considere completo",
+                    "Para listar las habilidades técnicas requeridas por el equipo de desarrollo"
+                ],
+                correct: 3,
+                explanation: "La 'Definition of Done' se utiliza en el desarrollo Agile para delinear los criterios específicos y condiciones que deben cumplirse para que una parte del trabajo se considere completa."
+            },
+            {
+                question: "En Mendix, ¿cuál es la mejor práctica para modelar una asociación donde una Factura debe estar vinculada exactamente a un Cliente?",
+                options: [
+                    "Asociación Many-to-Many",
+                    "Asociación One-to-Many",
+                    "Asociación One-to-One Obligatoria",
+                    "Asociación One-to-One Opcional"
+                ],
+                correct: 3,
+                explanation: "Una asociación One-to-One Obligatoria asegura que cada factura esté vinculada exactamente a un cliente y la asociación es obligatoria, lo que significa que una factura no puede existir sin estar vinculada a un cliente."
+            },
+            {
+                question: "¿Cuál es la significancia de un círculo verde en un microflow de Mendix?",
+                options: [
+                    "Indica un error en el microflow",
+                    "Representa el evento de inicio del microflow",
+                    "Significa un breakpoint para debugging",
+                    "Marca el evento de fin del microflow"
+                ],
+                correct: 2,
+                explanation: "Un círculo verde en un microflow de Mendix significa el evento de inicio, indicando dónde comienza la ejecución del microflow."
+            },
+            {
+                question: "¿Cuál de las siguientes describe mejor el propósito de un exclusive split en el contexto de un Domain Model en Mendix?",
+                options: [
+                    "Para permitir herencia múltiple entre entidades",
+                    "Para definir diferentes roles de usuario y su acceso a entidades",
+                    "Para distribuir objetos entrantes a diferentes caminos basados en una condición",
+                    "Para combinar múltiples asociaciones en una sola asociación"
+                ],
+                correct: 3,
+                explanation: "Un exclusive split se utiliza para enrutar objetos a diferentes caminos en un flujo de trabajo basado en condiciones específicas, alineándose con su propósito en Mendix."
+            },
+            {
+                question: "¿Cuál es la significancia de un 'Microflow' en Mendix?",
+                options: [
+                    "Es un componente de UI pequeño y reutilizable",
+                    "Es una forma visual de definir la lógica de negocio de una aplicación",
+                    "Es una herramienta para gestionar el despliegue de una aplicación",
+                    "Es una característica de seguridad para autenticación de usuarios"
+                ],
+                correct: 2,
+                explanation: "Los Microflows son representaciones visuales de la lógica de negocio en Mendix. Permiten a los desarrolladores modelar flujos de trabajo, lógica de decisión y manipulación de datos visualmente."
+            },
+            {
+                question: "¿Qué característica de Mendix se debe usar para mostrar una lista de objetos asociados dentro del contexto del objeto actual en una página?",
+                options: [
+                    "Reference Selector",
+                    "Data Grid",
+                    "List View",
+                    "Data View"
+                ],
+                correct: 3,
+                explanation: "Un List View está diseñado para mostrar una lista de objetos asociados dentro del contexto del objeto actual, convirtiéndolo en la elección apropiada para este requisito."
+            },
+            {
+                question: "En Scrum, ¿cuál es el propósito principal del Sprint Review?",
+                options: [
+                    "Para asignar tareas para el próximo Sprint",
+                    "Para analizar las métricas de rendimiento del equipo",
+                    "Para inspeccionar el Incremento y adaptar el Product Backlog",
+                    "Para finalizar el producto para lanzamiento al mercado"
+                ],
+                correct: 3,
+                explanation: "El propósito principal del Sprint Review es inspeccionar el Incremento y adaptar el Product Backlog basándose en el feedback de los stakeholders y cambios en el mercado o tecnología."
+            },
+            {
+                question: "Al utilizar el editor de expresiones dentro de un microflow, ¿cuál de los siguientes tipos de expresiones puedes usar?",
+                options: [
+                    "Expresiones booleanas y concatenaciones de strings",
+                    "Operaciones aritméticas y acciones Java",
+                    "Consultas de base de datos y llamadas API",
+                    "Tags HTML y estilos CSS"
+                ],
+                correct: 1,
+                explanation: "Las expresiones booleanas y concatenaciones de strings se usan comúnmente en el editor de expresiones dentro de un microflow en Mendix para manejar operaciones lógicas y manipular texto."
+            },
+            {
+                question: "En Mendix, al definir una asociación, ¿qué significa el checkbox 'dependent' para la entidad hija?",
+                options: [
+                    "La entidad hija puede existir independientemente de la entidad padre",
+                    "La existencia de la entidad hija depende de la entidad padre",
+                    "La entidad hija es el propietario principal de la asociación",
+                    "La entidad hija controla el comportamiento de eliminación de la entidad padre"
+                ],
+                correct: 2,
+                explanation: "Cuando el checkbox 'dependent' está marcado, indica que la entidad hija no puede existir sin la entidad padre."
+            },
+            {
+                question: "¿Por qué los desarrolladores deben establecer el Domain Model antes de crear páginas en Mendix?",
+                options: [
+                    "Para asegurar que las páginas puedan ser estilizadas correctamente",
+                    "Para prevenir que usuarios no autorizados accedan a las páginas",
+                    "Para definir los datos y lógica con los que las páginas interactuarán",
+                    "Para optimizar las páginas para tiempos de carga más rápidos"
+                ],
+                correct: 3,
+                explanation: "Establecer el Domain Model primero asegura que la estructura de datos y la lógica de negocio estén en su lugar, con las que las páginas construidas posteriormente interactuarán."
+            },
+            {
+                question: "Para permitir acceso a una aplicación Mendix para usuarios sin cuentas después de que se haya configurado seguridad de nivel de producción, ¿qué paso adicional debe tomarse?",
+                options: [
+                    "Configurar un servicio de Single Sign-On (SSO)",
+                    "Crear cuentas de invitado con permisos limitados",
+                    "Configurar acceso de usuario anónimo dentro de la configuración de seguridad",
+                    "Deshabilitar verificaciones de seguridad para el ambiente de producción"
+                ],
+                correct: 3,
+                explanation: "Configurar acceso de usuario anónimo dentro de la configuración de seguridad permite a los usuarios acceder a la aplicación sin necesidad de una cuenta."
+            },
+            {
+                question: "¿Cuál es el rol principal del Mendix Team Server en el desarrollo de aplicaciones?",
+                options: [
+                    "Para gestionar acceso de usuarios y niveles de seguridad",
+                    "Para actuar como el sistema de control de versiones centralizado",
+                    "Para desplegar la aplicación a varios ambientes",
+                    "Para rastrear y registrar errores de aplicación"
+                ],
+                correct: 2,
+                explanation: "El rol principal del Mendix Team Server es servir como el sistema de control de versiones centralizado, permitiendo a los miembros del equipo colaborar, rastrear cambios y gestionar diferentes versiones de la aplicación."
+            },
+            {
+                question: "¿Qué widget en Mendix NO se recomienda para páginas móviles debido a preocupaciones de usabilidad?",
+                options: [
+                    "Data Grid",
+                    "List View",
+                    "Button",
+                    "Input Field"
+                ],
+                correct: 1,
+                explanation: "Los Data Grids no se recomiendan para páginas móviles debido a preocupaciones de usabilidad. No son responsive y pueden ser difíciles de interactuar en pantallas más pequeñas."
+            },
+            {
+                question: "En un microflow de Mendix, ¿cómo difiere una actividad 'Change object' de una actividad 'Refresh object'?",
+                options: [
+                    "'Change object' modifica atributos, mientras que 'Refresh object' actualiza la vista del cliente sin cambiar atributos",
+                    "'Change object' actualiza la base de datos, mientras que 'Refresh object' no",
+                    "'Change object' es solo para objetos persistentes, mientras que 'Refresh object' es para objetos no persistentes",
+                    "'Change object' crea un nuevo objeto, mientras que 'Refresh object' actualiza uno existente"
+                ],
+                correct: 1,
+                explanation: "'Change object' se utiliza para modificar los atributos de un objeto, mientras que 'Refresh object' se utiliza para actualizar la vista del cliente para reflejar el estado actual del objeto sin cambiar sus atributos."
+            },
+            {
+                question: "¿Qué aspecto de la plataforma Mendix es crucial para asegurar la seguridad y gestión de acceso apropiada de las aplicaciones?",
+                options: [
+                    "Mendix User Authentication",
+                    "Mendix Security Module",
+                    "Mendix Role-Based Access Control",
+                    "Mendix Encryption Services"
+                ],
+                correct: 3,
+                explanation: "Mendix Role-Based Access Control (RBAC) es crucial para definir y gestionar roles de usuario y permisos, asegurando la gestión de acceso apropiada y seguridad dentro de la aplicación."
+            },
+            {
+                question: "¿Qué actividad de microflow usarías para remover un objeto de la base de datos?",
+                options: [
+                    "Delete Object",
+                    "Remove Object",
+                    "Destroy Object",
+                    "Erase Object"
+                ],
+                correct: 1,
+                explanation: "La actividad 'Delete Object' en microflows de Mendix está específicamente diseñada para remover un objeto de la base de datos."
+            },
+            {
+                question: "¿Cuál es la función principal del Mendix Team Server en el contexto de colaboración de equipo?",
+                options: [
+                    "Para programar reuniones de equipo y gestionar agendas",
+                    "Para servir como una solución de almacenamiento de documentos centralizada",
+                    "Para proporcionar un sistema de control de versiones y facilitar la colaboración de equipo",
+                    "Para gestionar el despliegue y monitoreo de aplicaciones"
+                ],
+                correct: 3,
+                explanation: "El Mendix Team Server está diseñado para proporcionar control de versiones y facilitar la colaboración de equipo permitiendo a múltiples desarrolladores trabajar en el mismo proyecto simultáneamente."
+            },
+            {
+                question: "En Mendix, ¿cómo se representa visualmente la multiplicidad de una asociación entre dos entidades en el Domain Model?",
+                options: [
+                    "Por el color de la línea de asociación",
+                    "Por el grosor de la línea de asociación",
+                    "Por las etiquetas en los extremos de la línea de asociación",
+                    "Por la dirección de las flechas en la línea de asociación"
+                ],
+                correct: 3,
+                explanation: "La multiplicidad de
