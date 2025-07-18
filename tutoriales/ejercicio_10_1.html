@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Python - POO: Construyendo una Fábrica de Superhéroes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .hero-section {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            margin-bottom: 30px;
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            line-height: 1.2;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .hero-section .description {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .main-content {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .topic-section {
+            margin-bottom: 60px;
+            border-bottom: 2px solid #f1f5f9;
+            padding-bottom: 40px;
+        }
+        
+        .topic-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .topic-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .topic-header .emoji {
+            font-size: 3rem;
+        }
+        
+        .topic-header .title-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+        
+        .topic-header .title-content .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .analogy-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fab1a0 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 6px solid #e17055;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .analogy-box h3 {
+            color: #d63031;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .example-box {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .example-box::before {
+            content: "💡 Ejemplo Práctico";
+            position: absolute;
+            top: -15px;
+            left: 25px;
+            background: #28a745;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 12px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 20px 0;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .practice-section {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            color: #2d3748;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .practice-section h3 {
+            color: #00695c;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .solution-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 2px solid #00b894;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .solution-header {
+            background: #00b894;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .concept-card {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .concept-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .concept-card h4 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .comparison-box {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            color: #2d3748;
+        }
+        
+        .comparison-box h3 {
+            color: #e84393;
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+        
+        .vs-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 20px;
+            align-items: center;
+            margin: 20px 0;
+        }
+        
+        .vs-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .vs-divider {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e84393;
+            text-align: center;
+        }
+        
+        .step-by-step {
+            counter-reset: step-counter;
+            margin: 30px 0;
+        }
+        
+        .step {
+            counter-increment: step-counter;
+            margin: 25px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 5px solid #667eea;
+            position: relative;
+            margin-left: 40px;
+        }
+        
+        .step::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+        
+        .highlight-box {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 12px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .highlight-box .icon {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-section .subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .main-content {
+                padding: 30px 25px;
+            }
+            
+            .topic-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .topic-header .emoji {
+                font-size: 2.5rem;
+            }
+            
+            .vs-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .vs-divider {
+                display: none;
+            }
+            
+            .step {
+                margin-left: 20px;
+            }
+            
+            .step::before {
+                left: -15px;
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <h1>🦸‍♀️ Construyendo una Fábrica de Superhéroes</h1>
+            <p class="subtitle">Domina la Programación Orientada a Objetos creando tu propia liga de justicia</p>
+            <p class="description">Aprende a crear clases y objetos en Python usando la analogía de una fábrica que produce superhéroes únicos con sus propios poderes y características.</p>
+        </div>
+        
+        <div class="main-content">
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🏭</span>
+                    <div class="title-content">
+                        <h2>¿Qué es una Fábrica de Superhéroes?</h2>
+                        <p class="subtitle">Entendiendo clases y objetos a través de la analogía perfecta</p>
+                    </div>
+                </div>
+                
+                <div class="analogy-box">
+                    <h3>🦸‍♂️ La Gran Analogía: Fábrica de Superhéroes</h3>
+                    <p>Imagina que tienes una <strong>fábrica que crea superhéroes</strong>. En esta fábrica:</p>
+                    <ul style="margin: 15px 0 0 20px;">
+                        <li><strong>🏗️ Los PLANOS</strong> son las <code>clases</code> - definen cómo será cada superhéroe</li>
+                        <li><strong>🦸‍♀️ Los SUPERHÉROES</strong> son los <code>objetos</code> - cada héroe único creado</li>
+                        <li><strong>⚡ Los PODERES y CARACTERÍSTICAS</strong> son los <code>atributos</code> - fuerza, velocidad, nombre</li>
+                        <li><strong>🎯 Las ACCIONES</strong> son los <code>métodos</code> - volar, disparar rayos, salvar el mundo</li>
+                    </ul>
+                </div>
+                
+                <p>La <strong>Programación Orientada a Objetos (POO)</strong> funciona exactamente como esta fábrica. Creamos "planos" (clases) que definen cómo serán nuestros superhéroes (objetos), y luego fabricamos tantos héroes únicos como necesitemos.</p>
+                
+                <div class="highlight-box">
+                    <span class="icon">💡</span><strong>Punto Clave:</strong> Una clase es como el molde de una galleta, y los objetos son las galletas que produces con ese molde. Cada galleta tiene la misma forma básica, pero puede tener diferentes sabores, colores o decoraciones.
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🧩</span>
+                    <div class="title-content">
+                        <h2>Los Ingredientes de Nuestros Superhéroes</h2>
+                        <p class="subtitle">Conceptos fundamentales explicados paso a paso</p>
+                    </div>
+                </div>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h4>🏗️ Clase (Los Planos)</h4>
+                        <p>Es la plantilla o molde que define qué características y poderes tendrán nuestros superhéroes. Como los planos arquitectónicos de una casa.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4>🦸‍♀️ Objeto (El Superhéroe)</h4>
+                        <p>Es un superhéroe específico creado usando los planos. Cada objeto es único aunque use la misma plantilla.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4>⚡ Atributos (Las Características)</h4>
+                        <p>Son las propiedades de cada superhéroe: nombre, poder principal, nivel de fuerza, ciudad que protege.</p>
+                    </div>
+                    
+                    <div class="concept-card">
+                        <h4>🎯 Métodos (Las Acciones)</h4>
+                        <p>Son las cosas que puede hacer el superhéroe: volar, usar poderes, salvar personas, luchar contra villanos.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🏭</span>
+                    <div class="title-content">
+                        <h2>Construyendo Nuestro Primer Superhéroe</h2>
+                        <p class="subtitle">Creando la clase Superheroe con Python</p>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <p>Vamos a crear nuestra fábrica de superhéroes paso a paso:</p>
+                    
+                    <div class="code-block">
+class Superheroe:
+    """
+    🏗️ Esta es nuestra fábrica de superhéroes
+    Define cómo será cada superhéroe que creemos
+    """
+    
+    def __init__(self, nombre, poder_principal, ciudad, nivel_fuerza=50):
+        """
+        🎂 Constructor: se ejecuta cuando 'nace' un nuevo superhéroe
+        Es como el momento en que sale de la fábrica
+        """
+        # 📝 Atributos (características del superhéroe)
+        self.nombre = nombre
+        self.poder_principal = poder_principal
+        self.ciudad = ciudad
+        self.nivel_fuerza = nivel_fuerza
+        self.energia = 100  # Todos empiezan con energía máxima
+        self.villanos_derrotados = 0
+        self.estado = "Patrullando"
+    
+    def presentarse(self):
+        """🎤 El superhéroe se presenta"""
+        return f"¡Hola! Soy {self.nombre}, protejo {self.ciudad} con mi poder de {self.poder_principal}! 🦸‍♂️"
+    
+    def usar_poder(self):
+        """⚡ Usar el poder principal"""
+        if self.energia >= 20:
+            self.energia -= 20
+            return f"{self.nombre} usa {self.poder_principal}! ⚡ Energía restante: {self.energia}"
+        else:
+            return f"{self.nombre} está muy cansado para usar sus poderes 😴"
+    
+    def luchar_villano(self):
+        """⚔️ Luchar contra un villano"""
+        if self.energia >= 30:
+            self.energia -= 30
+            self.villanos_derrotados += 1
+            return f"¡{self.nombre} derrotó a un villano! 🏆 Total derrotados: {self.villanos_derrotados}"
+        else:
+            return f"{self.nombre} necesita descansar antes de luchar 😰"
+    
+    def descansar(self):
+        """😴 Recuperar energía"""
+        self.energia = 100
+        self.estado = "Descansado"
+        return f"{self.nombre} descansó y recuperó toda su energía! 💤"
+    
+    def mostrar_estado(self):
+        """📊 Mostrar estadísticas completas"""
+        return f"""
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🦸‍♂️ PERFIL DE SUPERHÉROE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 Nombre: {self.nombre}
+⚡ Poder: {self.poder_principal}
+🏙️ Ciudad: {self.ciudad}
+💪 Fuerza: {self.nivel_fuerza}/100
+🔋 Energía: {self.energia}/100
+🏆 Villanos derrotados: {self.villanos_derrotados}
+📍 Estado actual: {self.estado}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        """
+                    </div>
+                </div>
+                
+                <div class="step-by-step">
+                    <div class="step">
+                        <h4>🏭 Paso 1: Crear superhéroes (objetos)</h4>
+                        <p>Ahora usamos nuestra "fábrica" para crear superhéroes únicos:</p>
+                        <div class="code-block">
+# 🦸‍♂️ Creando superhéroes usando nuestra clase
+superman = Superheroe("Superman", "Súper fuerza", "Metrópolis", 95)
+batman = Superheroe("Batman", "Inteligencia táctica", "Gotham City", 70)
+mujer_maravilla = Superheroe("Mujer Maravilla", "Lazo de la verdad", "Themyscira", 90)
+
+# 📋 Cada superhéroe tiene sus propias características
+print(superman.nombre)          # Superman
+print(batman.ciudad)            # Gotham City
+print(mujer_maravilla.nivel_fuerza)  # 90
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <h4>🎬 Paso 2: Los superhéroes en acción</h4>
+                        <p>Veamos qué pueden hacer nuestros héroes:</p>
+                        <div class="code-block">
+# 🎤 Presentaciones
+print(superman.presentarse())
+# ¡Hola! Soy Superman, protejo Metrópolis con mi poder de Súper fuerza! 🦸‍♂️
+
+print(batman.presentarse())
+# ¡Hola! Soy Batman, protejo Gotham City con mi poder de Inteligencia táctica! 🦸‍♂️
+
+# ⚡ Usando poderes
+print(superman.usar_poder())
+# Superman usa Súper fuerza! ⚡ Energía restante: 80
+
+print(batman.luchar_villano())
+# ¡Batman derrotó a un villano! 🏆 Total derrotados: 1
+
+# 📊 Estado completo
+print(superman.mostrar_estado())
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🌟</span>
+                    <div class="title-content">
+                        <h2>Liga de la Justicia Avanzada</h2>
+                        <p class="subtitle">Sistema completo de superhéroes con equipos y misiones</p>
+                    </div>
+                </div>
+                
+                <div class="example-box">
+                    <p>Vamos a crear un sistema más complejo con equipos de superhéroes:</p>
+                    
+                    <div class="code-block">
+class LigaSuperhéroes:
+    """🏛️ Clase para manejar equipos de superhéroes"""
+    
+    def __init__(self, nombre_liga):
+        self.nombre_liga = nombre_liga
+        self.miembros = []
+        self.misiones_completadas = 0
+        self.fondos = 1000000  # Un millón para empezar
+    
+    def agregar_miembro(self, superheroe):
+        """➕ Agregar un nuevo superhéroe al equipo"""
+        self.miembros.append(superheroe)
+        return f"¡{superheroe.nombre} se unió a {self.nombre_liga}! 🎉"
+    
+    def mision_grupal(self, dificultad="normal"):
+        """🚁 Enviar al equipo en una misión"""
+        if len(self.miembros) < 2:
+            return "⚠️ Se necesitan al menos 2 superhéroes para una misión grupal"
+        
+        energia_total = sum(heroe.energia for heroe in self.miembros)
+        energia_requerida = {"fácil": 40, "normal": 60, "difícil": 80}[dificultad]
+        
+        if energia_total < energia_requerida * len(self.miembros):
+            return "⚠️ El equipo está muy cansado para esta misión"
+        
+        # Realizar la misión
+        for heroe in self.miembros:
+            heroe.energia -= energia_requerida
+            heroe.villanos_derrotados += 1
+        
+        recompensa = {"fácil": 50000, "normal": 100000, "difícil": 200000}[dificultad]
+        self.fondos += recompensa
+        self.misiones_completadas += 1
+        
+        return f"🏆 ¡Misión {dificultad} completada! Recompensa: ${recompensa:,}"
+    
+    def mostrar_equipo(self):
+        """📋 Mostrar información del equipo"""
+        info = f"\n🏛️ {self.nombre_liga.upper()}\n"
+        info += f"💰 Fondos: ${self.fondos:,}\n"
+        info += f"🎯 Misiones completadas: {self.misiones_completadas}\n"
+        info += f"👥 Miembros ({len(self.miembros)}):\n"
+        
+        for i, heroe in enumerate(self.miembros, 1):
+            info += f"   {i}. {heroe.nombre} - {heroe.poder_principal} "
+            info += f"(Energía: {heroe.energia}%) 🦸‍♂️\n"
+        
+        return info
+
+# 🏛️ Creando la Liga de la Justicia
+liga = LigaSuperhéroes("Liga de la Justicia")
+
+# 👥 Creando superhéroes
+superman = Superheroe("Superman", "Vuelo y súper fuerza", "Metrópolis", 95)
+batman = Superheroe("Batman", "Inteligencia táctica", "Gotham", 80)
+flash = Superheroe("Flash", "Súper velocidad", "Central City", 75)
+
+# ➕ Agregando miembros
+print(liga.agregar_miembro(superman))
+print(liga.agregar_miembro(batman))
+print(liga.agregar_miembro(flash))
+
+# 🚁 Misiones en equipo
+print(liga.mision_grupal("normal"))
+print(liga.mision_grupal("difícil"))
+
+# 📊 Estado del equipo
+print(liga.mostrar_equipo())
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">⚔️</span>
+                    <div class="title-content">
+                        <h2>POO vs Programación Tradicional</h2>
+                        <p class="subtitle">¿Por qué usar objetos en lugar de funciones sueltas?</p>
+                    </div>
+                </div>
+                
+                <div class="comparison-box">
+                    <h3>🥊 La Gran Batalla: Objetos vs Funciones</h3>
+                    
+                    <div class="vs-grid">
+                        <div class="vs-item">
+                            <h4>🦸‍♂️ Con POO (Superhéroes Organizados)</h4>
+                            <div class="code-block" style="margin: 10px 0; font-size: 0.8rem;">
+# Cada superhéroe sabe qué puede hacer
+superman = Superheroe("Superman", "Vuelo", "Metrópolis")
+superman.volar()      # ✅ Organizado
+superman.atacar()     # ✅ Todo en un lugar
+print(superman.energia)  # ✅ Fácil acceso
+                            </div>
+                            <p><strong>Ventajas:</strong> Organizado, reutilizable, fácil de mantener</p>
+                        </div>
+                        
+                        <div class="vs-divider">VS</div>
+                        
+                        <div class="vs-item">
+                            <h4>📝 Sin POO (Funciones Dispersas)</h4>
+                            <div class="code-block" style="margin: 10px 0; font-size: 0.8rem;">
+# Variables y funciones por todos lados
+nombre_superman = "Superman"
+energia_superman = 100
+ciudad_superman = "Metrópolis"
+
+def volar_superman():     # 😵 Función específica
+    # código para volar
+    
+def atacar_superman():   # 😵 Otra función específica
+    # código para atacar
+                            </div>
+                            <p><strong>Problemas:</strong> Desorganizado, difícil de mantener, código repetitivo</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="analogy-box">
+                    <h3>🏠 Analogía: Casa vs Habitaciones Dispersas</h3>
+                    <p><strong>POO es como una casa:</strong> Todo está organizado, cada habitación tiene su propósito, y es fácil encontrar las cosas.</p>
+                    <p><strong>Programación tradicional sin organización:</strong> Es como tener la cocina en el jardín, el baño en el garage, y la cama en la sala. ¡Todo funciona, pero es un caos!</p>
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🎯</span>
+                    <div class="title-content">
+                        <h2>¿Cuándo Usar Nuestra Fábrica de Superhéroes?</h2>
+                        <p class="subtitle">Guía práctica para decidir cuándo usar POO</p>
+                    </div>
+                </div>
+                
+                <div class="analogy-box">
+                    <h3>🤔 ¿Fábrica de Superhéroes o Herramientas Sueltas?</h3>
+                    <p><strong>Usa POO (Fábrica):</strong> Cuando necesites crear muchos elementos similares con características y comportamientos específicos.</p>
+                    <p><strong>Usa funciones simples:</strong> Para tareas rápidas y específicas que no necesitan "recordar" información.</p>
+                </div>
+                
+                <div class="concept-grid">
+                    <div class="concept-card" style="background: linear-gradient(135deg, #00b894 0%, #55efc4 100%);">
+                        <h4>✅ USA POO CUANDO:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>🦸‍♂️ Tienes "cosas" del mundo real (usuarios, productos, personajes)</li>
+                            <li>🏭 Necesitas crear múltiples elementos similares</li>
+                            <li>📈 Tu proyecto va a crecer y expandirse</li>
+                            <li>👥 Trabajas en equipo</li>
+                            <li>🔄 Necesitas que los objetos "recuerden" información</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-card" style="background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);">
+                        <h4>⚠️ EVITA POO CUANDO:</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>📝 Tienes scripts simples y cortos</li>
+                            <li>🧮 Solo haces cálculos matemáticos</li>
+                            <li>⚡ Necesitas máximo rendimiento</li>
+                            <li>🎓 Estás aprendiendo programación básica</li>
+                            <li>🚀 Es un proyecto que usarás una sola vez</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🏋️‍♂️</span>
+                    <div class="title-content">
+                        <h2>Entrenamiento de Superhéroes</h2>
+                        <p class="subtitle">Ejercicios prácticos con soluciones completas</p>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>🎯 Ejercicio 1: Academia de Superhéroes</h3>
+                    <p><strong>Misión:</strong> Crea una clase <code>Estudiante</code> para una academia donde entrenan futuros superhéroes.</p>
+                    
+                    <p><strong>Requisitos:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Atributos:</strong> nombre, edad, poder_en_desarrollo, nivel_entrenamiento, energia</li>
+                        <li><strong>Métodos:</strong> entrenar(), usar_poder(), descansar(), graduarse(), mostrar_progreso()</li>
+                    </ul>
+                    
+                    <p><strong>Reto extra:</strong> Los estudiantes solo pueden graduarse si su nivel_entrenamiento >= 80</p>
+                    
+                    <div class="solution-box">
+                        <div class="solution-header">💡 SOLUCIÓN COMPLETA</div>
+                        <div class="code-block">
+class Estudiante:
+    """🎓 Clase para estudiantes de la Academia de Superhéroes"""
+    
+    def __init__(self, nombre, edad, poder_en_desarrollo):
+        self.nombre = nombre
+        self.edad = edad
+        self.poder_en_desarrollo = poder_en_desarrollo
+        self.nivel_entrenamiento = 0  # Empiezan desde cero
+        self.energia = 100
+        self.graduado = False
+    
+    def entrenar(self):
+        """🏋️‍♂️ Entrenar para mejorar habilidades"""
+        if self.energia >= 25:
+            self.energia -= 25
+            self.nivel_entrenamiento += 10
+            if self.nivel_entrenamiento > 100:
+                self.nivel_entrenamiento = 100
+            return f"{self.nombre} entrenó duro! 💪 Nivel: {self.nivel_entrenamiento}%"
+        else:
+            return f"{self.nombre} está muy cansado para entrenar 😴"
+    
+    def usar_poder(self):
+        """⚡ Practicar usando sus poderes"""
+        if self.energia >= 15 and self.nivel_entrenamiento >= 20:
+            self.energia -= 15
+            self.nivel_entrenamiento += 5
+            return f"{self.nombre} usó {self.poder_en_desarrollo}! ⚡ ¡Está mejorando!"
+        elif self.nivel_entrenamiento < 20:
+            return f"{self.nombre} necesita más entrenamiento básico primero 📚"
+        else:
+            return f"{self.nombre} está muy cansado 😰"
+    
+    def descansar(self):
+        """😴 Recuperar energía"""
+        self.energia = 100
+        return f"{self.nombre} descansó y está listo para más entrenamiento! 💤"
+    
+    def graduarse(self):
+        """🎓 Intentar graduarse de la academia"""
+        if self.nivel_entrenamiento >= 80:
+            self.graduado = True
+            return f"🎉 ¡{self.nombre} se graduó como superhéroe oficial! 🦸‍♂️"
+        else:
+            falta = 80 - self.nivel_entrenamiento
+            return f"❌ {self.nombre} necesita {falta}% más de entrenamiento"
+    
+    def mostrar_progreso(self):
+        """📊 Mostrar el progreso del estudiante"""
+        estado = "🎓 GRADUADO" if self.graduado else "📚 EN ENTRENAMIENTO"
+        return f"""
+┌─────────────────────────────────────┐
+│  👨‍🎓 ESTUDIANTE: {self.nombre:20} │
+├─────────────────────────────────────┤
+│  🎂 Edad: {self.edad} años                     │
+│  ⚡ Poder: {self.poder_en_desarrollo:25}  │
+│  📈 Entrenamiento: {self.nivel_entrenamiento:3}%              │
+│  🔋 Energía: {self.energia:3}%                   │
+│  📋 Estado: {estado:20}     │
+└─────────────────────────────────────┘
+        """
+
+# 🧪 PROBANDO NUESTRA ACADEMIA
+print("🏫 ¡Bienvenidos a la Academia de Superhéroes!\n")
+
+# Creando estudiantes
+peter = Estudiante("Peter Parker", 16, "Telarañas")
+clark = Estudiante("Clark Kent", 17, "Súper fuerza")
+diana = Estudiante("Diana Prince", 18, "Lazo dorado")
+
+estudiantes = [peter, clark, diana]
+
+# Simulando entrenamiento
+for estudiante in estudiantes:
+    print(f"📚 {estudiante.nombre} comienza su entrenamiento...")
+    
+    # Varias sesiones de entrenamiento
+    for sesion in range(8):
+        print(f"  Sesión {sesion + 1}: {estudiante.entrenar()}")
+        if sesion % 3 == 2:  # Descansar cada 3 sesiones
+            print(f"  💤 {estudiante.descansar()}")
+    
+    # Intentar graduación
+    print(f"  🎓 {estudiante.graduarse()}")
+    print(estudiante.mostrar_progreso())
+    print()
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>🎯 Ejercicio 2: Vehículos de Superhéroes</h3>
+                    <p><strong>Misión:</strong> Crea un sistema para los vehículos que usan los superhéroes (Batimóvil, Avión Invisible, etc.)</p>
+                    
+                    <p><strong>Requisitos:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Atributos:</strong> nombre, velocidad_maxima, combustible, capacidad_pasajeros</li>
+                        <li><strong>Métodos:</strong> acelerar(), frenar(), repostar(), transportar_superheroe()</li>
+                        <li><strong>Reto:</strong> Diferentes tipos de vehículos con características especiales</li>
+                    </ul>
+                    
+                    <div class="solution-box">
+                        <div class="solution-header">💡 SOLUCIÓN COMPLETA</div>
+                        <div class="code-block">
+class VehiculoSuperheroe:
+    """🚗 Clase base para vehículos de superhéroes"""
+    
+    def __init__(self, nombre, velocidad_maxima, capacidad_combustible, capacidad_pasajeros):
+        self.nombre = nombre
+        self.velocidad_maxima = velocidad_maxima
+        self.velocidad_actual = 0
+        self.combustible = capacidad_combustible
+        self.capacidad_combustible = capacidad_combustible
+        self.capacidad_pasajeros = capacidad_pasajeros
+        self.pasajeros = []
+        self.kilometraje = 0
+    
+    def acelerar(self, incremento=20):
+        """🚀 Acelerar el vehículo"""
+        if self.combustible > 0:
+            nueva_velocidad = min(self.velocidad_actual + incremento, self.velocidad_maxima)
+            self.velocidad_actual = nueva_velocidad
+            self.combustible -= 5  # Consume combustible
+            return f"{self.nombre} acelera a {self.velocidad_actual} km/h! 🚀"
+        else:
+            return f"⛽ {self.nombre} necesita combustible!"
+    
+    def frenar(self, decremento=30):
+        """🛑 Frenar el vehículo"""
+        self.velocidad_actual = max(0, self.velocidad_actual - decremento)
+        return f"{self.nombre} frena a {self.velocidad_actual} km/h 🛑"
+    
+    def repostar(self):
+        """⛽ Llenar el tanque"""
+        self.combustible = self.capacidad_combustible
+        return f"⛽ {self.nombre} tiene el tanque lleno!"
+    
+    def transportar_superheroe(self, superheroe):
+        """🦸‍♂️ Subir un superhéroe al vehículo"""
+        if len(self.pasajeros) < self.capacidad_pasajeros:
+            self.pasajeros.append(superheroe)
+            return f"🦸‍♂️ {superheroe} abordó {self.nombre}!"
+        else:
+            return f"⚠️ {self.nombre} está lleno!"
+    
+    def iniciar_mision(self, distancia):
+        """🎯 Ir a una misión"""
+        if self.combustible <= 0:
+            return "⛽ Necesitas repostar antes de la misión!"
+        
+        if not self.pasajeros:
+            return "⚠️ ¡No hay nadie en el vehículo!"
+        
+        # Simular viaje
+        tiempo_viaje = distancia / (self.velocidad_maxima * 0.8)  # 80% de velocidad máxima
+        combustible_usado = distancia * 0.1
+        
+        self.combustible -= combustible_usado
+        self.kilometraje += distancia
+        
+        return f"""
+🚁 ¡MISIÓN EN CURSO!
+🎯 Destino alcanzado en {tiempo_viaje:.1f} horas
+📏 Distancia recorrida: {distancia} km
+⛽ Combustible restante: {self.combustible:.1f}L
+👥 Pasajeros: {', '.join(self.pasajeros)}
+        """
+    
+    def mostrar_estado(self):
+        """📊 Mostrar estado del vehículo"""
+        return f"""
+┌─────────────────────────────────────┐
+│  🚗 VEHÍCULO: {self.nombre:22} │
+├─────────────────────────────────────┤
+│  🏎️  Velocidad actual: {self.velocidad_actual:3} km/h     │
+│  🚀 Velocidad máxima: {self.velocidad_maxima:4} km/h    │
+│  ⛽ Combustible: {self.combustible:5.1f}/{self.capacidad_combustible}L     │
+│  👥 Pasajeros: {len(self.pasajeros)}/{self.capacidad_pasajeros}              │
+│  📏 Kilometraje: {self.kilometraje:6.1f} km        │
+│  🦸‍♂️ A bordo: {', '.join(self.pasajeros) if self.pasajeros else 'Ninguno':20} │
+└─────────────────────────────────────┘
+        """
+
+# 🧪 CREANDO LA FLOTA DE VEHÍCULOS
+print("🚗 ¡Flota de Vehículos de Superhéroes!\n")
+
+# Diferentes vehículos
+batimovil = VehiculoSuperheroe("Batimóvil", 300, 100, 2)
+avion_invisible = VehiculoSuperheroe("Avión Invisible", 800, 500, 4)
+motocicleta_flash = VehiculoSuperheroe("Moto del Flash", 400, 50, 1)
+
+vehiculos = [batimovil, avion_invisible, motocicleta_flash]
+
+# Preparando misión
+for vehiculo in vehiculos:
+    print(f"🔧 Preparando {vehiculo.nombre}...")
+    print(vehiculo.repostar())
+    
+    # Subir superhéroes
+    if vehiculo.nombre == "Batimóvil":
+        print(vehiculo.transportar_superheroe("Batman"))
+        print(vehiculo.transportar_superheroe("Robin"))
+    elif vehiculo.nombre == "Avión Invisible":
+        print(vehiculo.transportar_superheroe("Mujer Maravilla"))
+        print(vehiculo.transportar_superheroe("Superman"))
+    else:
+        print(vehiculo.transportar_superheroe("Flash"))
+    
+    # Acelerar
+    print(vehiculo.acelerar(50))
+    print(vehiculo.acelerar(30))
+    
+    # Ir a misión
+    print(vehiculo.iniciar_mision(150))
+    
+    # Estado final
+    print(vehiculo.mostrar_estado())
+    print()
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>🎯 Ejercicio 3: Sistema de Combate Épico</h3>
+                    <p><strong>Misión:</strong> Crea un sistema donde los superhéroes pueden luchar en torneos organizados.</p>
+                    
+                    <p><strong>Requisitos:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Clases:</strong> <code>Luchador</code>, <code>Torneo</code>, <code>Combate</code></li>
+                        <li><strong>Mecánicas:</strong> Sistema de turnos, críticos, habilidades especiales</li>
+                        <li><strong>Reto:</strong> Torneo eliminatorio con múltiples rondas</li>
+                    </ul>
+                    
+                    <div class="solution-box">
+                        <div class="solution-header">💡 SOLUCIÓN COMPLETA</div>
+                        <div class="code-block">
+import random
+
+class Luchador:
+    """⚔️ Clase para luchadores del torneo"""
+    
+    def __init__(self, nombre, poder_especial, ataque_base=30):
+        self.nombre = nombre
+        self.poder_especial = poder_especial
+        self.vida_maxima = 100
+        self.vida_actual = 100
+        self.ataque_base = ataque_base
+        self.victorias = 0
+        self.energia_especial = 100
+    
+    def atacar(self, oponente):
+        """⚔️ Ataque básico"""
+        # Posibilidad de crítico (20%)
+        es_critico = random.random() < 0.2
+        daño = self.ataque_base
+        
+        if es_critico:
+            daño *= 1.5
+            mensaje = f"💥 ¡{self.nombre} hace un CRÍTICO! "
+        else:
+            mensaje = f"⚔️ {self.nombre} ataca! "
+        
+        oponente.recibir_daño(int(daño))
+        return mensaje + f"Daño: {int(daño)}"
+    
+    def usar_poder_especial(self, oponente):
+        """⚡ Usar habilidad especial"""
+        if self.energia_especial >= 50:
+            self.energia_especial -= 50
+            daño = self.ataque_base * 2
+            oponente.recibir_daño(daño)
+            return f"⚡ ¡{self.nombre} usa {self.poder_especial}! Daño masivo: {daño}"
+        else:
+            return f"⚠️ {self.nombre} no tiene energía para {self.poder_especial}"
+    
+    def recibir_daño(self, daño):
+        """💔 Recibir daño"""
+        self.vida_actual -= daño
+        if self.vida_actual < 0:
+            self.vida_actual = 0
+    
+    def curarse(self):
+        """💚 Curarse entre combates"""
+        self.vida_actual = self.vida_maxima
+        self.energia_especial = 100
+    
+    def esta_vivo(self):
+        """❤️ Verificar si sigue en pie"""
+        return self.vida_actual > 0
+    
+    def obtener_estado(self):
+        """📊 Estado del luchador"""
+        barra_vida = "█" * (self.vida_actual // 10) + "░" * ((100 - self.vida_actual) // 10)
+        barra_energia = "▓" * (self.energia_especial // 10) + "░" * ((100 - self.energia_especial) // 10)
+        
+        return f"""
+{self.nombre} - {self.poder_especial}
+❤️  Vida: [{barra_vida}] {self.vida_actual}/100
+⚡ Energía: [{barra_energia}] {self.energia_especial}/100
+🏆 Victorias: {self.victorias}
+        """
+
+class Combate:
+    """🥊 Clase para manejar combates individuales"""
+    
+    def __init__(self, luchador1, luchador2):
+        self.luchador1 = luchador1
+        self.luchador2 = luchador2
+        self.turno = 1
+        self.log_combate = []
+    
+    def simular_combate(self):
+        """🎮 Simular un combate completo"""
+        self.log_combate.append(f"⚔️ ¡COMIENZA EL COMBATE!")
+        self.log_combate.append(f"🥊 {self.luchador1.nombre} VS {self.luchador2.nombre}")
+        self.log_combate.append("─" * 50)
+        
+        while self.luchador1.esta_vivo() and self.luchador2.esta_vivo():
+            self.ejecutar_turno()
+            self.turno += 1
+            
+            if self.turno > 20:  # Evitar combates infinitos
+                self.log_combate.append("⏰ ¡Combate terminado por tiempo!")
+                break
+        
+        # Determinar ganador
+        if self.luchador1.esta_vivo():
+            ganador = self.luchador1
+            perdedor = self.luchador2
+        else:
+            ganador = self.luchador2
+            perdedor = self.luchador1
+        
+        ganador.victorias += 1
+        self.log_combate.append(f"🏆 ¡{ganador.nombre} GANA EL COMBATE!")
+        
+        return ganador
+    
+    def ejecutar_turno(self):
+        """🎯 Ejecutar un turno de combate"""
+        atacante = self.luchador1 if self.turno % 2 == 1 else self.luchador2
+        defensor = self.luchador2 if self.turno % 2 == 1 else self.luchador1
+        
+        self.log_combate.append(f"\n🔄 TURNO {self.turno}")
+        
+        # Decidir acción (70% ataque normal, 30% poder especial)
+        if random.random() < 0.3 and atacante.energia_especial >= 50:
+            accion = atacante.usar_poder_especial(defensor)
+        else:
+            accion = atacante.atacar(defensor)
+        
+        self.log_combate.append(accion)
+        self.log_combate.append(f"💔 {defensor.nombre}: {defensor.vida_actual} HP restantes")
+        
+        if not defensor.esta_vivo():
+            self.log_combate.append(f"💀 ¡{defensor.nombre} ha caído!")
+    
+    def mostrar_log(self):
+        """📜 Mostrar el log completo del combate"""
+        return "\n".join(self.log_combate)
+
+class Torneo:
+    """🏟️ Clase para organizar torneos"""
+    
+    def __init__(self, nombre_torneo):
+        self.nombre_torneo = nombre_torneo
+        self.participantes = []
+        self.ronda_actual = 1
+        self.historia_combates = []
+    
+    def agregar_luchador(self, luchador):
+        """➕ Agregar participante al torneo"""
+        self.participantes.append(luchador)
+        return f"🥊 {luchador.nombre} se inscribió al torneo!"
+    
+    def iniciar_torneo(self):
+        """🏁 Comenzar el torneo eliminatorio"""
+        if len(self.participantes) < 2:
+            return "⚠️ Se necesitan al menos 2 luchadores"
+        
+        print(f"🏟️ ¡COMIENZA {self.nombre_torneo.upper()}!")
+        print(f"👥 Participantes: {len(self.participantes)}")
+        
+        luchadores_activos = self.participantes.copy()
+        
+        while len(luchadores_activos) > 1:
+            print(f"\n🔥 ═══ RONDA {self.ronda_actual} ═══")
+            luchadores_activos = self.ejecutar_ronda(luchadores_activos)
+            self.ronda_actual += 1
+        
+        # ¡Tenemos un campeón!
+        campeon = luchadores_activos[0]
+        print(f"\n🏆 ¡¡¡{campeon.nombre} ES EL CAMPEÓN DEL TORNEO!!!")
+        return campeon
+    
+    def ejecutar_ronda(self, luchadores):
+        """⚔️ Ejecutar una ronda de combates"""
+        ganadores = []
+        random.shuffle(luchadores)  # Emparejar aleatoriamente
+        
+        for i in range(0, len(luchadores), 2):
+            if i + 1 < len(luchadores):
+                luchador1 = luchadores[i]
+                luchador2 = luchadores[i + 1]
+                
+                # Curar a los luchadores antes del combate
+                luchador1.curarse()
+                luchador2.curarse()
+                
+                print(f"\n🥊 {luchador1.nombre} vs {luchador2.nombre}")
+                
+                combate = Combate(luchador1, luchador2)
+                ganador = combate.simular_combate()
+                ganadores.append(ganador)
+                
+                self.historia_combates.append(combate)
+                print(f"🏆 Ganador: {ganador.nombre}")
+            else:
+                # Luchador con bye (pasa automáticamente)
+                ganadores.append(luchadores[i])
+                print(f"🎫 {luchadores[i].nombre} pasa automáticamente a la siguiente ronda")
+        
+        return ganadores
+
+# 🧪 ¡GRAN TORNEO DE SUPERHÉROES!
+print("🏟️ ¡BIENVENIDOS AL GRAN TORNEO DE SUPERHÉROES!\n")
+
+# Crear luchadores
+luchadores = [
+    Luchador("Superman", "Rayo Láser", 35),
+    Luchador("Batman", "Batarang Explosivo", 30),
+    Luchador("Flash", "Tornado de Velocidad", 32),
+    Luchador("Hulk", "Puño Devastador", 40),
+    Luchador("Thor", "Martillo Místico", 38),
+    Luchador("Iron Man", "Rayo Repulsor", 33),
+    Luchador("Capitán América", "Escudo Vibranium", 31),
+    Luchador("Wolverine", "Garras Adamantium", 36)
+]
+
+# Crear y ejecutar torneo
+torneo = Torneo("Copa Mundial de Superhéroes")
+
+for luchador in luchadores:
+    print(torneo.agregar_luchador(luchador))
+
+print("\n📊 PARTICIPANTES:")
+for luchador in luchadores:
+    print(luchador.obtener_estado())
+
+# ¡Que comience la batalla!
+campeon = torneo.iniciar_torneo()
+
+print(f"\n🎉 ESTADÍSTICAS FINALES:")
+print(f"🏆 Campeón: {campeon.nombre}")
+print(f"⚔️ Combates totales: {len(torneo.historia_combates)}")
+print(f"🔥 Rondas disputadas: {torneo.ronda_actual - 1}")
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🎓</span>
+                    <div class="title-content">
+                        <h2>Graduación de la Fábrica de Superhéroes</h2>
+                        <p class="subtitle">Resumen y próximos desafíos épicos</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <span class="icon">🎯</span><strong>¡Felicidades! Has completado tu entrenamiento en POO.</strong>
+                    <br>Ahora sabes cómo crear tus propias "fábricas" para producir objetos únicos y organizados.
+                </div>
+                
+                <div class="analogy-box">
+                    <h3>🎖️ Tu Certificado de Graduación</h3>
+                    <p>Has dominado los conceptos fundamentales:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px;">
+                        <li>✅ <strong>Clases:</strong> Crear "planos" para tus objetos</li>
+                        <li>✅ <strong>Objetos:</strong> Fabricar elementos únicos usando esos planos</li>
+                        <li>✅ <strong>Atributos:</strong> Dar características a tus objetos</li>
+                        <li>✅ <strong>Métodos:</strong> Enseñar acciones a tus objetos</li>
+                        <li>✅ <strong>Aplicación práctica:</strong> Resolver problemas reales con POO</li>
+                    </ul>
+                </div>
+                
+                <div class="concept-grid">
+                    <div class="concept-card" style="background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);">
+                        <h4>🚀 Próximos Superpoderes</h4>
+                        <ul style="list-style: none; padding: 0; color: #2d3748;">
+                            <li>🧬 <strong>Herencia:</strong> Superhéroes que heredan poderes</li>
+                            <li>🎭 <strong>Polimorfismo:</strong> Mismo poder, diferentes efectos</li>
+                            <li>🔒 <strong>Encapsulación:</strong> Proteger secretos de identidad</li>
+                            <li>🎨 <strong>Abstracción:</strong> Simplificar poderes complejos</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-card" style="background: linear-gradient(135deg, #00b894 0%, #55efc4 100%);">
+                        <h4>💡 Consejos de Maestro</h4>
+                        <ul style="list-style: none; padding: 0; color: #2d3748;">
+                            <li>🎯 Practica creando objetos de la vida real</li>
+                            <li>🔄 Experimenta con diferentes diseños de clases</li>
+                            <li>👥 Combina objetos para crear sistemas complejos</li>
+                            <li>📚 Lee código de otros para aprender nuevas técnicas</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>🏆 Desafío Final: Tu Propia Fábrica</h3>
+                    <p><strong>Misión Épica:</strong> Crea tu propio sistema usando POO. Algunas ideas:</p>
+                    <ul style="margin-left: 20px;">
+                        <li>🏫 <strong>Escuela de Magia:</strong> Estudiantes, hechizos, casas, profesores</li>
+                        <li>🌌 <strong>Exploración Espacial:</strong> Naves, planetas, astronautas, misiones</li>
+                        <li>🏰 <strong>Reino Medieval:</strong> Caballeros, castillos, dragones, tesoros</li>
+                        <li>🎮 <strong>Estudio de Videojuegos:</strong> Desarrolladores, proyectos, lanzamientos</li>
+                        <li>🦄 <strong>Santuario de Criaturas Mágicas:</strong> Dragones, unicornios, cuidadores</li>
+                    </ul>
+                    
+                    <div class="solution-box">
+                        <div class="solution-header">💡 PLANTILLA PARA TU PROYECTO</div>
+                        <div class="code-block">
+# 🎯 PLANTILLA PARA TU PROPIA FÁBRICA DE OBJETOS
+
+class TuClasePrincipal:
+    """📝 Describe qué representa tu clase"""
+    
+    def __init__(self, parametro1, parametro2, parametro3):
+        # 🏷️ Atributos (características del objeto)
+        self.atributo1 = parametro1
+        self.atributo2 = parametro2
+        self.atributo3 = parametro3
+        self.estado = "inicial"
+        self.puntuacion = 0
+    
+    def accion_basica(self):
+        """⚡ Acción que puede realizar el objeto"""
+        # Tu código aquí
+        return f"{self.atributo1} realiza una acción básica!"
+    
+    def accion_especial(self):
+        """🌟 Acción especial o avanzada"""
+        # Tu código aquí
+        return f"{self.atributo1} hace algo especial!"
+    
+    def cambiar_estado(self, nuevo_estado):
+        """🔄 Cambiar el estado del objeto"""
+        self.estado = nuevo_estado
+        return f"{self.atributo1} ahora está: {self.estado}"
+    
+    def mostrar_info(self):
+        """📊 Mostrar información completa"""
+        return f"""
+╔══════════════════════════════════════╗
+║  📋 INFORMACIÓN DEL OBJETO           ║
+╠══════════════════════════════════════╣
+║  🏷️ Nombre: {self.atributo1:25} ║
+║  📈 Estado: {self.estado:25} ║
+║  🎯 Puntuación: {self.puntuacion:20} ║
+╚══════════════════════════════════════╝
+        """
+
+# 🧪 EJEMPLO DE USO
+mi_objeto = TuClasePrincipal("Ejemplo", "Valor2", "Valor3")
+print(mi_objeto.accion_basica())
+print(mi_objeto.accion_especial())
+print(mi_objeto.mostrar_info())
+
+# 💡 CONSEJOS PARA TU PROYECTO:
+# 1. Empieza simple y ve agregando funcionalidades
+# 2. Piensa en objetos del mundo real
+# 3. Haz que los objetos interactúen entre sí
+# 4. Agrega elementos divertidos y creativos
+# 5. ¡No tengas miedo de experimentar!
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="topic-section">
+                <div class="topic-header">
+                    <span class="emoji">🌟</span>
+                    <div class="title-content">
+                        <h2>El Legado de tu Fábrica de Superhéroes</h2>
+                        <p class="subtitle">Reflexiones finales y el poder de la programación orientada a objetos</p>
+                    </div>
+                </div>
+                
+                <div class="analogy-box">
+                    <h3>🏭 De Fábrica a Imperio Tecnológico</h3>
+                    <p>Lo que comenzó como una simple fábrica de superhéroes ahora es tu base para construir cualquier cosa que puedas imaginar. Cada clase que creas es como abrir una nueva línea de producción en tu imperio tecnológico.</p>
+                </div>
+                
+                <div class="comparison-box">
+                    <h3>🎭 El Antes y Después de Aprender POO</h3>
+                    
+                    <div class="vs-grid">
+                        <div class="vs-item">
+                            <h4>😅 ANTES (Sin POO)</h4>
+                            <p><em>"Necesito crear 10 personajes... tendré que escribir 200 líneas de código repetitivo"</em></p>
+                            <ul style="font-size: 0.9rem; margin-top: 10px;">
+                                <li>Código desorganizado</li>
+                                <li>Variables por todos lados</li>
+                                <li>Difícil de mantener</li>
+                                <li>Mucha repetición</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="vs-divider">🔄</div>
+                        
+                        <div class="vs-item">
+                            <h4>😎 DESPUÉS (Con POO)</h4>
+                            <p><em>"¡Solo creo una clase y luego genero 100 personajes únicos en segundos!"</em></p>
+                            <ul style="font-size: 0.9rem; margin-top: 10px;">
+                                <li>Código elegante y organizado</li>
+                                <li>Todo en su lugar</li>
+                                <li>Fácil de expandir</li>
+                                <li>Reutilizable infinitamente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <span class="icon">🔮</span><strong>Visión del Futuro:</strong> Con POO has desbloqueado una nueva forma de pensar en programación. Ahora ves el mundo como objetos que interactúan, cada uno con sus propias responsabilidades y capacidades. ¡Es el superpoder definitivo del programador!
+                </div>
+                
+                <div class="concept-grid">
+                    <div class="concept-card" style="background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);">
+                        <h4>🎯 Tu Nueva Mentalidad</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>🧠 Piensas en "objetos" que colaboran</li>
+                            <li>🏗️ Diseñas antes de programar</li>
+                            <li>🔄 Reutilizas en lugar de repetir</li>
+                            <li>🎨 Creas código elegante y mantenible</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="concept-card" style="background: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);">
+                        <h4>🚀 Aplicaciones Reales</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li>🎮 Videojuegos épicos</li>
+                            <li>💻 Aplicaciones web modernas</li>
+                            <li>🤖 Sistemas de inteligencia artificial</li>
+                            <li>📱 Apps móviles innovadoras</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="practice-section">
+                    <h3>🏆 Certificado de Graduación Oficial</h3>
+                    <div style="background: white; padding: 30px; border-radius: 15px; border: 3px solid #667eea; text-align: center; margin: 20px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                        <h2 style="color: #667eea; margin-bottom: 20px;">🎓 CERTIFICADO OFICIAL 🎓</h2>
+                        <div style="font-size: 1.2rem; color: #2d3748; line-height: 1.8;">
+                            <p><strong>Por medio de la presente se certifica que:</strong></p>
+                            <p style="font-size: 1.5rem; color: #667eea; margin: 20px 0;"><strong>[ TU NOMBRE AQUÍ ]</strong></p>
+                            <p>Ha completado exitosamente el curso:</p>
+                            <p style="font-size: 1.3rem; color: #e17055; margin: 15px 0;"><strong>"🦸‍♀️ Construyendo una Fábrica de Superhéroes"</strong></p>
+                            <p>Y ha demostrado dominio en:</p>
+                            <ul style="list-style: none; margin: 20px 0; padding: 0;">
+                                <li>✅ Programación Orientada a Objetos</li>
+                                <li>✅ Creación de Clases y Objetos</li>
+                                <li>✅ Diseño de Sistemas Complejos</li>
+                                <li>✅ Resolución de Problemas Creativos</li>
+                            </ul>
+                            <p style="margin-top: 30px; font-style: italic;">
+                                "Ahora posee el superpoder de crear universos de código organizados y elegantes"
+                            </p>
+                        </div>
+                        <div style="margin-top: 30px; font-size: 0.9rem; color: #666;">
+                            <p>Academia de Programación de Superhéroes • Fecha: ${new Date().toLocaleDateString()}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="analogy-box">
+                    <h3>🌅 Tu Aventura Apenas Comienza</h3>
+                    <p>Recuerda que cada gran superhéroe comenzó con un origen humilde. Tu journey en POO es como la historia de origen de Spider-Man: al principio Peter Parker no sabía controlar sus poderes, pero con práctica se convirtió en un héroe legendario.</p>
+                    <p><strong>Cada línea de código que escribas te hace más fuerte. ¡Sigue practicando y pronto serás el superhéroe de la programación que siempre quisiste ser!</strong></p>
+                </div>
+                
+                <div style="text-align: center; padding: 40px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; color: white; margin-top: 40px;">
+                    <h2 style="font-size: 2.5rem; margin-bottom: 20px;">🎉 ¡FELICIDADES! 🎉</h2>
+                    <p style="font-size: 1.3rem; margin-bottom: 15px;">Has completado tu entrenamiento en la Fábrica de Superhéroes</p>
+                    <p style="font-size: 1.1rem; opacity: 0.9;">Ahora ve y crea cosas increíbles con tus nuevos superpoderes de POO</p>
+                    <div style="margin-top: 30px; font-size: 3rem;">
+                        🦸‍♂️🦸‍♀️💻⚡🏆
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+                            
