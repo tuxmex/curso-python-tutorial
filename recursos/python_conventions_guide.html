@@ -1,0 +1,1518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Convenciones de Python - Guía Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateX(-100px) translateY(-100px); }
+            100% { transform: translateX(100px) translateY(100px); }
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            background: #1e40af;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-menu ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-menu a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 15px 15px 0 0;
+            font-size: 1.8em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-content {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-top: none;
+            border-radius: 0 0 15px 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .analogy-box {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-left: 6px solid #f59e0b;
+            padding: 25px;
+            border-radius: 0 10px 10px 0;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .analogy-box::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            left: -15px;
+            background: #f59e0b;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+        }
+
+        .analogy-box strong {
+            color: #92400e;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+
+        .code-block.good {
+            border: 3px solid #10b981;
+        }
+
+        .code-block.bad {
+            border: 3px solid #ef4444;
+        }
+
+        .code-label {
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .code-label.good {
+            background: #10b981;
+            color: white;
+        }
+
+        .code-label.bad {
+            background: #ef4444;
+            color: white;
+        }
+
+        .rule-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .rule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-color: #3b82f6;
+        }
+
+        .rule-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .rule-description {
+            color: #64748b;
+            margin-bottom: 15px;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .example-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .example-card:hover {
+            border-color: #3b82f6;
+            transform: translateY(-3px);
+        }
+
+        .industrial-note {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border: 2px solid #0ea5e9;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .industrial-note::before {
+            content: '🏭';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: #0ea5e9;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .industrial-note strong {
+            color: #0c4a6e;
+        }
+
+        .instructor-info {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border: 2px solid #3b82f6;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.1);
+        }
+
+        .instructor-info h3 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .instructor-info a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 25px;
+            background: rgba(59, 130, 246, 0.1);
+            transition: all 0.3s ease;
+            display: inline-block;
+            margin: 5px;
+        }
+
+        .instructor-info a:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tooltip {
+            position: relative;
+            cursor: help;
+            border-bottom: 1px dotted #3b82f6;
+        }
+
+        .tooltip:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1e293b;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            white-space: nowrap;
+            z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+            
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2em;
+            }
+            
+            .nav-menu ul {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #3b82f6;
+            color: white;
+            padding: 15px;
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Estilos para código con syntax highlighting */
+        .keyword { color: #f97316; font-weight: bold; }
+        .string { color: #22c55e; }
+        .comment { color: #94a3b8; font-style: italic; }
+        .function { color: #3b82f6; font-weight: bold; }
+        .number { color: #06b6d4; }
+        .variable { color: #a855f7; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐍 Convenciones de Python</h1>
+            <p>La Guía Definitiva para Escribir Código Elegante y Profesional</p>
+        </div>
+
+        <nav class="nav-menu">
+            <ul>
+                <li><a href="#nombres">🏷️ Nombres</a></li>
+                <li><a href="#formato">📐 Formato</a></li>
+                <li><a href="#estructura">🏗️ Estructura</a></li>
+                <li><a href="#comentarios">💬 Comentarios</a></li>
+                <li><a href="#funciones">⚙️ Funciones</a></li>
+                <li><a href="#clases">🏛️ Clases</a></li>
+                <li><a href="#importaciones">📦 Importaciones</a></li>
+                <li><a href="#industrial">🏭 Industrial</a></li>
+            </ul>
+        </nav>
+
+        <div class="content">
+            <!-- Introducción -->
+            <div class="section">
+                <div class="analogy-box">
+                    <strong>🎯 ¿Por qué importan las convenciones?</strong>
+                    Imagina que estás leyendo un libro donde cada capítulo está escrito con un estilo diferente: algunos sin márgenes, otros con letras gigantes, algunos sin puntuación. ¡Sería imposible de leer! Las convenciones de Python son como las reglas de escritura: hacen que tu código sea legible, mantenible y profesional.
+                </div>
+
+                <div class="industrial-note">
+                    <strong>🏭 En la Industria:</strong> El código se lee 10 veces más de lo que se escribe. En equipos industriales donde múltiples ingenieros trabajan en sistemas críticos, seguir convenciones puede ser la diferencia entre un sistema que funciona perfectamente y uno que falla en producción.
+                </div>
+            </div>
+
+            <!-- Sección 1: Nombres de Variables -->
+            <div class="section" id="nombres">
+                <div class="section-header">
+                    🏷️ Convenciones de Nombres
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>🎭 La Analogía del Teatro:</strong>
+                        En una obra de teatro, cada actor tiene un nombre que refleja su personalidad y rol. De igual manera, en Python, los nombres deben ser descriptivos y seguir patrones que indiquen su propósito. Un buen nombre es como un buen actor: inmediatamente sabes qué papel desempeña.
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🐍 snake_case para Variables y Funciones
+                        </div>
+                        <div class="rule-description">
+                            Las variables y funciones usan snake_case: palabras en minúsculas separadas por guiones bajos.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="comment"># Variables descriptivas</span>
+<span class="variable">temperatura_horno</span> = <span class="number">850</span>
+<span class="variable">presion_sistema</span> = <span class="number">3.5</span>
+<span class="variable">numero_piezas_producidas</span> = <span class="number">1250</span>
+
+<span class="comment"># Funciones claras</span>
+<span class="keyword">def</span> <span class="function">calcular_eficiencia_operador</span>():
+    <span class="keyword">pass</span>
+
+<span class="keyword">def</span> <span class="function">enviar_alerta_emergencia</span>():
+    <span class="keyword">pass</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="comment"># Variables confusas</span>
+<span class="variable">tempH</span> = <span class="number">850</span>
+<span class="variable">pSys</span> = <span class="number">3.5</span>
+<span class="variable">nPP</span> = <span class="number">1250</span>
+
+<span class="comment"># Funciones poco claras</span>
+<span class="keyword">def</span> <span class="function">calcEff</span>():
+    <span class="keyword">pass</span>
+
+<span class="keyword">def</span> <span class="function">sendAlert</span>():
+    <span class="keyword">pass</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🏛️ PascalCase para Clases
+                        </div>
+                        <div class="rule-description">
+                            Las clases usan PascalCase: cada palabra comienza con mayúscula, sin espacios.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="keyword">class</span> <span class="function">MotorIndustrial</span>:
+    <span class="keyword">pass</span>
+
+<span class="keyword">class</span> <span class="function">SensorTemperatura</span>:
+    <span class="keyword">pass</span>
+
+<span class="keyword">class</span> <span class="function">ControladorProduccion</span>:
+    <span class="keyword">pass</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="keyword">class</span> <span class="function">motor_industrial</span>:
+    <span class="keyword">pass</span>
+
+<span class="keyword">class</span> <span class="function">sensortemperatura</span>:
+    <span class="keyword">pass</span>
+
+<span class="keyword">class</span> <span class="function">CONTROLADOR_PRODUCCION</span>:
+    <span class="keyword">pass</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📢 MAYÚSCULAS para Constantes
+                        </div>
+                        <div class="rule-description">
+                            Las constantes usan MAYÚSCULAS con guiones bajos. Son valores que nunca cambian.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="comment"># Constantes del sistema</span>
+<span class="variable">TEMPERATURA_MAXIMA</span> = <span class="number">100</span>
+<span class="variable">PRESION_CRITICA</span> = <span class="number">5.0</span>
+<span class="variable">VELOCIDAD_MAXIMA_RPM</span> = <span class="number">3000</span>
+<span class="variable">CODIGO_ERROR_CRITICO</span> = <span class="string">"ERR_001"</span>
+
+<span class="comment"># Configuración de planta</span>
+<span class="variable">MAX_OPERARIOS_POR_TURNO</span> = <span class="number">15</span>
+<span class="variable">TIEMPO_DESCANSO_MINUTOS</span> = <span class="number">30</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="comment"># Constantes mal definidas</span>
+<span class="variable">tempMax</span> = <span class="number">100</span>
+<span class="variable">presion_critica</span> = <span class="number">5.0</span>
+<span class="variable">VelocidadMaximaRpm</span> = <span class="number">3000</span>
+<span class="variable">codigoErrorCritico</span> = <span class="string">"ERR_001"</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="industrial-note">
+                        <strong>💼 Nombres Industriales Descriptivos:</strong>
+                        En entornos industriales, los nombres deben ser inequívocos. Usa prefijos que indiquen el tipo de equipamiento: <code>motor_bomba_001</code>, <code>sensor_temp_horno_a</code>, <code>valvula_seguridad_linea_2</code>. Esto facilita el mantenimiento y la depuración.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 2: Formato y Espaciado -->
+            <div class="section" id="formato">
+                <div class="section-header">
+                    📐 Formato y Espaciado
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>🏗️ La Analogía de la Arquitectura:</strong>
+                        Un edificio bien diseñado tiene espacios bien distribuidos: pasillos amplios, habitaciones organizadas, y una estructura clara. El código Python sigue los mismos principios: espacios estratégicos, líneas organizadas y una estructura visual que guía al lector.
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📏 Indentación de 4 Espacios
+                        </div>
+                        <div class="rule-description">
+                            Python usa indentación para definir bloques de código. Siempre usar 4 espacios, nunca tabs.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto (4 espacios)</div>
+<pre><span class="keyword">def</span> <span class="function">verificar_temperatura</span>(<span class="variable">temp</span>):
+    <span class="keyword">if</span> <span class="variable">temp</span> > <span class="number">80</span>:
+        <span class="function">print</span>(<span class="string">"Temperatura alta"</span>)
+        <span class="keyword">if</span> <span class="variable">temp</span> > <span class="number">100</span>:
+            <span class="function">print</span>(<span class="string">"CRÍTICO"</span>)
+            <span class="keyword">return</span> <span class="keyword">False</span>
+    <span class="keyword">return</span> <span class="keyword">True</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto (inconsistente)</div>
+<pre><span class="keyword">def</span> <span class="function">verificar_temperatura</span>(<span class="variable">temp</span>):
+  <span class="keyword">if</span> <span class="variable">temp</span> > <span class="number">80</span>:
+      <span class="function">print</span>(<span class="string">"Temperatura alta"</span>)
+        <span class="keyword">if</span> <span class="variable">temp</span> > <span class="number">100</span>:
+         <span class="function">print</span>(<span class="string">"CRÍTICO"</span>)
+           <span class="keyword">return</span> <span class="keyword">False</span>
+  <span class="keyword">return</span> <span class="keyword">True</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📏 Máximo 79 Caracteres por Línea
+                        </div>
+                        <div class="rule-description">
+                            Las líneas largas son difíciles de leer. Divide líneas largas usando paréntesis o barras invertidas.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="comment"># Línea dividida correctamente</span>
+<span class="variable">resultado</span> = <span class="function">calcular_eficiencia_produccion</span>(
+    <span class="variable">piezas_producidas</span>=<span class="number">1500</span>,
+    <span class="variable">piezas_objetivo</span>=<span class="number">1600</span>,
+    <span class="variable">horas_trabajadas</span>=<span class="number">8</span>,
+    <span class="variable">numero_operarios</span>=<span class="number">12</span>
+)
+
+<span class="comment"># Lista dividida</span>
+<span class="variable">sensores_criticos</span> = [
+    <span class="string">"TEMP_HORNO_001"</span>, <span class="string">"PRES_SISTEMA_002"</span>,
+    <span class="string">"VEL_MOTOR_003"</span>, <span class="string">"NIV_TANQUE_004"</span>
+]</pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="comment"># Línea demasiado larga</span>
+<span class="variable">resultado</span> = <span class="function">calcular_eficiencia_produccion</span>(<span class="variable">piezas_producidas</span>=<span class="number">1500</span>, <span class="variable">piezas_objetivo</span>=<span class="number">1600</span>, <span class="variable">horas_trabajadas</span>=<span class="number">8</span>, <span class="variable">numero_operarios</span>=<span class="number">12</span>)
+
+<span class="variable">sensores_criticos</span> = [<span class="string">"TEMP_HORNO_001"</span>, <span class="string">"PRES_SISTEMA_002"</span>, <span class="string">"VEL_MOTOR_003"</span>, <span class="string">"NIV_TANQUE_004"</span>]</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🔲 Espacios Alrededor de Operadores
+                        </div>
+                        <div class="rule-description">
+                            Usar espacios alrededor de operadores para mejorar legibilidad.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="comment"># Operadores con espacio</span>
+<span class="variable">eficiencia</span> = (<span class="variable">produccion_actual</span> / <span class="variable">produccion_objetivo</span>) * <span class="number">100</span>
+<span class="variable">temperatura_promedio</span> = (<span class="variable">temp_min</span> + <span class="variable">temp_max</span>) / <span class="number">2</span>
+<span class="variable">condicion_segura</span> = <span class="variable">presion</span> < <span class="number">5.0</span> <span class="keyword">and</span> <span class="variable">temperatura</span> < <span class="number">85</span>
+
+<span class="comment"># Asignaciones claras</span>
+<span class="variable">x</span> = <span class="number">1</span>
+<span class="variable">y</span> = <span class="number">2</span>
+<span class="variable">resultado</span> = <span class="variable">x</span> + <span class="variable">y</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="comment"># Operadores sin espacio</span>
+<span class="variable">eficiencia</span>=(<span class="variable">produccion_actual</span>/<span class="variable">produccion_objetivo</span>)*<span class="number">100</span>
+<span class="variable">temperatura_promedio</span>=(<span class="variable">temp_min</span>+<span class="variable">temp_max</span>)/<span class="number">2</span>
+<span class="variable">condicion_segura</span>=<span class="variable">presion</span><<span class="number">5.0</span> <span class="keyword">and</span> <span class="variable">temperatura</span><<span class="number">85</span>
+
+<span class="comment"># Asignaciones confusas</span>
+<span class="variable">x</span>=<span class="number">1</span>
+<span class="variable">y</span> = <span class="number">2</span>
+<span class="variable">resultado</span> =<span class="variable">x</span>+<span class="variable">y</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 3: Estructura del Código -->
+            <div class="section" id="estructura">
+                <div class="section-header">
+                    🏗️ Estructura del Código
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>📚 La Analogía de la Biblioteca:</strong>
+                        Una biblioteca bien organizada tiene secciones claras: ficción, ciencia, historia, cada una en su lugar lógico. El código Python sigue la misma lógica: importaciones al inicio, clases agrupadas, funciones organizadas por propósito. ¡Un lector puede encontrar lo que busca sin perderse!
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📋 Orden de Elementos en un Archivo
+                        </div>
+                        <div class="rule-description">
+                            Todo archivo Python debe seguir un orden específico para mantener consistencia.
+                        </div>
+                        <div class="code-block good">
+                            <div class="code-label good">✅ Estructura Correcta</div>
+<pre><span class="comment">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Módulo de Control Industrial
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Sistema de monitoreo para equipos industriales
+"""</span>
+
+<span class="comment"># 1. Importaciones estándar</span>
+<span class="keyword">import</span> datetime
+<span class="keyword">import</span> os
+<span class="keyword">import</span> sys
+
+<span class="comment"># 2. Importaciones de terceros</span>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+
+<span class="comment"># 3. Importaciones locales</span>
+<span class="keyword">from</span> .sensores <span class="keyword">import</span> SensorTemperatura
+<span class="keyword">from</span> .motores <span class="keyword">import</span> MotorIndustrial
+
+<span class="comment"># 4. Constantes</span>
+<span class="variable">TEMPERATURA_MAXIMA</span> = <span class="number">100</span>
+<span class="variable">PRESION_CRITICA</span> = <span class="number">5.0</span>
+
+<span class="comment"># 5. Clases</span>
+<span class="keyword">class</span> <span class="function">ControladorPlanta</span>:
+    <span class="keyword">pass</span>
+
+<span class="comment"># 6. Funciones</span>
+<span class="keyword">def</span> <span class="function">calcular_eficiencia</span>():
+    <span class="keyword">pass</span>
+
+<span class="comment"># 7. Código principal</span>
+<span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:
+    <span class="function">main</span>()</pre>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📦 Espaciado Entre Funciones y Clases
+                        </div>
+                        <div class="rule-description">
+                            Usar líneas en blanco para separar lógicamente el código.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="keyword">class</span> <span class="function">SensorIndustrial</span>:
+    <span class="string">"""Sensor para monitoreo industrial."""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">sensor_id</span>):
+        <span class="variable">self</span>.<span class="variable">sensor_id</span> = <span class="variable">sensor_id</span>
+    
+    <span class="keyword">def</span> <span class="function">leer_valor</span>(<span class="variable">self</span>):
+        <span class="string">"""Lee valor del sensor."""</span>
+        <span class="keyword">return</span> <span class="number">25.5</span>
+
+
+<span class="keyword">class</span> <span class="function">MotorIndustrial</span>:
+    <span class="string">"""Motor para uso industrial."""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">motor_id</span>):
+        <span class="variable">self</span>.<span class="variable">motor_id</span> = <span class="variable">motor_id</span>
+
+
+<span class="keyword">def</span> <span class="function">calcular_eficiencia</span>(<span class="variable">produccion</span>, <span class="variable">objetivo</span>):
+    <span class="string">"""Calcula eficiencia de producción."""</span>
+    <span class="keyword">return</span> (<span class="variable">produccion</span> / <span class="variable">objetivo</span>) * <span class="number">100</span>
+
+
+<span class="keyword">def</span> <span class="function">generar_reporte</span>(<span class="variable">datos</span>):
+    <span class="string">"""Genera reporte de datos."""</span>
+    <span class="keyword">pass</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="keyword">class</span> <span class="function">SensorIndustrial</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">sensor_id</span>):
+        <span class="variable">self</span>.<span class="variable">sensor_id</span> = <span class="variable">sensor_id</span>
+    <span class="keyword">def</span> <span class="function">leer_valor</span>(<span class="variable">self</span>):
+        <span class="keyword">return</span> <span class="number">25.5</span>
+<span class="keyword">class</span> <span class="function">MotorIndustrial</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">motor_id</span>):
+        <span class="variable">self</span>.<span class="variable">motor_id</span> = <span class="variable">motor_id</span>
+<span class="keyword">def</span> <span class="function">calcular_eficiencia</span>(<span class="variable">produccion</span>, <span class="variable">objetivo</span>):
+    <span class="keyword">return</span> (<span class="variable">produccion</span> / <span class="variable">objetivo</span>) * <span class="number">100</span>
+<span class="keyword">def</span> <span class="function">generar_reporte</span>(<span class="variable">datos</span>):
+    <span class="keyword">pass</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 4: Comentarios y Documentación -->
+            <div class="section" id="comentarios">
+                <div class="section-header">
+                    💬 Comentarios y Documentación
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>🗺️ La Analogía del Mapa del Tesoro:</strong>
+                        Los comentarios son como las anotaciones en un mapa del tesoro: explican rutas complicadas, advierten sobre peligros, y ayudan a futuros exploradores (incluido tu yo futuro) a entender el camino. Un buen comentario no dice QUÉ hace el código, sino POR QUÉ lo hace.
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📝 Docstrings para Funciones y Clases
+                        </div>
+                        <div class="rule-description">
+                            Toda función y clase debe tener un docstring que explique su propósito, parámetros y valor de retorno.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="keyword">def</span> <span class="function">calcular_oee</span>(<span class="variable">disponibilidad</span>, <span class="variable">rendimiento</span>, <span class="variable">calidad</span>):
+    <span class="string">"""
+    Calcula el OEE (Overall Equipment Effectiveness).
+    
+    El OEE es una métrica clave en manufactura que mide
+    la eficiencia general de un equipo.
+    
+    Args:
+        disponibilidad (float): Porcentaje de tiempo disponible (0-100)
+        rendimiento (float): Porcentaje de rendimiento (0-100)
+        calidad (float): Porcentaje de calidad (0-100)
+    
+    Returns:
+        float: Valor OEE como porcentaje (0-100)
+    
+    Example:
+        >>> calcular_oee(85.0, 90.0, 95.0)
+        72.675
+    """</span>
+    <span class="keyword">return</span> (<span class="variable">disponibilidad</span> * <span class="variable">rendimiento</span> * <span class="variable">calidad</span>) / <span class="number">10000</span>
+
+
+<span class="keyword">class</span> <span class="function">SensorProceso</span>:
+    <span class="string">"""
+    Sensor para monitoreo de procesos industriales.
+    
+    Esta clase maneja la comunicación con sensores físicos,
+    valida lecturas y mantiene histórico de datos.
+    
+    Attributes:
+        sensor_id (str): Identificador único del sensor
+        tipo (str): Tipo de sensor (temperatura, presión, etc.)
+        rango_min (float): Valor mínimo del rango operativo
+        rango_max (float): Valor máximo del rango operativo
+    """</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">sensor_id</span>, <span class="variable">tipo</span>, <span class="variable">rango_min</span>, <span class="variable">rango_max</span>):
+        <span class="variable">self</span>.<span class="variable">sensor_id</span> = <span class="variable">sensor_id</span>
+        <span class="variable">self</span>.<span class="variable">tipo</span> = <span class="variable">tipo</span>
+        <span class="variable">self</span>.<span class="variable">rango_min</span> = <span class="variable">rango_min</span>
+        <span class="variable">self</span>.<span class="variable">rango_max</span> = <span class="variable">rango_max</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="keyword">def</span> <span class="function">calcular_oee</span>(<span class="variable">disponibilidad</span>, <span class="variable">rendimiento</span>, <span class="variable">calidad</span>):
+    <span class="comment"># calcula oee</span>
+    <span class="keyword">return</span> (<span class="variable">disponibilidad</span> * <span class="variable">rendimiento</span> * <span class="variable">calidad</span>) / <span class="number">10000</span>
+
+
+<span class="keyword">class</span> <span class="function">SensorProceso</span>:
+    <span class="comment"># sensor de proceso</span>
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">sensor_id</span>, <span class="variable">tipo</span>, <span class="variable">rango_min</span>, <span class="variable">rango_max</span>):
+        <span class="variable">self</span>.<span class="variable">sensor_id</span> = <span class="variable">sensor_id</span>  <span class="comment"># id del sensor</span>
+        <span class="variable">self</span>.<span class="variable">tipo</span> = <span class="variable">tipo</span>  <span class="comment"># tipo</span>
+        <span class="variable">self</span>.<span class="variable">rango_min</span> = <span class="variable">rango_min</span>  <span class="comment"># minimo</span>
+        <span class="variable">self</span>.<span class="variable">rango_max</span> = <span class="variable">rango_max</span>  <span class="comment"># maximo</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🔍 Comentarios Explicativos (No Obvios)
+                        </div>
+                        <div class="rule-description">
+                            Los comentarios deben explicar el "por qué", no el "qué". Evita comentarios que solo repiten lo que hace el código.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="comment"># Usar factor de seguridad de 1.2 según norma ISO 9001</span>
+<span class="variable">presion_maxima</span> = <span class="variable">presion_diseno</span> * <span class="number">1.2</span>
+
+<span class="comment"># Esperar 500ms para estabilización del sensor antes de leer</span>
+time.sleep(<span class="number">0.5</span>)
+<span class="variable">lectura</span> = <span class="function">sensor_leer</span>()
+
+<span class="comment"># Algoritmo PID para control de temperatura</span>
+<span class="comment"># Kp=1.5, Ki=0.3, Kd=0.1 optimizados para este horno específico</span>
+<span class="variable">salida_control</span> = <span class="variable">kp</span> * <span class="variable">error</span> + <span class="variable">ki</span> * <span class="variable">integral</span> + <span class="variable">kd</span> * <span class="variable">derivada</span>
+
+<span class="comment"># Convertir RPM a radianes/segundo para cálculos de física</span>
+<span class="variable">velocidad_rad_s</span> = <span class="variable">rpm</span> * <span class="number">2</span> * math.pi / <span class="number">60</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="comment"># Multiplicar presion_diseno por 1.2</span>
+<span class="variable">presion_maxima</span> = <span class="variable">presion_diseno</span> * <span class="number">1.2</span>
+
+<span class="comment"># Esperar 500 milisegundos</span>
+time.sleep(<span class="number">0.5</span>)
+<span class="comment"># Leer del sensor</span>
+<span class="variable">lectura</span> = <span class="function">sensor_leer</span>()
+
+<span class="comment"># Calcular salida de control</span>
+<span class="variable">salida_control</span> = <span class="variable">kp</span> * <span class="variable">error</span> + <span class="variable">ki</span> * <span class="variable">integral</span> + <span class="variable">kd</span> * <span class="variable">derivada</span>
+
+<span class="comment"># Convertir RPM</span>
+<span class="variable">velocidad_rad_s</span> = <span class="variable">rpm</span> * <span class="number">2</span> * math.pi / <span class="number">60</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="industrial-note">
+                        <strong>🔧 Documentación Industrial:</strong>
+                        En sistemas industriales, incluye siempre información sobre: normas aplicables (ISO, ANSI), rangos de operación, condiciones de seguridad, y procedimientos de emergencia. Esta información puede salvar vidas y equipos.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 5: Funciones -->
+            <div class="section" id="funciones">
+                <div class="section-header">
+                    ⚙️ Mejores Prácticas para Funciones
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>🔧 La Analogía de la Caja de Herramientas:</strong>
+                        Una función es como una herramienta especializada: tiene un propósito específico, es fácil de usar, y hace bien una sola cosa. No usarías un martillo para atornillar, ni un destornillador para clavar. Cada función debe ser una herramienta perfecta para su trabajo específico.
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🎯 Una Función, Una Responsabilidad
+                        </div>
+                        <div class="rule-description">
+                            Cada función debe hacer una sola cosa y hacerla bien. Esto facilita el testing, debugging y mantenimiento.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto (Funciones específicas)</div>
+<pre><span class="keyword">def</span> <span class="function">leer_sensor_temperatura</span>(<span class="variable">sensor_id</span>):
+    <span class="string">"""Lee temperatura de un sensor específico."""</span>
+    <span class="comment"># Solo lee temperatura</span>
+    <span class="keyword">return</span> <span class="function">hardware_read</span>(<span class="variable">sensor_id</span>)
+
+
+<span class="keyword">def</span> <span class="function">validar_temperatura</span>(<span class="variable">temperatura</span>, <span class="variable">limite_min</span>, <span class="variable">limite_max</span>):
+    <span class="string">"""Valida si temperatura está en rango aceptable."""</span>
+    <span class="comment"># Solo valida</span>
+    <span class="keyword">return</span> <span class="variable">limite_min</span> <= <span class="variable">temperatura</span> <= <span class="variable">limite_max</span>
+
+
+<span class="keyword">def</span> <span class="function">enviar_alerta</span>(<span class="variable">mensaje</span>, <span class="variable">nivel</span>):
+    <span class="string">"""Envía alerta al sistema de monitoreo."""</span>
+    <span class="comment"># Solo envía alertas</span>
+    <span class="function">sistema_alertas_send</span>(<span class="variable">mensaje</span>, <span class="variable">nivel</span>)
+
+
+<span class="keyword">def</span> <span class="function">monitorear_temperatura</span>(<span class="variable">sensor_id</span>):
+    <span class="string">"""Función principal que orquesta el monitoreo."""</span>
+    <span class="variable">temp</span> = <span class="function">leer_sensor_temperatura</span>(<span class="variable">sensor_id</span>)
+    
+    <span class="keyword">if</span> <span class="keyword">not</span> <span class="function">validar_temperatura</span>(<span class="variable">temp</span>, <span class="number">0</span>, <span class="number">100</span>):
+        <span class="function">enviar_alerta</span>(<span class="string">f"Temperatura fuera de rango: {temp}°C"</span>, <span class="string">"CRITICO"</span>)
+    
+    <span class="keyword">return</span> <span class="variable">temp</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto (Función que hace todo)</div>
+<pre><span class="keyword">def</span> <span class="function">monitorear_temperatura</span>(<span class="variable">sensor_id</span>):
+    <span class="string">"""Función que hace demasiadas cosas."""</span>
+    <span class="comment"># Lee temperatura</span>
+    <span class="variable">temp</span> = <span class="function">hardware_read</span>(<span class="variable">sensor_id</span>)
+    
+    <span class="comment"># Valida temperatura</span>
+    <span class="keyword">if</span> <span class="variable">temp</span> < <span class="number">0</span> <span class="keyword">or</span> <span class="variable">temp</span> > <span class="number">100</span>:
+        <span class="comment"># Envía alerta</span>
+        <span class="function">sistema_alertas_send</span>(
+            <span class="string">f"Temperatura fuera de rango: {temp}°C"</span>, 
+            <span class="string">"CRITICO"</span>
+        )
+        
+        <span class="comment"># Guarda en base de datos</span>
+        <span class="function">db_save</span>(<span class="string">"alertas"</span>, {<span class="string">"sensor"</span>: <span class="variable">sensor_id</span>, <span class="string">"temp"</span>: <span class="variable">temp</span>})
+        
+        <span class="comment"># Envía email</span>
+        <span class="function">email_send</span>(<span class="string">"admin@empresa.com"</span>, <span class="string">"Alerta temperatura"</span>)
+        
+        <span class="comment"># Actualiza dashboard</span>
+        <span class="function">dashboard_update</span>(<span class="string">"temperatura_status"</span>, <span class="string">"ERROR"</span>)
+    
+    <span class="keyword">return</span> <span class="variable">temp</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📝 Parámetros con Nombres Descriptivos
+                        </div>
+                        <div class="rule-description">
+                            Los parámetros deben tener nombres claros y usar type hints cuando sea posible.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="keyword">def</span> <span class="function">calcular_potencia_motor</span>(
+    <span class="variable">voltaje_nominal</span>: <span class="function">float</span>,
+    <span class="variable">corriente_maxima</span>: <span class="function">float</span>,
+    <span class="variable">factor_potencia</span>: <span class="function">float</span> = <span class="number">0.85</span>,
+    <span class="variable">eficiencia</span>: <span class="function">float</span> = <span class="number">0.90</span>
+) -> <span class="function">float</span>:
+    <span class="string">"""
+    Calcula la potencia de un motor trifásico.
+    
+    Args:
+        voltaje_nominal: Voltaje nominal en volts
+        corriente_maxima: Corriente máxima en amperes
+        factor_potencia: Factor de potencia (0.0-1.0, default: 0.85)
+        eficiencia: Eficiencia del motor (0.0-1.0, default: 0.90)
+    
+    Returns:
+        Potencia en watts
+    """</span>
+    <span class="variable">potencia_aparente</span> = <span class="variable">voltaje_nominal</span> * <span class="variable">corriente_maxima</span> * math.sqrt(<span class="number">3</span>)
+    <span class="variable">potencia_real</span> = <span class="variable">potencia_aparente</span> * <span class="variable">factor_potencia</span>
+    <span class="variable">potencia_util</span> = <span class="variable">potencia_real</span> * <span class="variable">eficiencia</span>
+    
+    <span class="keyword">return</span> <span class="variable">potencia_util</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="keyword">def</span> <span class="function">calc_pot</span>(<span class="variable">v</span>, <span class="variable">i</span>, <span class="variable">fp</span>=<span class="number">0.85</span>, <span class="variable">e</span>=<span class="number">0.9</span>):
+    <span class="string">"""calcula potencia"""</span>
+    <span class="variable">pa</span> = <span class="variable">v</span> * <span class="variable">i</span> * math.sqrt(<span class="number">3</span>)
+    <span class="variable">pr</span> = <span class="variable">pa</span> * <span class="variable">fp</span>
+    <span class="variable">pu</span> = <span class="variable">pr</span> * <span class="variable">e</span>
+    <span class="keyword">return</span> <span class="variable">pu</span></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 6: Clases -->
+            <div class="section" id="clases">
+                <div class="section-header">
+                    🏛️ Mejores Prácticas para Clases
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>🏭 La Analogía de la Fábrica:</strong>
+                        Una clase es como el plano de una fábrica: define cómo será la estructura, qué máquinas tendrá, y qué procesos realizará. Cada objeto (instancia) es una fábrica real construida según ese plano. Todas las fábricas del mismo tipo tendrán la misma estructura básica, pero cada una procesará sus propios materiales.
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🏗️ Estructura Clara de Clases
+                        </div>
+                        <div class="rule-description">
+                            Las clases deben tener una estructura organizada: docstring, constantes, __init__, métodos públicos, métodos privados.
+                        </div>
+                        <div class="code-block good">
+                            <div class="code-label good">✅ Estructura Correcta</div>
+<pre><span class="keyword">class</span> <span class="function">MotorIndustrial</span>:
+    <span class="string">"""
+    Motor industrial para aplicaciones de manufactura.
+    
+    Esta clase encapsula el comportamiento de un motor industrial,
+    incluyendo control de velocidad, monitoreo de temperatura,
+    y gestión de mantenimiento.
+    
+    Attributes:
+        TEMPERATURA_MAXIMA (float): Temperatura máxima permitida
+        VELOCIDAD_MAXIMA (int): Velocidad máxima en RPM
+    """</span>
+    
+    <span class="comment"># Constantes de clase</span>
+    <span class="variable">TEMPERATURA_MAXIMA</span> = <span class="number">85.0</span>  <span class="comment"># °C</span>
+    <span class="variable">VELOCIDAD_MAXIMA</span> = <span class="number">3000</span>    <span class="comment"># RPM</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">motor_id</span>: <span class="function">str</span>, <span class="variable">potencia_kw</span>: <span class="function">float</span>):
+        <span class="string">"""
+        Inicializa el motor industrial.
+        
+        Args:
+            motor_id: Identificador único del motor
+            potencia_kw: Potencia nominal en kilowatts
+        """</span>
+        <span class="variable">self</span>.<span class="variable">motor_id</span> = <span class="variable">motor_id</span>
+        <span class="variable">self</span>.<span class="variable">potencia_kw</span> = <span class="variable">potencia_kw</span>
+        <span class="variable">self</span>.<span class="variable">_velocidad_actual</span> = <span class="number">0</span>  <span class="comment"># Atributo protegido</span>
+        <span class="variable">self</span>.<span class="variable">_temperatura</span> = <span class="number">25.0</span>
+        <span class="variable">self</span>.<span class="variable">__horas_operacion</span> = <span class="number">0</span>  <span class="comment"># Atributo privado</span>
+        <span class="variable">self</span>.<span class="variable">estado</span> = <span class="string">"detenido"</span>
+    
+    <span class="comment"># Métodos públicos</span>
+    <span class="keyword">def</span> <span class="function">arrancar</span>(<span class="variable">self</span>, <span class="variable">velocidad_rpm</span>: <span class="function">int</span>) -> <span class="function">bool</span>:
+        <span class="string">"""
+        Arranca el motor a la velocidad especificada.
+        
+        Args:
+            velocidad_rpm: Velocidad objetivo en RPM
+            
+        Returns:
+            True si arrancó correctamente, False en caso contrario
+        """</span>
+        <span class="keyword">if</span> <span class="keyword">not</span> <span class="variable">self</span>.<span class="function">_validar_velocidad</span>(<span class="variable">velocidad_rpm</span>):
+            <span class="keyword">return</span> <span class="keyword">False</span>
+            
+        <span class="variable">self</span>.<span class="variable">_velocidad_actual</span> = <span class="variable">velocidad_rpm</span>
+        <span class="variable">self</span>.<span class="variable">estado</span> = <span class="string">"funcionando"</span>
+        <span class="keyword">return</span> <span class="keyword">True</span>
+    
+    <span class="keyword">def</span> <span class="function">detener</span>(<span class="variable">self</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Detiene el motor de forma segura."""</span>
+        <span class="variable">self</span>.<span class="variable">_velocidad_actual</span> = <span class="number">0</span>
+        <span class="variable">self</span>.<span class="variable">estado</span> = <span class="string">"detenido"</span>
+    
+    <span class="keyword">def</span> <span class="function">obtener_estado</span>(<span class="variable">self</span>) -> <span class="function">dict</span>:
+        <span class="string">"""Retorna el estado actual del motor."""</span>
+        <span class="keyword">return</span> {
+            <span class="string">"motor_id"</span>: <span class="variable">self</span>.<span class="variable">motor_id</span>,
+            <span class="string">"estado"</span>: <span class="variable">self</span>.<span class="variable">estado</span>,
+            <span class="string">"velocidad_rpm"</span>: <span class="variable">self</span>.<span class="variable">_velocidad_actual</span>,
+            <span class="string">"temperatura"</span>: <span class="variable">self</span>.<span class="variable">_temperatura</span>
+        }
+    
+    <span class="comment"># Métodos protegidos</span>
+    <span class="keyword">def</span> <span class="function">_validar_velocidad</span>(<span class="variable">self</span>, <span class="variable">velocidad</span>: <span class="function">int</span>) -> <span class="function">bool</span>:
+        <span class="string">"""Valida que la velocidad esté dentro del rango permitido."""</span>
+        <span class="keyword">return</span> <span class="number">0</span> <= <span class="variable">velocidad</span> <= <span class="variable">self</span>.<span class="variable">VELOCIDAD_MAXIMA</span>
+    
+    <span class="comment"># Métodos privados</span>
+    <span class="keyword">def</span> <span class="function">__actualizar_horas_operacion</span>(<span class="variable">self</span>, <span class="variable">horas</span>: <span class="function">float</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Actualiza el contador interno de horas de operación."""</span>
+        <span class="variable">self</span>.<span class="variable">__horas_operacion</span> += <span class="variable">horas</span></pre>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🔐 Encapsulamiento: Público, Protegido y Privado
+                        </div>
+                        <div class="rule-description">
+                            Usar convenciones de nombres para indicar el nivel de acceso a atributos y métodos.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Correcto</div>
+<pre><span class="keyword">class</span> <span class="function">SensorTemperatura</span>:
+    <span class="string">"""Sensor de temperatura industrial."""</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">sensor_id</span>: <span class="function">str</span>):
+        <span class="comment"># Público: accesible desde cualquier lugar</span>
+        <span class="variable">self</span>.<span class="variable">sensor_id</span> = <span class="variable">sensor_id</span>
+        <span class="variable">self</span>.<span class="variable">estado</span> = <span class="string">"activo"</span>
+        
+        <span class="comment"># Protegido: para uso interno y subclases</span>
+        <span class="variable">self</span>.<span class="variable">_ultima_lectura</span> = <span class="number">0.0</span>
+        <span class="variable">self</span>.<span class="variable">_calibracion</span> = <span class="number">1.0</span>
+        
+        <span class="comment"># Privado: solo para uso interno de la clase</span>
+        <span class="variable">self</span>.<span class="variable">__contador_lecturas</span> = <span class="number">0</span>
+        <span class="variable">self</span>.<span class="variable">__historial_errores</span> = []
+    
+    <span class="comment"># Método público</span>
+    <span class="keyword">def</span> <span class="function">leer_temperatura</span>(<span class="variable">self</span>) -> <span class="function">float</span>:
+        <span class="string">"""Lee la temperatura actual del sensor."""</span>
+        <span class="variable">valor_crudo</span> = <span class="variable">self</span>.<span class="function">_obtener_valor_hardware</span>()
+        <span class="variable">self</span>.<span class="function">__incrementar_contador</span>()
+        <span class="keyword">return</span> <span class="variable">valor_crudo</span> * <span class="variable">self</span>.<span class="variable">_calibracion</span>
+    
+    <span class="comment"># Método protegido</span>
+    <span class="keyword">def</span> <span class="function">_obtener_valor_hardware</span>(<span class="variable">self</span>) -> <span class="function">float</span>:
+        <span class="string">"""Obtiene valor del hardware del sensor."""</span>
+        <span class="comment"># Lógica de comunicación con hardware</span>
+        <span class="keyword">return</span> <span class="number">25.5</span>
+    
+    <span class="comment"># Método privado</span>
+    <span class="keyword">def</span> <span class="function">__incrementar_contador</span>(<span class="variable">self</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Incrementa el contador interno de lecturas."""</span>
+        <span class="variable">self</span>.<span class="variable">__contador_lecturas</span> += <span class="number">1</span></pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Incorrecto</div>
+<pre><span class="keyword">class</span> <span class="function">SensorTemperatura</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>, <span class="variable">sensor_id</span>):
+        <span class="comment"># Todo público sin distinción</span>
+        <span class="variable">self</span>.<span class="variable">sensor_id</span> = <span class="variable">sensor_id</span>
+        <span class="variable">self</span>.<span class="variable">estado</span> = <span class="string">"activo"</span>
+        <span class="variable">self</span>.<span class="variable">ultima_lectura</span> = <span class="number">0.0</span>
+        <span class="variable">self</span>.<span class="variable">calibracion</span> = <span class="number">1.0</span>
+        <span class="variable">self</span>.<span class="variable">contador_lecturas</span> = <span class="number">0</span>
+        <span class="variable">self</span>.<span class="variable">historial_errores</span> = []
+    
+    <span class="keyword">def</span> <span class="function">leer_temperatura</span>(<span class="variable">self</span>):
+        <span class="variable">valor_crudo</span> = <span class="variable">self</span>.<span class="function">obtener_valor_hardware</span>()
+        <span class="variable">self</span>.<span class="function">incrementar_contador</span>()
+        <span class="keyword">return</span> <span class="variable">valor_crudo</span> * <span class="variable">self</span>.<span class="variable">calibracion</span>
+    
+    <span class="keyword">def</span> <span class="function">obtener_valor_hardware</span>(<span class="variable">self</span>):
+        <span class="keyword">return</span> <span class="number">25.5</span>
+    
+    <span class="keyword">def</span> <span class="function">incrementar_contador</span>(<span class="variable">self</span>):
+        <span class="variable">self</span>.<span class="variable">contador_lecturas</span> += <span class="number">1</span></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="industrial-note">
+                        <strong>🏭 Clases en Sistemas Industriales:</strong>
+                        En aplicaciones industriales, las clases representan equipos reales: motores, sensores, válvulas. Mantén la correspondencia clara entre la clase y el equipo físico. Incluye siempre métodos para estado de salud, diagnóstico y mantenimiento preventivo.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 7: Importaciones -->
+            <div class="section" id="importaciones">
+                <div class="section-header">
+                    📦 Mejores Prácticas para Importaciones
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>📚 La Analogía de la Biblioteca de Herramientas:</strong>
+                        Las importaciones son como tomar prestadas herramientas especializadas de diferentes talleres. Primero tomas las herramientas básicas (bibliotecas estándar), luego las especializadas (terceros), y finalmente tus propias herramientas caseras (módulos locales). El orden importa para encontrar rápidamente lo que necesitas.
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            📋 Orden de Importaciones
+                        </div>
+                        <div class="rule-description">
+                            Las importaciones deben seguir un orden específico: estándar, terceros, locales.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Orden Correcto</div>
+<pre><span class="comment"># 1. Importaciones de la biblioteca estándar</span>
+<span class="keyword">import</span> datetime
+<span class="keyword">import</span> os
+<span class="keyword">import</span> sys
+<span class="keyword">import</span> time
+<span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict
+<span class="keyword">from</span> pathlib <span class="keyword">import</span> Path
+
+<span class="comment"># 2. Importaciones de terceros</span>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> requests
+<span class="keyword">from</span> flask <span class="keyword">import</span> Flask, jsonify
+<span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine
+
+<span class="comment"># 3. Importaciones locales</span>
+<span class="keyword">from</span> .sensores <span class="keyword">import</span> SensorTemperatura, SensorPresion
+<span class="keyword">from</span> .motores <span class="keyword">import</span> MotorIndustrial
+<span class="keyword">from</span> ..utils <span class="keyword">import</span> configuracion
+<span class="keyword">from</span> mi_proyecto.base_datos <span class="keyword">import</span> ConexionDB</pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Orden Incorrecto</div>
+<pre><span class="comment"># Mezclado sin orden</span>
+<span class="keyword">from</span> .sensores <span class="keyword">import</span> SensorTemperatura
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> os
+<span class="keyword">from</span> flask <span class="keyword">import</span> Flask
+<span class="keyword">import</span> sys
+<span class="keyword">from</span> mi_proyecto.base_datos <span class="keyword">import</span> ConexionDB
+<span class="keyword">import</span> datetime
+<span class="keyword">import</span> requests</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🎯 Importaciones Específicas vs Importaciones Completas
+                        </div>
+                        <div class="rule-description">
+                            Importa solo lo que necesitas. Evita importaciones con asterisco (*) excepto en casos muy específicos.
+                        </div>
+                        <div class="code-comparison">
+                            <div class="code-block good">
+                                <div class="code-label good">✅ Importaciones Específicas</div>
+<pre><span class="comment"># Importa solo lo necesario</span>
+<span class="keyword">from</span> math <span class="keyword">import</span> sqrt, pi, sin, cos
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta
+<span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict, Counter
+
+<span class="comment"># Uso claro y directo</span>
+<span class="variable">area_circulo</span> = <span class="variable">pi</span> * <span class="function">sqrt</span>(<span class="variable">radio</span>)
+<span class="variable">ahora</span> = <span class="function">datetime</span>.<span class="function">now</span>()
+<span class="variable">contador</span> = <span class="function">Counter</span>(<span class="variable">lista_elementos</span>)
+
+<span class="comment"># Para módulos grandes, usar alias</span>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+
+<span class="variable">array</span> = <span class="variable">np</span>.<span class="function">array</span>([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])
+<span class="variable">df</span> = <span class="variable">pd</span>.<span class="function">DataFrame</span>(<span class="variable">datos</span>)</pre>
+                            </div>
+                            <div class="code-block bad">
+                                <div class="code-label bad">❌ Importaciones Problemáticas</div>
+<pre><span class="comment"># Importación con asterisco (evitar)</span>
+<span class="keyword">from</span> math <span class="keyword">import</span> *
+<span class="keyword">from</span> datetime <span class="keyword">import</span> *
+<span class="keyword">from</span> mi_modulo <span class="keyword">import</span> *
+
+<span class="comment"># Contamina el namespace</span>
+<span class="comment"># No se sabe de dónde viene cada función</span>
+<span class="variable">area_circulo</span> = <span class="variable">pi</span> * <span class="function">sqrt</span>(<span class="variable">radio</span>)  <span class="comment"># ¿De math?</span>
+<span class="variable">ahora</span> = <span class="function">now</span>()  <span class="comment"># ¿De datetime?</span>
+
+<span class="comment"># Importaciones innecesarias</span>
+<span class="keyword">import</span> math  <span class="comment"># Solo para usar math.pi</span>
+<span class="keyword">import</span> datetime  <span class="comment"># Solo para datetime.now()</span>
+
+<span class="variable">area</span> = <span class="variable">math</span>.<span class="variable">pi</span> * <span class="variable">math</span>.<span class="function">sqrt</span>(<span class="variable">radio</span>)
+<span class="variable">ahora</span> = <span class="variable">datetime</span>.<span class="variable">datetime</span>.<span class="function">now</span>()</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección 8: Aplicaciones Industriales -->
+            <div class="section" id="industrial">
+                <div class="section-header">
+                    🏭 Convenciones para Aplicaciones Industriales
+                </div>
+                <div class="section-content">
+                    <div class="analogy-box">
+                        <strong>⚙️ La Analogía del Manual de Operaciones:</strong>
+                        En una planta industrial, cada procedimiento debe estar claramente documentado, ser repetible y seguro. El código industrial debe seguir los mismos principios: procedimientos claros, nomenclatura estándar, y protocolos de seguridad. Un error de código puede detener una línea de producción o, peor aún, causar un accidente.
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🏷️ Nomenclatura de Equipos Industriales
+                        </div>
+                        <div class="rule-description">
+                            Usar convenciones de nomenclatura que reflejen la organización física de la planta.
+                        </div>
+                        <div class="code-block good">
+                            <div class="code-label good">✅ Nomenclatura Industrial Clara</div>
+<pre><span class="comment"># Estructura: ÁREA_EQUIPO_NÚMERO_FUNCIÓN</span>
+<span class="comment"># Sensores</span>
+<span class="variable">LINEA1_SENSOR_TEMP_001</span> = <span class="string">"L1-TE-001"</span>
+<span class="variable">LINEA1_SENSOR_PRES_002</span> = <span class="string">"L1-PE-002"</span>
+<span class="variable">HORNO_SENSOR_TEMP_003</span> = <span class="string">"HR-TE-003"</span>
+
+<span class="comment"># Motores</span>
+<span class="variable">LINEA1_MOTOR_PRINCIPAL_001</span> = <span class="string">"L1-MT-001"</span>
+<span class="variable">BOMBA_AGUA_MOTOR_002</span> = <span class="string">"BA-MT-002"</span>
+
+<span class="comment"># Válvulas</span>
+<span class="variable">LINEA1_VALVULA_CONTROL_001</span> = <span class="string">"L1-CV-001"</span>
+<span class="variable">SEGURIDAD_VALVULA_ALIVIO_002</span> = <span class="string">"SF-PV-002"</span>
+
+<span class="comment"># Estados de operación estándar</span>
+<span class="variable">ESTADO_OPERACIONAL</span> = <span class="string">"OPERACIONAL"</span>
+<span class="variable">ESTADO_MANTENIMIENTO</span> = <span class="string">"MANTENIMIENTO"</span>
+<span class="variable">ESTADO_FALLA</span> = <span class="string">"FALLA"</span>
+<span class="variable">ESTADO_EMERGENCIA</span> = <span class="string">"PARADA_EMERGENCIA"</span>
+
+<span class="comment"># Límites de seguridad según normas industriales</span>
+<span class="variable">TEMPERATURA_MAXIMA_OPERACION</span> = <span class="number">85.0</span>  <span class="comment"># °C según ISO 13849</span>
+<span class="variable">PRESION_MAXIMA_TRABAJO</span> = <span class="number">16.0</span>  <span class="comment"># bar según ASME B31.3</span>
+<span class="variable">VELOCIDAD_MAXIMA_MOTOR</span> = <span class="number">1800</span>  <span class="comment"># RPM según especificaciones</span></pre>
+                        </div>
+                    </div>
+
+                    <div class="rule-card">
+                        <div class="rule-title">
+                            🚨 Manejo de Alarmas y Eventos Críticos
+                        </div>
+                        <div class="rule-description">
+                            Implementar un sistema robusto de manejo de alarmas con niveles de criticidad.
+                        </div>
+                        <div class="code-block good">
+                            <div class="code-label good">✅ Sistema de Alarmas Estructurado</div>
+<pre><span class="keyword">from</span> enum <span class="keyword">import</span> Enum
+<span class="keyword">from</span> datetime <span class="keyword">import</span> datetime
+<span class="keyword">from</span> typing <span class="keyword">import</span> Dict, List
+
+<span class="keyword">class</span> <span class="function">NivelAlarma</span>(<span class="function">Enum</span>):
+    <span class="string">"""Niveles de criticidad según ISA-18.2"""</span>
+    <span class="variable">INFO</span> = <span class="string">"INFORMACION"</span>
+    <span class="variable">ADVERTENCIA</span> = <span class="string">"ADVERTENCIA"</span>
+    <span class="variable">ALARMA</span> = <span class="string">"ALARMA"</span>
+    <span class="variable">CRITICA</span> = <span class="string">"CRITICA"</span>
+    <span class="variable">EMERGENCIA</span> = <span class="string">"EMERGENCIA"</span>
+
+<span class="keyword">class</span> <span class="function">SistemaAlarmas</span>:
+    <span class="string">"""
+    Sistema centralizado de gestión de alarmas industriales.
+    
+    Cumple con estándares ISA-18.2 para sistemas de alarmas.
+    Proporciona logging, escalación automática y notificaciones.
+    """</span>
+    
+    <span class="keyword">def</span> <span class="function">__init__</span>(<span class="variable">self</span>):
+        <span class="variable">self</span>.<span class="variable">alarmas_activas</span>: <span class="function">Dict</span>[<span class="function">str</span>, <span class="function">dict</span>] = {}
+        <span class="variable">self</span>.<span class="variable">historial_alarmas</span>: <span class="function">List</span>[<span class="function">dict</span>] = []
+    
+    <span class="keyword">def</span> <span class="function">generar_alarma</span>(<span class="variable">self</span>, 
+                      <span class="variable">equipo_id</span>: <span class="function">str</span>, 
+                      <span class="variable">mensaje</span>: <span class="function">str</span>, 
+                      <span class="variable">nivel</span>: <span class="function">NivelAlarma</span>,
+                      <span class="variable">valor_actual</span>: <span class="function">float</span> = <span class="keyword">None</span>,
+                      <span class="variable">limite</span>: <span class="function">float</span> = <span class="keyword">None</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""
+        Genera una nueva alarma en el sistema.
+        
+        Args:
+            equipo_id: Identificador del equipo (ej: "L1-TE-001")
+            mensaje: Descripción de la alarma
+            nivel: Nivel de criticidad según NivelAlarma
+            valor_actual: Valor que disparó la alarma
+            limite: Límite que se sobrepasó
+        """</span>
+        <span class="variable">timestamp</span> = <span class="function">datetime</span>.<span class="function">now</span>()
+        
+        <span class="variable">alarma</span> = {
+            <span class="string">"id"</span>: <span class="string">f"{equipo_id}_{timestamp.strftime('%Y%m%d_%H%M%S')}"</span>,
+            <span class="string">"equipo_id"</span>: <span class="variable">equipo_id</span>,
+            <span class="string">"timestamp"</span>: <span class="variable">timestamp</span>,
+            <span class="string">"mensaje"</span>: <span class="variable">mensaje</span>,
+            <span class="string">"nivel"</span>: <span class="variable">nivel</span>.<span class="variable">value</span>,
+            <span class="string">"valor_actual"</span>: <span class="variable">valor_actual</span>,
+            <span class="string">"limite"</span>: <span class="variable">limite</span>,
+            <span class="string">"estado"</span>: <span class="string">"ACTIVA"</span>,
+            <span class="string">"reconocida"</span>: <span class="keyword">False</span>
+        }
+        
+        <span class="comment"># Registrar alarma activa</span>
+        <span class="variable">self</span>.<span class="variable">alarmas_activas</span>[<span class="variable">alarma</span>[<span class="string">"id"</span>]] = <span class="variable">alarma</span>
+        <span class="variable">self</span>.<span class="variable">historial_alarmas</span>.<span class="function">append</span>(<span class="variable">alarma</span>.<span class="function">copy</span>())
+        
+        <span class="comment"># Escalación automática según criticidad</span>
+        <span class="variable">self</span>.<span class="function">_procesar_escalacion</span>(<span class="variable">alarma</span>)
+        
+        <span class="comment"># Log de seguridad</span>
+        <span class="variable">self</span>.<span class="function">_log_alarma</span>(<span class="variable">alarma</span>)
+    
+    <span class="keyword">def</span> <span class="function">_procesar_escalacion</span>(<span class="variable">self</span>, <span class="variable">alarma</span>: <span class="function">dict</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Procesa la escalación según el nivel de criticidad."""</span>
+        <span class="variable">nivel</span> = <span class="variable">alarma</span>[<span class="string">"nivel"</span>]
+        
+        <span class="keyword">if</span> <span class="variable">nivel</span> == <span class="variable">NivelAlarma</span>.<span class="variable">EMERGENCIA</span>.<span class="variable">value</span>:
+            <span class="comment"># Parada de emergencia automática</span>
+            <span class="variable">self</span>.<span class="function">_activar_parada_emergencia</span>(<span  class="variable">alarma</span>[<span class="string">"equipo_id"</span>])
+<span class="keyword">elif</span> <span class="variable">nivel</span>
+            <span class="variable">== NivelAlarma.CRITICA.value</span>:
+            <span class="comment"># Notificación inmediata al operador</span>
+            <span class="variable">self</span>.<span class="function">_notificar_operador</span>(<span class="variable">alarma</span>)
+        <span class="keyword">elif</span> <span class="variable">nivel</span> == <span class="variable">NivelAlarma.ALARMA</span>.<span class="variable">value</span>:
+            <span class="comment"># Registro en log de alarmas</span>
+            <span class="variable">self</span>.<span class="function">_registrar_log_alarma</span>(<span class="variable">alarma</span>)
+        <span class="keyword">elif</span> <span class="variable">nivel</span> == <span class="variable">NivelAlarma.ADVERTENCIA</span>.<span class="variable">value</span>:
+            <span class="comment"># Notificación al supervisor</span>
+            <span class="variable">self</span>.<span class="function">_notificar_supervisor</span>(<span class="variable">alarma</span>)
+        <span class="keyword">elif</span> <span class="variable">nivel</span> == <span class="variable">NivelAlarma.INFO</span>.<span class="variable">value</span>:
+            <span class="comment"># Registro informativo</span>
+            <span class="variable">self</span>.<span class="function">  _registrar_log_informativo</span>(<span class="variable">alarma</span>) 
+        <span class="keyword">else</span>:
+            <span class="comment"># Nivel desconocido, registrar error</span>
+<span class="variable">self</span>.<span class="function">_log_error</span>(<span class="string">"Nivel de alarma desconocido"</span>, <span class="variable">alarma</span>[<span class="string">"id"</span>])
+    
+    <span class="keyword">def</span> <span class="function">_activar_parada_emergencia</span>(<span class="variable">self</span>, <span class="variable">equipo_id</span>: <span class="function">str</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Activa la parada de emergencia para el equipo especificado."""</span>
+        <span class="comment"># Lógica para activar la parada de emergencia</span>
+        <span class="comment"># Ejemplo: enviar señal a PLC, registrar evento, etc.</span>
+        <span class="variable">self</span>.<span class="function">_log_evento</span>(<span class="string">"Parada de emergencia activada"</span>, <span class="variable">equipo_id</span>)
+    
+    <span class="keyword">def</span> <span class="function">_notificar_operador</span>(<span class="variable">self</span>, <span class="variable">alarma</span>: <span class="function">dict</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Notifica al operador sobre una alarma crítica."""</span>
+        <span class="comment"># Lógica de notificación (email, SMS, etc.)</span>
+        <span class="variable">self</span>.<span class="function">_log_evento</span>(<span class="string">"Notificación al operador"</span>, <span class="variable">alarma</span>[<span class="string">"id"</span>])
+    
+    <span class="keyword">def</span> <span class="function">_notificar_supervisor</span>(<span class="variable">self</span>, <span class="variable">alarma</span>: <span class="function">dict</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Notifica al supervisor sobre una alarma de nivel medio."""</span>
+        <span class="comment"># Lógica de notificación (email, dashboard, etc.)</span>
+        <span class="variable">self</span>.<span class="function">_log_evento</span>(<span class="string">"Notificación al supervisor"</span>, <span class="variable">alarma</span>[<span class="string">"id"</span>])
+    <span class="keyword">def</span> <span class="function">_registrar_log_alarma</span>(<span class="variable">self</span>, <span class="variable">alarma</span>: <span class="function">dict</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Registra una alarma en el log de alarmas."""</span>
+        <span class="comment"># Lógica para registrar en log de alarmas</span>
+        <span class="variable">self</span>.<span class="function">_log_evento</span>(<span class="string">"Alarma registrada"</span>, <span class="variable">alarma</span>[<span class="string">"id"</span>])
+    <span class="keyword">def</span> <span class="function">_registrar_log_informativo</span>(<span class="variable">self</span>, <span class="variable">alarma</span>: <span class="function">dict</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Registra una alarma informativa en el log."""</span>
+        <span class="comment"># Lógica para registrar en log informativo</span >
+<span class="variable">self</span>.<span class="function">_log_evento</span>(<span class="string">"Alarma informativa registrada"</span>, <span class="variable">alarma</span>[<span class="string">"id"</span>])
+    
+    <span class="keyword">def</span> <span class="function">_log_evento</span>(<span class="variable">self</span>, <span class="variable">mensaje</span>: <span class="function">str</span>, <span class="variable">equipo_id</span>: <span class="function">str</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Registra un evento en el log del sistema."""</span>
+        <span class="variable">timestamp</span> = <span class="function">datetime</span>.<span class="function">now</span>()
+        <span class="variable">evento</span> = {
+            <span class="string">"timestamp"</span>: <span class="variable">timestamp</span>,
+            <span class="string">"equipo_id"</span>: <span class="variable">equipo_id</span>,
+            <span class="string">"mensaje"</span>: <span class="variable">mensaje</span>
+        }
+        <span class="variable">self</span>.<span class="variable">historial_alarmas</span>.<span class="function">append</span>(<span class="variable">evento</span>)
+    
+    <span class="keyword">def</span> <span class="function">_log_error</span>(<span class="variable">self</span>, <span class="variable">mensaje_error</span>: <span class="function">str</span>, 
+                     <span class="variable">alarma_id</span>: <span class="function">str</span>) -> <span class="keyword">None</span>:
+        <span class="string">"""Registra un error en el log del sistema."""</span>
+        <span class="comment"># Lógica para registrar errores críticos en el sistema de alarmas o logs de errores.</span>
+        <span class="comment"># Ejemplo: enviar a un sistema de monitoreo, registrar en base de datos, etc.</span>
+        <span class="variable">self</span>.<span class="function">_log_evento</span>(< span class="string">'Error'</ span>, 
+            f"< span class='string'>{ mensaje_error }</ span>" , alarma_id)</pre>
+                        </div>
+                </div>
+                    </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
