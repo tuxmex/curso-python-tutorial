@@ -582,7 +582,7 @@
                         </div>
                         <div class="code-comparison">
                             <div class="code-block good">
-                                <div class="code-label good">✅ Correcto (4 espacios)</div>
+                                <div class="code-label good">✅ Correcto</div>
 <pre><span class="keyword">def</span> <span class="function">verificar_temperatura</span>(<span class="variable">temp</span>):
     <span class="keyword">if</span> <span class="variable">temp</span> > <span class="number">80</span>:
         <span class="function">print</span>(<span class="string">"Temperatura alta"</span>)
@@ -592,7 +592,7 @@
     <span class="keyword">return</span> <span class="keyword">True</span></pre>
                             </div>
                             <div class="code-block bad">
-                                <div class="code-label bad">❌ Incorrecto (inconsistente)</div>
+                                <div class="code-label bad">❌ Incorrecto</div>
 <pre><span class="keyword">def</span> <span class="function">verificar_temperatura</span>(<span class="variable">temp</span>):
   <span class="keyword">if</span> <span class="variable">temp</span> > <span class="number">80</span>:
       <span class="function">print</span>(<span class="string">"Temperatura alta"</span>)
@@ -694,7 +694,7 @@
                             Todo archivo Python debe seguir un orden específico para mantener consistencia.
                         </div>
                         <div class="code-block good">
-                            <div class="code-label good">✅ Estructura Correcta</div>
+                            <div class="code-label good">✅ Correcto</div>
 <pre><span class="comment">#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -943,7 +943,7 @@ time.sleep(<span class="number">0.5</span>)
                         </div>
                         <div class="code-comparison">
                             <div class="code-block good">
-                                <div class="code-label good">✅ Correcto (Funciones específicas)</div>
+                                <div class="code-label good">✅ Correcto</div>
 <pre><span class="keyword">def</span> <span class="function">leer_sensor_temperatura</span>(<span class="variable">sensor_id</span>):
     <span class="string">"""Lee temperatura de un sensor específico."""</span>
     <span class="comment"># Solo lee temperatura</span>
@@ -972,7 +972,7 @@ time.sleep(<span class="number">0.5</span>)
     <span class="keyword">return</span> <span class="variable">temp</span></pre>
                             </div>
                             <div class="code-block bad">
-                                <div class="code-label bad">❌ Incorrecto (Función que hace todo)</div>
+                                <div class="code-label bad">❌ Incorrecto </div>
 <pre><span class="keyword">def</span> <span class="function">monitorear_temperatura</span>(<span class="variable">sensor_id</span>):
     <span class="string">"""Función que hace demasiadas cosas."""</span>
     <span class="comment"># Lee temperatura</span>
@@ -1067,7 +1067,7 @@ time.sleep(<span class="number">0.5</span>)
                             Las clases deben tener una estructura organizada: docstring, constantes, __init__, métodos públicos, métodos privados.
                         </div>
                         <div class="code-block good">
-                            <div class="code-label good">✅ Estructura Correcta</div>
+                            <div class="code-label good">✅ Correcto </div>
 <pre><span class="keyword">class</span> <span class="function">MotorIndustrial</span>:
     <span class="string">"""
     Motor industrial para aplicaciones de manufactura.
@@ -1287,7 +1287,7 @@ time.sleep(<span class="number">0.5</span>)
                         </div>
                         <div class="code-comparison">
                             <div class="code-block good">
-                                <div class="code-label good">✅ Importaciones Específicas</div>
+                                <div class="code-label good">✅ Correcto</div>
 <pre><span class="comment"># Importa solo lo necesario</span>
 <span class="keyword">from</span> math <span class="keyword">import</span> sqrt, pi, sin, cos
 <span class="keyword">from</span> datetime <span class="keyword">import</span> datetime, timedelta
@@ -1307,7 +1307,7 @@ time.sleep(<span class="number">0.5</span>)
 <span class="variable">df</span> = <span class="variable">pd</span>.<span class="function">DataFrame</span>(<span class="variable">datos</span>)</pre>
                             </div>
                             <div class="code-block bad">
-                                <div class="code-label bad">❌ Importaciones Problemáticas</div>
+                                <div class="code-label bad">❌ Incorrecto </div>
 <pre><span class="comment"># Importación con asterisco (evitar)</span>
 <span class="keyword">from</span> math <span class="keyword">import</span> *
 <span class="keyword">from</span> datetime <span class="keyword">import</span> *
@@ -1349,7 +1349,7 @@ time.sleep(<span class="number">0.5</span>)
                             Usar convenciones de nomenclatura que reflejen la organización física de la planta.
                         </div>
                         <div class="code-block good">
-                            <div class="code-label good">✅ Nomenclatura Industrial Clara</div>
+                            <div class="code-label good">✅ Correcto</div>
 <pre><span class="comment"># Estructura: ÁREA_EQUIPO_NÚMERO_FUNCIÓN</span>
 <span class="comment"># Sensores</span>
 <span class="variable">LINEA1_SENSOR_TEMP_001</span> = <span class="string">"L1-TE-001"</span>
