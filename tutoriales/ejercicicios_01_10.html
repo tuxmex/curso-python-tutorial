@@ -3046,6 +3046,280 @@ heroe_inexistente = base_datos_heroes.get(<span class="string">"XYZ999"</span>, 
                     </div>
                 </div>
             </div>
+
+ <!-- AGREGAR DESPUÉS DEL EJERCICIO 8 EXISTENTE -->
+
+<div class="exercise-container">
+    <div class="exercise-header">
+        <h2>🏭 Ejercicio 9 del Docente: Sistema de Gestión de Inventario Industrial</h2>
+        <div class="objective">
+            <strong>Objetivo:</strong> Complementar el diario digital con manejo avanzado de archivos CSV, logging automático, y sistemas industriales robustos para gestión de inventarios en tiempo real.
+        </div>
+    </div>
+
+    <div class="code-section">
+        <h3>ejercicio_09_docente_inventario.py</h3>
+        <div class="code-block">
+        <pre><code>#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Ejercicio 9 - Docente: Sistema de Gestión de Inventario Industrial
+Autor: Anastacio Rodríguez García
+Fecha: 2024
+Descripción: Manejo avanzado de archivos para sistemas industriales
+"""
+
+import csv
+import datetime
+import os
+import json
+from typing import Dict, List, Optional
+
+print("🏭 SISTEMA DE GESTIÓN DE INVENTARIO INDUSTRIAL")
+print("=" * 60)
+
+class GestorInventario:
+    """
+    🎯 Gestor completo de inventario que demuestra:
+    - Manejo de archivos CSV para datos estructurados
+    - Logging automático para auditoría
+    - Respaldos automáticos
+    - Validación robusta de datos
+    """
+    
+    def _transportar_carga(self, parametros: Dict) -> bool:
+        """🚚 Transportar carga entre puntos"""
+        origen = parametros.get('origen', [0, 0])
+        destino = parametros.get('destino', [10, 10])
+        peso_carga = parametros.get('peso', 0)
+        
+        print(f"🚚 {self._robot_id} transportando carga")
+        print(f"   📍 Origen: {origen}")
+        print(f"   🎯 Destino: {destino}")
+        print(f"   ⚖️ Peso: {peso_carga}kg")
+        
+        # Verificar capacidad
+        if peso_carga > self._capacidad_carga:
+            print(f"❌ Carga excede capacidad máxima ({self._capacidad_carga}kg)")
+            return False
+        
+        # Simular movimiento
+        self._posicion_actual = destino
+        
+        self._RobotIndustrial__tareas_completadas += 1
+        print("✅ Transporte completado")
+        return True
+
+
+# ============================================================================
+# CLASE COMPUESTA - Célula de Trabajo
+# ============================================================================
+
+class CelulaTrabajoInteligente:
+    """
+    🏭 Célula de trabajo que coordina múltiples robots
+    Demuestra composición: una célula contiene múltiples robots
+    """
+    
+    def __init__(self, celula_id: str, linea_produccion: str):
+        self.celula_id = celula_id
+        self.linea_produccion = linea_produccion
+        self.robots: List[RobotIndustrial] = []
+        self.productos_procesados = 0
+        
+        print(f"🏭 Célula de trabajo {celula_id} creada en línea {linea_produccion}")
+    
+    def agregar_robot(self, robot: RobotIndustrial):
+        """🤖 Agregar robot a la célula"""
+        self.robots.append(robot)
+        print(f"➕ Robot {robot.robot_id} agregado a célula {self.celula_id}")
+    
+    def inicializar_celula(self):
+        """⚡ Inicializar todos los robots de la célula"""
+        print(f"\n⚡ Inicializando célula {self.celula_id}...")
+        
+        for robot in self.robots:
+            if robot.encender():
+                print(f"   ✅ {robot.robot_id} operativo")
+            else:
+                print(f"   ❌ {robot.robot_id} falló al inicializar")
+        
+        print(f"🎯 Célula {self.celula_id} lista para producción")
+    
+    def procesar_producto(self, especificaciones: Dict) -> bool:
+        """🏭 Procesar un producto completo usando la célula"""
+        print(f"\n🏭 Procesando producto en célula {self.celula_id}")
+        print(f"📋 Especificaciones: {especificaciones}")
+        
+        # Secuencia de producción usando diferentes robots
+        secuencia_exito = True
+        
+        # Paso 1: Transporte de materiales
+        robot_transporte = next((r for r in self.robots if isinstance(r, RobotTransportador)), None)
+        if robot_transporte:
+            print("\n📦 FASE 1: Transporte de materiales")
+            if not robot_transporte.ejecutar_tarea(TipoTarea.TRANSPORTE, {
+                'origen': [0, 0],
+                'destino': [5, 5],
+                'peso': especificaciones.get('peso_materiales', 20)
+            }):
+                secuencia_exito = False
+        
+        # Paso 2: Ensamble
+        robot_ensamble = next((r for r in self.robots if isinstance(r, RobotEnsamblador)), None)
+        if robot_ensamble and secuencia_exito:
+            print("\n🔧 FASE 2: Ensamble de componentes")
+            if not robot_ensamble.ejecutar_tarea(TipoTarea.ENSAMBLE, {
+                'componentes': especificaciones.get('componentes', ['base', 'tapa']),
+                'tornillos': especificaciones.get('tornillos', 4)
+            }):
+                secuencia_exito = False
+        
+        # Paso 3: Soldadura (si es requerida)
+        robot_soldadura = next((r for r in self.robots if isinstance(r, RobotSoldador)), None)
+        if robot_soldadura and especificaciones.get('requiere_soldadura', False) and secuencia_exito:
+            print("\n🔥 FASE 3: Soldadura")
+            if not robot_soldadura.ejecutar_tarea(TipoTarea.SOLDADURA, {
+                'longitud_cm': especificaciones.get('longitud_soldadura', 10),
+                'espesor_mm': especificaciones.get('espesor_soldadura', 3)
+            }):
+                secuencia_exito = False
+        
+        # Paso 4: Inspección final
+        if secuencia_exito:
+            print("\n🔍 FASE 4: Inspección final")
+            robot_inspector = next((r for r in self.robots 
+                                  if TipoTarea.INSPECCION in r.obtener_capacidades()), None)
+            if robot_inspector:
+                if robot_inspector.ejecutar_tarea(TipoTarea.INSPECCION, especificaciones):
+                    print("✅ Producto aprobado")
+                else:
+                    secuencia_exito = False
+                    print("❌ Producto rechazado en inspección final")
+        
+        # Paso 5: Empaque
+        if secuencia_exito and robot_ensamble:
+            print("\n📦 FASE 5: Empaque")
+            robot_ensamble.ejecutar_tarea(TipoTarea.EMPAQUE, {
+                'producto': especificaciones.get('nombre_producto', 'Producto Industrial')
+            })
+        
+        if secuencia_exito:
+            self.productos_procesados += 1
+            print(f"\n🎉 ¡Producto completado exitosamente en célula {self.celula_id}!")
+        else:
+            print(f"\n❌ Producto falló en célula {self.celula_id}")
+        
+        return secuencia_exito
+    
+    def obtener_reporte_celula(self):
+        """📊 Generar reporte completo de la célula"""
+        print(f"\n📊 REPORTE DE CÉLULA: {self.celula_id}")
+        print("=" * 60)
+        print(f"🏭 Línea de producción: {self.linea_produccion}")
+        print(f"🤖 Robots en célula: {len(self.robots)}")
+        print(f"📦 Productos procesados: {self.productos_procesados}")
+        
+        print(f"\n🤖 ESTADO DE ROBOTS:")
+        for robot in self.robots:
+            stats = robot.obtener_estadisticas()
+            print(f"   • {stats['robot_id']}: {stats['estado']} "
+                  f"(Tareas: {stats['tareas_completadas']}, "
+                  f"Precisión: {stats['precision']:.1f}%)")
+
+
+# ============================================================================
+# DEMOSTRACIÓN COMPLETA DEL SISTEMA
+# ============================================================================
+
+def demo_sistema_robots():
+    """🎮 Demostración completa del sistema de robots colaborativos"""
+    print("\n🎮 DEMOSTRACIÓN SISTEMA DE ROBOTS COLABORATIVOS")
+    print("=" * 70)
+    
+    # Crear diferentes tipos de robots
+    print("\n🤖 Creando robots especializados...")
+    
+    soldador = RobotSoldador("SOLD-001", "MIG")
+    ensamblador = RobotEnsamblador("ASSY-001", 2)
+    transportador = RobotTransportador("TRANS-001", 150.0)
+    
+    # Crear célula de trabajo y agregar robots
+    print("\n🏭 Configurando célula de trabajo...")
+    celula = CelulaTrabajoInteligente("CELL-A1", "Línea Automotive")
+    
+    celula.agregar_robot(transportador)
+    celula.agregar_robot(ensamblador)
+    celula.agregar_robot(soldador)
+    
+    # Inicializar célula
+    celula.inicializar_celula()
+    
+    # Procesar diferentes productos
+    print("\n🏭 PROCESANDO PRODUCTOS...")
+    
+    productos_a_procesar = [
+        {
+            'nombre_producto': 'Soporte Motor',
+            'componentes': ['base_aluminio', 'refuerzos', 'tornilleria'],
+            'tornillos': 6,
+            'requiere_soldadura': True,
+            'longitud_soldadura': 15,
+            'espesor_soldadura': 4,
+            'peso_materiales': 25
+        },
+        {
+            'nombre_producto': 'Carcasa Electrónica',
+            'componentes': ['tapa_superior', 'base_inferior', 'juntas'],
+            'tornillos': 8,
+            'requiere_soldadura': False,
+            'peso_materiales': 15
+        }
+    ]
+    
+    # Procesar cada producto
+    productos_exitosos = 0
+    for i, producto in enumerate(productos_a_procesar, 1):
+        print(f"\n{'='*20} PRODUCTO {i} {'='*20}")
+        if celula.procesar_producto(producto):
+            productos_exitosos += 1
+    
+    # Generar reporte final
+    print(f"\n{'='*20} REPORTE FINAL {'='*20}")
+    celula.obtener_reporte_celula()
+    
+    print(f"\n📈 RESUMEN DE PRODUCCIÓN:")
+    print(f"   📦 Productos procesados exitosamente: {productos_exitosos}/{len(productos_a_procesar)}")
+    print(f"   📊 Tasa de éxito: {(productos_exitosos/len(productos_a_procesar)*100):.1f}%")
+    
+    # Demostrar polimorfismo
+    print(f"\n🔄 DEMOSTRACIÓN DE POLIMORFISMO:")
+    print("   (Diferentes robots ejecutando la misma interfaz)")
+    
+    for robot in [soldador, ensamblador, transportador]:
+        capacidades = robot.obtener_capacidades()
+        print(f"   🤖 {robot.robot_id}: {[cap.value for cap in capacidades]}")
+    
+    print(f"\n✅ Demostración completada")
+    print(f"🎓 Conceptos de POO demostrados:")
+    print(f"   • ✅ Herencia: RobotIndustrial → Robots especializados")
+    print(f"   • ✅ Polimorfismo: Misma interfaz, comportamientos diferentes")
+    print(f"   • ✅ Encapsulación: Atributos privados y métodos públicos")
+    print(f"   • ✅ Composición: Célula contiene múltiples robots")
+    print(f"   • ✅ Abstracción: Simplificación de complejidad industrial")
+
+
+if __name__ == "__main__":
+    demo_sistema_robots()
+</code></pre>
+        </div>
+    </div>
+
+    <div class="instructor-note">
+        <h4>💡 Nota para el Instructor:</h4>
+        <p>Este ejercicio demuestra POO avanzada aplicada a robótica industrial. Los estudiantes aprenden herencia, polimorfismo, encapsulación y composición en un contexto de Industria 4.0, preparándolos para sistemas de automatización reales.</p>
+    </div>
+</div>           
  <div class="instructor-note">
                 <strong>👨‍🏫 Información del Instructor:</strong><br>
                 <strong>Instructor:</strong> Anastacio Rodríguez García<br>
