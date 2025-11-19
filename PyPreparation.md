@@ -1,4 +1,3 @@
-Tienes razón, voy a crear las flashcards completas con código y explicación en formato optimizado para Kindle 7":
 
 ---
 
