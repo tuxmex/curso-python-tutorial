@@ -38,3 +38,4 @@ El curso está organizado por módulos temáticos con ejemplos prácticos y ejer
 ```bash
 git clone https://github.com/tuxmex/curso-python-tutorial.git
 cd curso-python-tutorial
+```
