@@ -2,7 +2,11 @@
 
 Bienvenido al repositorio del curso **Fundamentos de Python**, diseñado para enseñar desde los conceptos más básicos hasta una base sólida en programación con Python. Diseñado para docentes de la UTNG, pero adecuado para autodidactas y cualquier persona que desee iniciarse en el mundo del desarrollo con este lenguaje versátil y poderoso.
 
+
 ## Instructor:
+
+<img src="https://github.com/user-attachments/assets/e786f582-b5f0-4f3e-b30f-14875c9ecd11" width="100" />
+
 Anastacio Rodríguez García
 Mtro. en Ingeniería de Software
 ---
@@ -26,6 +30,7 @@ El curso está organizado por módulos temáticos con ejemplos prácticos y ejer
 
 ---
 
+
 ## 🚀 Cómo empezar
 
 ### 1. Clona el repositorio
@@ -33,3 +38,4 @@ El curso está organizado por módulos temáticos con ejemplos prácticos y ejer
 ```bash
 git clone https://github.com/tuxmex/curso-python-tutorial.git
 cd curso-python-tutorial
+```
