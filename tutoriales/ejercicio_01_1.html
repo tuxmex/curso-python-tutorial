@@ -252,7 +252,8 @@
                 padding: 15px;
             }
         }
-         .instructor-info {
+        
+        .instructor-info {
             background: rgba(255, 255, 255, 0.95);
             padding: 20px;
             border-radius: 10px;
@@ -267,6 +268,25 @@
         
         .instructor-info a:hover {
             text-decoration: underline;
+        }
+        
+        .codigo-indentado {
+            margin-left: 20px;
+        }
+        
+        .linea-codigo {
+            display: block;
+            min-height: 1.6em;
+        }
+        
+        .espacio-codigo {
+            display: inline-block;
+            width: 20px;
+        }
+        
+        .doble-espacio-codigo {
+            display: inline-block;
+            width: 40px;
         }
     </style>
 </head>
@@ -324,7 +344,7 @@
                 <p>Comenzamos mostrando el título de nuestra receta usando print()</p>
                 <div class="codigo-ejemplo">
 <span class="comment"># Mi primera receta: Tacos de programador</span>
-<span class="function">print</span>(<span class="string">"=== RECETA: TACOS DE PROGRAMADOR ==="</span>)
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"=== RECETA: TACOS DE PROGRAMADOR ==="</span>)</span>
                 </div>
             </div>
 
@@ -332,9 +352,9 @@
                 <h4>Agregar los primeros pasos</h4>
                 <p>Cada línea de código es como un paso en nuestra receta</p>
                 <div class="codigo-ejemplo">
-<span class="function">print</span>(<span class="string">"Paso 1: Abrir el IDE (como abrir la despensa)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 2: Escribir código limpio (como lavar los ingredientes)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 3: Declarar variables (como preparar los utensilios)"</span>)
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"Paso 1: Abrir el IDE (como abrir la despensa)"</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"Paso 2: Escribir código limpio (como lavar los ingredientes)"</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"Paso 3: Declarar variables (como preparar los utensilios)"</span>)</span>
                 </div>
             </div>
 
@@ -342,10 +362,10 @@
                 <h4>Completar la receta con más pasos</h4>
                 <p>Agregamos más instrucciones para hacer nuestra receta completa</p>
                 <div class="codigo-ejemplo">
-<span class="function">print</span>(<span class="string">"Paso 4: Usar funciones (como mezclar ingredientes)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 5: Probar el código (como probar el sazón)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 6: Depurar errores (como ajustar la sal)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 7: ¡Servir y disfrutar tu programa!"</span>)
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"Paso 4: Usar funciones (como mezclar ingredientes)"</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"Paso 5: Probar el código (como probar el sazón)"</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"Paso 6: Depurar errores (como ajustar la sal)"</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"Paso 7: ¡Servir y disfrutar tu programa!"</span>)</span>
                 </div>
             </div>
 
@@ -359,32 +379,32 @@
             
             <div class="codigo-ejemplo">
 <span class="comment"># Mi primera receta: Tacos de programador</span>
-<span class="comment"># Este programa muestra una receta divertida comparando cocinar con programar</span>
-
-<span class="function">print</span>(<span class="string">"=== RECETA: TACOS DE PROGRAMADOR ==="</span>)
-<span class="function">print</span>(<span class="string">""</span>)  <span class="comment"># Línea en blanco para separar</span>
-
-<span class="comment"># Ingredientes (conceptos de programación)</span>
-<span class="function">print</span>(<span class="string">"INGREDIENTES:"</span>)
-<span class="function">print</span>(<span class="string">"- 2 tazas de creatividad"</span>)
-<span class="function">print</span>(<span class="string">"- 1 kilo de paciencia"</span>)
-<span class="function">print</span>(<span class="string">"- 500g de lógica fresca"</span>)
-<span class="function">print</span>(<span class="string">"- Bugs al gusto (para darle sabor)"</span>)
-<span class="function">print</span>(<span class="string">""</span>)
-
-<span class="comment"># Instrucciones paso a paso</span>
-<span class="function">print</span>(<span class="string">"INSTRUCCIONES:"</span>)
-<span class="function">print</span>(<span class="string">"Paso 1: Abrir el IDE (como abrir la despensa)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 2: Escribir código limpio (como lavar los ingredientes)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 3: Declarar variables (como preparar los utensilios)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 4: Usar funciones (como mezclar ingredientes)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 5: Probar el código (como probar el sazón)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 6: Depurar errores (como ajustar la sal)"</span>)
-<span class="function">print</span>(<span class="string">"Paso 7: ¡Servir y disfrutar tu programa!"</span>)
-<span class="function">print</span>(<span class="string">""</span>)
-
-<span class="comment"># Mensaje final</span>
-<span class="function">print</span>(<span class="string">"¡Buen provecho! Digo... ¡Happy Coding! 🌮💻"</span>)
+<span class="linea-codigo"><span class="comment"># Este programa muestra una receta divertida comparando cocinar con programar</span></span>
+<span class="linea-codigo"></span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"=== RECETA: TACOS DE PROGRAMADOR ==="</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">""</span>)  <span class="comment"># Línea en blanco para separar</span></span>
+<span class="linea-codigo"></span>
+<span class="linea-codigo"><span class="comment"># Ingredientes (conceptos de programación)</span></span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"INGREDIENTES:"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"- 2 tazas de creatividad"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"- 1 kilo de paciencia"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"- 500g de lógica fresca"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"- Bugs al gusto (para darle sabor)"</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">""</span>)</span>
+<span class="linea-codigo"></span>
+<span class="linea-codigo"><span class="comment"># Instrucciones paso a paso</span></span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"INSTRUCCIONES:"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"Paso 1: Abrir el IDE (como abrir la despensa)"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"Paso 2: Escribir código limpio (como lavar los ingredientes)"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"Paso 3: Declarar variables (como preparar los utensilios)"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"Paso 4: Usar funciones (como mezclar ingredientes)"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"Paso 5: Probar el código (como probar el sazón)"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"Paso 6: Depurar errores (como ajustar la sal)"</span>)</span>
+<span class="linea-codigo"><span class="doble-espacio-codigo"></span><span class="function">print</span>(<span class="string">"Paso 7: ¡Servir y disfrutar tu programa!"</span>)</span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">""</span>)</span>
+<span class="linea-codigo"></span>
+<span class="linea-codigo"><span class="comment"># Mensaje final</span></span>
+<span class="linea-codigo"><span class="function">print</span>(<span class="string">"¡Buen provecho! Digo... ¡Happy Coding! 🌮💻"</span>)</span>
             </div>
 
             <div class="resultado-esperado">
